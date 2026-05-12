@@ -12,26 +12,26 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100/80 bg-white/80 backdrop-blur-md">
       <div className="container-site flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex min-w-0 items-center gap-2 lg:shrink-0">
           <BrandLogo className="h-9 w-9 shrink-0" />
-          <span className="font-display text-base font-semibold tracking-tight text-slate-950">
+          <span className="min-w-0 font-display text-base font-semibold tracking-tight text-slate-950 lg:whitespace-nowrap">
             {SITE.name}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-2 xl:gap-1 lg:flex">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+              className="rounded-full px-2 py-2 text-[13px] font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900 xl:px-3 xl:text-sm"
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden shrink-0 items-center gap-2 lg:flex">
           <Button href="/contact" variant="ghost" size="sm">
             {CTA.recruiter}
           </Button>
