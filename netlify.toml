@@ -1,0 +1,11 @@
+# Netlify — https://docs.netlify.com/integrations/frameworks/next-js/
+# Next.js is auto-detected; this file pins the build and Node version.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Set secrets in Netlify → Site configuration → Environment variables (never commit them):
+# NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY, NEXT_PUBLIC_CALENDLY_URL
