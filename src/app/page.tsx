@@ -8,7 +8,6 @@ import { RecruiterCta } from "@/components/sections/RecruiterCta";
 import { Segments } from "@/components/sections/Segments";
 import { SpecialtiesSection } from "@/components/sections/SpecialtiesSection";
 import { StatsAnimated } from "@/components/sections/StatsAnimated";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
@@ -46,7 +45,6 @@ export default function HomePage() {
       <Segments />
       <SpecialtiesSection />
       <StatsAnimated />
-      <Testimonials />
       <Process />
       <FeaturedStates />
 

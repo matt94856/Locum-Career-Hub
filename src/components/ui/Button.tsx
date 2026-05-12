@@ -27,6 +27,7 @@ export function Button({
   variant = "primary",
   size = "md",
   className = "",
+  title,
   ...props
 }: {
   children: ReactNode;
@@ -34,26 +35,27 @@ export function Button({
   variant?: Variant;
   size?: Size;
   className?: string;
+  title?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`.trim();
 
   if (href) {
     if (href.startsWith("/")) {
       return (
-        <Link href={href} className={cls}>
+        <Link href={href} className={cls} title={title}>
           {children}
         </Link>
       );
     }
     return (
-      <a href={href} className={cls} target="_blank" rel="noopener noreferrer">
+      <a href={href} className={cls} target="_blank" rel="noopener noreferrer" title={title}>
         {children}
       </a>
     );
   }
 
   return (
-    <button className={cls} {...props}>
+    <button className={cls} title={title} {...props}>
       {children}
     </button>
   );

@@ -9,6 +9,27 @@
   # Next.js inlines NEXT_PUBLIC_* into JS; Netlify secrets scan would otherwise fail when values match env vars.
   SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_CALENDLY_URL,NEXT_PUBLIC_RECAPTCHA_SITE_KEY,NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY"
 
+# --- Domain / HTTPS (SEO) ---
+# Netlify UI should still use: Primary domain = www.locumcareerhub.com, Force HTTPS.
+# These redirects are a repo backup so all host variants 301 to the single public origin.
+[[redirects]]
+  from = "http://locumcareerhub.com/*"
+  to = "https://www.locumcareerhub.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://locumcareerhub.com/*"
+  to = "https://www.locumcareerhub.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.locumcareerhub.com/*"
+  to = "https://www.locumcareerhub.com/:splat"
+  status = 301
+  force = true
+
 # Set secrets in Netlify → Site configuration → Environment variables (never commit them).
 # Use scope "All" (Production + Deploy previews + Branch deploys) unless you intentionally differ.
 #

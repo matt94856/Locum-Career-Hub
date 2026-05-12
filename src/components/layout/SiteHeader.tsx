@@ -11,15 +11,19 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100/80 bg-white/80 backdrop-blur-md">
-      <div className="container-site flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex min-w-0 items-center gap-2 lg:shrink-0">
+      {/*
+        Mobile: 2-column grid — brand | menu (nav is display:none so it does not consume cells).
+        lg+: 3-column grid — brand | nav (minmax(0,1fr) prevents overlap into CTAs) | actions.
+      */}
+      <div className="container-site grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-4 xl:gap-x-6">
+        <Link href="/" className="flex min-w-0 items-center gap-2 lg:max-w-none lg:shrink-0">
           <BrandLogo className="h-9 w-9 shrink-0" />
           <span className="min-w-0 font-display text-base font-semibold tracking-tight text-slate-950 lg:whitespace-nowrap">
             {SITE.name}
           </span>
         </Link>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-2 xl:gap-1 lg:flex">
+        <nav className="hidden min-h-0 min-w-0 flex-wrap items-center justify-center gap-x-0.5 gap-y-1 px-1 sm:px-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:flex xl:gap-x-1">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
@@ -31,41 +35,49 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-2 lg:flex">
-          <Button href="/contact" variant="ghost" size="sm">
-            {CTA.recruiter}
-          </Button>
-          <Button href="/physician-opportunities" variant="primary" size="sm">
-            {CTA.explore}
-          </Button>
-        </div>
+        <div className="flex items-center justify-end gap-2 lg:col-start-3 lg:row-start-1">
+          <div className="hidden shrink-0 items-center gap-2 lg:flex">
+            <Button
+              href="/contact"
+              variant="ghost"
+              size="sm"
+              className="max-w-[10.5rem] truncate xl:max-w-none"
+              title={CTA.recruiter}
+            >
+              {CTA.recruiter}
+            </Button>
+            <Button href="/physician-opportunities" variant="primary" size="sm">
+              {CTA.explore}
+            </Button>
+          </div>
 
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white p-2 text-slate-800 shadow-sm lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="sr-only">Open menu</span>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            {open ? (
-              <path
-                d="M6 6L18 18M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            ) : (
-              <path
-                d="M4 7H20M4 12H20M4 17H20"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            )}
-          </svg>
-        </button>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white p-2 text-slate-800 shadow-sm lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="sr-only">Open menu</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              {open ? (
+                <path
+                  d="M6 6L18 18M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              ) : (
+                <path
+                  d="M4 7H20M4 12H20M4 17H20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open ? (

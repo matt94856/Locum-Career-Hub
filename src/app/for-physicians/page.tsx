@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { GuideCardLink } from "@/components/ui/GuideCardLink";
 import { LANDING_PAGES, type LandingPage } from "@/lib/landings";
 import { CTA, SITE } from "@/lib/site";
@@ -137,6 +138,11 @@ export default function ForPhysiciansPage() {
               </div>
             ))}
           </div>
+          <p className="mt-6 text-sm text-slate-600">
+            <Link className="font-semibold text-brand-700 hover:underline" href="/guides">
+              Browse the complete topic guide library →
+            </Link>
+          </p>
           <div className="mt-10 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
             <Button href="/physician-opportunities" className="w-full justify-center">
               {CTA.flexible}

@@ -39,7 +39,6 @@ export const metadata: Metadata = {
   },
   description: SITE.tagline,
   applicationName: SITE.name,
-  alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
