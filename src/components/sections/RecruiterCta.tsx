@@ -1,0 +1,50 @@
+import Link from "next/link";
+import { SITE } from "@/lib/site";
+import { Button } from "@/components/ui/Button";
+
+export function RecruiterCta() {
+  return (
+    <section className="py-16 sm:py-20">
+      <div className="container-site">
+        <div className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-8 py-12 text-white sm:px-12">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_circle_at_20%_20%,rgba(37,99,235,0.55),transparent_55%),radial-gradient(600px_circle_at_90%_30%,rgba(14,165,233,0.35),transparent_55%)]" />
+          <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-100">Recruiter desk</p>
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+                Talk with a physician recruiter who speaks your language
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
+                If you want schedule control, travel optionality, or a burnout reset—we will map realistic pathways and
+                timelines. No spam. No bait-and-switch rates.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button href={SITE.calendlyUrl} className="w-full sm:w-auto">
+                  Book a calendar call
+                </Button>
+                <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full sm:w-auto">
+                  Call {SITE.phoneDisplay}
+                </Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+                <p className="text-sm font-semibold">What to have ready</p>
+                <ul className="mt-4 space-y-3 text-sm text-slate-200">
+                  <li>CV + month/year availability</li>
+                  <li>State licenses (active or in progress)</li>
+                  <li>Specialty board status and DEA needs</li>
+                  <li>Travel preferences and dealbreakers</li>
+                </ul>
+                <Link href="#lead-form" className="mt-6 inline-flex text-sm font-semibold text-brand-100 hover:text-white">
+                  Prefer a form? Submit an inquiry →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
