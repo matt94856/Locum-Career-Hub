@@ -3,22 +3,22 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const segments = [
   {
     title: "New residency graduates",
-    copy: "Sample practice settings, accelerate income, and avoid locking into the wrong culture too early.",
+    copy: "Explore settings and pacing before you lock into a culture that does not fit.",
     tag: "Post-training",
   },
   {
-    title: "Mid-career burnout",
-    copy: "Reduce inbox weight, escape toxic admin, and rebuild boundaries with selective blocks.",
+    title: "Mid-career exhaustion",
+    copy: "Reduce chronic overload, escape draining politics, and rebuild boundaries with selective blocks.",
     tag: "Recovery",
   },
   {
     title: "Moonlighting doctors",
-    copy: "Stack shifts compliantly with malpractice clarity and schedules that respect your primary role.",
+    copy: "Add shifts with malpractice clarity and schedules that respect your primary role.",
     tag: "Add-on",
   },
   {
     title: "Semi-retirement physicians",
-    copy: "Stay sharp with flexible coverage—without the guilt of saying no to what matters at home.",
+    copy: "Stay clinical without the guilt of saying no to what matters at home.",
     tag: "Glide path",
   },
 ];
@@ -29,15 +29,15 @@ export function Segments() {
       <div className="container-site">
         <SectionHeading
           eyebrow="Who we serve"
-          title="A career hub designed for physicians at four pivotal moments"
-          subtitle="The emotional truth is simple: you want freedom without sacrificing the craft you trained for. We help you get there with modern recruiting—transparent, fast, and respectful."
+          title="Four moments physicians quietly describe to us"
+          subtitle="You may not be searching for locums yet. You might simply want your weeks to feel survivable again. We start there—then explore what actually fits."
         />
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr md:grid-cols-2">
           {segments.map((s) => (
             <div
               key={s.title}
-              className="rounded-3xl border border-slate-100 bg-white p-7 shadow-sm transition hover:shadow-card"
+              className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md"
             >
               <span className="inline-flex rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800 ring-1 ring-brand-100">
                 {s.tag}

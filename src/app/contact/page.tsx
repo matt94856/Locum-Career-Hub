@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { SITE } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
+
+const CONTACT_DESC =
+  "Contact Locum Career Hub for locum tenens opportunities, credentialing questions, and schedule planning. Fast responses from physician-first recruiters.";
 
 export const metadata: Metadata = {
   title: "Contact a Physician Recruiter",
-  description:
-    "Contact Locum Career Hub for locum tenens opportunities, credentialing questions, and schedule planning. Fast responses from physician-first recruiters.",
+  description: CONTACT_DESC,
   alternates: { canonical: "/contact" },
+  ...socialShareMetadata({
+    title: `Contact | ${SITE.name}`,
+    description: CONTACT_DESC,
+    path: "/contact",
+  }),
 };
 
 export default function ContactPage() {
@@ -23,9 +31,11 @@ export default function ContactPage() {
             Share your goals, availability, and non-negotiables. We will respond with realistic pathways—not a generic
             blast.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href={SITE.calendlyUrl}>Book a calendar call</Button>
-            <Button href={`tel:${SITE.phoneTel}`} variant="secondary">
+          <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
+            <Button href={SITE.calendlyUrl} className="w-full justify-center">
+              Book a 30-minute call
+            </Button>
+            <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center">
               Call {SITE.phoneDisplay}
             </Button>
           </div>

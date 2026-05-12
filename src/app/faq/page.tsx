@@ -4,12 +4,21 @@ import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { FAQ_PAGE } from "@/lib/faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqJsonLd } from "@/lib/schema";
+import { SITE } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
+
+const FAQ_DESC =
+  "Answers to common locum tenens questions: credentialing, malpractice, scheduling, compensation, and how to start without getting spammed.";
 
 export const metadata: Metadata = {
   title: "FAQ | Locum Tenens for Physicians",
-  description:
-    "Answers to common locum tenens questions: credentialing, malpractice, scheduling, compensation, and how to start without getting spammed.",
+  description: FAQ_DESC,
   alternates: { canonical: "/faq" },
+  ...socialShareMetadata({
+    title: `FAQ | ${SITE.name}`,
+    description: FAQ_DESC,
+    path: "/faq",
+  }),
 };
 
 export default function FaqPage() {
@@ -31,10 +40,10 @@ export default function FaqPage() {
 
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <FaqAccordion items={FAQ_PAGE} />
           </div>
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <LeadCaptureForm
               title="Still have questions?"
               subtitle="Submit a complete inquiry and a recruiter will respond with specifics for your specialty, states, and timeline."

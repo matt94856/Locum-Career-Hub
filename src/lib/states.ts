@@ -2,6 +2,7 @@ export const FEATURED_STATES = [
   { name: "Florida", slug: "florida", code: "FL", note: "High demand, coastal assignments" },
   { name: "Texas", slug: "texas", code: "TX", note: "Metro & community hospital coverage" },
   { name: "California", slug: "california", code: "CA", note: "Academic & community placements" },
+  { name: "New York", slug: "new-york", code: "NY", note: "Metro density and strong inpatient demand" },
   { name: "North Carolina", slug: "north-carolina", code: "NC", note: "Growing health systems" },
   { name: "Arizona", slug: "arizona", code: "AZ", note: "Seasonal & year-round needs" },
   { name: "Washington", slug: "washington", code: "WA", note: "Pacific Northwest flexibility" },

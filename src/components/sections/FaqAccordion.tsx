@@ -4,24 +4,30 @@ import { useState } from "react";
 import type { FaqItem } from "@/lib/faq";
 
 export function FaqAccordion({ items }: { items: FaqItem[] }) {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-slate-100 rounded-3xl border border-slate-100 bg-white shadow-sm">
+    <div className="min-w-0 divide-y divide-slate-100 rounded-2xl border border-slate-100 bg-white shadow-sm">
       {items.map((item, idx) => {
         const isOpen = open === idx;
         return (
-          <div key={item.q} className="p-2">
+          <div key={item.q} className="p-1 sm:p-2">
             <button
               type="button"
-              onClick={() => setOpen(idx)}
-              className="flex w-full items-center justify-between gap-4 rounded-2xl px-4 py-4 text-left hover:bg-slate-50"
+              onClick={() => setOpen(isOpen ? null : idx)}
+              className="flex w-full min-w-0 items-start justify-between gap-4 rounded-xl px-3 py-3.5 text-left transition hover:bg-slate-50 sm:px-4 sm:py-4"
               aria-expanded={isOpen}
             >
-              <span className="text-sm font-semibold text-slate-950">{item.q}</span>
-              <span className="text-brand-700">{isOpen ? "−" : "+"}</span>
+              <span className="min-w-0 flex-1 text-sm font-semibold leading-snug text-slate-950 [overflow-wrap:anywhere]">
+                {item.q}
+              </span>
+              <span className="mt-0.5 shrink-0 text-base font-semibold tabular-nums text-brand-700" aria-hidden>
+                {isOpen ? "−" : "+"}
+              </span>
             </button>
-            {isOpen ? <div className="px-4 pb-4 text-sm leading-relaxed text-slate-600">{item.a}</div> : null}
+            {isOpen ? (
+              <div className="px-3 pb-3 text-sm leading-relaxed text-slate-600 sm:px-4 sm:pb-4">{item.a}</div>
+            ) : null}
           </div>
         );
       })}

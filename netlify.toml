@@ -9,3 +9,6 @@
 
 # Set secrets in Netlify → Site configuration → Environment variables (never commit them):
 # NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY, NEXT_PUBLIC_CALENDLY_URL
+# Google reCAPTCHA (v2 checkbox): create keys at https://www.google.com/recaptcha/admin
+#   NEXT_PUBLIC_RECAPTCHA_SITE_KEY — site key (public, used by the lead form widget)
+#   RECAPTCHA_SECRET_KEY — secret key (server-only, used by /api/lead to verify tokens)

@@ -20,18 +20,27 @@
 
   --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px rgb(15 23 42 / 0.06);
   --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 40px rgb(15 23 42 / 0.08);
+  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.05), 0 16px 44px rgb(15 23 42 / 0.1);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
   body {
     @apply bg-white text-slate-900 antialiased;
+    overflow-x: clip;
   }
   ::selection {
     @apply bg-brand-100 text-brand-900;
   }
+}
+
+/** Premium surface: cards, topic links, directory tiles */
+@utility surface-card {
+  @apply rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-200;
+  @apply hover:border-brand-200/90 hover:shadow-md;
 }
 
 @utility container-prose {

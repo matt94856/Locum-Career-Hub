@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { CTA } from "@/lib/site";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -13,59 +14,60 @@ export function Hero() {
 
       <div className="container-site relative py-16 sm:py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <motion.p
               initial={reduce ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
+              transition={{ duration: 0.28 }}
               className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm backdrop-blur"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Modern physician recruiting · Nationwide coverage
+              Modern physician careers · Nationwide coverage
             </motion.p>
 
             <motion.h1
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.05 }}
+              transition={{ duration: 0.32, delay: 0.04 }}
               className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
             >
-              Flexible Locum Tenens Opportunities for Modern Physicians
+              More flexibility. Less burnout.
             </motion.h1>
 
             <motion.p
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
+              transition={{ duration: 0.32, delay: 0.1 }}
               className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl"
             >
-              Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and
-              career goals.
+              If the hospital week is stealing your energy, you are not failing medicine—your environment may be failing
+              you. Locum Career Hub helps physicians find breathing room: clearer schedules, stronger advocacy, and
+              flexible work—including locum tenens when it genuinely fits.
             </motion.p>
 
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.18 }}
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+              transition={{ duration: 0.32, delay: 0.14 }}
+              className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2"
             >
-              <Button href="/physician-opportunities" className="w-full sm:w-auto">
-                Find Opportunities
+              <Button href="/physician-opportunities" className="w-full justify-center">
+                {CTA.explore}
               </Button>
-              <Button href="/contact" variant="secondary" className="w-full sm:w-auto">
-                Talk to a Recruiter
+              <Button href="/contact" variant="secondary" className="w-full justify-center">
+                {CTA.recruiter}
               </Button>
             </motion.div>
 
             <motion.div
               initial={reduce ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
+              transition={{ duration: 0.35, delay: 0.2 }}
               className="mt-10 grid gap-3 sm:grid-cols-3"
             >
-              {[
-                { k: "Credentialing", v: "White-glove support" },
-                { k: "Transparency", v: "Clear rates & expectations" },
+                {[
+                { k: "Clarity", v: "Expectations in writing" },
+                { k: "Calm pace", v: "No bait-and-switch" },
                 { k: "Advocacy", v: "Recruiters who listen first" },
               ].map((x) => (
                 <div
@@ -79,27 +81,27 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="relative rounded-3xl border border-slate-100 bg-white p-6 shadow-card"
+              transition={{ duration: 0.38, delay: 0.08 }}
+              className="relative min-w-0 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl"
             >
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-200/40 blur-3xl" />
               <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky-200/40 blur-3xl" />
 
               <p className="text-sm font-semibold text-slate-900">Built for real clinical life</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                From post-residency exploration to semi-retirement glide paths, we help you practice medicine
-                with more autonomy—and less administrative drag.
+                From early attending uncertainty to semi-retirement glide paths, we help you protect autonomy—and
+                reduce the background hum of stress.
               </p>
 
               <ul className="mt-6 space-y-3 text-sm text-slate-700">
                 {[
-                  "Choose blocks that match your energy and family life",
-                  "Travel when you want—stay local when you need",
-                  "Higher weekly potential with malpractice clarity up front",
+                  "Name what is breaking before we talk labels",
+                  "Explore flexible blocks only when they match your life",
+                  "Keep malpractice, travel, and rates transparent from the start",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
                     <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-full bg-brand-50 text-brand-700">
@@ -119,9 +121,9 @@ export function Hero() {
               </ul>
 
               <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
-                <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">Fast next step</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">Low-pressure next step</p>
                 <p className="mt-2 text-sm text-slate-200">
-                  Tell us your specialty and availability—our team responds quickly with realistic options.
+                  Share your specialty and what “better” would feel like—we respond with realistic options, not spam.
                 </p>
                 <Link
                   href="#lead-form"

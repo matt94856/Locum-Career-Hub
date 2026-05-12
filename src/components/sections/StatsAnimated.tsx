@@ -28,7 +28,7 @@ function Stat({
       return;
     }
     const controls = animate(0, value, {
-      duration: 1.05,
+      duration: 0.85,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(v),
     });
@@ -36,7 +36,7 @@ function Stat({
   }, [inView, reduceMotion, value]);
 
   return (
-    <div ref={ref} className="rounded-3xl border border-slate-100 bg-white p-7 shadow-sm">
+    <div ref={ref} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
       <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">{label}</p>
       <div className="mt-3 flex items-end gap-1">
         <p className="font-display text-4xl font-semibold tracking-tight text-slate-950">{Math.round(display)}</p>
@@ -59,7 +59,7 @@ export function StatsAnimated() {
           subtitle="Numbers are directional and vary by market—but the goal is consistent: fewer surprises, faster clarity, and schedules that respect your life outside the hospital."
         />
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr md:grid-cols-2 lg:grid-cols-3">
           <Stat
             label="Avg. recruiter response"
             value={24}

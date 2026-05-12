@@ -13,10 +13,16 @@ export function SectionHeading({ eyebrow, title, subtitle, align = "center" }: P
       {eyebrow ? (
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">{eyebrow}</p>
       ) : null}
-      <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+      <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
         {title}
       </h2>
-      {subtitle ? <p className="mt-4 text-base leading-relaxed text-slate-600">{subtitle}</p> : null}
+      {subtitle ? (
+        <p
+          className={`mt-3 text-sm leading-relaxed text-slate-600 sm:mt-4 sm:text-base ${align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl"}`}
+        >
+          {subtitle}
+        </p>
+      ) : null}
     </div>
   );
 }

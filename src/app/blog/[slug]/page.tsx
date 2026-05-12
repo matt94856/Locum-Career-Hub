@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArticleBody } from "@/components/blog/ArticleBody";
 import { BLOG_POSTS, getPost } from "@/lib/blog-posts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
-import { BRAND_LOGO_URL, SITE } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -19,21 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     keywords: post.keywords,
-    openGraph: {
+    ...socialShareMetadata({
       title: post.title,
       description: post.description,
+      path: `/blog/${post.slug}`,
       type: "article",
       publishedTime: post.date,
-      url: `${SITE.url}/blog/${post.slug}`,
-      siteName: SITE.name,
-      images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [BRAND_LOGO_URL],
-    },
+    }),
   };
 }
 
@@ -93,13 +86,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </header>
 
         <div className="container-prose py-14 sm:py-16">
-          <div className="max-w-none">
-            {post.body.map((para, idx) => (
-              <p key={idx} className="mt-6 text-sm leading-relaxed text-slate-700 first:mt-0 sm:text-base">
-                {para}
-              </p>
-            ))}
-          </div>
+          <ArticleBody blocks={post.content} />
 
           <div className="mt-12 rounded-3xl border border-slate-100 bg-slate-50 p-6">
             <h2 className="font-display text-xl font-semibold text-slate-950">Related hubs</h2>

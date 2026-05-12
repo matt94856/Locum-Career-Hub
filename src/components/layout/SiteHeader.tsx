@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { NAV_LINKS, SITE, CTA } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 
 export function SiteHeader() {
@@ -32,11 +32,11 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button href="/contact" variant="ghost" className="px-4">
-            Talk to a Recruiter
+          <Button href="/contact" variant="ghost" size="sm">
+            {CTA.recruiter}
           </Button>
-          <Button href="/physician-opportunities" variant="primary" className="px-4">
-            Find Opportunities
+          <Button href="/physician-opportunities" variant="primary" size="sm">
+            {CTA.explore}
           </Button>
         </div>
 
@@ -81,12 +81,12 @@ export function SiteHeader() {
                 {l.label}
               </Link>
             ))}
-            <div className="mt-3 grid gap-2">
-              <Button href="/physician-opportunities" className="w-full">
-                Find Opportunities
+            <div className="mt-3 grid grid-cols-1 gap-2">
+              <Button href="/physician-opportunities" className="w-full justify-center" size="md">
+                {CTA.explore}
               </Button>
-              <Button href="/contact" variant="secondary" className="w-full">
-                Talk to a Recruiter
+              <Button href="/contact" variant="secondary" className="w-full justify-center" size="md">
+                {CTA.recruiter}
               </Button>
             </div>
           </div>

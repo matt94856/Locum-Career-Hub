@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { FeaturedStates } from "@/components/sections/FeaturedStates";
 import { Hero } from "@/components/sections/Hero";
 import { InternalTopicGrid } from "@/components/sections/InternalTopicGrid";
@@ -16,28 +17,23 @@ import { Button } from "@/components/ui/Button";
 import { HOME_FAQ } from "@/lib/faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqJsonLd } from "@/lib/schema";
-import type { Metadata } from "next";
-import { BRAND_LOGO_URL, SITE } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
+import { SITE } from "@/lib/site";
+
+const homeTitle = "More flexibility. Less burnout.";
+const homeDesc =
+  "If you are exhausted, stretched thin, or craving autonomy—explore calm, physician-first guidance and flexible opportunities built around your life.";
 
 export const metadata: Metadata = {
-  title: "Flexible Locum Tenens Opportunities for Modern Physicians",
+  title: homeTitle,
   description:
-    "Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and career goals. Physician-first recruiting with nationwide coverage.",
+    "The modern physician career platform for flexibility, freedom, and balance—empathy-first guidance, then locum tenens and flexible work when it fits your life.",
   alternates: { canonical: "/" },
-  openGraph: {
-    title: "Flexible Locum Tenens Opportunities for Modern Physicians",
-    description:
-      "Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and career goals.",
-    url: SITE.url,
-    images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Flexible Locum Tenens Opportunities for Modern Physicians",
-    description:
-      "Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and career goals.",
-    images: [BRAND_LOGO_URL],
-  },
+  ...socialShareMetadata({
+    title: `${homeTitle} | ${SITE.name}`,
+    description: homeDesc,
+    path: "/",
+  }),
 };
 
 export default function HomePage() {
@@ -56,15 +52,15 @@ export default function HomePage() {
 
       <section className="py-16 sm:py-20">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <SectionHeading
               align="left"
               eyebrow="FAQ"
-              title="Answers physicians ask before their first locums block"
-              subtitle="Still exploring? Start here—then talk with a recruiter for specifics tied to your specialty and timeline."
+              title="Questions physicians ask when the week feels unsustainable"
+              subtitle="Still exploring? Start here—then connect when you want specifics for your specialty and timeline."
             />
             <div className="mt-8 space-y-4">
-              <Button href="/faq" variant="secondary" className="w-full sm:w-auto">
+              <Button href="/faq" variant="secondary" className="w-full justify-center sm:w-auto sm:min-w-0">
                 View all FAQs
               </Button>
               <p className="text-sm text-slate-600">
@@ -76,7 +72,7 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <FaqAccordion items={HOME_FAQ} />
           </div>
         </div>

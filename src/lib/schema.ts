@@ -1,5 +1,17 @@
 import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
+/** Topics and entities this organization is positioned to help with (semantic + AI retrieval signals). */
+const KNOWS_ABOUT = [
+  "Physician burnout",
+  "Flexible physician careers",
+  "Locum tenens",
+  "Physician work-life balance",
+  "Moonlighting and side income for physicians",
+  "Hospital medicine staffing",
+  "Emergency medicine staffing",
+  "Anesthesia and CRNA locums",
+] as const;
+
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -8,10 +20,12 @@ export function organizationJsonLd() {
     url: SITE.url,
     logo: BRAND_LOGO_URL,
     description: SITE.tagline,
+    knowsAbout: KNOWS_ABOUT.map((name) => ({ "@type": "Thing", name })),
     contactPoint: [
       {
         "@type": "ContactPoint",
         telephone: SITE.phoneTel,
+        email: SITE.email,
         contactType: "customer support",
         areaServed: "US",
         availableLanguage: ["English"],
@@ -44,15 +58,23 @@ export function professionalServiceJsonLd() {
     image: BRAND_LOGO_URL,
     url: SITE.url,
     telephone: SITE.phoneTel,
+    email: SITE.email,
     priceRange: "$$",
     areaServed: {
       "@type": "Country",
       name: "United States",
     },
     serviceType: [
+      "Physician career consulting",
       "Physician recruiting",
       "Locum tenens staffing",
-      "Healthcare staffing consulting",
+      "Flexible physician work arrangements",
+    ],
+    knowsAbout: [
+      { "@type": "Thing", name: "Physician burnout" },
+      { "@type": "Thing", name: "Flexible physician careers" },
+      { "@type": "Thing", name: "Locum tenens" },
+      { "@type": "Thing", name: "Physician work-life balance" },
     ],
     description: SITE.tagline,
   };
@@ -116,5 +138,33 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       name: item.name,
       item: `${SITE.url}${item.path}`,
     })),
+  };
+}
+
+/** Medical/clinical career intent pages — helps Google + AI systems classify topical authority. */
+export function medicalWebPageJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  keywords?: string[];
+  aboutTopics?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: input.name,
+    description: input.description,
+    url: `${SITE.url}${input.path}`,
+    inLanguage: "en-US",
+    isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
+    ...(input.keywords?.length ? { keywords: input.keywords.join(", ") } : {}),
+    ...(input.aboutTopics?.length
+      ? {
+          about: input.aboutTopics.map((t) => ({
+            "@type": "Thing",
+            name: t,
+          })),
+        }
+      : {}),
   };
 }

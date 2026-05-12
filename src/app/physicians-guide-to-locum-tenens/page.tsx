@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { PrintButton } from "@/components/util/PrintButton";
+import { SITE } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
+
+const GUIDE_DESC =
+  "A practical, physician-first guide to locum tenens: scheduling models, compensation questions, credentialing, travel, and burnout recovery framing.";
 
 export const metadata: Metadata = {
   title: "The Physician’s Guide to Locum Tenens (Printable)",
-  description:
-    "A practical, physician-first guide to locum tenens: scheduling models, compensation questions, credentialing, travel, and burnout recovery framing.",
+  description: GUIDE_DESC,
   alternates: { canonical: "/physicians-guide-to-locum-tenens" },
+  ...socialShareMetadata({
+    title: `Physician’s Guide to Locum Tenens | ${SITE.name}`,
+    description: GUIDE_DESC,
+    path: "/physicians-guide-to-locum-tenens",
+  }),
 };
 
 export default function PhysiciansGuidePage() {
@@ -22,8 +30,10 @@ export default function PhysiciansGuidePage() {
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
             Save this page, print to PDF, or request an emailed copy via the inquiry form on the homepage.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="/#lead-form">Email me the PDF</Button>
+          <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
+            <Button href="/#lead-form" className="w-full justify-center">
+              Email me the PDF
+            </Button>
             <PrintButton />
           </div>
         </div>
@@ -40,19 +50,13 @@ export default function PhysiciansGuidePage() {
             This guide is educational. For placement-specific timelines, stipends, and malpractice details, talk with a
             recruiter.
           </p>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/physician-opportunities#lead-form"
-              className="inline-flex items-center justify-center rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-700"
-            >
+          <div className="mt-5 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
+            <Button href="/physician-opportunities#lead-form" className="w-full justify-center">
               Submit an inquiry
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm hover:border-brand-200 hover:bg-brand-50"
-            >
+            </Button>
+            <Button href="/contact" variant="secondary" className="w-full justify-center">
               Book a call
-            </Link>
+            </Button>
           </div>
         </div>
       </section>

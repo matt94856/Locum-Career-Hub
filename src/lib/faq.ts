@@ -2,8 +2,12 @@ export type FaqItem = { q: string; a: string };
 
 export const HOME_FAQ: FaqItem[] = [
   {
-    q: "What is locum tenens?",
-    a: "Locum tenens assignments are contract roles that help facilities maintain coverage while giving physicians schedule control, travel options, and competitive weekly rates.",
+    q: "I am burned out, but I am not sure I want locums. Is it okay to reach out?",
+    a: "Yes. Many physicians start by describing what feels broken—schedule, autonomy, politics, income pressure—and we explore options together. Locum tenens is one tool; it is not a requirement to have a useful conversation.",
+  },
+  {
+    q: "What is locum tenens—in plain language?",
+    a: "Contract clinical coverage that helps facilities stay staffed while giving physicians clearer time boundaries, travel optionality, and often less standing administrative load than traditional employed roles.",
   },
   {
     q: "How quickly can I start?",
@@ -19,7 +23,7 @@ export const HOME_FAQ: FaqItem[] = [
   },
   {
     q: "Is locums a fit if I am burned out?",
-    a: "Many physicians use locums to reset clinical joy, reduce administrative load, and rebuild boundaries. We match you to cultures and volumes aligned with your goals.",
+    a: "It can be—for some clinicians, short blocks reduce chronic overload while they stabilize. Fit depends on volume, culture, and what you need clinically. We prioritize sustainable pacing over “just take more shifts.”",
   },
 ];
 

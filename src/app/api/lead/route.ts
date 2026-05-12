@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
+import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
 
 type LeadBody = {
   firstName?: unknown;
@@ -14,6 +15,7 @@ type LeadBody = {
   smsOptIn?: unknown;
   leadMagnet?: unknown;
   pagePath?: unknown;
+  recaptchaToken?: unknown;
 };
 
 function isNonEmptyString(v: unknown): v is string {
@@ -73,6 +75,24 @@ export async function POST(req: Request) {
   const json = (await req.json().catch(() => null)) as LeadBody | null;
   if (!json || typeof json !== "object") {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (secret) {
+    const token = typeof json.recaptchaToken === "string" ? json.recaptchaToken : "";
+    const forwarded = req.headers.get("x-forwarded-for");
+    const remoteip =
+      (forwarded ? forwarded.split(",")[0] : null)?.trim() ||
+      req.headers.get("x-real-ip")?.trim() ||
+      null;
+
+    const captchaOk = await verifyRecaptchaToken(token, remoteip);
+    if (!captchaOk) {
+      return NextResponse.json(
+        { ok: false, error: "Security verification failed. Please complete the reCAPTCHA and try again." },
+        { status: 400 },
+      );
+    }
   }
 
   const normalized = normalizeLead(json);

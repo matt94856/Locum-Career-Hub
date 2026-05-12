@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, CTA } from "@/lib/site";
+import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
+
+const ABOUT_DESC =
+  "Locum Career Hub is a modern physician career partner: calm guidance for flexibility, balance, and autonomy—with locum tenens support when it fits.";
 
 export const metadata: Metadata = {
   title: "About Locum Career Hub",
-  description:
-    "Locum Career Hub is a modern physician recruiting partner focused on flexibility, transparency, and sustainable schedules for locum tenens.",
+  description: ABOUT_DESC,
   alternates: { canonical: "/about" },
+  ...socialShareMetadata({
+    title: `About ${SITE.name}`,
+    description: ABOUT_DESC,
+    path: "/about",
+  }),
 };
 
 export default function AboutPage() {
@@ -16,7 +24,7 @@ export default function AboutPage() {
         <div className="container-site max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">About</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            A physician recruiting experience that feels like a modern healthcare product
+            A physician experience that feels calm, modern, and credible
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">{SITE.tagline}</p>
         </div>
@@ -24,7 +32,7 @@ export default function AboutPage() {
 
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7 space-y-6 text-sm leading-relaxed text-slate-700">
+          <div className="min-w-0 space-y-6 text-sm leading-relaxed text-slate-700 lg:col-span-7">
             <h2 className="font-display text-2xl font-semibold text-slate-950">Why we exist</h2>
             <p>
               Traditional staffing sites often feel transactional: noisy listings, opaque expectations, and recruiters
@@ -41,7 +49,7 @@ export default function AboutPage() {
               consent, credentialing realism, and recruiter professionalism.
             </p>
           </div>
-          <div className="lg:col-span-5 rounded-3xl border border-slate-100 bg-white p-7 shadow-sm">
+          <div className="min-w-0 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-7 lg:col-span-5">
             <h2 className="font-display text-xl font-semibold text-slate-950">Principles</h2>
             <ul className="mt-4 space-y-3 text-sm text-slate-700">
               <li>
@@ -59,10 +67,12 @@ export default function AboutPage() {
                 support staffing.
               </li>
             </ul>
-            <div className="mt-8 flex flex-col gap-3">
-              <Button href="/physician-opportunities">Find Opportunities</Button>
-              <Button href="/contact" variant="secondary">
-                Talk to a Recruiter
+            <div className="mt-8 grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
+              <Button href="/physician-opportunities" className="w-full justify-center">
+                {CTA.explore}
+              </Button>
+              <Button href="/contact" variant="secondary" className="w-full justify-center">
+                {CTA.recruiter}
               </Button>
             </div>
             <p className="mt-6 text-xs text-slate-500">

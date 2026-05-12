@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { LANDING_SLUGS } from "@/lib/landings";
 import { SITE } from "@/lib/site";
+import { SPECIALTY_SEO_SLUGS } from "@/lib/specialty-seo";
+import { STATE_LOCUM_SLUGS } from "@/lib/state-locum-seo";
 
 const staticRoutes = [
   "/",
@@ -12,6 +14,7 @@ const staticRoutes = [
   "/locations",
   "/blog",
   "/faq",
+  "/for-physicians",
   "/physicians-guide-to-locum-tenens",
 ];
 
@@ -30,6 +33,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.65,
+    })),
+    ...SPECIALTY_SEO_SLUGS.map((slug) => ({
+      url: `${SITE.url}/specialties/${slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.64,
+    })),
+    ...STATE_LOCUM_SLUGS.map((slug) => ({
+      url: `${SITE.url}/locum-tenens-jobs/${slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.63,
     })),
     ...BLOG_POSTS.map((p) => ({
       url: `${SITE.url}/blog/${p.slug}`,

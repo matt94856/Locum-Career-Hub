@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -6,7 +6,11 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
-import { BRAND_LOGO_URL, SITE } from "@/lib/site";
+import { openGraphImages, twitterImageUrls } from "@/lib/social-metadata";
+import { SITE } from "@/lib/site";
+
+/** Same asset as `public/logo.svg` — local so favicon/metadata never hit the image optimizer with a remote URL. */
+const APP_ICON = "/logo.svg" as const;
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -21,10 +25,16 @@ const display = Instrument_Serif({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} | Physician Locum Tenens Recruiting`,
+    default: `${SITE.name} | Modern physician careers`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.tagline,
@@ -36,18 +46,19 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} | Physician Locum Tenens Recruiting`,
+    title: `${SITE.name} | Modern physician careers`,
     description: SITE.tagline,
-    images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
+    images: openGraphImages(),
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | Physician Locum Tenens Recruiting`,
+    title: `${SITE.name} | Modern physician careers`,
     description: SITE.tagline,
-    images: [BRAND_LOGO_URL],
+    images: twitterImageUrls(),
   },
   icons: {
-    icon: [{ url: BRAND_LOGO_URL, type: "image/png" }],
+    icon: [{ url: APP_ICON, type: "image/svg+xml" }],
+    apple: [{ url: APP_ICON, type: "image/svg+xml" }],
   },
 };
 

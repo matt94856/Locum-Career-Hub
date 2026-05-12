@@ -29,19 +29,19 @@ export function Testimonials() {
     <section className="py-16 sm:py-20">
       <div className="container-site">
         <SectionHeading
-          eyebrow="Testimonials"
-          title="Physicians choose us when they want advocacy—not pressure"
-          subtitle="These stories are representative of the physicians we serve. Your experience will depend on specialty, market demand, and credentialing timelines."
+          eyebrow="Voices"
+          title="“Finally, someone gets the schedule part.”"
+          subtitle="Representative reflections from physicians we work with. Your experience depends on specialty, site culture, and credentialing timelines."
         />
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr lg:grid-cols-3">
           {quotes.map((t) => (
             <figure
               key={t.name}
-              className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 shadow-sm"
+              className="relative min-w-0 overflow-hidden rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
             >
               <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-sky-400 to-brand-700" />
-              <blockquote className="text-sm leading-relaxed text-slate-700">“{t.quote}”</blockquote>
+              <blockquote className="text-sm leading-relaxed text-slate-700 [overflow-wrap:anywhere]">“{t.quote}”</blockquote>
               <figcaption className="mt-6 text-sm">
                 <p className="font-semibold text-slate-950">{t.name}</p>
                 <p className="text-slate-600">
