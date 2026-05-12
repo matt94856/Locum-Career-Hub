@@ -19,8 +19,14 @@ export function RecruiterCta() {
                 realistic options and timelines. No spam. No bait-and-switch rates.
               </p>
               <div className="mt-6 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-                <Button href={SITE.calendlyUrl} className="w-full justify-center">
-                  {CTA.bookCall}
+                <Button
+                  href={
+                    SITE.calendlyUrl ||
+                    `mailto:${SITE.email}?subject=${encodeURIComponent("Schedule a call — Locum Career Hub")}`
+                  }
+                  className="w-full justify-center"
+                >
+                  {SITE.calendlyUrl ? CTA.bookCall : "Email to schedule a call"}
                 </Button>
                 <Button
                   href={`tel:${SITE.phoneTel}`}
