@@ -17,7 +17,7 @@ import { HOME_FAQ } from "@/lib/faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqJsonLd } from "@/lib/schema";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Flexible Locum Tenens Opportunities for Modern Physicians",
@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     description:
       "Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and career goals.",
     url: SITE.url,
+    images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Flexible Locum Tenens Opportunities for Modern Physicians",
+    description:
+      "Connect with high-paying locum tenens opportunities built around your schedule, lifestyle, and career goals.",
+    images: [BRAND_LOGO_URL],
   },
 };
 

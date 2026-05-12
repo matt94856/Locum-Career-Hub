@@ -1,12 +1,28 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Physician Insights | Locum Tenens Blog",
   description:
     "Physician-focused articles on burnout, compensation, travel, taxes, and transitioning into locum tenens—written for clinicians, not corporate jargon.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Physician Insights | Locum Tenens Blog",
+    description:
+      "Physician-focused articles on burnout, compensation, travel, taxes, and transitioning into locum tenens—written for clinicians, not corporate jargon.",
+    url: `${SITE.url}/blog`,
+    siteName: SITE.name,
+    images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Physician Insights | Locum Tenens Blog",
+    description:
+      "Physician-focused articles on burnout, compensation, travel, taxes, and transitioning into locum tenens—written for clinicians, not corporate jargon.",
+    images: [BRAND_LOGO_URL],
+  },
 };
 
 export default function BlogIndexPage() {

@@ -1,4 +1,4 @@
-import { SITE } from "@/lib/site";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
 export function organizationJsonLd() {
   return {
@@ -6,7 +6,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/logo.svg`,
+    logo: BRAND_LOGO_URL,
     description: SITE.tagline,
     contactPoint: [
       {
@@ -41,7 +41,7 @@ export function professionalServiceJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: SITE.name,
-    image: `${SITE.url}/og-default.png`,
+    image: BRAND_LOGO_URL,
     url: SITE.url,
     telephone: SITE.phoneTel,
     priceRange: "$$",
@@ -95,7 +95,7 @@ export function articleJsonLd(input: {
       name: SITE.name,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE.url}/logo.svg`,
+        url: BRAND_LOGO_URL,
       },
     },
     mainEntityOfPage: {

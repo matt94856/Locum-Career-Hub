@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 
@@ -12,9 +13,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-slate-100/80 bg-white/80 backdrop-blur-md">
       <div className="container-site flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-sm font-bold text-white shadow-sm">
-            LC
-          </span>
+          <BrandLogo className="h-9 w-9 shrink-0" />
           <span className="font-display text-base font-semibold tracking-tight text-slate-950">
             {SITE.name}
           </span>

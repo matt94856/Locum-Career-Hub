@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { LANDING_PAGES } from "@/lib/landings";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
@@ -10,9 +11,7 @@ export function SiteFooter() {
       <div className="container-site grid gap-10 py-14 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-bold text-white">
-              LC
-            </span>
+            <BrandLogo className="h-10 w-10 shrink-0 ring-1 ring-white/15" />
             <span className="font-display text-lg font-semibold text-white">{SITE.name}</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">{SITE.tagline}</p>

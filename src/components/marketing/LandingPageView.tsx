@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getLanding, type LandingPage } from "@/lib/landings";
-import { SITE } from "@/lib/site";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/schema";
 
 function webPageJsonLd(page: LandingPage) {
@@ -30,11 +30,13 @@ export function buildLandingMetadata(page: LandingPage): Metadata {
       url: `${SITE.url}/${page.slug}`,
       siteName: SITE.name,
       type: "website",
+      images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
     },
     twitter: {
       card: "summary_large_image",
       title: page.title,
       description: page.description,
+      images: [BRAND_LOGO_URL],
     },
   };
 }

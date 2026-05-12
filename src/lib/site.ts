@@ -1,3 +1,7 @@
+/** Brand mark (PNG); used in UI, metadata icons, and structured data. */
+export const BRAND_LOGO_URL =
+  "https://github.com/matt94856/Locum-Career-Hub/blob/main/public/locumcareerhublogo.png?raw=true" as const;
+
 export const SITE = {
   name: "Locum Career Hub",
   domain: "LocumCareerHub.com",
@@ -8,7 +12,8 @@ export const SITE = {
   phoneDisplay: "(800) 555-0199",
   phoneTel: "+18005550199",
   calendlyUrl: process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/locum-career-hub/recruiter",
-  ogImage: "/og-default.png",
+  /** Default OG / social preview image */
+  ogImage: BRAND_LOGO_URL,
 } as const;
 
 export const NAV_LINKS = [

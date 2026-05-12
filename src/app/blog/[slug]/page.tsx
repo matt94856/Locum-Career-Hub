@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BLOG_POSTS, getPost } from "@/lib/blog-posts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -23,6 +24,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.description,
       type: "article",
       publishedTime: post.date,
+      url: `${SITE.url}/blog/${post.slug}`,
+      siteName: SITE.name,
+      images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [BRAND_LOGO_URL],
     },
   };
 }

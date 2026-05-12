@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
-import { SITE } from "@/lib/site";
+import { BRAND_LOGO_URL, SITE } from "@/lib/site";
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -38,14 +38,16 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} | Physician Locum Tenens Recruiting`,
     description: SITE.tagline,
+    images: [{ url: BRAND_LOGO_URL, alt: SITE.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} | Physician Locum Tenens Recruiting`,
     description: SITE.tagline,
+    images: [BRAND_LOGO_URL],
   },
   icons: {
-    icon: "/logo.svg",
+    icon: [{ url: BRAND_LOGO_URL, type: "image/png" }],
   },
 };
 
