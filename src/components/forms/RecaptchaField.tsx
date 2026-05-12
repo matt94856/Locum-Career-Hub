@@ -66,6 +66,11 @@ export const RecaptchaField = forwardRef<RecaptchaFieldHandle, RecaptchaFieldPro
 
   useEffect(() => {
     if (!siteKey) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn(
+          "[reCAPTCHA] NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set. Add it in .env.local (and Netlify env + rebuild) so the widget can render.",
+        );
+      }
       onReadyRef.current?.();
       return;
     }

@@ -104,7 +104,15 @@ export async function POST(req: Request) {
   try {
     supabase = createSupabaseAdmin();
   } catch {
-    return NextResponse.json({ ok: false, error: "Server configuration error." }, { status: 503 });
+    return NextResponse.json(
+      {
+        ok: false,
+        code: "SUPABASE_NOT_CONFIGURED",
+        error:
+          "We could not save your inquiry on this deployment yet. Please email us directly and we will help you from there.",
+      },
+      { status: 503 },
+    );
   }
 
   const { error } = await supabase.from("physician_leads").insert(normalized.value);

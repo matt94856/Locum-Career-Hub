@@ -5,6 +5,7 @@ import { SPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
+import { SITE } from "@/lib/site";
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
 
@@ -149,10 +150,20 @@ export function LeadCaptureForm({
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      const data = (await res.json().catch(() => null)) as {
+        ok?: boolean;
+        error?: string;
+        code?: string;
+      } | null;
       if (!res.ok) {
         setStatus("error");
-        setError(typeof data?.error === "string" ? data.error : "Something went wrong. Please try again.");
+        if (data?.code === "SUPABASE_NOT_CONFIGURED") {
+          setError(
+            `We could not save your inquiry through the form yet. Please email ${SITE.email} or call ${SITE.phoneDisplay} and we will pick it up from there.`,
+          );
+        } else {
+          setError(typeof data?.error === "string" ? data.error : "Something went wrong. Please try again.");
+        }
         return;
       }
       setStatus("success");
