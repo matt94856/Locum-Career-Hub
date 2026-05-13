@@ -7,6 +7,7 @@ import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/lib/schema";
 import { openGraphImages, twitterImageUrls } from "@/lib/social-metadata";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { SITE } from "@/lib/site";
 
 /** Same asset as `public/logo.svg` — local so favicon/metadata never hit the image optimizer with a remote URL. */
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`}>
       <body className="min-h-screen bg-white pb-24 font-sans antialiased sm:pb-0">
+        <GoogleAnalytics />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={professionalServiceJsonLd()} />
