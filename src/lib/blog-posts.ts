@@ -13,6 +13,12 @@ const CORE_POSTS: BlogPost[] = [
     readMinutes: 12,
     category: "Well-being",
     keywords: ["physician burnout", "doctor burnout alternatives", "physician work-life balance"],
+    author: {
+      name: "Matthew Fuller",
+      jobTitle: "Physician recruiting lead, Locum Career Hub",
+      description:
+        "Physician-first recruiting focused on credentialing clarity, realistic scheduling, and low-pressure next steps for locum tenens and flexible roles.",
+    },
     content: [
       {
         type: "p",

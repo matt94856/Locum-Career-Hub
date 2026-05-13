@@ -10,6 +10,9 @@ import {
   STATE_LOCUM_PAGES,
   STATE_LOCUM_SLUGS,
 } from "@/lib/state-locum-seo";
+import { SPECIALTIES } from "@/lib/specialties";
+import { specialtyToSlug } from "@/lib/specialty-seo";
+import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { CTA } from "@/lib/site";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 
@@ -143,6 +146,31 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
                 </Link>{" "}
                 overview.
               </p>
+            </div>
+
+            <div>
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">
+                Locum tenens jobs in {page.stateName} by specialty
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm text-slate-600">
+                Pick your specialty for a dedicated {page.stateName} page: credentialing context, FAQs, and a direct
+                inquiry path.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {SPECIALTIES.map((s) => {
+                  const specSlug = specialtyToSlug(s);
+                  return (
+                    <li key={specSlug}>
+                      <Link
+                        href={specialtyStatePath(page.slug, specSlug)}
+                        className="inline-block rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 transition hover:border-brand-200 hover:bg-brand-50"
+                      >
+                        {s}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
 
             <div>

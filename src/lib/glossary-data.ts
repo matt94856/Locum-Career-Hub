@@ -1,0 +1,142 @@
+import { stateNameToSlug } from "@/lib/us-state-slugs";
+
+/** Programmatic glossary — educational definitions (not individualized legal/tax/medical advice). */
+const GLOSSARY_TITLES = [
+  "Locum tenens",
+  "Privileging",
+  "Credentialing",
+  "Compact nursing license",
+  "IMLC compact for physicians",
+  "Malpractice tail coverage",
+  "Claims-made malpractice",
+  "Occurrence malpractice",
+  "1099 income",
+  "W-2 employment",
+  "Locum tenens pay",
+  "Weekly locum rate",
+  "Stipend",
+  "Housing stipend",
+  "Travel stipend",
+  "Moonlighting",
+  "Per diem physician work",
+  "Block schedule",
+  "Nocturnist",
+  "Hospitalist medicine",
+  "Emergency medicine locums",
+  "Anesthesia locums",
+  "CRNA locum jobs",
+  "Radiology locums",
+  "Psychiatry locums",
+  "OB/GYN locums",
+  "Cardiology locums",
+  "Surgery locums",
+  "Pediatric locums",
+  "Telehealth locums",
+  "Urgent care locums",
+  "Internal medicine locums",
+  "Family medicine locums",
+  "Locum staffing agency",
+  "Physician recruiter",
+  "VMS vendor management system",
+  "MSO management services organization",
+  "Locums contract",
+  "Independent contractor physician",
+  "Backup physician coverage",
+  "Call pay",
+  "Supervision agreements",
+  "APP supervision",
+  "Census cap",
+  "Patient volume expectations",
+  "Chart closure expectations",
+  "RVU productivity",
+  "Cancellation clause",
+  "Non-compete clause",
+  "Locum malpractice insurance",
+  "Federal malpractice reform",
+  "State medical board",
+  "DEA registration",
+  "State controlled substance license",
+  "BLS ACLS certification",
+  "ATLS certification",
+  "Fellowship-trained physician",
+  "Board certification",
+  "Maintenance of certification",
+  "Locum tenens taxes",
+  "Quarterly estimated taxes",
+  "S corporation physician",
+  "LLC for locums",
+  "Business expenses for locums",
+  "CME allowance",
+  "Travel day pay",
+  "Orientation day",
+  "Handoff expectations",
+  "Sign-out quality",
+  "Moral injury in medicine",
+  "Physician burnout",
+  "Schedule flexibility",
+  "Work-life balance for doctors",
+  "Semi-retirement for physicians",
+  "Bridge employment",
+  "Credentialing packet",
+  "Primary source verification",
+  "NPDB query",
+  "OIG exclusion check",
+  "SAM exclusion check",
+  "Locum tenens housing",
+  "Corporate housing",
+  "Air travel for locums",
+  "Rental car for locums",
+  "Shift differential",
+  "Holiday pay locums",
+  "Overtime for physicians",
+  "Locum tenens credentialing timeline",
+  "Privileging timeline",
+  "Temporary privileges",
+  "Disaster privileges",
+  "Telemedicine licensure",
+  "Multi-state licensing strategy",
+  "Locum tenens interview",
+  "Site visit expectations",
+  "Supervision ratio",
+  "ICU staffing model",
+  "ED staffing model",
+  "Hospital medicine staffing",
+  "Locum tenens FAQ",
+  "Travel physician jobs",
+  "Per diem vs locums",
+  "Locums vs per diem",
+  "Agency bill rate",
+  "Locum tenens transparency",
+  "Physician autonomy",
+  "Clinical documentation integrity",
+  "Peer review",
+  "Quality metrics in hospital medicine",
+] as const;
+
+export type GlossaryItem = { slug: string; title: string };
+
+const glossarySlugSeen = new Set<string>();
+export const GLOSSARY_ITEMS: GlossaryItem[] = GLOSSARY_TITLES.map((title) => {
+  let slug = stateNameToSlug(title);
+  if (glossarySlugSeen.has(slug)) {
+    slug = `${slug}-glossary`;
+  }
+  glossarySlugSeen.add(slug);
+  return { slug, title };
+});
+
+export const GLOSSARY_SLUGS = GLOSSARY_ITEMS.map((g) => g.slug);
+
+const bySlug = new Map(GLOSSARY_ITEMS.map((g) => [g.slug, g]));
+
+export function getGlossaryItem(slug: string): GlossaryItem | undefined {
+  return bySlug.get(slug);
+}
+
+export function glossaryBodyParagraphs(title: string): string[] {
+  return [
+    `${title} comes up constantly in physician searches about flexible work, locum tenens, and staffing models. Definitions differ by contract, specialty, and facility policy—so the safest mental model is to separate “what the term usually means” from “what your specific agreement says.”`,
+    `If you are evaluating locum tenens jobs or physician staffing options, the practical move is to translate ${title} into operational questions: who owns credentialing tasks, what is documented about volume and call, and what happens if the schedule changes mid-assignment.`,
+    `Locum Career Hub is a physician career and recruiting resource—not a substitute for individualized legal, tax, or licensing advice. When you are ready for matches, submit an inquiry with your specialty, states, dates, and boundaries so we can respond with realistic next steps.`,
+  ];
+}

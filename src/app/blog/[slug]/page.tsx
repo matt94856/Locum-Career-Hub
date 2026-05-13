@@ -50,6 +50,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           slug: post.slug,
           datePublished: post.date,
           keywords: post.keywords,
+          author: post.author,
         })}
       />
       <JsonLd data={crumbs} />

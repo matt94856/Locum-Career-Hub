@@ -22,7 +22,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm backdrop-blur"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Modern physician careers · Nationwide coverage
+              Modern physician careers · Locum tenens jobs · Physician recruiting
             </motion.p>
 
             <motion.h1
@@ -41,8 +41,8 @@ export function Hero() {
               className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl"
             >
               If the hospital week is stealing your energy, you are not failing medicine—your environment may be failing
-              you. Locum Career Hub helps physicians find breathing room: clearer schedules, stronger advocacy, and
-              flexible work—including locum tenens when it genuinely fits.
+              you. Locum Career Hub connects physicians with locum tenens jobs and flexible staffing options when they fit:
+              clearer schedules, stronger advocacy, and recruiting that explains tradeoffs instead of pushing quotas.
             </motion.p>
 
             <motion.div

@@ -19,14 +19,14 @@ import { faqJsonLd } from "@/lib/schema";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { SITE } from "@/lib/site";
 
-const homeTitle = "More flexibility. Less burnout.";
+const homeTitle = "Locum Tenens Jobs & Physician Staffing | More Flexibility, Less Burnout";
 const homeDesc =
-  "If you are exhausted, stretched thin, or craving autonomy—explore calm, physician-first guidance and flexible opportunities built around your life.";
+  "Locum tenens jobs and physician recruiting for US clinicians—transparent schedules, credentialing clarity, and flexible work when the hospital week no longer fits.";
 
 export const metadata: Metadata = {
   title: homeTitle,
   description:
-    "The modern physician career platform for flexibility, freedom, and balance—empathy-first guidance, then locum tenens and flexible work when it fits your life.",
+    "Locum tenens jobs and physician staffing support for US doctors—empathy-first guidance, specialty and state hubs, then flexible locum work when it fits your life.",
   alternates: { canonical: "/" },
   ...socialShareMetadata({
     title: `${homeTitle} | ${SITE.name}`,

@@ -9,6 +9,12 @@ export type ArticleBlock =
   | { type: "ul"; items: string[] }
   | { type: "callout"; variant: "note" | "legal"; title: string; text: string };
 
+export type BlogAuthor = {
+  name: string;
+  jobTitle?: string;
+  description?: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -17,5 +23,7 @@ export type BlogPost = {
   readMinutes: number;
   category: string;
   keywords: string[];
+  /** Optional human author for E-E-A-T signals in Article JSON-LD. */
+  author?: BlogAuthor;
   content: ArticleBlock[];
 };

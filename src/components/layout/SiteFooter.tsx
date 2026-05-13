@@ -32,7 +32,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:col-span-5">
+        <div className="grid gap-8 sm:grid-cols-3 lg:col-span-5">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Company</p>
             <ul className="mt-4 space-y-2 text-sm">
@@ -43,6 +43,31 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Resources</p>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>
+                <Link className="hover:text-white" href="/locum-tenens-jobs">
+                  Locum jobs by state
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/national-locum-tenens-jobs-guide">
+                  National locum guide
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/glossary">
+                  Glossary
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/tools">
+                  Tools
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

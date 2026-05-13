@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { getStateNameBySlug } from "@/lib/us-state-slugs";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
 export type StateLocumPage = {
   slug: string;
   stateName: string;
-  code: string;
+  code?: string;
   title: string;
   description: string;
   h1: string;
@@ -277,10 +278,60 @@ export const STATE_LOCUM_PAGES: StateLocumPage[] = [
   },
 ];
 
-export const STATE_LOCUM_SLUGS = STATE_LOCUM_PAGES.map((p) => p.slug);
+/** All US states + DC — use for sitemaps and static generation (rich copy exists for a subset in `STATE_LOCUM_PAGES`). */
+export { US_STATE_SLUGS as STATE_LOCUM_SLUGS } from "@/lib/us-state-slugs";
+
+function buildFallbackStateLocumPage(slug: string, stateName: string): StateLocumPage {
+  return {
+    slug,
+    stateName,
+    title: `Locum Tenens Jobs ${stateName} | Physician Locums | Locum Career Hub`,
+    description: `${stateName} locum tenens jobs and flexible physician coverage—transparent expectations, credentialing context, and recruiter advocacy for hospitalists, ED, anesthesia, and more.`,
+    h1: `Locum Tenens Jobs in ${stateName}: Flexible Physician Coverage`,
+    h2: `When you want locum physician jobs with clearer boundaries and documented expectations`,
+    keywords: [
+      `locum tenens ${stateName}`,
+      "locum tenens jobs",
+      "locum physician jobs",
+      "travel physician jobs",
+      "physician recruiter",
+      `${stateName} physician opportunities`,
+    ],
+    answer: `${stateName} locum tenens jobs are contract-based physician roles across hospitals and groups—often used when clinicians want defined blocks, income clarity, or a calmer bridge while evaluating long-term fit.`,
+    whoFor: [
+      `Physicians licensed or willing to pursue licensure in ${stateName}`,
+      "Clinicians comparing travel physician jobs vs local block coverage",
+      "Attendings who want expectations for census, backup, and call in writing before day one",
+    ],
+    intro: `${stateName} staffing needs shift by specialty, season, and local market dynamics. Locum Career Hub helps physicians explore flexible work with a physician-first posture: fewer vague promises, more explicit scheduling and credentialing planning—whether you are easing burnout or designing your next chapter.`,
+    bullets: [
+      "State-appropriate licensing and privileging timelines discussed early",
+      "Malpractice, stipends, and cancellation terms reviewed before you commit",
+      "Specialty-aware matching—not generic job-board blasts",
+    ],
+    faqs: [
+      {
+        q: `Do I need an active ${stateName} license before I inquire?`,
+        a: "Requirements vary by assignment. Share your current licenses and target dates—we map realistic paths and interim options.",
+      },
+      {
+        q: "Are locums only for travelers?",
+        a: "No. Some physicians choose local block contracts; others prefer travel blocks. Distance should match your recovery needs.",
+      },
+      {
+        q: "What speeds up matching?",
+        a: "Share specialty, states you will consider, availability windows, travel appetite, and hard boundaries (nights, census, documentation load).",
+      },
+    ],
+  };
+}
 
 export function getStateLocumPage(slug: string): StateLocumPage | undefined {
-  return STATE_LOCUM_PAGES.find((p) => p.slug === slug);
+  const rich = STATE_LOCUM_PAGES.find((p) => p.slug === slug);
+  if (rich) return rich;
+  const stateName = getStateNameBySlug(slug);
+  if (!stateName) return undefined;
+  return buildFallbackStateLocumPage(slug, stateName);
 }
 
 export function buildStateLocumMetadata(page: StateLocumPage): Metadata {

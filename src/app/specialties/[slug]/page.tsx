@@ -11,6 +11,8 @@ import {
   SPECIALTY_SEO_SLUGS,
   specialtyToSlug,
 } from "@/lib/specialty-seo";
+import { FEATURED_STATES } from "@/lib/states";
+import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { SPECIALTIES } from "@/lib/specialties";
 import { CTA } from "@/lib/site";
 
@@ -154,6 +156,33 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
                 </li>
               </ul>
             </section>
+
+            <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
+              <h2 className="font-display text-xl font-semibold text-slate-950">{name} locums by state</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                High-intent examples—each opens a dedicated specialty × state page with FAQs and a lead path.
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {FEATURED_STATES.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      href={specialtyStatePath(s.slug, slug)}
+                      className="inline-block rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-800 transition hover:border-brand-200 hover:bg-brand-50"
+                    >
+                      {s.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/locum-tenens-jobs"
+                    className="inline-block rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 transition hover:border-brand-200 hover:bg-brand-50"
+                  >
+                    All states →
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>

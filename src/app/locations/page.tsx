@@ -4,6 +4,7 @@ import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SITE } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
+import { stateNameToSlug } from "@/lib/us-state-slugs";
 
 const LOC_DESC =
   "Locum Career Hub staffs physician locums nationwide. Explore featured states, licensing strategy, and demand hotspots for locum tenens.";
@@ -86,7 +87,12 @@ export default function LocationsPage() {
                     <ul className="mt-3 grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
                       {STATES_BY_LETTER[letter]?.map((s) => (
                         <li key={s} className="text-sm text-slate-700">
-                          {s}
+                          <Link
+                            className="font-semibold text-brand-700 hover:underline"
+                            href={`/locum-tenens-jobs/${stateNameToSlug(s)}`}
+                          >
+                            {s}
+                          </Link>
                         </li>
                       ))}
                     </ul>

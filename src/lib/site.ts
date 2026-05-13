@@ -7,7 +7,7 @@ export const SITE = {
   domain: "LocumCareerHub.com",
   url: "https://www.locumcareerhub.com",
   tagline:
-    "The modern physician career platform for flexibility, freedom, and balance—built for clinicians who are tired, stretched thin, or simply ready for a calmer path.",
+    "Locum tenens jobs and physician recruiting—with transparent expectations, credentialing clarity, and calm next steps for US clinicians exploring flexible work.",
   email: "matthewfuller389@gmail.com",
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",

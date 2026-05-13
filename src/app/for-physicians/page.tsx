@@ -40,7 +40,7 @@ const PROBLEM_SLUGS = [
 ] as const;
 
 const HIGH_INTENT_SLUGS = [
-  "locum-tenens-jobs",
+  "national-locum-tenens-jobs-guide",
   "locum-opportunities",
   "locum-physician-jobs",
   "physician-travel-jobs",

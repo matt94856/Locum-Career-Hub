@@ -5,11 +5,20 @@ const KNOWS_ABOUT = [
   "Physician burnout",
   "Flexible physician careers",
   "Locum tenens",
+  "Locum tenens jobs",
+  "Physician recruiting",
+  "Physician staffing agency",
   "Physician work-life balance",
   "Moonlighting and side income for physicians",
   "Hospital medicine staffing",
   "Emergency medicine staffing",
   "Anesthesia and CRNA locums",
+  "Radiology locum jobs",
+  "Psychiatry locum jobs",
+  "Cardiology locum jobs",
+  "Physician credentialing",
+  "Medical malpractice insurance for locums",
+  "Physician compensation and 1099 income",
 ] as const;
 
 export function organizationJsonLd() {
@@ -68,7 +77,10 @@ export function professionalServiceJsonLd() {
       "Physician career consulting",
       "Physician recruiting",
       "Locum tenens staffing",
+      "Locum tenens jobs",
+      "Physician staffing agency",
       "Flexible physician work arrangements",
+      "Physician credentialing support",
     ],
     knowsAbout: [
       { "@type": "Thing", name: "Physician burnout" },
@@ -101,17 +113,27 @@ export function articleJsonLd(input: {
   slug: string;
   datePublished: string;
   keywords?: string[];
+  author?: { name: string; jobTitle?: string; description?: string };
 }) {
+  const authorNode = input.author
+    ? {
+        "@type": "Person",
+        name: input.author.name,
+        ...(input.author.jobTitle ? { jobTitle: input.author.jobTitle } : {}),
+        ...(input.author.description ? { description: input.author.description } : {}),
+      }
+    : {
+        "@type": "Organization",
+        name: SITE.name,
+      };
+
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: input.title,
     description: input.description,
     datePublished: input.datePublished,
-    author: {
-      "@type": "Organization",
-      name: SITE.name,
-    },
+    author: authorNode,
     publisher: {
       "@type": "Organization",
       name: SITE.name,

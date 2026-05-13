@@ -30,7 +30,7 @@ export type LandingPage = {
 
 export const LANDING_PAGES: LandingPage[] = [
   {
-    slug: "locum-tenens-jobs",
+    slug: "national-locum-tenens-jobs-guide",
     title: "Locum Tenens Jobs for Physicians | Locum Career Hub",
     description:
       "Explore high-demand locum tenens jobs with transparent pay, credentialing support, and schedules built around your life. Connect with a physician recruiter today.",
@@ -120,7 +120,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Transparent stipend and lodging expectations",
       "Repeat assignments when you find a site you love",
     ],
-    relatedSlugs: ["locum-tenens-jobs", "physician-side-income", "flexible-physician-careers"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "physician-side-income", "flexible-physician-careers"],
     relatedLinks: [
       { href: "/locum-tenens-jobs/florida", title: "Locum tenens jobs in Florida" },
       { href: "/locum-tenens-jobs/texas", title: "Locum tenens jobs in Texas" },
@@ -143,7 +143,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Rate transparency so you can compare W-2 vs 1099 tradeoffs",
       "Advocacy for sustainable panel sizes and support staffing",
     ],
-    relatedSlugs: ["part-time-physician-jobs", "moonlighting-physician-jobs", "locum-tenens-jobs"],
+    relatedSlugs: ["part-time-physician-jobs", "moonlighting-physician-jobs", "national-locum-tenens-jobs-guide"],
     answer:
       "Flexible physician careers reorganize how, when, and where you work—often through contract blocks, moonlighting, or locums—so your schedule matches your life instead of the other way around.",
     whoFor: [
@@ -249,7 +249,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Academic and community sites with clear census targets",
       "Rapid credentialing for high-volume hospitalist networks",
     ],
-    relatedSlugs: ["emergency-medicine-locum-jobs", "locum-tenens-jobs", "part-time-physician-jobs"],
+    relatedSlugs: ["emergency-medicine-locum-jobs", "national-locum-tenens-jobs-guide", "part-time-physician-jobs"],
   },
   {
     slug: "emergency-medicine-locum-jobs",
@@ -283,7 +283,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "OR start times and room turnover norms",
       "Travel packages tuned to multi-week blocks",
     ],
-    relatedSlugs: ["hospitalist-locum-jobs", "emergency-medicine-locum-jobs", "locum-tenens-jobs"],
+    relatedSlugs: ["hospitalist-locum-jobs", "emergency-medicine-locum-jobs", "national-locum-tenens-jobs-guide"],
   },
   {
     slug: "physician-burnout-alternatives",
@@ -317,7 +317,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Hybrid telehealth + onsite models when available",
       "Transparent weekly minimums and cancellation policies",
     ],
-    relatedSlugs: ["moonlighting-physician-jobs", "flexible-physician-careers", "locum-tenens-jobs"],
+    relatedSlugs: ["moonlighting-physician-jobs", "flexible-physician-careers", "national-locum-tenens-jobs-guide"],
   },
   {
     slug: "physician-burnout-solutions",
@@ -423,7 +423,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Written call, post-call, and census expectations",
       "Iteration after your first assignment—adjust, repeat, or politely exit",
     ],
-    relatedSlugs: ["flexible-physician-careers", "part-time-physician-jobs", "locum-tenens-jobs"],
+    relatedSlugs: ["flexible-physician-careers", "part-time-physician-jobs", "national-locum-tenens-jobs-guide"],
   },
   {
     slug: "careers-after-residency",
@@ -457,7 +457,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Options beyond ‘quit or stay’—including short blocks while you stabilize",
       "Credentialing timelines so you are not guessing in silence",
     ],
-    relatedSlugs: ["career-change-for-doctors", "physician-burnout-solutions", "flexible-physician-careers", "locum-tenens-jobs"],
+    relatedSlugs: ["career-change-for-doctors", "physician-burnout-solutions", "flexible-physician-careers", "national-locum-tenens-jobs-guide"],
     answer:
       "Leaving hospital medicine usually means changing your work structure—not your identity. Locum Career Hub helps physicians map transitions (including locum tenens) with transparent expectations and low-pressure guidance.",
     whoFor: [
@@ -512,7 +512,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Moonlighting and part-time stacks when you need income without chaos",
       "Recruiter conversations that respect uncertainty",
     ],
-    relatedSlugs: ["leaving-hospital-medicine", "careers-after-residency", "physician-side-income", "locum-tenens-jobs"],
+    relatedSlugs: ["leaving-hospital-medicine", "careers-after-residency", "physician-side-income", "national-locum-tenens-jobs-guide"],
     answer:
       "Career change for doctors is a design problem: match clinical intensity, autonomy, and admin load to your season of life. Locum Career Hub maps options—including locum opportunities—without treating uncertainty as a sales hook.",
     whoFor: [
@@ -608,7 +608,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Credentialing support with realistic start dates",
       "Advocacy on stipends, lodging, malpractice, and cancellation terms",
     ],
-    relatedSlugs: ["locum-tenens-jobs", "locum-physician-jobs", "physician-travel-jobs", "hospitalist-locum-jobs"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-physician-jobs", "physician-travel-jobs", "hospitalist-locum-jobs"],
     answer:
       "Locum opportunities are short- or medium-term physician coverage roles—commonly called locum tenens—with explicit scheduling windows and recruiter support for licensing and credentialing.",
     whoFor: [
@@ -647,7 +647,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Local and travel models depending on your constraints",
       "Iteration after your first assignment—adjust, repeat, or exit politely",
     ],
-    relatedSlugs: ["locum-tenens-jobs", "locum-opportunities", "emergency-medicine-locum-jobs", "crna-locum-jobs"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-opportunities", "emergency-medicine-locum-jobs", "crna-locum-jobs"],
     answer:
       "Locum physician jobs are contract-based clinical roles that help facilities maintain staffing while offering physicians clearer scheduling windows than many traditional employed roles.",
     whoFor: [
