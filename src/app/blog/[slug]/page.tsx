@@ -5,6 +5,7 @@ import { ArticleBody } from "@/components/blog/ArticleBody";
 import { BLOG_POSTS, getPost } from "@/lib/blog-posts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
+import { DEFAULT_BLOG_AUTHOR } from "@/lib/blog-author";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
 export function generateStaticParams() {
@@ -50,7 +51,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           slug: post.slug,
           datePublished: post.date,
           keywords: post.keywords,
-          author: post.author,
+          author: post.author ?? DEFAULT_BLOG_AUTHOR,
         })}
       />
       <JsonLd data={crumbs} />

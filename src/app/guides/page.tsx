@@ -6,9 +6,9 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
-const PAGE_TITLE = "Physician Career Guides | Topics, Locums & Flexible Work";
+const PAGE_TITLE = "Locum Tenens Guides | Burnout, Travel Jobs & Flexible Careers";
 const PAGE_DESCRIPTION =
-  "Skimmable guides on locum tenens, schedule flexibility, burnout, travel roles, specialties, and career transitions—written for physicians who want context without pressure.";
+  "Locum tenens guides for physicians: burnout alternatives, travel physician jobs, side income, schedule flexibility, and credentialing—skimmable resources without pressure.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "travel physician jobs guide",
   ],
   ...socialShareMetadata({
-    title: `Career Guides | ${SITE.name}`,
+    title: "Locum Tenens Guides | Burnout, Travel Jobs & Flexible Careers",
     description: PAGE_DESCRIPTION,
     path: "/guides",
   }),

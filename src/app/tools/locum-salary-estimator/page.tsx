@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LocumSalaryEstimator } from "@/components/tools/LocumSalaryEstimator";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
@@ -39,6 +39,13 @@ export default function LocumSalaryEstimatorPage() {
   return (
     <main className="pb-24 sm:pb-0">
       <JsonLd data={medical} />
+      <JsonLd
+        data={webApplicationJsonLd({
+          name: "Locum tenens salary range estimator",
+          description: DESC,
+          path: PATH,
+        })}
+      />
       <JsonLd data={crumbs} />
 
       <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">

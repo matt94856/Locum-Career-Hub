@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
+import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
@@ -54,6 +54,15 @@ export default function W2Vs1099Page() {
   return (
     <main className="pb-24 sm:pb-0">
       <JsonLd data={medical} />
+      <JsonLd
+        data={webApplicationJsonLd({
+          name: "W-2 vs 1099 for physicians (overview)",
+          description:
+            "Educational comparison of employed (W-2) vs independent contractor (1099) framing for physicians exploring locum tenens.",
+          path: PATH,
+          applicationCategory: "BusinessApplication",
+        })}
+      />
       <JsonLd data={faqJsonLd([...FAQ])} />
       <JsonLd data={crumbs} />
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getStateNameBySlug } from "@/lib/us-state-slugs";
+import { shareDocumentTitle, stripBrandFromTitle } from "@/lib/seo-title";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
 export type StateLocumPage = {
@@ -336,13 +337,14 @@ export function getStateLocumPage(slug: string): StateLocumPage | undefined {
 
 export function buildStateLocumMetadata(page: StateLocumPage): Metadata {
   const path = `/locum-tenens-jobs/${page.slug}`;
+  const titlePart = stripBrandFromTitle(page.title);
   return {
-    title: page.title,
+    title: titlePart,
     description: page.description,
     alternates: { canonical: path },
     keywords: page.keywords,
     ...socialShareMetadata({
-      title: page.title,
+      title: shareDocumentTitle(titlePart),
       description: page.description,
       path,
     }),

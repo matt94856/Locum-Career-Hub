@@ -4,14 +4,14 @@ import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
 
 const ABOUT_DESC =
-  "Locum Career Hub is a modern physician career partner: calm guidance for flexibility, balance, and autonomy—with locum tenens support when it fits.";
+  "Locum Career Hub is a physician staffing and recruiting partner for locum tenens jobs, flexible careers, credentialing clarity, and calm recruiter guidance nationwide.";
 
 export const metadata: Metadata = {
-  title: "About Locum Career Hub",
+  title: "About Locum Career Hub | Physician Staffing & Recruiting",
   description: ABOUT_DESC,
   alternates: { canonical: "/about" },
   ...socialShareMetadata({
-    title: `About ${SITE.name}`,
+    title: "About Locum Career Hub | Physician Staffing & Recruiting",
     description: ABOUT_DESC,
     path: "/about",
   }),

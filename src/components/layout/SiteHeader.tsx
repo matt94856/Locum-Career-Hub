@@ -17,7 +17,7 @@ export function SiteHeader() {
       */}
       <div className="container-site grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-4 xl:gap-x-6">
         <Link href="/" className="flex min-w-0 items-center gap-2 lg:max-w-none lg:shrink-0">
-          <BrandLogo className="h-9 w-9 shrink-0" />
+          <BrandLogo className="h-9 w-9 shrink-0" priority />
           <span className="min-w-0 font-display text-base font-semibold tracking-tight text-slate-950 lg:whitespace-nowrap">
             {SITE.name}
           </span>

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { GLOSSARY_SLUGS, getGlossaryItem, glossaryBodyParagraphs } from "@/lib/glossary-data";
+import { shareDocumentTitle } from "@/lib/seo-title";
 import { SITE } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
@@ -16,14 +17,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const item = getGlossaryItem(slug);
   if (!item) return {};
   const path = `/glossary/${slug}`;
-  const title = `${item.title}: Definition for Physicians | ${SITE.name}`;
+  const titlePart = `${item.title}: Locum Tenens & Physician Staffing Definition`;
   const description = `What “${item.title}” means in locum tenens and physician staffing contexts—clear language for search and AI overviews.`;
   return {
-    title,
+    title: titlePart,
     description,
     alternates: { canonical: path },
     keywords: [item.title.toLowerCase(), "locum tenens glossary", "physician staffing terms"],
-    ...socialShareMetadata({ title, description, path }),
+    ...socialShareMetadata({ title: shareDocumentTitle(titlePart), description, path }),
   };
 }
 

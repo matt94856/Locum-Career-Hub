@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { shareDocumentTitle, stripBrandFromTitle } from "@/lib/seo-title";
 import { socialShareMetadata } from "@/lib/social-metadata";
-import { SITE } from "@/lib/site";
 
 export function specialtyStatePath(stateSlug: string, specialtySlug: string) {
   return `/locum-tenens-jobs/${stateSlug}/${specialtySlug}`;
@@ -14,10 +14,10 @@ export function buildSpecialtyStateMetadata(input: {
 }): Metadata {
   const { stateName, specialtyName, stateSlug, specialtySlug } = input;
   const path = specialtyStatePath(stateSlug, specialtySlug);
-  const title = `${specialtyName} Locum Jobs ${stateName} | Locum Tenens | ${SITE.name}`;
+  const titlePart = `${specialtyName} Locum Tenens Jobs in ${stateName}`;
   const description = `${stateName} locum tenens and flexible ${specialtyName} roles—credentialing context, realistic scheduling, and recruiter advocacy (not generic job-board noise).`;
   return {
-    title,
+    title: titlePart,
     description,
     alternates: { canonical: path },
     keywords: [
@@ -28,7 +28,7 @@ export function buildSpecialtyStateMetadata(input: {
       "physician staffing agency",
       "locum tenens recruiter",
     ],
-    ...socialShareMetadata({ title, description, path }),
+    ...socialShareMetadata({ title: shareDocumentTitle(titlePart), description, path }),
   };
 }
 

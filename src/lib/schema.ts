@@ -1,4 +1,7 @@
-import { BRAND_LOGO_URL, SITE } from "@/lib/site";
+import { SITE } from "@/lib/site";
+
+/** Absolute logo URL for structured data (prefer on-site asset over remote GitHub). */
+export const SCHEMA_LOGO_URL = `${SITE.url}/logo.svg` as const;
 
 /** Topics and entities this organization is positioned to help with (semantic + AI retrieval signals). */
 const KNOWS_ABOUT = [
@@ -27,7 +30,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: SITE.name,
     url: SITE.url,
-    logo: BRAND_LOGO_URL,
+    logo: SCHEMA_LOGO_URL,
     description: SITE.tagline,
     knowsAbout: KNOWS_ABOUT.map((name) => ({ "@type": "Thing", name })),
     contactPoint: [
@@ -64,7 +67,7 @@ export function professionalServiceJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: SITE.name,
-    image: BRAND_LOGO_URL,
+    image: SCHEMA_LOGO_URL,
     url: SITE.url,
     telephone: SITE.phoneTel,
     email: SITE.email,
@@ -139,7 +142,7 @@ export function articleJsonLd(input: {
       name: SITE.name,
       logo: {
         "@type": "ImageObject",
-        url: BRAND_LOGO_URL,
+        url: SCHEMA_LOGO_URL,
       },
     },
     mainEntityOfPage: {
@@ -188,5 +191,34 @@ export function medicalWebPageJsonLd(input: {
           })),
         }
       : {}),
+  };
+}
+
+/** Interactive physician tools (salary estimator, calculators). */
+export function webApplicationJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  applicationCategory?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: input.name,
+    description: input.description,
+    url: `${SITE.url}${input.path}`,
+    applicationCategory: input.applicationCategory ?? "FinanceApplication",
+    operatingSystem: "Any",
+    browserRequirements: "Requires JavaScript",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    provider: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: SITE.url,
+    },
   };
 }

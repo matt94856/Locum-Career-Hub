@@ -10,11 +10,11 @@ const SPEC_DESC =
   "Explore locum tenens recruiting across hospital medicine, emergency medicine, anesthesia, outpatient specialties, and more. Built for schedule control and transparent expectations.";
 
 export const metadata: Metadata = {
-  title: "Medical Specialties | Locum Tenens Coverage",
+  title: "Locum Tenens Specialties | Hospitalist, EM, Anesthesia & More",
   description: SPEC_DESC,
   alternates: { canonical: "/specialties" },
   ...socialShareMetadata({
-    title: `Medical Specialties | ${SITE.name}`,
+    title: "Locum Tenens Specialties | Nationwide Physician Coverage",
     description: SPEC_DESC,
     path: "/specialties",
   }),

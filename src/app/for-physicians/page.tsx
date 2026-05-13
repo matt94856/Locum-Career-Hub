@@ -7,16 +7,16 @@ import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
 
 const FOR_PHYS_DESC =
-  "If you are exhausted, uncertain, or craving autonomy—you are in the right place. Explore problem-aware guides and flexible career paths, including locum tenens when it fits.";
+  "Locum tenens jobs and flexible physician careers for US doctors—burnout-aware guides, schedule relief, and calm next steps when traditional hospital work no longer fits.";
 const FOR_PHYS_OG =
-  "Empathy-first resources for burnout, schedule strain, and work-life balance—plus high-intent guides when you are ready to explore flexible work.";
+  "Empathy-first locum tenens and flexible work resources for burnout, schedule strain, and work-life balance—plus high-intent guides when you are ready to explore options.";
 
 export const metadata: Metadata = {
-  title: "For Physicians | Flexibility, Balance, and Calm Next Steps",
+  title: "For Physicians | Locum Tenens, Burnout Relief & Flexible Careers",
   description: FOR_PHYS_DESC,
   alternates: { canonical: "/for-physicians" },
   ...socialShareMetadata({
-    title: `For Physicians | ${SITE.name}`,
+    title: "For Physicians | Locum Tenens & Flexible Careers",
     description: FOR_PHYS_OG,
     path: "/for-physicians",
   }),

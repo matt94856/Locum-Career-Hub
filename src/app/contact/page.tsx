@@ -5,14 +5,14 @@ import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
 
 const CONTACT_DESC =
-  "Contact Locum Career Hub for locum tenens opportunities, credentialing questions, and schedule planning. Fast responses from physician-first recruiters.";
+  "Talk with a Locum Career Hub physician recruiter about locum tenens jobs, credentialing timelines, and schedule planning—fast, physician-first responses.";
 
 export const metadata: Metadata = {
-  title: "Contact a Physician Recruiter",
+  title: "Contact a Physician Recruiter | Locum Tenens Staffing",
   description: CONTACT_DESC,
   alternates: { canonical: "/contact" },
   ...socialShareMetadata({
-    title: `Contact | ${SITE.name}`,
+    title: "Contact a Physician Recruiter | Locum Tenens Staffing",
     description: CONTACT_DESC,
     path: "/contact",
   }),

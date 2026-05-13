@@ -5,17 +5,19 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getLanding, type LandingPage } from "@/lib/landings";
 import { CTA } from "@/lib/site";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
+import { shareDocumentTitle, stripBrandFromTitle } from "@/lib/seo-title";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
 
 export function buildLandingMetadata(page: LandingPage): Metadata {
+  const titlePart = stripBrandFromTitle(page.title);
   return {
-    title: page.title,
+    title: titlePart,
     description: page.description,
     alternates: { canonical: `/${page.slug}` },
     keywords: page.keywords,
     ...socialShareMetadata({
-      title: page.title,
+      title: shareDocumentTitle(titlePart),
       description: page.description,
       path: `/${page.slug}`,
     }),
