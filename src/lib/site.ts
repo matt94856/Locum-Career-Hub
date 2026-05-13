@@ -11,8 +11,10 @@ export const SITE = {
   email: "matthewfuller389@gmail.com",
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",
-  /** Set `NEXT_PUBLIC_CALENDLY_URL` in Netlify / `.env.local` (do not hardcode booking links in source—secrets scan). */
-  calendlyUrl: (process.env.NEXT_PUBLIC_CALENDLY_URL ?? "").trim(),
+  /** Override with `NEXT_PUBLIC_CALENDLY_URL` in Netlify / `.env.local` if the booking link changes. */
+  calendlyUrl:
+    (process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/matthewfuller389/30min").trim() ||
+    "https://calendly.com/matthewfuller389/30min",
   /**
    * Default 1200×630 social preview is generated at `/opengraph-image` (see `app/opengraph-image.tsx`).
    * `BRAND_LOGO_URL` remains useful for UI + some structured data where a raster logo is expected.
