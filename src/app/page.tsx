@@ -41,6 +41,16 @@ export default function HomePage() {
       <JsonLd data={faqJsonLd(HOME_FAQ)} />
 
       <Hero />
+
+      <section className="border-b border-slate-100 bg-slate-50/40 py-16 sm:py-20">
+        <div className="container-site">
+          <LeadCaptureForm
+            title="Request locum matches"
+            subtitle="Most visitors start here—share specialty, states, and timeline. We respond with realistic options, not a generic blast."
+          />
+        </div>
+      </section>
+
       <TrustBar />
       <Segments />
       <SpecialtiesSection />
@@ -77,12 +87,6 @@ export default function HomePage() {
       </section>
 
       <RecruiterCta />
-
-      <section className="py-16 sm:py-20">
-        <div className="container-site">
-          <LeadCaptureForm />
-        </div>
-      </section>
 
       <InternalTopicGrid />
     </main>

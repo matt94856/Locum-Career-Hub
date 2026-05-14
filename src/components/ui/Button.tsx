@@ -28,6 +28,7 @@ export function Button({
   size = "md",
   className = "",
   title,
+  onClick,
   ...props
 }: {
   children: ReactNode;
@@ -36,26 +37,27 @@ export function Button({
   size?: Size;
   className?: string;
   title?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`.trim();
 
   if (href) {
     if (href.startsWith("/")) {
       return (
-        <Link href={href} className={cls} title={title}>
+        <Link href={href} className={cls} title={title} onClick={onClick}>
           {children}
         </Link>
       );
     }
     return (
-      <a href={href} className={cls} target="_blank" rel="noopener noreferrer" title={title}>
+      <a href={href} className={cls} target="_blank" rel="noopener noreferrer" title={title} onClick={onClick}>
         {children}
       </a>
     );
   }
 
   return (
-    <button className={cls} title={title} {...props}>
+    <button className={cls} title={title} onClick={onClick} {...props}>
       {children}
     </button>
   );

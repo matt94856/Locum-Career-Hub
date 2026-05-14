@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
-import { SITE } from "@/lib/site";
+import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
+import { SITE } from "@/lib/site";
 
 const CONTACT_DESC =
   "Talk with a Locum Career Hub physician recruiter about locum tenens jobs, credentialing timelines, and schedule planning—fast, physician-first responses.";
@@ -32,15 +33,9 @@ export default function ContactPage() {
             blast.
           </p>
           <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-            <Button
-              href={
-                SITE.calendlyUrl ||
-                `mailto:${SITE.email}?subject=${encodeURIComponent("Schedule a call — Locum Career Hub")}`
-              }
-              className="w-full justify-center"
-            >
-              {SITE.calendlyUrl ? "Book a 30-minute call" : "Email to schedule a call"}
-            </Button>
+            <CalendlyBookButton source="contact_hero" className="w-full justify-center">
+              Book a 30-minute call
+            </CalendlyBookButton>
             <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center">
               Call {SITE.phoneDisplay}
             </Button>

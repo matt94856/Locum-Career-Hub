@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
+import { trackCtaClick } from "@/lib/analytics-events";
 import { CTA } from "@/lib/site";
 
 export function Hero() {
@@ -51,12 +53,16 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.14 }}
               className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2"
             >
-              <Button href="/physician-opportunities" className="w-full justify-center">
-                {CTA.explore}
+              <Button
+                href="/#lead-form"
+                className="w-full justify-center"
+                onClick={() => trackCtaClick("hero_submit_inquiry", "/#lead-form")}
+              >
+                Submit inquiry
               </Button>
-              <Button href="/contact" variant="secondary" className="w-full justify-center">
-                {CTA.recruiter}
-              </Button>
+              <CalendlyBookButton source="hero" variant="secondary" className="w-full justify-center">
+                {CTA.bookCall}
+              </CalendlyBookButton>
             </motion.div>
 
             <motion.div

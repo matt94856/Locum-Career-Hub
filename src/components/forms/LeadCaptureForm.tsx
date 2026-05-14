@@ -5,6 +5,7 @@ import { SPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
+import { trackGenerateLead } from "@/lib/analytics-events";
 import { SITE } from "@/lib/site";
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
@@ -167,6 +168,7 @@ export function LeadCaptureForm({
         return;
       }
       setStatus("success");
+      trackGenerateLead(typeof window !== "undefined" ? window.location.pathname : "inquiry_form");
       form.reset();
       setSelectedStates(new Set());
       setStateQuery("");
