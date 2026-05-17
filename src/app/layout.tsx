@@ -10,8 +10,9 @@ import { openGraphImages, twitterImageUrls } from "@/lib/social-metadata";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { SITE } from "@/lib/site";
 
-/** Same asset as `public/logo.svg` — local so favicon/metadata never hit the image optimizer with a remote URL. */
-const APP_ICON = "/logo.svg" as const;
+/** Raster icons in `public/` — Google Search uses PNG/ICO, not SVG. */
+const FAVICON_ICO = "/favicon.ico" as const;
+const FAVICON_48 = "/icon-48.png" as const;
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -57,8 +58,12 @@ export const metadata: Metadata = {
     images: twitterImageUrls(),
   },
   icons: {
-    icon: [{ url: APP_ICON, type: "image/svg+xml" }],
-    apple: [{ url: APP_ICON, type: "image/svg+xml" }],
+    icon: [
+      { url: FAVICON_ICO, sizes: "any" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: FAVICON_48, sizes: "48x48", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
