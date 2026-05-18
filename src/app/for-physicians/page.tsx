@@ -2,25 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideCardLink } from "@/components/ui/GuideCardLink";
 import { LANDING_PAGES, type LandingPage } from "@/lib/landings";
-import { CTA, SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { Tier1DiscoveryHub } from "@/components/sections/Tier1DiscoveryHub";
+import { buildForPhysiciansSerpMetadata } from "@/lib/serp-ctr";
+import { CTA } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 
-const FOR_PHYS_DESC =
-  "Locum tenens jobs and flexible physician careers for US doctors—burnout-aware guides, schedule relief, and calm next steps when traditional hospital work no longer fits.";
-const FOR_PHYS_OG =
-  "Empathy-first locum tenens and flexible work resources for burnout, schedule strain, and work-life balance—plus high-intent guides when you are ready to explore options.";
-
-export const metadata: Metadata = {
-  title: "For Physicians | Locum Tenens, Burnout Relief & Flexible Careers",
-  description: FOR_PHYS_DESC,
-  alternates: { canonical: "/for-physicians" },
-  ...socialShareMetadata({
-    title: "For Physicians | Locum Tenens & Flexible Careers",
-    description: FOR_PHYS_OG,
-    path: "/for-physicians",
-  }),
-};
+export const metadata: Metadata = buildForPhysiciansSerpMetadata();
 
 const PROBLEM_SLUGS = [
   "physician-burnout-solutions",
@@ -82,6 +69,8 @@ export default function ForPhysiciansPage() {
           </div>
         </div>
       </section>
+
+      <Tier1DiscoveryHub variant="compact" />
 
       <section className="py-14 sm:py-16">
         <div className="container-site max-w-3xl space-y-4 text-sm leading-relaxed text-slate-700">

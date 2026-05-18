@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { shareDocumentTitle, stripBrandFromTitle } from "@/lib/seo-title";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { buildSpecialtyStateSerpMetadata } from "@/lib/serp-ctr";
 
 export function specialtyStatePath(stateSlug: string, specialtySlug: string) {
   return `/locum-tenens-jobs/${stateSlug}/${specialtySlug}`;
@@ -12,24 +11,7 @@ export function buildSpecialtyStateMetadata(input: {
   specialtySlug: string;
   specialtyName: string;
 }): Metadata {
-  const { stateName, specialtyName, stateSlug, specialtySlug } = input;
-  const path = specialtyStatePath(stateSlug, specialtySlug);
-  const titlePart = `${specialtyName} Locum Tenens Jobs in ${stateName}`;
-  const description = `${stateName} locum tenens and flexible ${specialtyName} roles—credentialing context, realistic scheduling, and recruiter advocacy (not generic job-board noise).`;
-  return {
-    title: titlePart,
-    description,
-    alternates: { canonical: path },
-    keywords: [
-      `${specialtyName} locum ${stateName}`,
-      `locum tenens ${stateName}`,
-      `${specialtyName} physician jobs`,
-      "locum physician jobs",
-      "physician staffing agency",
-      "locum tenens recruiter",
-    ],
-    ...socialShareMetadata({ title: shareDocumentTitle(titlePart), description, path }),
-  };
+  return buildSpecialtyStateSerpMetadata(input);
 }
 
 export function buildSpecialtyStateFaqs(specialtyName: string, stateName: string) {

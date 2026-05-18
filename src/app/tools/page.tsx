@@ -1,32 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { buildToolsIndexSerpMetadata } from "@/lib/serp-ctr";
 
-const DESC =
-  "Physician economics tools: locum salary ranges (illustrative) and W-2 vs 1099 framing—built for transparency, not hype.";
-
-export const metadata: Metadata = {
-  title: "Physician Career Tools | Locum Salary & Tax Framing",
-  description: DESC,
-  alternates: { canonical: "/tools" },
-  ...socialShareMetadata({
-    title: `Tools | ${SITE.name}`,
-    description: DESC,
-    path: "/tools",
-  }),
-};
+export const metadata: Metadata = buildToolsIndexSerpMetadata();
 
 const TOOLS = [
   {
     href: "/tools/locum-salary-estimator",
-    title: "Locum salary range estimator",
-    body: "Model gross ranges from shift count and blended hourly assumptions—clearly labeled as illustrative, not a quote.",
+    title: "Free locum tenens salary calculator",
+    body: "Matches “locum tenens income calculator” searches—weekly gross ranges, illustrative only.",
   },
   {
     href: "/tools/w2-vs-1099-physician",
-    title: "W-2 vs 1099 for physicians (overview)",
-    body: "High-level comparison table for employed vs independent contractor framing—educational, not individualized tax advice.",
+    title: "Locum vs employed calculator (W-2 vs 1099)",
+    body: "Compare pay structures before you sign—educational, not tax advice.",
   },
 ] as const;
 
@@ -59,6 +47,7 @@ export default function ToolsIndexPage() {
               <span className="mt-4 inline-block text-sm font-semibold text-brand-700">Open tool →</span>
             </Link>
           ))}
+          <LeadConversionBand headline="Ran the numbers—want real locum matches?" />
         </div>
       </section>
     </main>

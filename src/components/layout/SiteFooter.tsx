@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/layout/BrandLogo";
-import { LANDING_PAGES } from "@/lib/landings";
+import { TIER1_FOOTER_LINKS } from "@/lib/seo/tier1-discovery";
 import { NAV_LINKS, SITE } from "@/lib/site";
-
-const footerLandings = LANDING_PAGES.slice(0, 7);
 
 export function SiteFooter() {
   return (
@@ -75,10 +73,10 @@ export function SiteFooter() {
               Popular searches
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              {footerLandings.map((l) => (
-                <li key={l.slug}>
-                  <Link className="hover:text-white" href={`/${l.slug}`}>
-                    {l.h1}
+              {TIER1_FOOTER_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link className="hover:text-white" href={l.href}>
+                    {l.shortTitle ?? l.title}
                   </Link>
                 </li>
               ))}

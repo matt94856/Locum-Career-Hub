@@ -57,13 +57,19 @@ export const metadata: Metadata = {
     description: SITE.tagline,
     images: twitterImageUrls(),
   },
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
+      { url: "/icon", type: "image/png", sizes: "48x48" },
       { url: FAVICON_ICO, sizes: "any" },
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
       { url: FAVICON_48, sizes: "48x48", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: [{ url: FAVICON_ICO }],
+    apple: [
+      { url: "/apple-icon", type: "image/png", sizes: "180x180" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 

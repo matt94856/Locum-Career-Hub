@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { buildW2vs1099SerpMetadata } from "@/lib/serp-ctr";
 
 const PATH = "/tools/w2-vs-1099-physician";
 
@@ -22,19 +21,7 @@ const FAQ = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: "W-2 vs 1099 for Physicians | Locum Income Framing",
-  description:
-    "Educational comparison of employed (W-2) vs independent contractor (1099) framing for physicians exploring locum tenens—not individualized tax or legal advice.",
-  alternates: { canonical: PATH },
-  keywords: ["1099 vs w2 physician", "locum taxes", "independent contractor doctor", "physician employment types"],
-  ...socialShareMetadata({
-    title: `W-2 vs 1099 for Physicians | ${SITE.name}`,
-    description:
-      "High-level comparison for physicians evaluating locum tenens and flexible work structures—educational context only.",
-    path: PATH,
-  }),
-};
+export const metadata: Metadata = buildW2vs1099SerpMetadata();
 
 export default function W2Vs1099Page() {
   const medical = medicalWebPageJsonLd({

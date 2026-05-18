@@ -5,23 +5,13 @@ import { STATE_LOCUM_PAGES } from "@/lib/state-locum-seo";
 import { US_STATE_SLUGS, getStateNameBySlug } from "@/lib/us-state-slugs";
 import { SPECIALTIES } from "@/lib/specialties";
 import { specialtyToSlug } from "@/lib/specialty-seo";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { GuideCardLink } from "@/components/ui/GuideCardLink";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { TIER1_STATE_LINKS } from "@/lib/seo/tier1-discovery";
+import { buildLocumJobsHubSerpMetadata } from "@/lib/serp-ctr";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 
-const DESC =
-  "National locum tenens jobs hub: browse every US state, then drill into specialty-specific demand and inquiry paths for physician locums.";
-
-export const metadata: Metadata = {
-  title: "Locum Tenens Jobs by State | Nationwide Physician Locums",
-  description: DESC,
-  alternates: { canonical: "/locum-tenens-jobs" },
-  ...socialShareMetadata({
-    title: `Locum Tenens Jobs by State | ${SITE.name}`,
-    description: DESC,
-    path: "/locum-tenens-jobs",
-  }),
-};
+export const metadata: Metadata = buildLocumJobsHubSerpMetadata();
 
 export default function LocumTenensJobsHubPage() {
   const featured = new Set(STATE_LOCUM_PAGES.map((p) => p.slug));
@@ -46,6 +36,25 @@ export default function LocumTenensJobsHubPage() {
             <Button href="/specialties" variant="secondary" className="justify-center">
               Browse specialties →
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-100 bg-slate-50/50 py-12 sm:py-14">
+        <div className="container-site">
+          <h2 className="font-display text-xl font-semibold text-slate-950">States with the most search interest</h2>
+          <p className="mt-2 max-w-2xl text-sm text-slate-600">
+            Start with these hubs—they already earn impressions in Google. Each links to specialty-specific pages inside the state.
+          </p>
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {TIER1_STATE_LINKS.map((l) => (
+              <li key={l.href} className="min-w-0">
+                <GuideCardLink href={l.href} title={l.title} description={l.description} ctaLabel={l.ctaLabel} />
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 max-w-2xl">
+            <LeadConversionBand headline="Want matches in a specific state?" />
           </div>
         </div>
       </section>

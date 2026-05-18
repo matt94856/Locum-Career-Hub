@@ -3,24 +3,14 @@ import Link from "next/link";
 import { LocumSalaryEstimator } from "@/components/tools/LocumSalaryEstimator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { buildSalaryEstimatorSerpMetadata } from "@/lib/serp-ctr";
 
 const PATH = "/tools/locum-salary-estimator";
 const DESC =
   "Illustrative locum tenens salary range calculator for physicians—gross-only modeling with explicit disclaimers (not a quote or tax advice).";
 
-export const metadata: Metadata = {
-  title: "Locum Tenens Salary Estimator (Illustrative) | Physician Gross Range",
-  description: DESC,
-  alternates: { canonical: PATH },
-  keywords: ["locum tenens salary calculator", "physician locum pay", "weekly locum rate", "locum compensation"],
-  ...socialShareMetadata({
-    title: `Locum Salary Estimator | ${SITE.name}`,
-    description: DESC,
-    path: PATH,
-  }),
-};
+export const metadata: Metadata = buildSalaryEstimatorSerpMetadata();
 
 export default function LocumSalaryEstimatorPage() {
   const medical = medicalWebPageJsonLd({
@@ -80,6 +70,7 @@ export default function LocumSalaryEstimatorPage() {
             </Link>
             .
           </p>
+          <LeadConversionBand headline="Like the range? Get real locum matches." />
         </div>
       </section>
     </main>

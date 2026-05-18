@@ -4,9 +4,10 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { GLOSSARY_SLUGS, getGlossaryItem, glossaryBodyParagraphs } from "@/lib/glossary-data";
-import { shareDocumentTitle } from "@/lib/seo-title";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
+import { buildGlossarySerpMetadata } from "@/lib/serp-ctr";
 import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
 
 export function generateStaticParams() {
   return GLOSSARY_SLUGS.map((slug) => ({ slug }));
@@ -16,16 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = getGlossaryItem(slug);
   if (!item) return {};
-  const path = `/glossary/${slug}`;
-  const titlePart = `${item.title}: Locum Tenens & Physician Staffing Definition`;
-  const description = `What “${item.title}” means in locum tenens and physician staffing contexts—clear language for search and AI overviews.`;
-  return {
-    title: titlePart,
-    description,
-    alternates: { canonical: path },
-    keywords: [item.title.toLowerCase(), "locum tenens glossary", "physician staffing terms"],
-    ...socialShareMetadata({ title: shareDocumentTitle(titlePart), description, path }),
-  };
+  return buildGlossarySerpMetadata(item.title, slug);
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -34,7 +26,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
   if (!item) notFound();
 
   const path = `/glossary/${slug}`;
-  const paragraphs = glossaryBodyParagraphs(item.title);
+  const paragraphs = glossaryBodyParagraphs(slug, item.title);
 
   const medical = medicalWebPageJsonLd({
     name: `${item.title} | Physician glossary | ${SITE.name}`,
@@ -79,6 +71,10 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
             >
               Back to glossary
             </Link>
+          </div>
+          <div className="mt-12 space-y-6">
+            <LeadConversionBand headline="Definitions are step one—matches are step two." />
+            <Tier1QuickLinks />
           </div>
         </div>
       </article>

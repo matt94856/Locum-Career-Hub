@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
+import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
-import {
-  buildSpecialtyStateFaqs,
-  buildSpecialtyStateMetadata,
-  specialtyStatePath,
-} from "@/lib/specialty-state-seo";
+import { buildSpecialtyStatePageContent } from "@/lib/seo/specialty-state-content";
+import { buildSpecialtyStateMetadata, specialtyStatePath } from "@/lib/specialty-state-seo";
 import { SPECIALTY_SEO_SLUGS, getSpecialtyNameBySlug, specialtyToSlug } from "@/lib/specialty-seo";
 import { SPECIALTIES } from "@/lib/specialties";
 import { getStateLocumPage } from "@/lib/state-locum-seo";
@@ -54,11 +54,17 @@ export default async function SpecialtyStateLocumPage({
   if (!statePage || !specialtyName) notFound();
 
   const path = specialtyStatePath(state, specialtySlug);
-  const faqs = buildSpecialtyStateFaqs(specialtyName, statePage.stateName);
+  const content = buildSpecialtyStatePageContent({
+    stateSlug: state,
+    stateName: statePage.stateName,
+    specialtySlug,
+    specialtyName,
+  });
+  if (!content) notFound();
 
   const medical = medicalWebPageJsonLd({
     name: `${specialtyName} locum jobs in ${statePage.stateName} | ${SITE.name}`,
-    description: `${statePage.stateName} locum tenens and flexible ${specialtyName} work—expectations, credentialing, and calm recruiting.`,
+    description: content.metaDescription,
     path,
     keywords: [
       `${specialtyName} locum ${statePage.stateName}`,
@@ -81,7 +87,7 @@ export default async function SpecialtyStateLocumPage({
   return (
     <main className="pb-24 sm:pb-0">
       <JsonLd data={medical} />
-      <JsonLd data={faqJsonLd([...faqs])} />
+      <JsonLd data={faqJsonLd(content.faqs)} />
       <JsonLd data={crumbs} />
 
       <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">
@@ -92,26 +98,21 @@ export default async function SpecialtyStateLocumPage({
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 [overflow-wrap:anywhere] sm:text-5xl">
             {specialtyName} locum tenens jobs in {statePage.stateName}
           </h1>
-          <h2 className="mt-4 text-lg font-medium text-slate-700 sm:text-xl">
-            Geographic intent + specialty intent—mapped to realistic credentialing and scheduling expectations
-          </h2>
+          <h2 className="mt-4 text-lg font-medium text-slate-700 sm:text-xl">{content.heroSubhead}</h2>
           <p className="mt-6 rounded-2xl border border-brand-100 bg-white/90 p-4 text-base font-medium leading-relaxed text-slate-800 shadow-sm sm:p-5 sm:text-lg">
             <span className="text-brand-800">Direct answer: </span>
-            {statePage.stateName} {specialtyName} locum roles are contract-based assignments where pay, call, backup, and
-            documentation expectations should be explicit before you commit. Demand varies by market season and local
-            staffing—this page is built to help semantic search and AI summaries route physicians to a calmer next step.
+            {content.directAnswer}
           </p>
-          <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Weekly rates and workload are not universal truths—they shift by site, payer mix, and acuity. What should be
-            universal is transparency: written expectations, credentialing owners, and a recruiter who advocates for your
-            boundaries—not a volume dump disguised as opportunity.
-          </p>
+          <p className="mt-6 text-lg leading-relaxed text-slate-600">{content.intro}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form" className="justify-center">
               {CTA.explore}
             </Button>
             <Button href={`/specialties/${specialtySlug}`} variant="secondary" className="justify-center">
               {specialtyName} overview →
+            </Button>
+            <Button href={`/locum-tenens-jobs/${state}`} variant="secondary" className="justify-center">
+              All {statePage.stateName} specialties →
             </Button>
           </div>
         </div>
@@ -120,49 +121,12 @@ export default async function SpecialtyStateLocumPage({
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5 sm:p-6">
-              <h2 className="font-display text-lg font-semibold text-slate-950">Why physicians land on this page</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
-                <li className="flex gap-3">
-                  <span className="mt-1 h-2 w-2 flex-none rounded-full bg-brand-600" />
-                  <span>
-                    You are evaluating {specialtyName} locum tenens jobs in {statePage.stateName} specifically—not a
-                    generic national posting.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 h-2 w-2 flex-none rounded-full bg-brand-600" />
-                  <span>You want licensing and privileging context tied to a real geography and timeline.</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 h-2 w-2 flex-none rounded-full bg-brand-600" />
-                  <span>You are comparing travel physician jobs vs local block coverage while protecting recovery time.</span>
-                </li>
-              </ul>
-            </div>
-
-            <section>
-              <h2 className="font-display text-2xl font-semibold text-slate-950">Pay, workload, and “average rates”</h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-                Public rate tables are often misleading because they mix shift types, call burden, and acuity. For {specialtyName}{" "}
-                in {statePage.stateName}, the productive question is what is documented: census targets, backup layers,
-                night responsibilities, and malpractice structure. We help you interpret offers with those variables in
-                view—without pretending a single number fits every clinician.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="font-display text-2xl font-semibold text-slate-950">Credentialing and start dates</h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-                Credentialing is frequently the longest pole. Starting early, naming owners, and tracking privileging tasks
-                reduces surprise delays—especially when multiple facilities or telemedicine layers are involved.
-              </p>
-            </section>
+            <ContentSections sections={content.sections} />
 
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>
               <dl className="mt-6 space-y-6">
-                {faqs.map((f) => (
+                {content.faqs.map((f) => (
                   <div key={f.q} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                     <dt className="font-semibold text-slate-900">{f.q}</dt>
                     <dd className="mt-2 text-sm leading-relaxed text-slate-600">{f.a}</dd>
@@ -199,10 +163,15 @@ export default async function SpecialtyStateLocumPage({
             </div>
           </div>
 
-          <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+          <aside className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
               title={`Request ${specialtyName} in ${statePage.stateName}`}
               subtitle="Share dates, license footprint, and boundaries. We respond with realistic options—not spam."
+            />
+            <Tier1QuickLinks />
+            <LeadConversionBand
+              headline={`Request ${specialtyName} in ${statePage.stateName}`}
+              subline="2-minute form—physician recruiter follow-up, not a blast."
             />
           </aside>
         </div>

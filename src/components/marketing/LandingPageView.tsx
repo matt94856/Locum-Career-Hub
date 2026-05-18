@@ -5,23 +5,21 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getLanding, type LandingPage } from "@/lib/landings";
 import { CTA } from "@/lib/site";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
-import { shareDocumentTitle, stripBrandFromTitle } from "@/lib/seo-title";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { buildSerpMetadata, landingSerpOverride } from "@/lib/serp-ctr";
+import { stripBrandFromTitle } from "@/lib/seo-title";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { Button } from "@/components/ui/Button";
 
 export function buildLandingMetadata(page: LandingPage): Metadata {
-  const titlePart = stripBrandFromTitle(page.title);
-  return {
+  const override = landingSerpOverride(page.slug);
+  const titlePart = override?.title ?? stripBrandFromTitle(page.title);
+  const description = override?.description ?? page.description;
+  return buildSerpMetadata({
     title: titlePart,
-    description: page.description,
-    alternates: { canonical: `/${page.slug}` },
+    description,
+    path: `/${page.slug}`,
     keywords: page.keywords,
-    ...socialShareMetadata({
-      title: shareDocumentTitle(titlePart),
-      description: page.description,
-      path: `/${page.slug}`,
-    }),
-  };
+  });
 }
 
 export function LandingPageView({ page }: { page: LandingPage }) {
@@ -203,6 +201,12 @@ export function LandingPageView({ page }: { page: LandingPage }) {
               Physician insights library →
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-100 bg-slate-50/50 py-12 sm:py-14">
+        <div className="container-site max-w-3xl">
+          <LeadConversionBand headline="Read enough—want matches for your situation?" />
         </div>
       </section>
     </main>

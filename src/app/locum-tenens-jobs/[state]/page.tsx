@@ -14,6 +14,10 @@ import { SPECIALTIES } from "@/lib/specialties";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { CTA } from "@/lib/site";
+import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
+import { ContentSections } from "@/components/seo/ContentSections";
+import { getStateProfile, getStateProfileSections } from "@/lib/seo/state-profiles";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 
 export function generateStaticParams() {
@@ -57,6 +61,8 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
   const faqLd = faqJsonLd(page.faqs);
 
   const otherStates = STATE_LOCUM_PAGES.filter((s) => s.slug !== page.slug).slice(0, 5);
+  const stateProfile = getStateProfile(page.slug);
+  const profileSections = stateProfile ? getStateProfileSections(stateProfile) : [];
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -116,6 +122,8 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
                 ))}
               </ul>
             </div>
+
+            {profileSections.length > 0 ? <ContentSections sections={profileSections} /> : null}
 
             <div>
               <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">FAQs</h2>
@@ -198,10 +206,15 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
             </div>
           </div>
 
-          <div className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+          <div className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
               title={`Request ${page.stateName} matches`}
               subtitle={`Tell us specialty, dates, and boundaries. We will follow up with realistic ${page.stateName} options—not generic blasts.`}
+            />
+            <Tier1QuickLinks />
+            <LeadConversionBand
+              headline={`${page.stateName} locums—ready to talk?`}
+              subline="Submit once; we map licensing and realistic start windows."
             />
           </div>
         </div>

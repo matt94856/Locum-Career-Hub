@@ -1,6 +1,25 @@
 import { LANDING_PAGES } from "@/lib/landings";
+import { landingSerpOverride } from "@/lib/serp-ctr";
 import { GuideCardLink } from "@/components/ui/GuideCardLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+
+const TIER1_LANDING_SLUGS = new Set([
+  "national-locum-tenens-jobs-guide",
+  "physician-travel-jobs",
+  "moonlighting-physician-jobs",
+  "hospitalist-locum-jobs",
+  "leaving-hospital-medicine",
+  "physician-burnout-alternatives",
+  "flexible-physician-careers",
+]);
+
+function sortedLandings() {
+  return [...LANDING_PAGES].sort((a, b) => {
+    const aTier = TIER1_LANDING_SLUGS.has(a.slug) ? 0 : 1;
+    const bTier = TIER1_LANDING_SLUGS.has(b.slug) ? 0 : 1;
+    return aTier - bTier;
+  });
+}
 
 export function InternalTopicGrid() {
   return (
@@ -13,11 +32,18 @@ export function InternalTopicGrid() {
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
-          {LANDING_PAGES.map((p) => (
-            <div key={p.slug} className="min-w-0">
-              <GuideCardLink href={`/${p.slug}`} title={p.h1} description={p.description} />
-            </div>
-          ))}
+          {sortedLandings().map((p) => {
+            const serp = landingSerpOverride(p.slug);
+            return (
+              <div key={p.slug} className="min-w-0">
+                <GuideCardLink
+                  href={`/${p.slug}`}
+                  title={serp?.title ?? p.h1}
+                  description={serp?.description ?? p.description}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

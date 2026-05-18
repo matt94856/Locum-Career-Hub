@@ -16,24 +16,11 @@ import { Button } from "@/components/ui/Button";
 import { HOME_FAQ } from "@/lib/faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqJsonLd } from "@/lib/schema";
-import { socialShareMetadata } from "@/lib/social-metadata";
-import { SITE } from "@/lib/site";
+import { Tier1DiscoveryHub } from "@/components/sections/Tier1DiscoveryHub";
+import { HOME_LEAD_ANCHOR } from "@/lib/seo/tier1-discovery";
+import { buildHomeSerpMetadata } from "@/lib/serp-ctr";
 
-const homeTitle = "Locum Tenens Jobs & Physician Staffing | More Flexibility, Less Burnout";
-const homeDesc =
-  "Locum tenens jobs and physician recruiting for US clinicians—transparent schedules, credentialing clarity, and flexible work when the hospital week no longer fits.";
-
-export const metadata: Metadata = {
-  title: homeTitle,
-  description:
-    "Locum tenens jobs and physician staffing support for US doctors—empathy-first guidance, specialty and state hubs, then flexible locum work when it fits your life.",
-  alternates: { canonical: "/" },
-  ...socialShareMetadata({
-    title: `${homeTitle} | ${SITE.name}`,
-    description: homeDesc,
-    path: "/",
-  }),
-};
+export const metadata: Metadata = buildHomeSerpMetadata();
 
 export default function HomePage() {
   return (
@@ -42,7 +29,9 @@ export default function HomePage() {
 
       <Hero />
 
-      <section className="border-b border-slate-100 bg-slate-50/40 py-16 sm:py-20">
+      <Tier1DiscoveryHub leadHref={HOME_LEAD_ANCHOR} />
+
+      <section id="get-matched" className="scroll-mt-24 border-b border-slate-100 bg-slate-50/40 py-16 sm:py-20">
         <div className="container-site">
           <LeadCaptureForm
             title="Request locum matches"

@@ -1,3 +1,4 @@
+import { glossaryRichParagraphs } from "@/lib/seo/glossary-rich-content";
 import { stateNameToSlug } from "@/lib/us-state-slugs";
 
 /** Programmatic glossary — educational definitions (not individualized legal/tax/medical advice). */
@@ -133,10 +134,6 @@ export function getGlossaryItem(slug: string): GlossaryItem | undefined {
   return bySlug.get(slug);
 }
 
-export function glossaryBodyParagraphs(title: string): string[] {
-  return [
-    `${title} comes up constantly in physician searches about flexible work, locum tenens, and staffing models. Definitions differ by contract, specialty, and facility policy—so the safest mental model is to separate “what the term usually means” from “what your specific agreement says.”`,
-    `If you are evaluating locum tenens jobs or physician staffing options, the practical move is to translate ${title} into operational questions: who owns credentialing tasks, what is documented about volume and call, and what happens if the schedule changes mid-assignment.`,
-    `Locum Career Hub is a physician career and recruiting resource—not a substitute for individualized legal, tax, or licensing advice. When you are ready for matches, submit an inquiry with your specialty, states, dates, and boundaries so we can respond with realistic next steps.`,
-  ];
+export function glossaryBodyParagraphs(slug: string, title: string): string[] {
+  return glossaryRichParagraphs(slug, title);
 }

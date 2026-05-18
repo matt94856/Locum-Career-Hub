@@ -5,34 +5,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { OPPORTUNITIES_FAQ } from "@/lib/opportunities-seo";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { FEATURED_STATES } from "@/lib/states";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import { buildPhysicianOpportunitiesSerpMetadata } from "@/lib/serp-ctr";
 
-const PAGE_TITLE = "Physician Opportunities | Locum Tenens Jobs & Flexible Careers";
+export const metadata: Metadata = buildPhysicianOpportunitiesSerpMetadata();
+
+const PAGE_TITLE = "Physician Locum Opportunities | Submit Your Preferences";
 const PAGE_DESCRIPTION =
-  "Why physicians choose locum tenens—flexible blocks, strong markets, and recruiter support—plus a short inquiry form to get matched without pressure.";
-const PAGE_OG_SNIP =
-  "Explore the benefits of locums and high-demand regions, then tell us what you need—we will follow up with calm, transparent next steps.";
-
-export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/physician-opportunities" },
-  keywords: [
-    "physician opportunities",
-    "locum tenens jobs",
-    "locum physician jobs",
-    "physician recruiter",
-    "travel physician jobs",
-    "flexible physician jobs",
-    "physician burnout solutions",
-  ],
-  ...socialShareMetadata({
-    title: `Physician Opportunities | ${SITE.name}`,
-    description: PAGE_OG_SNIP,
-    path: "/physician-opportunities",
-  }),
-};
+  "Tell us specialty, states, and dates—get realistic locum matches with physician recruiter advocacy (not spam).";
 
 const LOCUM_BENEFITS = [
   {

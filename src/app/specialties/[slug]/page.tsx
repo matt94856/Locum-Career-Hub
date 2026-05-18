@@ -14,6 +14,8 @@ import {
 import { FEATURED_STATES } from "@/lib/states";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { SPECIALTIES } from "@/lib/specialties";
+import { getSpecialtyProfile } from "@/lib/seo/specialty-profiles";
+import { ContentSections } from "@/components/seo/ContentSections";
 import { CTA } from "@/lib/site";
 
 const SPECIALTY_FAQ = (name: string) =>
@@ -73,6 +75,33 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
   ]);
 
   const other = SPECIALTIES.filter((s) => specialtyToSlug(s) !== slug).slice(0, 6);
+  const profile = getSpecialtyProfile(slug);
+  const profileSections = profile
+    ? [
+        {
+          h2: `${name}: assignment snapshot`,
+          paragraphs: [profile.assignmentSnapshot, profile.workflowNotes],
+        },
+        {
+          h2: "Credentialing and documentation",
+          paragraphs: [
+            profile.documentationFocus,
+            `Checklist: ${profile.credentialingChecklist.join(" · ")}`,
+          ],
+        },
+        {
+          h2: "Pay drivers and fit signals",
+          paragraphs: [
+            `Rate drivers include ${profile.payDrivers.join(", ")}.`,
+            profile.fitSignals.join(" "),
+          ],
+        },
+        {
+          h2: "Pitfalls to avoid",
+          paragraphs: profile.pitfalls,
+        },
+      ]
+    : [];
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -139,6 +168,8 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
               </p>
             </section>
 
+            {profileSections.length > 0 ? <ContentSections sections={profileSections} /> : null}
+
             <section>
               <h2 className="font-display text-2xl font-semibold text-slate-950">What to clarify before you commit</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
@@ -187,7 +218,7 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>
               <dl className="mt-6 space-y-6">
-                {faqs.map((f) => (
+                {[...faqs, ...(profile?.faqs ?? [])].map((f) => (
                   <div key={f.q} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
                     <dt className="font-semibold text-slate-900">{f.q}</dt>
                     <dd className="mt-2 text-sm leading-relaxed text-slate-600">{f.a}</dd>
