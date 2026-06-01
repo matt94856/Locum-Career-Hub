@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import { metadataPageTitle, shareDocumentTitle } from "@/lib/seo-title";
+import {
+  CARDIOLOGY_HUB_DESCRIPTION,
+  CARDIOLOGY_HUB_TITLE,
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+} from "@/lib/seo/cardiology-locum-jobs-config";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
 /** Google typically truncates descriptions around 155–160 characters. */
 export const SERP_DESCRIPTION_MAX = 155;
 
-/** Target length for the segment before `| Brand` in SERP titles. */
-export const SERP_TITLE_MAX = 58;
+/** Target length for the segment before `| Brand` in SERP titles (60 chars total with brand). */
+export const SERP_TITLE_MAX = 40;
 
 export function clampSerpDescription(text: string, max = SERP_DESCRIPTION_MAX): string {
   const t = text.replace(/\s+/g, " ").trim();
@@ -134,19 +140,24 @@ export function landingSerpOverride(slug: string): { title: string; description:
 
 export function buildHomeSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Cardiologist Locum Tenens Jobs (2026) | Recruiter Support",
-    description: buildSerpDescription({
-      hook: "Cardiologist locum tenens jobs with transparent pay drivers, privileging context, and realistic call.",
-      proof: "Cardiologist-only recruiter—state & subspecialty hubs.",
-      cta: "Talk to a cardiology recruiter—no job-board spam.",
-    }),
+    title: HOME_TITLE,
+    description: clampSerpDescription(HOME_DESCRIPTION),
     path: "/",
     keywords: [
-      "cardiologist locum tenens",
+      "locum tenens physician staffing",
+      "locum cardiologist jobs",
       "cardiology locum jobs",
-      "interventional cardiologist locum",
       "cardiologist recruiter",
     ],
+  });
+}
+
+export function buildCardiologyHubSerpMetadata(): Metadata {
+  return buildSerpMetadata({
+    title: CARDIOLOGY_HUB_TITLE,
+    description: clampSerpDescription(CARDIOLOGY_HUB_DESCRIPTION),
+    path: "/locum-jobs/cardiology",
+    keywords: ["locum cardiologist jobs", "cardiology locum tenens", "cardiologist recruiting"],
   });
 }
 

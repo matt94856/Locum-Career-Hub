@@ -5,6 +5,7 @@ import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { getIndexableCardiologySeoPaths } from "@/lib/cardiology-seo/registry";
 import { PRIORITY_METRO_SLUGS } from "@/lib/cardiology-seo/metro-rich-data";
+import { CARDIOLOGY_LOCUM_SPECIALTIES, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
 import { GLOSSARY_SLUGS } from "@/lib/glossary-data";
 import { LANDING_SLUGS } from "@/lib/landings";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
@@ -19,8 +20,7 @@ const staticRoutes = [
   "/contact",
   "/physician-opportunities",
   "/guides",
-  "/specialties",
-  "/cardiology-locum-jobs",
+  "/locum-jobs/cardiology",
   "/states",
   "/cities",
   "/salary",
@@ -55,6 +55,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.52,
   }));
 
+  const cardiologyLocumSpecialtyEntries: MetadataRoute.Sitemap = CARDIOLOGY_LOCUM_SPECIALTIES.map((s) => ({
+    url: `${SITE.url}${cardiologySpecialtyPath(s.pathSlug)}`,
+    lastModified,
+    changeFrequency: "weekly" as const,
+    priority: 0.82,
+  }));
+
   const cardiologySeoEntries: MetadataRoute.Sitemap = getIndexableCardiologySeoPaths().map((path) => {
     const citySlug = path.startsWith("/cities/") ? path.replace("/cities/", "") : "";
     const isFlagshipSalary = path.startsWith("/salary/cardiologist-salary-");
@@ -74,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE.url}${path}`,
       lastModified,
       changeFrequency: "weekly" as const,
-      priority: path === "/" ? 1 : path === "/cardiology-locum-jobs" || path === "/salary" ? 0.9 : 0.7,
+      priority: path === "/" ? 1 : path === "/locum-jobs/cardiology" || path === "/salary" ? 0.9 : 0.7,
     })),
     ...LANDING_SLUGS.map((slug) => ({
       url: `${SITE.url}/${slug}`,
@@ -95,6 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.63,
     })),
     ...specialtyStateEntries,
+    ...cardiologyLocumSpecialtyEntries,
     ...cardiologySeoEntries,
     ...glossaryEntries,
     ...BLOG_POSTS.map((p) => ({

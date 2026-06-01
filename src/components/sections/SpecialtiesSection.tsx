@@ -1,7 +1,6 @@
-import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import Link from "next/link";
+import { CARDIOLOGY_LOCUM_SPECIALTIES, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { specialtyToSlug } from "@/lib/specialty-seo";
 
 export function SpecialtiesSection() {
   return (
@@ -14,15 +13,15 @@ export function SpecialtiesSection() {
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
-          {CARDIOLOGY_SUBSPECIALTIES.map((s) => (
+          {CARDIOLOGY_LOCUM_SPECIALTIES.map((s) => (
             <Link
-              key={s}
-              href={`/specialties/${specialtyToSlug(s)}`}
+              key={s.pathSlug}
+              href={cardiologySpecialtyPath(s.pathSlug)}
               className="group surface-card flex min-h-full min-w-0 flex-col p-5"
             >
               <div className="flex min-w-0 items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold leading-snug text-slate-900 [overflow-wrap:anywhere]">{s}</p>
+                  <p className="text-sm font-semibold leading-snug text-slate-900 [overflow-wrap:anywhere]">{s.name}</p>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     Explore cardiologist locum openings, call norms, and privileging patterns.
                   </p>

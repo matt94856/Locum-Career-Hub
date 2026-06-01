@@ -3,6 +3,7 @@
  */
 
 import { SPECIALTY_SEO_SLUGS, getSpecialtyNameBySlug } from "@/lib/specialty-seo";
+import { cardiologySpecialtyPath, getCardiologySpecialtyByLegacySlug } from "@/lib/seo/cardiology-locum-jobs-config";
 
 export type Tier1Link = {
   href: string;
@@ -80,7 +81,7 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     ctaLabel: "Interventional guide →",
   },
   {
-    href: "/cardiology-locum-jobs",
+    href: "/locum-jobs/cardiology",
     title: "Cardiology locum jobs hub",
     shortTitle: "Cardiology locum jobs",
     description: "Money pages by subspecialty—general, interventional, EP, heart failure, and more.",
@@ -138,11 +139,13 @@ export const TIER1_STATE_LINKS: Tier1Link[] = [
 
 export const TIER1_SPECIALTY_LINKS: Tier1Link[] = SPECIALTY_SEO_SLUGS.map((slug) => {
   const name = getSpecialtyNameBySlug(slug) ?? slug;
+  const spec = getCardiologySpecialtyByLegacySlug(slug);
+  const href = spec ? cardiologySpecialtyPath(spec.pathSlug) : `/specialties/${slug}`;
   return {
-    href: `/specialties/${slug}`,
-    title: `${name} locum jobs`,
+    href,
+    title: `${name} locum tenens jobs`,
     shortTitle: name,
-    description: `Cardiologist locum coverage for ${name.toLowerCase()}—call, scope, and privileging in writing.`,
+    description: `${name} cardiologist locum coverage—call, scope, and privileging in writing.`,
     ctaLabel: `${name} →`,
   };
 });

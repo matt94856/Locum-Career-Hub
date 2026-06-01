@@ -33,7 +33,7 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.04 }}
               className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
             >
-              Cardiology locums with clearer boundaries.
+              Locum Tenens Physician Staffing Solutions
             </motion.h1>
 
             <motion.p
