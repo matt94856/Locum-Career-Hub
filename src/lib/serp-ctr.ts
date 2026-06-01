@@ -5,14 +5,16 @@ import {
   CARDIOLOGY_HUB_TITLE,
   HOME_DESCRIPTION,
   HOME_TITLE,
+  cardiologySpecialtyPath,
+  specialtySerpTitle,
 } from "@/lib/seo/cardiology-locum-jobs-config";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
 /** Google typically truncates descriptions around 155–160 characters. */
 export const SERP_DESCRIPTION_MAX = 155;
 
-/** Target length for the segment before `| Brand` in SERP titles (60 chars total with brand). */
-export const SERP_TITLE_MAX = 40;
+/** Target length for the segment before `| Brand` in SERP titles (~60 chars total with brand). */
+export const SERP_TITLE_MAX = 52;
 
 export function clampSerpDescription(text: string, max = SERP_DESCRIPTION_MAX): string {
   const t = text.replace(/\s+/g, " ").trim();
@@ -124,6 +126,16 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
       cta: "Get a calm options review.",
     }),
   },
+  "what-is-a-locum-cardiologist": {
+    title: "What Is a Locum Cardiologist? Definition & Role",
+    description:
+      "A locum cardiologist provides temporary cardiology coverage under contract. Learn duties, credentials, and how to find locum cardiology jobs. Contact Locum Career Hub.",
+  },
+  "locum-cardiologist-salary": {
+    title: "Locum Cardiologist Salary Guide | Pay Ranges",
+    description:
+      "Directional locum cardiologist salary ranges by subspecialty, call, and state—not guaranteed offers. Compare rates and contact Locum Career Hub for recruiter context.",
+  },
   "flexible-physician-careers": {
     title: "Flexible Cardiology Careers | Locums, Moonlighting & Blocks",
     description: buildSerpDescription({
@@ -149,6 +161,20 @@ export function buildHomeSerpMetadata(): Metadata {
       "cardiology locum jobs",
       "cardiologist recruiter",
     ],
+  });
+}
+
+export function buildCardiologySpecialtySerpMetadata(spec: {
+  name: string;
+  metaDescription: string;
+  pathSlug: string;
+  titleKeyword: string;
+}): Metadata {
+  return buildSerpMetadata({
+    title: specialtySerpTitle(spec.name),
+    description: spec.metaDescription,
+    path: cardiologySpecialtyPath(spec.pathSlug),
+    keywords: [spec.titleKeyword, "locum cardiologist jobs", "cardiology locum tenens"],
   });
 }
 

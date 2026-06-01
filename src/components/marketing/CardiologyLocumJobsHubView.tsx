@@ -7,10 +7,11 @@ import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { RelatedCardiologyLinks } from "@/components/seo/RelatedCardiologyLinks";
 import {
-  CARDIOLOGY_HUB_FAQS,
   CARDIOLOGY_HUB_PATH,
-  CARDIOLOGY_HUB_SECTIONS,
+  CARDIOLOGY_HUB_H1,
   CARDIOLOGY_LOCUM_SPECIALTIES,
+  CARDIOLOGY_HUB_FAQS,
+  CARDIOLOGY_HUB_SECTIONS,
   cardiologySpecialtyPath,
   specialtyLinkLabels,
 } from "@/lib/seo/cardiology-locum-jobs-config";
@@ -24,7 +25,7 @@ export function CardiologyLocumJobsHubView() {
   ]);
 
   const medical = medicalWebPageJsonLd({
-    name: "Locum Cardiologist Jobs & Recruitment",
+    name: CARDIOLOGY_HUB_H1,
     description:
       "Nationwide locum cardiologist and cardiology locum tenens opportunities with cardiologist-only recruiter support.",
     path: CARDIOLOGY_HUB_PATH,
@@ -43,7 +44,7 @@ export function CardiologyLocumJobsHubView() {
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Cardiology" }]} />
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiology locum tenens</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Locum Cardiologist Jobs & Recruitment
+            {CARDIOLOGY_HUB_H1}
           </h1>
           <div className="mt-6">
             <AnswerFirstBlock answer="A locum cardiologist is a board-certified or board-eligible MD/DO cardiologist who provides temporary cardiology coverage under contract—consult, cath lab, clinic, imaging, or EP—while hospitals fill leave, volume gaps, or staffing transitions. Locum Career Hub recruits cardiologists only; we are not the employer." />
@@ -65,6 +66,30 @@ export function CardiologyLocumJobsHubView() {
       <section className="py-14 sm:py-16">
         <div className="container-site max-w-3xl">
           <ContentSections sections={CARDIOLOGY_HUB_SECTIONS} />
+
+          <p className="mt-8 text-sm leading-relaxed text-slate-600">
+            Explore subspecialty pages:{" "}
+            {CARDIOLOGY_LOCUM_SPECIALTIES.map((s, i) => {
+              const labels = specialtyLinkLabels(s.name);
+              return (
+                <span key={s.pathSlug}>
+                  {i > 0 ? (i === CARDIOLOGY_LOCUM_SPECIALTIES.length - 1 ? ", and " : ", ") : null}
+                  <Link href={cardiologySpecialtyPath(s.pathSlug)} className="font-semibold text-brand-700 hover:underline">
+                    {labels.jobs}
+                  </Link>
+                </span>
+              );
+            })}
+            . Learn{" "}
+            <Link href="/what-is-a-locum-cardiologist" className="font-semibold text-brand-700 hover:underline">
+              what is a locum cardiologist
+            </Link>{" "}
+            or review{" "}
+            <Link href="/locum-cardiologist-salary" className="font-semibold text-brand-700 hover:underline">
+              locum cardiologist salary
+            </Link>{" "}
+            ranges before you inquire.
+          </p>
 
           <h2 className="mt-12 font-display text-2xl font-semibold text-slate-950">Browse cardiology subspecialties</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -126,7 +151,7 @@ export function CardiologyLocumJobsHubView() {
 
       <section className="border-t border-slate-100 bg-slate-50/60 py-14">
         <div className="container-site max-w-xl">
-          <LeadConversionBand headline="Ready to discuss locum cardiologist jobs?" />
+          <LeadConversionBand headline="Talk with a cardiology recruiter" subline="Share subspecialty, states, and boundaries—we respond with options, not spam." />
         </div>
       </section>
     </main>

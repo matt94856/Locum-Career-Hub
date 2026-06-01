@@ -26,6 +26,30 @@ export type Tier1Group = {
 /** Highest-leverage pages for cardiologists. */
 export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
   {
+    href: "/locum-jobs/cardiology",
+    title: "Cardiology locum tenens jobs hub",
+    shortTitle: "Cardiology locum jobs",
+    description: "Browse interventional, EP, heart failure, imaging, and general cardiology locum subspecialties.",
+    ctaLabel: "Browse subspecialties →",
+    badge: "Primary hub",
+  },
+  {
+    href: "/what-is-a-locum-cardiologist",
+    title: "What is a locum cardiologist?",
+    shortTitle: "What is a locum cardiologist?",
+    description: "Answer-first definition, duties, and how cardiologists start locum tenens work.",
+    ctaLabel: "Read definition →",
+    badge: "Top query",
+  },
+  {
+    href: "/locum-cardiologist-salary",
+    title: "Locum cardiologist salary guide",
+    shortTitle: "Locum cardiologist salary",
+    description: "Directional pay ranges by subspecialty and call—not guaranteed offers.",
+    ctaLabel: "Compare pay drivers →",
+    badge: "Top query",
+  },
+  {
     href: "/physician-opportunities",
     title: "Submit preferences & get cardiology matches",
     shortTitle: "Get matched (lead form)",

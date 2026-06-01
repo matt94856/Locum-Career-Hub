@@ -47,6 +47,26 @@ export function SiteFooter() {
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Resources</p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
+                <Link className="hover:text-white" href="/locum-jobs/cardiology">
+                  Cardiology locum jobs
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/what-is-a-locum-cardiologist">
+                  What is a locum cardiologist?
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/locum-cardiologist-salary">
+                  Locum cardiologist salary
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/resources">
+                  Cardiology resources
+                </Link>
+              </li>
+              <li>
                 <Link className="hover:text-white" href="/locum-tenens-jobs">
                   Locum jobs by state
                 </Link>

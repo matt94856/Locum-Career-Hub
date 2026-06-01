@@ -650,6 +650,128 @@ export const LANDING_PAGES: LandingPage[] = [
       },
     ],
   },
+  {
+    slug: "what-is-a-locum-cardiologist",
+    title: "What Is a Locum Cardiologist? | Locum Career Hub",
+    description:
+      "A locum cardiologist provides temporary cardiology coverage under contract. Learn duties, credentials, and how to find locum cardiology jobs. Contact Locum Career Hub.",
+    h1: "What Is a Locum Cardiologist?",
+    h2: "Definition, duties, and how cardiologists start locum tenens work",
+    keywords: [
+      "what is a locum cardiologist",
+      "locum cardiologist definition",
+      "locum cardiology jobs",
+      "cardiologist locum tenens",
+    ],
+    intro:
+      "A locum cardiologist is a board-certified or board-eligible MD/DO cardiologist who provides temporary cardiology coverage under contract—consult, cath lab, clinic, imaging, or EP—while hospitals fill leave, volume gaps, or staffing transitions.",
+    bullets: [
+      "Defined contract start and end dates—not open-ended employment",
+      "Hospital privileging and state licensure required before clinical work",
+      "Locum Career Hub recruits cardiologists only; we are not the employer",
+    ],
+    relatedSlugs: ["locum-cardiologist-salary", "national-locum-tenens-jobs-guide", "leaving-employed-cardiology"],
+    relatedLinks: [
+      { href: "/locum-jobs/cardiology", title: "Locum cardiologist jobs hub" },
+      { href: "/resources/how-much-do-locum-cardiologists-make", title: "How much do locum cardiologists make?" },
+    ],
+    answer:
+      "A locum cardiologist is a physician who temporarily covers cardiology duties at a hospital or clinic under contract—filling staffing gaps with flexible start and end dates while maintaining board certification and hospital privileges.",
+    whoFor: [
+      "Board-certified cardiologists exploring locum tenens for the first time",
+      "Fellows and new attendings researching how locum cardiology differs from employed roles",
+      "Cardiologists comparing consult, cath lab, and EP locum models",
+    ],
+    sections: [
+      {
+        h2: "What does a locum cardiologist do?",
+        paragraphs: [
+          "Locum cardiologists cover the same clinical scopes as employed cardiologists—inpatient consults, outpatient clinic, cath lab and STEMI call, electrophysiology ablation and devices, heart failure census, and cardiac imaging reads—within documented contract windows.",
+          "The difference is structure: contracts specify dates, call rules, malpractice coverage, and compensation drivers before day one. Locum Career Hub matches MD/DO cardiologists with programs that document those expectations upfront.",
+        ],
+      },
+      {
+        h2: "How do you become a locum cardiologist?",
+        paragraphs: [
+          "Complete cardiology training, obtain ABIM cardiovascular disease certification or eligibility, secure state medical licenses, and complete hospital privileging for your subspecialty scope. Interventional and EP roles require procedural logs and cath or EP lab privileges.",
+          "Submit subspecialty, states, and availability to a cardiologist-only recruiter—we map credentialing timelines and realistic matches rather than blasting generic listings.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Is a locum cardiologist an employee of the hospital?",
+        a: "Usually no—most locum cardiologists contract as independent professionals (often 1099). The hospital or agency sets coverage terms; Locum Career Hub is a recruiting service, not your employer.",
+      },
+      {
+        q: "How do I find locum cardiology jobs?",
+        a: "Browse our cardiology jobs hub by subspecialty, review state guides, or submit an inquiry—cardiologist-only recruiter follow-up within one business day.",
+      },
+      {
+        q: "How much do locum cardiologists make?",
+        a: "Pay varies by subspecialty, call, and geography. See our locum cardiologist salary page for directional ranges—not guaranteed offers.",
+      },
+    ],
+  },
+  {
+    slug: "locum-cardiologist-salary",
+    title: "Locum Cardiologist Salary Guide | Locum Career Hub",
+    description:
+      "Directional locum cardiologist salary ranges by subspecialty, call, and state—not guaranteed offers. Compare rates and contact Locum Career Hub for recruiter context.",
+    h1: "Locum Cardiologist Salary Guide",
+    h2: "Pay drivers, subspecialty differences, and how to compare offers",
+    keywords: [
+      "locum cardiologist salary",
+      "locum tenens cardiologist salary",
+      "how much do locum cardiologists make",
+      "cardiology locum pay",
+    ],
+    intro:
+      "Locum cardiologist salary is usually quoted as weekly gross contract rates that vary by subspecialty, call burden, and site acuity—not a single national average. Figures here are educational market context, not guaranteed offers from Locum Career Hub.",
+    bullets: [
+      "Interventional and EP blocks with STEMI or overnight call often sit at the higher end",
+      "Compare W-2 employed packages using total compensation, not headline salary alone",
+      "Document call, travel stipends, and malpractice before comparing weekly rates",
+    ],
+    relatedSlugs: ["what-is-a-locum-cardiologist", "national-locum-tenens-jobs-guide"],
+    relatedLinks: [
+      { href: "/salary", title: "Cardiology salary guides by state" },
+      { href: "/tools/locum-salary-estimator", title: "Locum salary calculator" },
+      { href: "/resources/locum-cardiologist-salary-guide", title: "Full locum cardiologist salary guide" },
+    ],
+    answer:
+      "Locum cardiologist pay is typically weekly gross contract compensation driven by subspecialty, call burden, procedural scope, and geography—interventional and EP STEMI call at the higher end; consult and clinic roles differ.",
+    whoFor: [
+      "Cardiologists comparing locum vs employed compensation",
+      "Interventional and EP cardiologists evaluating call-heavy blocks",
+      "Physicians modeling 1099 locum income before resigning from W-2 roles",
+    ],
+    sections: [
+      {
+        h2: "What drives locum cardiologist compensation?",
+        paragraphs: [
+          "Hospitals price coverage based on STEMI activation, cath lab case mix, consult census, clinic panel size, imaging read pools, and travel requirements. Weekly rates may exclude travel, lodging, and malpractice—stipends should be documented separately.",
+          "Use our state salary pages and subspecialty hubs for scope-specific context, then submit an inquiry for recruiter-led comparison when mutual fit exists.",
+        ],
+      },
+      {
+        h2: "Subspecialty pay differences",
+        paragraphs: [
+          "Interventional cardiology locums with PCI and STEMI call typically command premium weekly rates relative to non-invasive consult roles. Electrophysiology locums hinge on ablation volume and arrhythmia call. General cardiology spans a broad middle band sensitive to nights and backup staffing.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Does Locum Career Hub guarantee a pay rate?",
+        a: "No—we provide recruiter-led context and advocate during negotiations; hospitals set final offers.",
+      },
+      {
+        q: "Should I use the salary calculator?",
+        a: "Yes—for illustrative weekly ranges by specialty and schedule. Confirm all figures in writing for your specific assignment.",
+      },
+    ],
+  },
 ];
 
 export const LANDING_SLUGS = LANDING_PAGES.map((p) => p.slug);

@@ -11,6 +11,7 @@ import { getPillarExtension } from "@/lib/cardiology-authority/pillars";
 import {
   CARDIOLOGY_HUB_PATH,
   CARDIOLOGY_LOCUM_SPECIALTIES,
+  SPECIALTY_CONTEXTUAL_LINKS,
   type CardiologyLocumSpecialty,
   cardiologySpecialtyPath,
   specialtyLinkLabels,
@@ -46,6 +47,8 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
   const allFaqs = [...specialty.faqs, ...(pillar?.faqs ?? []), ...(profile?.faqs ?? [])];
   const eeat = pillar?.eeat;
   const related = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => specialty.relatedPathSlugs.includes(s.pathSlug));
+  const otherSpecialties = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => s.pathSlug !== specialty.pathSlug);
+  const contextualLinks = SPECIALTY_CONTEXTUAL_LINKS[specialty.pathSlug] ?? [];
 
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
@@ -97,9 +100,19 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
           <div className="mt-6">
             <AnswerFirstBlock answer={directAnswer} />
           </div>
-          <p className="mt-4 text-sm text-slate-600">{specialty.intro}</p>
+          <p className="mt-4 text-sm text-slate-600">
+            {specialty.intro}{" "}
+            <Link href={CARDIOLOGY_HUB_PATH} className="font-semibold text-brand-700 hover:underline">
+              locum cardiologist jobs
+            </Link>{" "}
+            across all subspecialties—or{" "}
+            <Link href="/physician-opportunities#lead-form" className="font-semibold text-brand-700 hover:underline">
+              talk with a cardiology recruiter
+            </Link>
+            .
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/physician-opportunities#lead-form">{CTA.explore}</Button>
+            <Button href="/physician-opportunities#lead-form">{CTA.recruiter}</Button>
             <Button href="/resources" variant="secondary">
               Cardiology guides →
             </Button>
@@ -111,6 +124,24 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
             <ContentSections sections={[...specialty.sections, ...pillarSections, ...profileSections]} />
+
+            {contextualLinks.length > 0 ? (
+              <p className="text-sm leading-relaxed text-slate-700">
+                {contextualLinks.map((link) => (
+                  <span key={link.targetPathSlug}>
+                    {link.prefix}{" "}
+                    <Link
+                      href={cardiologySpecialtyPath(link.targetPathSlug)}
+                      className="font-semibold text-brand-700 hover:underline"
+                    >
+                      {link.anchor}
+                    </Link>
+                    {link.suffix ? ` ${link.suffix}` : null}
+                  </span>
+                ))}
+              </p>
+            ) : null}
+
             <CardiologyCtaBand variant="opportunities" />
 
             {profile ? (
@@ -149,20 +180,48 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
             <CardiologyCtaBand variant="recruiter" />
 
             <div>
-              <h2 className="font-display text-xl font-semibold text-slate-950">Explore more cardiologist jobs</h2>
-              <ul className="mt-4 space-y-3">
-                {related.map((s) => {
+              <h2 className="font-display text-xl font-semibold text-slate-950">Explore more cardiology jobs</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                <Link href={CARDIOLOGY_HUB_PATH} className="font-semibold text-brand-700 hover:underline">
+                  locum cardiologist jobs
+                </Link>{" "}
+                hub · related subspecialties below
+              </p>
+              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                {otherSpecialties.map((s) => {
                   const labels = specialtyLinkLabels(s.name);
                   return (
                     <li key={s.pathSlug} className="text-sm">
                       <Link href={cardiologySpecialtyPath(s.pathSlug)} className="font-semibold text-brand-700 hover:underline">
                         {labels.jobs}
                       </Link>
+                      <span className="text-slate-400"> · </span>
+                      <Link href={cardiologySpecialtyPath(s.pathSlug)} className="text-brand-600 hover:underline">
+                        {labels.tenens}
+                      </Link>
                     </li>
                   );
                 })}
               </ul>
             </div>
+
+            {related.length > 0 ? (
+              <div>
+                <h2 className="font-display text-lg font-semibold text-slate-950">Related specialties</h2>
+                <ul className="mt-3 space-y-2">
+                  {related.map((s) => {
+                    const labels = specialtyLinkLabels(s.name);
+                    return (
+                      <li key={s.pathSlug} className="text-sm">
+                        <Link href={cardiologySpecialtyPath(s.pathSlug)} className="font-semibold text-brand-700 hover:underline">
+                          {labels.jobs}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
 
             <RelatedCardiologyLinks
               specialtyPathSlugs={specialty.relatedPathSlugs}
@@ -174,7 +233,7 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
 
           <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`Request ${specialty.name} matches`}
+              title="Talk with a cardiology recruiter"
               subtitle="Share subspecialty, states, and boundaries. Cardiologist-only recruiter follow-up."
               defaultSpecialty={specialty.name}
             />
