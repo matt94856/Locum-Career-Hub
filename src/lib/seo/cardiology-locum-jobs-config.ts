@@ -36,6 +36,7 @@ export const LEGACY_TO_PATH_SLUG: Record<string, string> = {
   "structural-heart": "structural-heart",
   "preventive-cardiology": "preventive-cardiology",
   "pediatric-cardiology": "pediatric-cardiology",
+  "adult-congenital-cardiology": "adult-congenital",
 };
 
 export const PATH_TO_LEGACY_SLUG = Object.fromEntries(
@@ -393,7 +394,7 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     metaDescription: specialtyMeta("pediatric", "pediatric cardiology"),
     intro:
       "Pediatric cardiology locum jobs cover congenital heart disease consults, fetal cardiology, cath and EP for pediatrics, and ICU co-management. Confirm whether the role is pediatric-only or includes adult congenital overlap.",
-    relatedPathSlugs: ["general", "heart-failure", "electrophysiology"],
+    relatedPathSlugs: ["adult-congenital", "general", "heart-failure", "electrophysiology"],
     sections: [
       {
         h2: "About Pediatric Cardiology Locum Jobs",
@@ -418,6 +419,43 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
       {
         q: "Do pediatric cardiology locums require fellowship training?",
         a: "Facilities typically require pediatric cardiology board certification or equivalent documented training.",
+      },
+    ],
+  },
+  {
+    pathSlug: "adult-congenital",
+    legacySlug: "adult-congenital-cardiology",
+    name: "Adult Congenital Cardiology",
+    h1: "Locum Adult Congenital Cardiology Jobs",
+    titleKeyword: "adult congenital cardiology locum jobs",
+    metaDescription: specialtyMeta("adult congenital", "adult congenital cardiology"),
+    intro:
+      "Adult congenital cardiology locum jobs serve ACHD patients in specialized centers—complex echo, cath, EP, and heart-team coordination. ACHD fellowship or documented ACHD experience is typically required; confirm overlap with pediatric or general consult scope.",
+    relatedPathSlugs: ["pediatric-cardiology", "general", "electrophysiology"],
+    sections: [
+      {
+        h2: "About Adult Congenital Locum Jobs",
+        paragraphs: [
+          "ACHD locums may span clinic, complex imaging, catheterization, and arrhythmia management within congenital networks. Document surgical backup and whether the role includes general adult consult coverage.",
+        ],
+      },
+      {
+        h2: "Job Requirements",
+        paragraphs: [
+          "ACHD fellowship or equivalent experience, state license, privileges aligned with congenital cath and device scope, and malpractice for complex interventions when applicable.",
+        ],
+      },
+      {
+        h2: "Typical Locations & Pay",
+        paragraphs: [
+          "Regional congenital centers and academic ACHD programs hire locum cardiologists for clinic backlog and leave. Case complexity and call drive weekly rates.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "How is ACHD locum work different from pediatric cardiology locums?",
+        a: "ACHD focuses on adults with congenital heart disease; pediatric locums focus on children. Some contracts blend both—confirm patient population upfront.",
       },
     ],
   },

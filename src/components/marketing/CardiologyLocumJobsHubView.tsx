@@ -4,6 +4,8 @@ import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { RelatedCardiologyLinks } from "@/components/seo/RelatedCardiologyLinks";
 import {
   CARDIOLOGY_HUB_FAQS,
   CARDIOLOGY_HUB_PATH,
@@ -43,12 +45,13 @@ export function CardiologyLocumJobsHubView() {
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             Locum Cardiologist Jobs & Recruitment
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            A <strong className="font-semibold text-slate-800">locum cardiologist</strong> is a physician who provides
-            temporary cardiology coverage under contract—cath lab, consult, clinic, imaging, or EP—while hospitals fill
-            leave, volume gaps, or staffing transitions. Locum Career Hub recruits{" "}
-            <strong className="font-semibold text-slate-800">cardiologists only</strong> and matches MD/DO
-            cardiologists with programs that document call, privileging, and malpractice before you start.
+          <div className="mt-6">
+            <AnswerFirstBlock answer="A locum cardiologist is a board-certified or board-eligible MD/DO cardiologist who provides temporary cardiology coverage under contract—consult, cath lab, clinic, imaging, or EP—while hospitals fill leave, volume gaps, or staffing transitions. Locum Career Hub recruits cardiologists only; we are not the employer." />
+          </div>
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            We match MD/DO cardiologists with programs that document call, cath lab scope, privileging, and malpractice
+            before you start—across interventional, EP, heart failure, imaging, structural, preventive, pediatric, and
+            adult congenital subspecialties.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form">{CTA.explore}</Button>
@@ -89,6 +92,23 @@ export function CardiologyLocumJobsHubView() {
               );
             })}
           </ul>
+
+          <div className="mt-12">
+            <h2 className="font-display text-2xl font-semibold text-slate-950">Physician resources</h2>
+            <p className="mt-3 text-sm text-slate-600">
+              Salary guides, credentialing explainers, and career transition articles for cardiologists.{" "}
+              <Link href="/resources" className="font-semibold text-brand-700 hover:underline">
+                Browse all resources →
+              </Link>
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <RelatedCardiologyLinks
+              specialtyPathSlugs={CARDIOLOGY_LOCUM_SPECIALTIES.slice(0, 4).map((s) => s.pathSlug)}
+              articleSlugs={["how-much-do-locum-cardiologists-make", "locum-vs-permanent-cardiology-jobs"]}
+            />
+          </div>
 
           <div className="mt-12">
             <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>

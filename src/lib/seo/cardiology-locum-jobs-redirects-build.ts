@@ -8,6 +8,7 @@ const LEGACY_SPECIALTY_TO_PATH: [string, string][] = [
   ["structural-heart", "structural-heart"],
   ["preventive-cardiology", "preventive-cardiology"],
   ["pediatric-cardiology", "pediatric-cardiology"],
+  ["adult-congenital-cardiology", "adult-congenital"],
 ];
 
 export function buildCardiologyLocumJobsUrlRedirects() {

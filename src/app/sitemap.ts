@@ -3,6 +3,8 @@
  */
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
+import { getAllArticleSlugs } from "@/lib/cardiology-authority/articles";
+import { JOB_SPECIALTY_SLUGS, jobStatePath, jobStateSpecialtyPath } from "@/lib/cardiology-authority/jobs-seo";
 import { getIndexableCardiologySeoPaths } from "@/lib/cardiology-seo/registry";
 import { PRIORITY_METRO_SLUGS } from "@/lib/cardiology-seo/metro-rich-data";
 import { CARDIOLOGY_LOCUM_SPECIALTIES, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
@@ -21,6 +23,10 @@ const staticRoutes = [
   "/physician-opportunities",
   "/guides",
   "/locum-jobs/cardiology",
+  "/resources",
+  "/editorial-policy",
+  "/content-review-policy",
+  "/team",
   "/states",
   "/cities",
   "/salary",
@@ -89,12 +95,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.65,
     })),
-    ...SPECIALTY_SEO_SLUGS.map((slug) => ({
-      url: `${SITE.url}/specialties/${slug}`,
+    ...getAllArticleSlugs().map((slug) => ({
+      url: `${SITE.url}/resources/${slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.76,
+    })),
+    ...US_STATE_SLUGS.map((state) => ({
+      url: `${SITE.url}${jobStatePath(state)}`,
       lastModified,
       changeFrequency: "weekly" as const,
-      priority: 0.64,
+      priority: 0.68,
     })),
+    ...US_STATE_SLUGS.flatMap((state) =>
+      JOB_SPECIALTY_SLUGS.map((specialtySlug) => ({
+        url: `${SITE.url}${jobStateSpecialtyPath(state, specialtySlug)}`,
+        lastModified,
+        changeFrequency: "weekly" as const,
+        priority: 0.66,
+      })),
+    ),
     ...STATE_LOCUM_SLUGS.map((slug) => ({
       url: `${SITE.url}/locum-tenens-jobs/${slug}`,
       lastModified,

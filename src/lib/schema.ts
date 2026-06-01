@@ -109,6 +109,81 @@ export function faqJsonLd(items: { q: string; a: string }[]) {
   };
 }
 
+export function personJsonLd(input: {
+  name: string;
+  jobTitle?: string;
+  description?: string;
+  url?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: input.name,
+    ...(input.jobTitle ? { jobTitle: input.jobTitle } : {}),
+    ...(input.description ? { description: input.description } : {}),
+    ...(input.url ? { url: input.url } : {}),
+    worksFor: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: SITE.url,
+    },
+  };
+}
+
+export function aboutPageJsonLd(input: { name: string; description: string; path: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: input.name,
+    description: input.description,
+    url: `${SITE.url}${input.path}`,
+    isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
+    mainEntity: organizationJsonLd(),
+  };
+}
+
+/** YMYL cardiology articles with author, reviewer, and dateModified (Phase 5–6). */
+export function authorityArticleJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  keywords?: string[];
+  author: { name: string; jobTitle?: string };
+  reviewer?: { name: string; credentials?: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description,
+    datePublished: input.datePublished,
+    dateModified: input.dateModified,
+    author: {
+      "@type": "Person",
+      name: input.author.name,
+      ...(input.author.jobTitle ? { jobTitle: input.author.jobTitle } : {}),
+    },
+    ...(input.reviewer
+      ? {
+          reviewedBy: {
+            "@type": "Organization",
+            name: input.reviewer.name,
+            ...(input.reviewer.credentials ? { description: input.reviewer.credentials } : {}),
+          },
+        }
+      : {}),
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      logo: { "@type": "ImageObject", url: SCHEMA_LOGO_URL },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}${input.path}` },
+    keywords: input.keywords?.join(", "),
+  };
+}
+
 export function articleJsonLd(input: {
   title: string;
   description: string;
