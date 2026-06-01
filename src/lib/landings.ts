@@ -107,14 +107,14 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "physician-travel-jobs",
-    title: "Physician Travel Jobs & Locum Assignments | Locum Career Hub",
+    title: "Travel Cardiologist Locum Jobs | Stipends & Blocks | Locum Career Hub",
     description:
-      "Discover travel doctor jobs with premium stipends, flexible blocks, and recruiter support from day one. Explore physician travel opportunities nationwide.",
-    h1: "Travel Doctor Jobs With Premium Support",
-    h2: "See new places, keep clinical autonomy, and protect your schedule",
-    keywords: ["travel doctor jobs", "physician travel jobs", "locum tenens opportunities"],
+      "Travel cardiologist locum jobs with premium stipends, cath lab call clarity, and cardiology recruiter support from day one. MD/DO cardiologists only.",
+    h1: "Travel Cardiologist Locum Jobs With Premium Support",
+    h2: "See new places, keep clinical autonomy, and protect your call schedule",
+    keywords: ["travel cardiologist locum", "cardiology locum tenens", "travel cardiology jobs"],
     intro:
-      "Travel physician jobs pair adventure with predictable workflows. We align you to teams that respect handoffs, staffing ratios, and specialty-appropriate volumes—so your trip feels sustainable, not chaotic.",
+      "Travel cardiology locums pair geographic variety with predictable workflows. We align cardiologists to teams that respect handoffs, STEMI activation rules, consult census, and cath lab scope—so your trip feels sustainable, not chaotic.",
     bullets: [
       "Itineraries that respect recovery and commute time",
       "Transparent stipend and lodging expectations",
@@ -130,26 +130,26 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "flexible-physician-careers",
-    title: "Flexible Physician Jobs & Locum Careers | Locum Career Hub",
+    title: "Flexible Cardiology Careers & Locum Blocks | Locum Career Hub",
     description:
-      "Design a flexible physician career with locums, moonlighting, and hybrid schedules. Higher income potential with modern recruiter support.",
-    h1: "Flexible Physician Careers on Your Terms",
-    h2: "Choose blocks that match life stages—from residency to semi-retirement",
-    keywords: ["flexible physician jobs", "physician opportunities", "physician work-life balance"],
+      "Design a flexible cardiology career with locums, moonlighting, and hybrid schedules. Cardiologist-only recruiter support.",
+    h1: "Flexible Cardiology Careers on Your Terms",
+    h2: "Choose blocks that match life stages—from fellowship to semi-retirement",
+    keywords: ["flexible cardiology careers", "cardiologist locum jobs", "cardiologist work-life balance"],
     intro:
-      "Flexibility is not a perk—it is how careers survive. Whether you need space for family, research, recovery, or simply fewer nights awake thinking about inbox volume, the goal is the same: a week that fits a human being. Locum Career Hub helps you architect options—including contract blocks when they genuinely help—without treating you like a quota.",
+      "Flexibility is not a perk—it is how cardiology careers survive. Whether you need space for family, research, recovery, or simply fewer nights awake thinking about cath lab call, the goal is the same: a week that fits a human being. Locum Career Hub recruits cardiologists only and helps you architect options—including contract blocks when they genuinely help—without treating you like a quota.",
     bullets: [
-      "Week-on/week-off, weekends-only, or seasonal coverage",
+      "Week-on/week-off, weekends-only, or seasonal cardiology coverage",
       "Rate transparency so you can compare W-2 vs 1099 tradeoffs",
-      "Advocacy for sustainable panel sizes and support staffing",
+      "Advocacy for sustainable consult census, clinic panels, and cath lab call",
     ],
     relatedSlugs: ["part-time-physician-jobs", "moonlighting-physician-jobs", "national-locum-tenens-jobs-guide"],
     answer:
-      "Flexible physician careers reorganize how, when, and where you work—often through contract blocks, moonlighting, or locums—so your schedule matches your life instead of the other way around.",
+      "Flexible cardiology careers reorganize how, when, and where you practice—often through locum blocks, moonlighting, or hybrid clinic and consult models—so your schedule matches your life instead of the other way around.",
     whoFor: [
-      "Physicians searching flexible physician jobs or part time doctor jobs",
-      "Parents balancing caregiving with clinical work",
-      "Clinicians who want autonomy without quitting medicine abruptly",
+      "Cardiologists searching flexible locum or part-time cardiology work",
+      "Parents balancing caregiving with clinical cardiology",
+      "MD/DO cardiologists who want autonomy without quitting medicine abruptly",
     ],
     sections: [
       {
@@ -198,13 +198,13 @@ export const LANDING_PAGES: LandingPage[] = [
       "Credentialing roadmaps for first-time state licenses",
       "Guidance on moonlighting vs full-time locums tradeoffs",
     ],
-    relatedSlugs: ["moonlighting-physician-jobs", "hospitalist-locum-jobs", "emergency-medicine-locum-jobs"],
+    relatedSlugs: ["moonlighting-physician-jobs", "interventional-cardiologist-locum-jobs", "cardiologist-travel-locums"],
   },
   {
     slug: "moonlighting-physician-jobs",
     title: "Moonlighting Physician Jobs | Extra Shifts & Locum Moonlighting",
     description:
-      "Find moonlighting physician jobs that fit around your primary role. Weekend blocks, telehealth, and local ED coverage with compliance-first support.",
+      "Find cardiologist moonlighting jobs that fit around your primary role. Weekend cath lab, consult, echo read, and clinic blocks with compliance-first support.",
     h1: "Moonlighting Jobs That Respect Your Primary Practice",
     h2: "Stack shifts without sacrificing boundaries or compliance",
     keywords: ["moonlighting physician jobs", "moonlighting jobs", "flexible physician jobs"],
@@ -215,7 +215,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Rapid credentialing for repeat health system networks",
       "Clear communication templates for employer transparency",
     ],
-    relatedSlugs: ["part-time-physician-jobs", "emergency-medicine-locum-jobs", "locum-jobs-for-new-graduates"],
+    relatedSlugs: ["part-time-physician-jobs", "interventional-cardiologist-locum-jobs", "locum-jobs-for-new-graduates"],
   },
   {
     slug: "retired-physician-opportunities",
@@ -426,57 +426,62 @@ export const LANDING_PAGES: LandingPage[] = [
     relatedSlugs: ["locum-jobs-for-new-graduates", "moonlighting-physician-jobs", "physician-side-income"],
   },
   {
-    slug: "leaving-hospital-medicine",
-    title: "Leaving Hospital Medicine | Calm Next Steps | Locum Career Hub",
+    slug: "leaving-employed-cardiology",
+    title: "Leaving Employed Cardiology | Calm Next Steps | Locum Career Hub",
     description:
-      "Leaving hospital medicine is a major decision. Explore boundaries, flexible contract work, and realistic transitions—including locum tenens when it fits.",
-    h1: "Leaving Hospital Medicine Without Burning Bridges",
-    h2: "If the system is the problem, your next step can still be strategic",
-    keywords: ["leaving hospital medicine", "physician career change", "flexible physician careers", "physician burnout solutions"],
+      "Leaving employed cardiology is a major decision. Explore boundaries, cardiology locum blocks, and realistic transitions—with cardiologist-only recruiter support.",
+    h1: "Leaving Employed Cardiology Without Burning Bridges",
+    h2: "If cath lab call, consult census, or clinic load is the problem, your next step can still be strategic",
+    keywords: [
+      "leaving employed cardiology",
+      "cardiologist career change",
+      "cardiology locum jobs",
+      "cardiologist burnout",
+    ],
     intro:
-      "Many physicians consider leaving hospital medicine after years of moral injury, chronic understaffing, and inbox creep that never shows up on a job description. You might still love patient care—and still need distance from the environment. Flexible contract coverage can be one bridge: defined dates, fewer standing committees, and explicit volume conversations before you arrive.",
+      "Many cardiologists consider leaving employed practice after years of relentless call, inbox creep, and committee load that never shows up on a job description. You might still love cardiology—and still need distance from the environment. Cardiology locum blocks can be one bridge: defined dates, documented STEMI or consult expectations, and explicit cath lab scope before you arrive.",
     bullets: [
-      "A calm review of what is driving the exit (schedule vs culture vs volume)",
-      "Options beyond ‘quit or stay’—including short blocks while you stabilize",
-      "Credentialing timelines so you are not guessing in silence",
+      "A calm review of what is driving the exit (call vs culture vs census vs compensation)",
+      "Options beyond ‘quit or stay’—including short cardiology blocks while you stabilize",
+      "Licensing and privileging timelines for cardiologists so you are not guessing in silence",
     ],
     relatedSlugs: ["career-change-for-doctors", "physician-burnout-solutions", "flexible-physician-careers", "national-locum-tenens-jobs-guide"],
     answer:
-      "Leaving hospital medicine usually means changing your work structure—not your identity. Locum Career Hub helps physicians map transitions (including locum tenens) with transparent expectations and low-pressure guidance.",
+      "Leaving employed cardiology usually means changing your work structure—not your identity. Locum Career Hub recruits cardiologists only and helps you map transitions (including locum tenens) with transparent expectations and low-pressure guidance.",
     whoFor: [
-      "Attendings who feel done with hospital medicine but are unsure what is next",
-      "Physicians who want flexibility before a permanent switch",
-      "Clinicians seeking physician stress reduction careers without leaving medicine overnight",
+      "Cardiologists who feel done with employed call or clinic load but are unsure what is next",
+      "Interventional, general, EP, and heart failure cardiologists wanting flexibility before a permanent switch",
+      "MD/DO cardiologists seeking a structured bridge without leaving medicine overnight",
     ],
     sections: [
       {
         h2: "Name the pain before you pick the label",
         paragraphs: [
-          "Some clinicians want a different specialty. Some want fewer nights. Some want a different employer in the same specialty. ‘Leaving hospital medicine’ can mean many things—and the right move depends on which lever is actually hurting you.",
-          "We start with constraints: family, finances, licensing footprint, and what recovery time you need—not slogans.",
+          "Some cardiologists want fewer STEMI nights. Some want less clinic panel creep. Some want a different health system—not a different specialty. The right move depends on which lever is actually hurting you.",
+          "We start with constraints: family, finances, licensing footprint, subspecialty scope, and what recovery time you need—not slogans.",
         ],
       },
       {
-        h2: "Where locum tenens fits as a bridge",
+        h2: "Where cardiology locum tenens fits as a bridge",
         paragraphs: [
-          "Locums is not an escape hatch from boundaries. It is a scheduling tool that can create breathing room when expectations are documented.",
-          "If you are problem-aware first, we still speak plainly about tradeoffs: travel fatigue, onboarding load, and the fact that toxic cultures can exist anywhere.",
+          "Locums is not an escape hatch from boundaries. It is a scheduling tool that can create breathing room when cath lab activation, consult census, and call are documented in writing.",
+          "We speak plainly about tradeoffs: travel fatigue, privileging load, and the fact that toxic cultures can exist anywhere—cardiology included.",
         ],
         bullets: [
-          "Short blocks while you interview for a permanent fit",
-          "Income clarity while you reduce admin-heavy roles",
-          "Geographic testing without buying a house on day one",
+          "Short blocks while you interview for a permanent cardiology fit",
+          "Income clarity while you reduce admin-heavy employed roles",
+          "Geographic testing without relocating on day one",
         ],
       },
     ],
     faqs: [
       {
-        q: "Do I have to commit to locums full time?",
-        a: "No. Many physicians use short blocks as a bridge while they decide what sustainable looks like.",
+        q: "Do I have to commit to cardiology locums full time?",
+        a: "No. Many cardiologists use short blocks as a bridge while they decide what sustainable call and clinic load look like.",
       },
       {
         q: "What if I am burned out?",
-        a: "Then pacing matters even more. We prioritize realistic volume conversations and recovery time—not ‘stack shifts until you feel better.’",
+        a: "Then pacing matters even more. We prioritize realistic consult census, cath lab scope, and recovery time—not stacking call until you feel better.",
       },
     ],
   },
@@ -495,7 +500,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Moonlighting and part-time stacks when you need income without chaos",
       "Recruiter conversations that respect uncertainty",
     ],
-    relatedSlugs: ["leaving-hospital-medicine", "careers-after-residency", "physician-side-income", "national-locum-tenens-jobs-guide"],
+    relatedSlugs: ["leaving-employed-cardiology", "careers-after-residency", "physician-side-income", "national-locum-tenens-jobs-guide"],
     answer:
       "Career change for doctors is a design problem: match clinical intensity, autonomy, and admin load to your season of life. Locum Career Hub maps options—including locum opportunities—without treating uncertainty as a sales hook.",
     whoFor: [
@@ -541,7 +546,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Practical questions about census, backup, nights, and documentation",
       "Options that respect your safety and your family’s stability",
     ],
-    relatedSlugs: ["physician-burnout-solutions", "doctor-work-life-balance", "leaving-hospital-medicine", "flexible-physician-careers"],
+    relatedSlugs: ["physician-burnout-solutions", "doctor-work-life-balance", "leaving-employed-cardiology", "flexible-physician-careers"],
     answer:
       "If you feel tired of being a doctor, the next step is often to change the work structure—not your character. Locum Career Hub helps physicians explore flexible models (including locums) with explicit expectations and recruiter respect for boundaries.",
     whoFor: [
@@ -585,13 +590,13 @@ export const LANDING_PAGES: LandingPage[] = [
     h2: "High-intent search, human pacing: understand the model before you commit",
     keywords: ["locum opportunities", "locum tenens opportunities", "locum physician jobs", "physician recruiter"],
     intro:
-      "Locum opportunities are contract-based roles that help hospitals maintain coverage while giving physicians clearer time boundaries than many permanent schedules allow. If you landed here without knowing the term ‘locum tenens,’ the simple version is: you agree to defined clinical dates, you practice within documented expectations, and you move on—or repeat—based on fit.",
+      "Cardiology locum opportunities are contract-based roles that help hospitals maintain cardiology coverage while giving cardiologists clearer time boundaries than many employed schedules allow. If you landed here without knowing the term ‘locum tenens,’ the simple version is: you agree to defined clinical dates, you practice cardiology within documented expectations, and you move on—or repeat—based on fit.",
     bullets: [
-      "Specialty-specific matching across inpatient and outpatient models",
+      "Subspecialty-specific cardiologist matching across cath lab, consult, clinic, and imaging",
       "Credentialing support with realistic start dates",
       "Advocacy on stipends, lodging, malpractice, and cancellation terms",
     ],
-    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-physician-jobs", "physician-travel-jobs", "hospitalist-locum-jobs"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-physician-jobs", "cardiologist-travel-locums", "interventional-cardiologist-locum-jobs"],
     answer:
       "Locum opportunities are short- or medium-term physician coverage roles—commonly called locum tenens—with explicit scheduling windows and recruiter support for licensing and credentialing.",
     whoFor: [
@@ -617,26 +622,26 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "locum-physician-jobs",
-    title: "Locum Physician Jobs | Travel & Local Blocks | Locum Career Hub",
+    title: "Cardiologist Locum Jobs | Travel & Local Blocks | Locum Career Hub",
     description:
-      "Locum physician jobs nationwide: hospital medicine, emergency care, anesthesia, and outpatient specialties—with recruiter-led transparency.",
-    h1: "Locum Physician Jobs for Clinicians Who Want the Week to Fit Life",
-    h2: "From hospitalist blocks to ED bundles—expectations documented before day one",
-    keywords: ["locum physician jobs", "locum tenens jobs", "travel physician jobs", "physician staffing"],
+      "Cardiologist locum jobs nationwide: cath lab, consult, clinic, EP, and imaging blocks—with cardiologist-only recruiter transparency.",
+    h1: "Cardiologist Locum Jobs for MD/DO Cardiologists Who Want the Week to Fit Life",
+    h2: "From cath lab call to consult census—expectations documented before day one",
+    keywords: ["cardiologist locum jobs", "cardiology locum tenens", "travel cardiologist locum", "cardiologist recruiter"],
     intro:
-      "Locum physician jobs are a practical way to change the shape of your work week—especially when you still want to practice, but need clearer boundaries, different intensity, or a calmer season while you decide what is next. Demand varies by specialty and region, but the core promise of well-run locums is the same: explicit dates, explicit expectations, and less surprise.",
+      "Cardiologist locum jobs are a practical way to change the shape of your work week—especially when you still want to practice cardiology, but need clearer call boundaries, documented cath lab scope, or a calmer season while you decide what is next. Demand varies by subspecialty and region; the core promise of well-run cardiology locums is explicit dates, explicit STEMI and consult expectations, and less surprise.",
     bullets: [
-      "Hospitalist, ED, anesthesia/CRNA, and outpatient pathways when clinically appropriate",
-      "Local and travel models depending on your constraints",
+      "General, interventional, EP, heart failure, and imaging-heavy cardiology pathways",
+      "Local and travel models depending on your call and recovery needs",
       "Iteration after your first assignment—adjust, repeat, or exit politely",
     ],
-    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-opportunities", "emergency-medicine-locum-jobs", "crna-locum-jobs"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "locum-opportunities", "interventional-cardiologist-locum-jobs", "cardiologist-travel-locums"],
     answer:
-      "Locum physician jobs are contract-based clinical roles that help facilities maintain staffing while offering physicians clearer scheduling windows than many traditional employed roles.",
+      "Cardiologist locum jobs are contract-based cardiology roles that help programs maintain coverage while offering MD/DO cardiologists clearer scheduling windows than many employed cardiology roles.",
     whoFor: [
-      "Physicians searching locum physician jobs or locum tenens jobs",
-      "Clinicians exploring travel physician jobs with explicit backup",
-      "Moonlighters who want organized blocks instead of chaotic one-offs",
+      "Cardiologists searching locum cardiology jobs or locum tenens",
+      "Interventional and general cardiologists exploring travel blocks with documented STEMI rules",
+      "Cardiologist moonlighters who want organized blocks instead of chaotic one-offs",
     ],
     faqs: [
       {

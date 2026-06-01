@@ -424,7 +424,7 @@ const CORE_POSTS: BlogPost[] = [
     content: [
       {
         type: "p",
-        text: "Online “best states” lists are entertaining but often misleading. Demand varies by specialty, season, and local staffing pipelines. A state can be hot for hospitalists and soft for another specialty at the same time.",
+        text: "Online “best states” lists are entertaining but often misleading. Demand varies by cardiology subspecialty, season, and local staffing pipelines. A state can be hot for interventional cardiology locums and softer for outpatient clinic blocks at the same time.",
       },
       {
         type: "h2",

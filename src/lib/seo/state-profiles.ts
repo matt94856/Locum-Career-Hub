@@ -234,7 +234,7 @@ function buildProfile(name: string): StateProfile {
     region,
     marketSnapshot: regionMarketLine(region, name),
     licensingPath,
-    locumDemandNotes: `Hospital medicine, emergency medicine, anesthesia, and outpatient primary care are common locum entry points in ${name}; procedural specialties often require site-specific privileging lists.`,
+    locumDemandNotes: `Cardiology locum demand in ${name} often clusters around inpatient consult, cath lab, clinic, and imaging read pools—interventional and EP roles require site-specific privileging and STEMI or lab capabilities confirmed in writing.`,
     travelVsLocal,
     seasonalNotes: seasonal,
     credentialingTips: [

@@ -21,7 +21,7 @@ const PROBLEM_SLUGS = [
   "careers-after-residency",
   "locum-jobs-for-new-graduates",
   "retired-physician-opportunities",
-  "leaving-hospital-medicine",
+  "leaving-employed-cardiology",
   "career-change-for-doctors",
   "tired-of-being-a-doctor",
 ] as const;
@@ -30,10 +30,9 @@ const HIGH_INTENT_SLUGS = [
   "national-locum-tenens-jobs-guide",
   "locum-opportunities",
   "locum-physician-jobs",
+  "cardiologist-travel-locums",
+  "interventional-cardiologist-locum-jobs",
   "physician-travel-jobs",
-  "hospitalist-locum-jobs",
-  "emergency-medicine-locum-jobs",
-  "crna-locum-jobs",
 ] as const;
 
 function bySlugs(slugs: readonly string[]): LandingPage[] {
@@ -50,14 +49,14 @@ export default function ForPhysiciansPage() {
       <section className="relative overflow-hidden border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_circle_at_15%_-10%,rgba(37,99,235,0.14),transparent_55%),radial-gradient(600px_circle_at_95%_20%,rgba(14,165,233,0.1),transparent_55%)]" />
         <div className="container-site relative max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">For physicians</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">For cardiologists</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Practice medicine on your terms—without the staffing-agency noise
+            Practice cardiology on your terms—without the staffing-agency noise
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600 sm:text-xl">
-            Most physicians who land here are not typing “locum tenens” first. They are tired, stretched, or quietly
-            grieving the autonomy they thought they would have. This hub is built around that reality: empathy first,
-            options second, pressure never.
+            Most cardiologists who land here are not typing “locum tenens” first. They are tired of call, stretched by
+            clinic panels, or quietly grieving the autonomy they thought they would have. This hub is built for MD/DO
+            cardiologists only: empathy first, options second, pressure never.
           </p>
           <div className="mt-10 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
             <Button href="/physician-opportunities" className="w-full justify-center">
@@ -76,16 +75,16 @@ export default function ForPhysiciansPage() {
         <div className="container-site max-w-3xl space-y-4 text-sm leading-relaxed text-slate-700">
           <h2 className="font-display text-2xl font-semibold text-slate-950">If this sounds familiar, you are not alone</h2>
           <ul className="list-disc space-y-2 pl-5 marker:text-brand-600">
-            <li>Chronic schedule exhaustion and difficulty switching off</li>
+            <li>Relentless cath lab or consult call and difficulty switching off</li>
             <li>Hospital politics and admin load crowding out patient care</li>
-            <li>Loss of autonomy—or uncertainty about what comes next</li>
+            <li>Loss of autonomy—or uncertainty about what comes next in cardiology</li>
             <li>A pull toward flexibility, moonlighting, semi-retirement, or relocation</li>
             <li>A wish for income that does not require sacrificing your health</li>
           </ul>
           <p>
-            Locum tenens is one path among many. When it fits, it can offer defined blocks, clearer boundaries, and a
-            calmer way to stay clinical while you redesign life. When it does not fit, you still deserve a thoughtful
-            conversation.
+            Cardiology locum tenens is one path among many. When it fits, it can offer defined blocks, clearer call and
+            cath lab boundaries, and a calmer way to stay clinical while you redesign life. When it does not fit, you
+            still deserve a thoughtful conversation with a cardiology recruiter—not a generic job blast.
           </p>
         </div>
       </section>
@@ -97,7 +96,7 @@ export default function ForPhysiciansPage() {
               Guides for problem-aware searches
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              Skimmable pages for burnout, balance, side income, schedule design, and early-career exploration.
+              Skimmable pages for burnout, balance, side income, schedule design, and early-career cardiology exploration.
             </p>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
@@ -114,10 +113,10 @@ export default function ForPhysiciansPage() {
         <div className="container-site">
           <div className="max-w-2xl">
             <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">
-              When you are ready: high-intent searches
+              When you are ready: high-intent cardiology searches
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              Straightforward guides for locums jobs, travel roles, popular specialties, and major states.
+              Straightforward guides for cardiology locums, travel blocks, subspecialty hubs, and major states.
             </p>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
@@ -129,7 +128,7 @@ export default function ForPhysiciansPage() {
           </div>
           <p className="mt-6 text-sm text-slate-600">
             <Link className="font-semibold text-brand-700 hover:underline" href="/guides">
-              Browse the complete topic guide library →
+              Browse the complete cardiology guide library →
             </Link>
           </p>
           <div className="mt-10 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">

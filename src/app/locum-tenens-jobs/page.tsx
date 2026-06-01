@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { STATE_LOCUM_PAGES } from "@/lib/state-locum-seo";
 import { US_STATE_SLUGS, getStateNameBySlug } from "@/lib/us-state-slugs";
 import { SPECIALTIES } from "@/lib/specialties";
 import { specialtyToSlug } from "@/lib/specialty-seo";
@@ -14,20 +13,18 @@ import { specialtyStatePath } from "@/lib/specialty-state-seo";
 export const metadata: Metadata = buildLocumJobsHubSerpMetadata();
 
 export default function LocumTenensJobsHubPage() {
-  const featured = new Set(STATE_LOCUM_PAGES.map((p) => p.slug));
-
   return (
     <main className="pb-24 sm:pb-0">
       <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">
         <div className="container-site max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Locum tenens jobs</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Nationwide locum tenens jobs—by state and specialty
+            Cardiologist locum jobs—by state and subspecialty
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Locum Career Hub is a physician career and recruiting resource focused on transparent expectations—not generic
-            job-board noise. Pick a state hub, then open a specialty page for localized intent (for example, emergency
-            medicine in Texas or hospitalist blocks in Florida).
+            Locum Career Hub recruits cardiologists only (MD/DO). Pick a state hub, then open a subspecialty page for
+            localized intent—for example, interventional cardiology in Texas or general cardiology consult blocks in
+            Florida.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form" className="justify-center">
@@ -63,7 +60,7 @@ export default function LocumTenensJobsHubPage() {
         <div className="container-site max-w-3xl rounded-2xl border border-brand-100 bg-brand-50/40 p-6 text-sm leading-relaxed text-slate-800">
           <p className="font-semibold text-slate-950">Want the long-form national guide?</p>
           <p className="mt-2">
-            FAQs, narrative context, and how we work with physicians:{" "}
+            FAQs, narrative context, and how we work with cardiologists:{" "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/national-locum-tenens-jobs-guide">
               National locum tenens jobs guide →
             </Link>
@@ -71,33 +68,11 @@ export default function LocumTenensJobsHubPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-16">
-        <div className="container-site">
-          <h2 className="font-display text-2xl font-semibold text-slate-950">Featured state guides</h2>
-          <p className="mt-2 max-w-2xl text-sm text-slate-600">
-            Deeper editorial context for high-demand markets—then explore specialty pages inside each state.
-          </p>
-          <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-            {STATE_LOCUM_PAGES.map((p) => (
-              <li key={p.slug}>
-                <Link
-                  href={`/locum-tenens-jobs/${p.slug}`}
-                  className="block rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-brand-200"
-                >
-                  <span className="font-display text-lg font-semibold text-slate-950">{p.stateName}</span>
-                  <span className="mt-2 block text-sm text-slate-600">State hub + FAQs →</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <section className="border-t border-slate-100 bg-slate-50/60 py-14 sm:py-16">
         <div className="container-site">
           <h2 className="font-display text-2xl font-semibold text-slate-950">All US states & DC</h2>
           <p className="mt-2 max-w-2xl text-sm text-slate-600">
-            Each link opens a state-level locum hub. {featured.size ? "Featured states above include expanded guides." : ""}
+            Each link opens a cardiologist locum hub for that state with subspecialty drill-downs.
           </p>
           <ul className="mt-8 columns-1 gap-x-8 text-sm sm:columns-2 lg:columns-3">
             {US_STATE_SLUGS.map((slug) => {
@@ -107,7 +82,6 @@ export default function LocumTenensJobsHubPage() {
                 <li key={slug} className="mb-2 break-inside-avoid">
                   <Link href={`/locum-tenens-jobs/${slug}`} className="font-semibold text-brand-700 hover:underline">
                     {name}
-                    {featured.has(slug) ? <span className="ml-1 text-xs font-normal text-slate-500">(expanded)</span> : null}
                   </Link>
                 </li>
               );
@@ -120,7 +94,8 @@ export default function LocumTenensJobsHubPage() {
         <div className="container-site max-w-3xl">
           <h2 className="font-display text-2xl font-semibold text-slate-950">Specialty × state matrix</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600">
-            For high-intent searches like “psychiatry locums California,” open your specialty below—we link straight into{" "}
+            For high-intent searches like “interventional cardiologist locums California,” open your subspecialty below—we
+            link straight into{" "}
             <span className="font-medium text-slate-800">California</span> as an example; every state has the same pattern
             under{" "}
             <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">/locum-tenens-jobs/[state]/[specialty]</code>.

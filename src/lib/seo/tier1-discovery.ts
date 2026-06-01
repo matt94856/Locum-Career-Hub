@@ -1,7 +1,8 @@
 /**
- * Tier 1 URLs — prioritized from Search Console impressions & near–page-one positions.
- * Used for internal linking (homepage hub, footer, hubs) to concentrate crawl equity and conversions.
+ * Tier 1 URLs — prioritized internal links for cardiologist-only SEO.
  */
+
+import { SPECIALTY_SEO_SLUGS, getSpecialtyNameBySlug } from "@/lib/specialty-seo";
 
 export type Tier1Link = {
   href: string;
@@ -21,21 +22,21 @@ export type Tier1Group = {
   links: Tier1Link[];
 };
 
-/** Highest-leverage pages: near page 1 in GSC or strong query match. */
+/** Highest-leverage pages for cardiologists. */
 export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
   {
     href: "/physician-opportunities",
-    title: "Submit preferences & get locum matches",
+    title: "Submit preferences & get cardiology matches",
     shortTitle: "Get matched (lead form)",
-    description: "Share specialty, states, and dates—physician recruiter follow-up, not a job-board blast.",
+    description: "Share subspecialty, states, and dates—cardiology recruiter follow-up, not a job-board blast.",
     ctaLabel: "Start matching →",
     badge: "Best for leads",
   },
   {
     href: "/tools/locum-salary-estimator",
-    title: "Free locum salary calculator",
+    title: "Cardiology locum salary calculator",
     shortTitle: "Locum salary calculator",
-    description: "Model weekly gross ranges—matches “locum tenens income calculator” searches.",
+    description: "Model weekly gross ranges for cardiologist locums—educational, not a guaranteed offer.",
     ctaLabel: "Run calculator →",
     badge: "Top search query",
   },
@@ -48,132 +49,110 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     badge: "Top search query",
   },
   {
-    href: "/physician-travel-jobs",
-    title: "Travel physician jobs",
-    shortTitle: "Travel physician jobs",
-    description: "Stipends, blocks, and handoffs explained—high travel-job search volume.",
+    href: "/cardiologist-travel-locums",
+    title: "Travel cardiologist locum jobs",
+    shortTitle: "Travel cardiology locums",
+    description: "Stipends, cath lab call, and STEMI rules documented before you commit.",
     ctaLabel: "Explore travel roles →",
     badge: "Trending",
   },
   {
-    href: "/leaving-hospital-medicine",
-    title: "Leaving hospital medicine?",
-    shortTitle: "Leaving hospital medicine",
-    description: "Structured paths without quitting medicine—currently ranking ~page 1.",
+    href: "/leaving-employed-cardiology",
+    title: "Leaving employed cardiology?",
+    shortTitle: "Leaving employed cardiology",
+    description: "Structured paths without quitting medicine—locums as a bridge when it fits.",
     ctaLabel: "Read guide →",
-    badge: "Page 1 potential",
+    badge: "Career transition",
   },
   {
     href: "/physician-burnout-alternatives",
-    title: "Physician burnout alternatives",
+    title: "Cardiologist burnout alternatives",
     shortTitle: "Burnout alternatives",
-    description: "Locums, hybrid work, and defined blocks when the week no longer fits.",
+    description: "Locums, hybrid blocks, and defined call when the week no longer fits.",
     ctaLabel: "See options →",
-    badge: "Page 1 potential",
+    badge: "Problem-aware",
   },
   {
-    href: "/moonlighting-physician-jobs",
-    title: "Moonlighting physician jobs",
-    shortTitle: "Moonlighting jobs",
-    description: "Weekend, telehealth, and local ED blocks around your primary job.",
-    ctaLabel: "Moonlighting guide →",
+    href: "/interventional-cardiologist-locum-jobs",
+    title: "Interventional cardiologist locum jobs",
+    shortTitle: "Interventional locums",
+    description: "STEMI activation, cath lab scope, and backup in writing.",
+    ctaLabel: "Interventional guide →",
   },
   {
-    href: "/hospitalist-locum-jobs",
-    title: "Hospitalist locum jobs",
-    shortTitle: "Hospitalist locums",
-    description: "Census, call, and backup documented before you commit.",
-    ctaLabel: "Hospitalist guide →",
+    href: "/cardiology-locum-jobs",
+    title: "Cardiology locum jobs hub",
+    shortTitle: "Cardiology locum jobs",
+    description: "Money pages by subspecialty—general, interventional, EP, heart failure, and more.",
+    ctaLabel: "Browse job types →",
   },
 ];
 
 export const TIER1_STATE_LINKS: Tier1Link[] = [
   {
     href: "/locum-tenens-jobs/new-york",
-    title: "Locum tenens jobs in New York",
+    title: "Cardiologist locum jobs in New York",
     shortTitle: "New York",
-    description: "Metro and upstate demand with licensing context.",
+    description: "Metro and upstate cardiology demand with licensing context.",
     ctaLabel: "NY guide →",
     badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/tennessee",
-    title: "Locum tenens jobs in Tennessee",
+    title: "Cardiologist locum jobs in Tennessee",
     shortTitle: "Tennessee",
-    description: "Nashville, Memphis, and community hospital coverage.",
+    description: "Nashville, Memphis, and community cath lab / consult coverage.",
     ctaLabel: "TN guide →",
     badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/washington",
-    title: "Locum tenens jobs in Washington",
+    title: "Cardiologist locum jobs in Washington",
     shortTitle: "Washington",
-    description: "Seattle, Spokane, and Pacific Northwest blocks.",
+    description: "Seattle, Spokane, and Pacific Northwest cardiology blocks.",
     ctaLabel: "WA guide →",
     badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/florida",
-    title: "Locum tenens jobs in Florida",
+    title: "Cardiologist locum jobs in Florida",
     shortTitle: "Florida",
     description: "Seasonal volume, licensing, and coastal vs inland fit.",
     ctaLabel: "FL guide →",
   },
   {
     href: "/locum-tenens-jobs/texas",
-    title: "Locum tenens jobs in Texas",
+    title: "Cardiologist locum jobs in Texas",
     shortTitle: "Texas",
-    description: "Metro depth and community impact statewide.",
+    description: "Metro depth and community cardiology statewide.",
     ctaLabel: "TX guide →",
   },
   {
     href: "/locum-tenens-jobs/california",
-    title: "Locum tenens jobs in California",
+    title: "Cardiologist locum jobs in California",
     shortTitle: "California",
-    description: "Compliance-forward placements north and south.",
+    description: "Compliance-forward cardiology placements north and south.",
     ctaLabel: "CA guide →",
   },
 ];
 
-export const TIER1_SPECIALTY_LINKS: Tier1Link[] = [
-  {
-    href: "/specialties/telehealth",
-    title: "Telemedicine locum jobs",
-    shortTitle: "Telehealth locums",
-    description: "Multi-state licensing and visit-pace clarity.",
-    ctaLabel: "Telehealth →",
-    badge: "High impressions",
-  },
-  {
-    href: "/specialties/family-medicine",
-    title: "Family medicine locum jobs",
-    shortTitle: "Family medicine",
-    description: "Outpatient pace, panel size, and scope in writing.",
-    ctaLabel: "Family medicine →",
-    badge: "Strong position",
-  },
-  {
-    href: "/specialties/hospitalist-medicine",
-    title: "Hospitalist locum jobs",
-    shortTitle: "Hospitalist",
-    description: "Census caps, nocturnist lanes, and cross-cover rules.",
-    ctaLabel: "Hospitalist →",
-  },
-  {
-    href: "/specialties/emergency-medicine",
-    title: "Emergency medicine locum jobs",
-    shortTitle: "Emergency medicine",
-    description: "Volume bands, boarding, and acuity mix.",
-    ctaLabel: "EM locums →",
-  },
-];
+export const TIER1_SPECIALTY_LINKS: Tier1Link[] = SPECIALTY_SEO_SLUGS.map((slug) => {
+  const name = getSpecialtyNameBySlug(slug) ?? slug;
+  return {
+    href: `/specialties/${slug}`,
+    title: `${name} locum jobs`,
+    shortTitle: name,
+    description: `Cardiologist locum coverage for ${name.toLowerCase()}—call, scope, and privileging in writing.`,
+    ctaLabel: `${name} →`,
+  };
+});
 
 export const TIER1_GLOSSARY_LINKS: Tier1Link[] = [
   {
     href: "/glossary/locum-tenens",
     title: "What is locum tenens?",
     shortTitle: "Locum tenens definition",
-    description: "Plain-English definition for physicians and semantic search.",
+    description: "Plain-English definition for cardiologists exploring locum tenens.",
     ctaLabel: "Read definition →",
   },
   {
@@ -204,29 +183,29 @@ export const TIER1_HUB_GROUPS: Tier1Group[] = [
   {
     id: "priority",
     eyebrow: "Start here",
-    title: "Pages physicians find in search right now",
+    title: "Pages cardiologists find in search",
     subtitle:
-      "These URLs already earn impressions in Google Search Console—we link to them prominently so users and crawlers find your best answers fast.",
+      "High-intent cardiology hubs and tools—we link to them prominently so users and crawlers find cardiologist-specific answers fast.",
     links: TIER1_PRIORITY_LINKS,
   },
   {
     id: "states",
     eyebrow: "High-demand states",
-    title: "Locum tenens jobs by state",
-    subtitle: "State hubs with licensing, metros, and specialty drill-downs.",
+    title: "Cardiologist locum jobs by state",
+    subtitle: "State hubs with licensing, metros, and subspecialty drill-downs.",
     links: TIER1_STATE_LINKS,
   },
   {
     id: "specialties",
-    eyebrow: "Specialties",
-    title: "Locum coverage by specialty",
-    subtitle: "Specialty overviews plus state-specific combo pages from each hub.",
+    eyebrow: "Cardiology subspecialties",
+    title: "Locum coverage by cardiology subspecialty",
+    subtitle: "Subspecialty overviews plus state-specific combo pages from each hub.",
     links: TIER1_SPECIALTY_LINKS,
   },
   {
     id: "glossary",
     eyebrow: "Definitions",
-    title: "Glossary physicians search before they apply",
+    title: "Glossary cardiologists search before they apply",
     subtitle: "Educational terms that match definition queries—then a clear path to matches.",
     links: TIER1_GLOSSARY_LINKS,
   },
@@ -238,14 +217,14 @@ export const TIER1_FOOTER_LINKS: Tier1Link[] = [
   ...TIER1_STATE_LINKS.slice(0, 3),
   {
     href: "/national-locum-tenens-jobs-guide",
-    title: "National locum tenens jobs guide",
-    shortTitle: "National locum guide",
+    title: "National cardiology locum guide",
+    shortTitle: "National cardiology guide",
     description: "",
   },
   {
     href: "/for-physicians",
-    title: "For physicians hub",
-    shortTitle: "For physicians",
+    title: "For cardiologists hub",
+    shortTitle: "For cardiologists",
     description: "",
   },
 ];

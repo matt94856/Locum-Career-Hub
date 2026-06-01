@@ -5,10 +5,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const TIER1_LANDING_SLUGS = new Set([
   "national-locum-tenens-jobs-guide",
-  "physician-travel-jobs",
+  "cardiologist-travel-locums",
+  "interventional-cardiologist-locum-jobs",
   "moonlighting-physician-jobs",
-  "hospitalist-locum-jobs",
-  "leaving-hospital-medicine",
+  "leaving-employed-cardiology",
   "physician-burnout-alternatives",
   "flexible-physician-careers",
 ]);
@@ -27,8 +27,8 @@ export function InternalTopicGrid() {
       <div className="container-site">
         <SectionHeading
           eyebrow="Explore"
-          title="Guides for what physicians type into search at 11 p.m."
-          subtitle="Problem-aware pages sit alongside high-intent guides—clean structure, short sections, and next steps that respect your attention."
+          title="Guides for what cardiologists type into search at 11 p.m."
+          subtitle="Problem-aware pages sit alongside high-intent cardiology guides—clean structure, short sections, and next steps that respect your attention."
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">

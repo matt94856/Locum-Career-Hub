@@ -74,6 +74,7 @@ const removedLandingRedirects = [
   { source: "/hospitalist-locum-jobs", destination: "/specialties/general-cardiology", permanent: true as const },
   { source: "/emergency-medicine-locum-jobs", destination: "/specialties/general-cardiology", permanent: true as const },
   { source: "/crna-locum-jobs", destination: "/specialties/general-cardiology", permanent: true as const },
+  { source: "/leaving-hospital-medicine", destination: "/leaving-employed-cardiology", permanent: true as const },
 ];
 
 /** Short SEO URLs → canonical money pages under /cardiology-locum-jobs/ */

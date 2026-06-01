@@ -63,42 +63,50 @@ export function buildSerpMetadata(input: {
 /** High-impression landing slugs from Search Console — query-aligned titles. */
 const LANDING_SERP: Record<string, { title: string; description: string }> = {
   "national-locum-tenens-jobs-guide": {
-    title: "Locum Tenens Jobs for Physicians (2026) | Free Recruiter Match",
+    title: "Cardiologist Locum Tenens Jobs (2026) | Free Recruiter Match",
     description: buildSerpDescription({
-      hook: "High-demand locum tenens jobs with transparent pay and credentialing support.",
-      proof: "Nationwide hospitalist, ED, and outpatient placements.",
-      cta: "Connect with a physician recruiter today.",
+      hook: "Cardiologist locum tenens jobs with transparent pay drivers and credentialing support.",
+      proof: "Cardiologist-only recruiter—cath lab, consult, clinic, and EP blocks.",
+      cta: "Connect with a cardiology recruiter today.",
     }),
   },
   "physician-travel-jobs": {
-    title: "Travel Physician Jobs (2026) | Stipends & Block Schedules",
+    title: "Travel Cardiologist Locum Jobs (2026) | Stipends & Blocks",
     description: buildSerpDescription({
-      hook: "Travel doctor jobs with transparent stipends, lodging, and handoff expectations.",
-      proof: "Compare metro and community blocks nationwide.",
-      cta: "Request travel matches in minutes.",
+      hook: "Travel cardiology locums with transparent stipends, cath lab call, and STEMI rules.",
+      proof: "Cardiologist-only recruiter—metro and community blocks nationwide.",
+      cta: "Request travel cardiology matches in minutes.",
     }),
   },
   "moonlighting-physician-jobs": {
-    title: "Moonlighting Physician Jobs | Weekend & Telehealth Blocks",
+    title: "Cardiologist Moonlighting Jobs | Weekend Cath Lab & Clinic",
     description: buildSerpDescription({
-      hook: "Moonlighting jobs that fit around your primary role—ED, telehealth, and local coverage.",
-      proof: "Compliance-first scheduling conversations.",
+      hook: "Cardiology moonlighting that fits around your primary role—weekend cath lab, consult, and reads.",
+      proof: "Compliance-first scheduling for MD/DO cardiologists.",
       cta: "See moonlighting options—low pressure.",
     }),
   },
-  "hospitalist-locum-jobs": {
-    title: "Hospitalist Locum Jobs | Census & Call Spelled Out",
+  "interventional-cardiologist-locum-jobs": {
+    title: "Interventional Cardiologist Locum Jobs | STEMI & Cath Lab",
     description: buildSerpDescription({
-      hook: "Hospitalist locum tenens with documented census, backup, and night coverage.",
-      proof: "No vague ‘manageable’ panels.",
-      cta: "Match to hospitalist blocks today.",
+      hook: "Interventional cardiology locums with STEMI activation, case mix, and backup documented.",
+      proof: "Cardiologist-only recruiter—not a generic board.",
+      cta: "Match to cath lab blocks today.",
+    }),
+  },
+  "leaving-employed-cardiology": {
+    title: "Leaving Employed Cardiology? Flexible Paths for Cardiologists",
+    description: buildSerpDescription({
+      hook: "Structured alternatives to quitting medicine—locums, hybrid, and part-time cardiology models.",
+      proof: "Burnout-aware, cardiology recruiter clarity.",
+      cta: "Explore next steps without judgment.",
     }),
   },
   "leaving-hospital-medicine": {
-    title: "Leaving Hospital Medicine? Flexible Paths for Physicians",
+    title: "Leaving Employed Cardiology? Flexible Paths for Cardiologists",
     description: buildSerpDescription({
-      hook: "Structured alternatives to quitting medicine—locums, hybrid, and part-time models.",
-      proof: "Burnout-aware, recruiter-led clarity.",
+      hook: "Structured alternatives to quitting medicine—locums, hybrid, and part-time cardiology models.",
+      proof: "Burnout-aware, cardiology recruiter clarity.",
       cta: "Explore next steps without judgment.",
     }),
   },
@@ -111,10 +119,10 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
     }),
   },
   "flexible-physician-careers": {
-    title: "Flexible Physician Careers | Locums, Moonlighting & Blocks",
+    title: "Flexible Cardiology Careers | Locums, Moonlighting & Blocks",
     description: buildSerpDescription({
-      hook: "Design a schedule that fits your life—contract blocks, telehealth, and locum pathways.",
-      proof: "Specialty-aware recruiter support.",
+      hook: "Design a cardiology schedule that fits your life—contract blocks, reads, and locum pathways.",
+      proof: "Cardiologist-only recruiter support.",
       cta: "Start with a 30-minute intro.",
     }),
   },
