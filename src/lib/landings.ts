@@ -31,19 +31,19 @@ export type LandingPage = {
 export const LANDING_PAGES: LandingPage[] = [
   {
     slug: "national-locum-tenens-jobs-guide",
-    title: "Locum Tenens Jobs for Physicians | Locum Career Hub",
+    title: "Cardiologist Locum Tenens Jobs | Locum Career Hub",
     description:
-      "Explore high-demand locum tenens jobs with transparent pay, credentialing support, and schedules built around your life. Connect with a physician recruiter today.",
-    h1: "Locum Tenens Jobs When You Want a Different Shape of Work",
-    h2: "High-intent search, human pace—transparent matches without staffing-agency noise",
+      "Cardiologist locum tenens jobs with transparent pay drivers, credentialing context, and schedules built around your life. Cardiologist-only recruiter—no job-board blast.",
+    h1: "Cardiologist Locum Jobs When You Want a Different Shape of Work",
+    h2: "Cath lab, consult, and clinic blocks—with expectations written before day one",
     keywords: [
-      "locum tenens jobs",
-      "locum tenens opportunities",
-      "physician staffing",
-      "physician recruiter",
+      "cardiologist locum tenens",
+      "cardiology locum jobs",
+      "cardiologist recruiter",
+      "interventional cardiologist locum",
     ],
     intro:
-      "If your current role feels relentlessly heavy, you are not alone—and you are allowed to want something steadier. Locum tenens jobs can offer defined blocks, fewer standing committees, and compensation discussed openly. When you are ready, Locum Career Hub matches you to vetted health systems and community hospitals nationwide.",
+      "If cath lab call, consult census, or clinic load feels relentlessly heavy, you are allowed to want something steadier. Cardiology locums can offer defined blocks and compensation discussed openly. Locum Career Hub recruits cardiologists only—we connect MD/DO cardiologists with hospitals and groups; we are not your employer.",
     bullets: [
       "Curated openings across inpatient, outpatient, and hybrid models",
       "Credentialing navigation with realistic start timelines",
@@ -62,12 +62,12 @@ export const LANDING_PAGES: LandingPage[] = [
       { href: "/locum-tenens-jobs/new-york", title: "Locum tenens jobs in New York" },
     ],
     answer:
-      "Locum Career Hub connects physicians to contract-based coverage roles—locum tenens and flexible inpatient/outpatient blocks—with transparent expectations and recruiter advocacy when a traditional schedule is not sustainable.",
+      "Locum Career Hub connects cardiologists to contract-based coverage—cath lab, consult, clinic, and imaging blocks—with transparent expectations when an employed schedule is not sustainable.",
     whoFor: [
-      "Physicians searching locum tenens jobs, locum physician jobs, or locum opportunities with clearer boundaries",
-      "Hospitalists and ED clinicians comparing hospitalist locum jobs or emergency medicine locum jobs",
-      "Advanced practice anesthesia teams exploring CRNA locum jobs",
-      "Anyone weighing travel physician jobs vs local flexible blocks",
+      "Cardiologists searching locum tenens jobs with clearer call and cath lab boundaries",
+      "Interventional, general, EP, and heart failure cardiologists comparing travel vs local blocks",
+      "Cardiologists using locums as a bridge while deciding next career steps",
+      "Anyone weighing travel cardiology locums vs local clinic or consult blocks",
     ],
     sections: [
       {
@@ -81,7 +81,7 @@ export const LANDING_PAGES: LandingPage[] = [
         h2: "Where locum tenens fits in a broader career strategy",
         paragraphs: [
           "Locums is a tool, not a moral failing. It can create runway when you need optionality, income clarity, or a calmer bridge while you decide what comes next. It does not fix toxic leadership by itself—and sustainable pacing still matters.",
-          "If you are high-intent for locum tenens jobs, we map specialty-specific pathways (for example hospitalist locum jobs, emergency medicine locum jobs, or CRNA locum jobs) with realistic credentialing timelines.",
+          "If you are high-intent for cardiology locums, we map subspecialty-specific pathways (interventional, EP, heart failure, imaging) with realistic privileging timelines.",
         ],
         bullets: [
           "Compare travel physician jobs vs local block coverage",
@@ -235,55 +235,38 @@ export const LANDING_PAGES: LandingPage[] = [
     relatedSlugs: ["part-time-physician-jobs", "physician-burnout-alternatives", "flexible-physician-careers"],
   },
   {
-    slug: "hospitalist-locum-jobs",
-    title: "Hospitalist Locum Jobs | Inpatient Coverage Nationwide",
+    slug: "interventional-cardiologist-locum-jobs",
+    title: "Interventional Cardiologist Locum Jobs | Cath Lab Nationwide",
     description:
-      "Hospitalist locum tenens jobs with block scheduling, nocturnist options, and team-oriented units. Speak with a physician recruiter today.",
-    h1: "Hospitalist Locum Jobs With Predictable Blocks",
-    h2: "Day, swing, and nocturnist coverage aligned to your stamina",
-    keywords: ["hospitalist locum jobs", "locum tenens jobs", "physician staffing"],
+      "Interventional cardiology locum jobs with STEMI, cath lab, and case-mix clarity. Cardiologist-only recruiter—documented call before you commit.",
+    h1: "Interventional Cardiologist Locum Jobs",
+    h2: "STEMI activation, cath lab scope, and backup documented upfront",
+    keywords: ["interventional cardiologist locum", "cardiology locum jobs", "cath lab locums"],
     intro:
-      "Hospital medicine is the backbone of locums demand. We prioritize closed ICUs when promised, APP support, and cap expectations so you can focus on safe admissions and thoughtful discharges.",
+      "Interventional cardiology locums hinge on STEMI pathways, case mix, and complication backup—not headline rates. Locum Career Hub recruits cardiologists only and aligns introductions with sites that document activation windows and call.",
     bullets: [
-      "Block schedules that protect sleep and handoffs",
-      "Academic and community sites with clear census targets",
-      "Rapid credentialing for high-volume hospitalist networks",
+      "STEMI and cath lab expectations in writing",
+      "Case logs and privileging timelines discussed early",
+      "Travel stipends and malpractice structure reviewed before you fly",
     ],
-    relatedSlugs: ["emergency-medicine-locum-jobs", "national-locum-tenens-jobs-guide", "part-time-physician-jobs"],
+    relatedSlugs: ["national-locum-tenens-jobs-guide", "cardiologist-travel-locums", "part-time-physician-jobs"],
   },
   {
-    slug: "emergency-medicine-locum-jobs",
-    title: "Emergency Medicine Locum Jobs | ED Locums Nationwide",
+    slug: "cardiologist-travel-locums",
+    title: "Travel Cardiologist Locum Jobs | Stipends & Blocks",
     description:
-      "Emergency medicine locum jobs with volume transparency, scribe availability, and malpractice clarity. Travel or local shifts available.",
-    h1: "Emergency Medicine Locum Jobs Built for Flow",
-    h2: "Know acuity mix, trauma designation, and staffing layers up front",
-    keywords: ["emergency medicine locum jobs", "travel doctor jobs", "physician opportunities"],
+      "Travel cardiologist locum jobs with lodging, air, and cath lab call defined before you commit. MD/DO cardiologists only.",
+    h1: "Travel Cardiologist Locum Jobs",
+    h2: "Compare stipends, call, and credentialing with a cardiology recruiter",
+    keywords: ["travel cardiologist locum", "cardiology locum tenens", "cardiologist travel jobs"],
     intro:
-      "The best ED locums assignments pair fair hourly rates with operational reality. We surface trauma level, fast track models, and specialty backup so you can choose shifts that match your edge practice style.",
+      "Travel cardiology locums can restore boundaries when employed call and clinic load feel unsustainable. We help cardiologists compare blocks with written STEMI rules, consult census, and malpractice—not generic travel promises.",
     bullets: [
-      "Single coverage vs team models—documented before you sign",
-      "Moonlighting-friendly weekend bundles",
-      "Support for airway-heavy vs low-acuity preferences",
+      "Air, lodging, and rental car stipends clarified in contracts",
+      "Multi-week blocks with orientation expectations documented",
+      "Subspecialty-aware matching across general, interventional, and EP",
     ],
-    relatedSlugs: ["hospitalist-locum-jobs", "moonlighting-physician-jobs", "physician-travel-jobs"],
-  },
-  {
-    slug: "crna-locum-jobs",
-    title: "CRNA Locum Jobs | Anesthesia Locum Tenens Opportunities",
-    description:
-      "CRNA locum jobs with OR block transparency, call expectations, and premium stipends. Locum Career Hub supports advanced practice anesthesia staffing.",
-    h1: "CRNA Locum Jobs With OR Clarity",
-    h2: "Call, case mix, and autonomy expectations—aligned before day one",
-    keywords: ["CRNA locum jobs", "physician staffing", "locum tenens opportunities"],
-    intro:
-      "Anesthesia locums lives in the details: OB-heavy days, cardiac call, or outpatient GI blocks require different stamina. We map case mix, CRNA-to-MD supervision models, and stipends with precision.",
-    bullets: [
-      "Call burden and post-call expectations in writing",
-      "OR start times and room turnover norms",
-      "Travel packages tuned to multi-week blocks",
-    ],
-    relatedSlugs: ["hospitalist-locum-jobs", "emergency-medicine-locum-jobs", "national-locum-tenens-jobs-guide"],
+    relatedSlugs: ["physician-travel-jobs", "interventional-cardiologist-locum-jobs", "flexible-physician-careers"],
   },
   {
     slug: "physician-burnout-alternatives",

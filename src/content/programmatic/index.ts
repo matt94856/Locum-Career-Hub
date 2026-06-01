@@ -1,3 +1,5 @@
+import { CARDIOLOGY_PROGRAMMATIC_SLUGS } from "@/lib/cardiology-programmatic";
+
 export type ProgrammaticSeoPage = {
   /** URL slug without leading slash */
   slug: string;
@@ -7,11 +9,8 @@ export type ProgrammaticSeoPage = {
   geoKey?: string;
 };
 
-/**
- * Programmatic SEO dataset (empty starter).
- *
- * Recommended expansion pattern:
- * - Generate rows from a spreadsheet export (CSV → JSON) at build time
- * - Keep medical claims compliant; focus on intent, process, and recruiter CTAs
- */
-export const PROGRAMMATIC_SEO_PAGES: ProgrammaticSeoPage[] = [];
+/** Cardiologist-only programmatic SEO pages (`/cardiology-locums/[slug]`). */
+export const PROGRAMMATIC_SEO_PAGES: ProgrammaticSeoPage[] = CARDIOLOGY_PROGRAMMATIC_SLUGS.map((slug) => ({
+  slug,
+  label: slug,
+}));

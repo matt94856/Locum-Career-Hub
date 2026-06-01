@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
+
+const ALLOWED_SPECIALTIES = new Set<string>([
+  ...CARDIOLOGY_SUBSPECIALTIES,
+  "Cardiology",
+  "General Cardiology",
+  "Non-Invasive Cardiology",
+]);
 
 type LeadBody = {
   firstName?: unknown;
@@ -44,6 +52,14 @@ function normalizeLead(body: LeadBody) {
     return { ok: false as const, error: "Select at least one preferred state." };
   }
 
+  const specialty = body.specialty.trim();
+  if (!ALLOWED_SPECIALTIES.has(specialty)) {
+    return {
+      ok: false as const,
+      error: "We currently recruit cardiologists (MD/DO) only. Please select a cardiology subspecialty.",
+    };
+  }
+
   const smsOptIn = body.smsOptIn === true;
   const leadMagnet = body.leadMagnet === true;
   const pagePath =
@@ -58,7 +74,7 @@ function normalizeLead(body: LeadBody) {
       last_name: body.lastName.trim(),
       email: body.email.trim().toLowerCase(),
       phone: body.phone.trim(),
-      specialty: body.specialty.trim(),
+      specialty,
       preferred_states: preferredStates,
       years_experience: body.yearsExperience.trim(),
       availability: body.availability.trim(),

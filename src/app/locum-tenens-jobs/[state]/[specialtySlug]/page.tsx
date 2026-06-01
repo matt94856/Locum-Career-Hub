@@ -11,7 +11,7 @@ import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema"
 import { buildSpecialtyStatePageContent } from "@/lib/seo/specialty-state-content";
 import { buildSpecialtyStateMetadata, specialtyStatePath } from "@/lib/specialty-state-seo";
 import { SPECIALTY_SEO_SLUGS, getSpecialtyNameBySlug, specialtyToSlug } from "@/lib/specialty-seo";
-import { SPECIALTIES } from "@/lib/specialties";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { getStateLocumPage } from "@/lib/state-locum-seo";
 import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 import { CTA, SITE } from "@/lib/site";
@@ -69,20 +69,20 @@ export default async function SpecialtyStateLocumPage({
     keywords: [
       `${specialtyName} locum ${statePage.stateName}`,
       "locum tenens jobs",
-      "locum physician jobs",
-      "physician staffing",
+      "cardiologist locum jobs",
+      "cardiology locum tenens",
     ],
-    aboutTopics: [specialtyName, "Locum tenens", statePage.stateName, "Physician careers"],
+    aboutTopics: [specialtyName, "Locum tenens", statePage.stateName, "Cardiologist careers"],
   });
 
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
-    { name: "Locations", path: "/locations" },
+    { name: "Cardiology locums", path: "/cardiology-locums" },
     { name: statePage.stateName, path: `/locum-tenens-jobs/${state}` },
     { name: specialtyName, path },
   ]);
 
-  const otherSpecs = SPECIALTIES.filter((s) => specialtyToSlug(s) !== specialtySlug).slice(0, 8);
+  const otherSpecs = CARDIOLOGY_SUBSPECIALTIES.filter((s) => specialtyToSlug(s) !== specialtySlug);
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -112,7 +112,7 @@ export default async function SpecialtyStateLocumPage({
               {specialtyName} overview →
             </Button>
             <Button href={`/locum-tenens-jobs/${state}`} variant="secondary" className="justify-center">
-              All {statePage.stateName} specialties →
+              All {statePage.stateName} cardiology locums →
             </Button>
           </div>
         </div>

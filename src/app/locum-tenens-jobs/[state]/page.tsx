@@ -10,7 +10,9 @@ import {
   STATE_LOCUM_PAGES,
   STATE_LOCUM_SLUGS,
 } from "@/lib/state-locum-seo";
-import { SPECIALTIES } from "@/lib/specialties";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
+import { getPageByStateSlug } from "@/lib/cardiology-seo/registry";
+import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { CTA } from "@/lib/site";
@@ -53,9 +55,9 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
     keywords: page.keywords,
     aboutTopics: [
       "Locum tenens",
-      "Physician careers",
-      "Flexible physician work",
-      `${page.stateName} physician staffing`,
+      "Cardiologist careers",
+      "Cardiology locum tenens",
+      `${page.stateName} cardiology staffing`,
     ],
   });
   const faqLd = faqJsonLd(page.faqs);
@@ -63,6 +65,7 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
   const otherStates = STATE_LOCUM_PAGES.filter((s) => s.slug !== page.slug).slice(0, 5);
   const stateProfile = getStateProfile(page.slug);
   const profileSections = stateProfile ? getStateProfileSections(stateProfile) : [];
+  const richStatePage = getPageByStateSlug(`${page.slug}-cardiology-locum-jobs`);
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -74,7 +77,7 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_circle_at_20%_0%,rgba(37,99,235,0.16),transparent_55%)]" />
         <div className="container-site relative">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">State guide</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist state guide</p>
             <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 [overflow-wrap:anywhere] sm:text-5xl">
               {page.h1}
             </h1>
@@ -99,6 +102,24 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 lg:col-span-7 space-y-10">
+            <RecruiterInquiryTrust geoLabel={page.stateName} />
+
+            {richStatePage ? (
+              <div className="rounded-2xl border border-brand-100 bg-brand-50/30 p-5 sm:p-6">
+                <h2 className="font-display text-lg font-semibold text-slate-950">Expanded {page.stateName} cardiology guide</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  For additional market context, licensing notes, and FAQs specific to cardiologist locums in{" "}
+                  {page.stateName}, see our dedicated state page.
+                </p>
+                <Link
+                  href={richStatePage.path}
+                  className="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:underline"
+                >
+                  {page.stateName} cardiology locum jobs (full guide) →
+                </Link>
+              </div>
+            ) : null}
+
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5 sm:p-6">
               <h2 className="font-display text-lg font-semibold text-slate-950">Who should read this</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
@@ -140,32 +161,32 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
             <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
               <h2 className="font-display text-lg font-semibold text-slate-950">Related topics</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                Explore problem-aware guides first—then return here when you want geography-specific context:{" "}
-                <Link className="font-semibold text-brand-700 hover:underline" href="/physician-burnout-solutions">
-                  physician burnout solutions
+                Explore cardiology career guides, then return here for {page.stateName}-specific context:{" "}
+                <Link className="font-semibold text-brand-700 hover:underline" href="/guides/how-to-become-a-locum-cardiologist">
+                  how to become a locum cardiologist
                 </Link>
                 ,{" "}
-                <Link className="font-semibold text-brand-700 hover:underline" href="/flexible-physician-careers">
-                  flexible physician careers
+                <Link className="font-semibold text-brand-700 hover:underline" href={`/guides/how-to-get-a-${page.slug}-medical-license`}>
+                  {page.stateName} medical license guide
                 </Link>
-                , and the national{" "}
-                <Link className="font-semibold text-brand-700 hover:underline" href="/locum-tenens-jobs">
-                  locum tenens jobs
-                </Link>{" "}
-                overview.
+                , and{" "}
+                <Link className="font-semibold text-brand-700 hover:underline" href="/cardiology-locum-jobs">
+                  cardiology locum job types
+                </Link>
+                .
               </p>
             </div>
 
             <div>
               <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">
-                Locum tenens jobs in {page.stateName} by specialty
+                Cardiology locum jobs in {page.stateName} by subspecialty
               </h2>
               <p className="mt-3 max-w-2xl text-sm text-slate-600">
-                Pick your specialty for a dedicated {page.stateName} page: credentialing context, FAQs, and a direct
+                Pick your cardiology subspecialty for a dedicated {page.stateName} page: credentialing context, FAQs, and
                 inquiry path.
               </p>
               <ul className="mt-6 flex flex-wrap gap-2">
-                {SPECIALTIES.map((s) => {
+                {CARDIOLOGY_SUBSPECIALTIES.map((s) => {
                   const specSlug = specialtyToSlug(s);
                   return (
                     <li key={specSlug}>
@@ -208,8 +229,9 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
 
           <div className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`Request ${page.stateName} matches`}
-              subtitle={`Tell us specialty, dates, and boundaries. We will follow up with realistic ${page.stateName} options—not generic blasts.`}
+              title={`Request ${page.stateName} cardiology matches`}
+              subtitle={`Select ${page.stateName} (and any other states) plus your subspecialty. A cardiology recruiter will contact you if realistic locum opportunities exist in those areas—usually within one business day. If nothing fits, we will tell you plainly.`}
+              defaultSpecialty="General Cardiology"
             />
             <Tier1QuickLinks />
             <LeadConversionBand

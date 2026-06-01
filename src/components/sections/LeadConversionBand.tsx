@@ -11,8 +11,8 @@ type Props = {
 
 /** Compact conversion strip for long-form SEO pages. */
 export function LeadConversionBand({
-  headline = "Ready for realistic locum matches?",
-  subline = "Share specialty, states, and boundaries—we respond with options, not spam.",
+  headline = "Ready for realistic cardiology locum matches?",
+  subline = "Share subspecialty, states, and boundaries—we respond with options, not spam.",
   className = "",
 }: Props) {
   return (
@@ -37,7 +37,7 @@ export function LeadConversionBand({
         </Link>{" "}
         ·{" "}
         <Link href="/for-physicians" className="font-semibold text-brand-700 hover:underline">
-          For physicians hub
+          For cardiologists hub
         </Link>
       </p>
     </aside>

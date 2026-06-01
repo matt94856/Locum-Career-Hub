@@ -7,7 +7,7 @@ export const SITE = {
   domain: "LocumCareerHub.com",
   url: "https://www.locumcareerhub.com",
   tagline:
-    "Locum tenens jobs and physician recruiting—with transparent expectations, credentialing clarity, and calm next steps for US clinicians exploring flexible work.",
+    "Cardiologist locum tenens recruiting—with transparent expectations, credentialing clarity, and calm next steps for MD/DO cardiologists exploring flexible cardiology work.",
   email: "matthewfuller389@gmail.com",
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",
@@ -27,18 +27,21 @@ export const SITE_OPEN_GRAPH_IMAGE = `${SITE.url}/opengraph-image` as const;
 
 /** Lower-pressure CTAs used across the marketing site */
 export const CTA = {
-  explore: "Explore Opportunities",
-  flexible: "See Flexible Options",
-  recruiter: "Talk With a Physician Recruiter",
-  learn: "Learn About Flexible Careers",
-  schedule: "Find Your Ideal Schedule",
+  explore: "Explore cardiology locums",
+  flexible: "See flexible cardiology blocks",
+  recruiter: "Talk with a cardiology recruiter",
+  learn: "Learn about cardiologist locums",
+  schedule: "Find your ideal block schedule",
   bookCall: "Schedule a 30-minute intro call",
 } as const;
 
 export const NAV_LINKS = [
-  { href: "/for-physicians", label: "For physicians" },
+  { href: "/for-physicians", label: "For cardiologists" },
   { href: "/physician-opportunities", label: "Opportunities" },
-  { href: "/specialties", label: "Specialties" },
+  { href: "/specialties", label: "Subspecialties" },
+  { href: "/cardiology-locum-jobs", label: "Cardiology jobs" },
+  { href: "/states", label: "By state" },
+  { href: "/cities", label: "By city" },
   { href: "/locations", label: "Locations" },
   { href: "/blog", label: "Insights" },
   { href: "/about", label: "About" },

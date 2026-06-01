@@ -1,5 +1,5 @@
 import { specialtyToSlug } from "@/lib/specialty-seo";
-import type { Specialty } from "@/lib/specialties";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 
 export type SpecialtyProfile = {
   slug: string;
@@ -15,339 +15,208 @@ export type SpecialtyProfile = {
   faqs: { q: string; a: string }[];
 };
 
-const PROFILES: SpecialtyProfile[] = [
+const CARDIOLOGY_PROFILE_DATA: Omit<SpecialtyProfile, "slug" | "name">[] = [
   {
-    slug: specialtyToSlug("Hospitalist Medicine"),
-    name: "Hospitalist Medicine",
-    settings: ["Community hospitals", "Academic medical centers", "Critical access hospitals", "Nocturnist programs"],
+    settings: ["Inpatient consult services", "Outpatient clinic blocks", "Telecardiology reads", "Weekend hospital coverage"],
     assignmentSnapshot:
-      "Hospitalist locums are usually shift-based inpatient coverage with explicit census targets, cross-cover rules, and admission caps. Blocks often run 7-on/7-off, 5-on/5-off, or nocturnist-only lanes.",
+      "General cardiology locums often blend inpatient consults, outpatient continuity gaps, and stress testing oversight. Blocks may run 7-on/7-off, weekday clinic weeks, or hybrid models with echo interpretation.",
     workflowNotes:
-      "Clarify who handles admissions after cutoff, how cross-cover works for rapid responses, and whether procedures (lines, intubations) are in scope. Handoff quality and chart closure windows should be written—not assumed.",
+      "Confirm stress test supervision, nuclear read expectations, call frequency, and whether you cover ICU consults or only cardiology service patients. Document PCI backup if you are non-invasive.",
     credentialingChecklist: [
-      "Hospital privileges and FPPE/OPPE expectations",
-      "ACLS/BLS (and ATLS if trauma-adjacent)",
-      "EHR proficiency for the host system",
-      "Coverage for cross-cover and rapid response scope",
+      "Hospital privileges with echo and stress lab scope",
+      "Board certification or eligibility per facility policy",
+      "State license and DEA where applicable",
+      "Malpractice limits aligned with procedural vs consult-only scope",
     ],
-    documentationFocus:
-      "Daily census caps, backup hospitalist layers, nocturnist ratios, and expected daily notes per patient.",
-    payDrivers: ["Census burden", "Night vs day differentials", "Procedure expectations", "Geographic demand"],
+    documentationFocus: "Daily consult volume, outpatient panel expectations, echo read turnaround, and call backup.",
+    payDrivers: ["Call burden", "Outpatient panel size", "Echo/stress volume", "Geographic demand"],
     fitSignals: [
-      "You want defined inpatient blocks with a clear end date",
-      "You prefer teams that document backup and cross-cover in writing",
+      "You want consult-heavy blocks with documented backup",
+      "You prefer written stress test and echo supervision rules",
     ],
     pitfalls: [
-      "Accepting a rate without a documented census target",
-      "Assuming cross-cover exists when nights are solo",
+      "Accepting consult volume without documented cross-cover on nights",
+      "Assuming outpatient blocks exclude inpatient callbacks",
     ],
     faqs: [
       {
-        q: "What census should be documented for hospitalist locums?",
-        a: "A sustainable target range (not a vague ‘manageable’ note), who backs you up, and what happens when the unit is over cap.",
+        q: "What should be documented for general cardiology locums?",
+        a: "Consult caps, call schedule, echo/stress scope, ICU involvement, and who covers nights when the service is busy.",
       },
       {
-        q: "Are nocturnist locums different from day hospitalist blocks?",
-        a: "Yes—night roles often have different cross-cover, rapid response expectations, and pay structures. Treat them as separate contract types.",
-      },
-    ],
-  },
-  {
-    slug: specialtyToSlug("Emergency Medicine"),
-    name: "Emergency Medicine",
-    settings: ["Level I–III trauma centers", "Freestanding EDs", "Critical access EDs", "Urgent care overflow sites"],
-    assignmentSnapshot:
-      "Emergency medicine locums center on hourly or shift coverage with volume bands, acuity mix, and coverage model (single vs double coverage). Peak seasons can change triage pressure quickly.",
-    workflowNotes:
-      "Confirm ultrasound scope, sedation privileges, tele-psych availability, and inpatient hold policies. Ask how boarding affects your shift and whether mid-level support is guaranteed on busy nights.",
-    credentialingChecklist: [
-      "Board certification or eligibility (per facility policy)",
-      "ATLS/ACLS and state DEA where applicable",
-      "Privileging for procedures you will actually perform",
-      "Malpractice tail or claims-made conversion clarity",
-    ],
-    documentationFocus: "Patients per hour bands, acuity mix, boarding policies, and on-call obligations outside scheduled shifts.",
-    payDrivers: ["Volume bands", "Night/weekend differentials", "Trauma level", "Boarding burden"],
-    fitSignals: ["You want shift work with hard stop times", "You need boarding and coverage rules defined upfront"],
-    pitfalls: ["Unsigned volume assumptions", "Solo coverage on nights advertised as ‘team-based’"],
-    faqs: [
-      {
-        q: "How do boarding hours affect ED locum fit?",
-        a: "Heavy boarding can turn a 10-hour shift into de facto 12+ hours of cognitive load. Document hold policies and whether compensation adjusts.",
+        q: "Can general cardiologists do locums without cath lab privileges?",
+        a: "Yes—many assignments are consult and clinic focused. Confirm procedural expectations before signing.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Anesthesiology & CRNA"),
-    name: "Anesthesiology & CRNA",
-    settings: ["OR suites", "Ambulatory surgery centers", "Obstetric units", "Cardiac programs", "Locum CRNA coverage"],
+    settings: ["Cath labs", "PCI-capable hospitals", "Structural programs", "Hybrid OR suites"],
     assignmentSnapshot:
-      "Anesthesia locums may be MD-only, CRNA-led with supervision, or mixed models. Case mix (general, regional, cardiac, OB) and call structure drive both lifestyle and liability exposure.",
+      "Interventional cardiology locums center on cath lab coverage, STEMI call, and sometimes structural cases. Case mix, activation times, and backup surgery pathways drive fit.",
     workflowNotes:
-      "Define supervision ratios, first-case start times, add-on case rules, and who handles OB epidural coverage. Clarify whether you cover ICU airways or only OR.",
+      "Define STEMI activation role, on-call PCI expectations, complication backup, and whether you cover peripheral interventions. Clarify TAVR/structural scope if advertised.",
     credentialingChecklist: [
-      "OR privileging and case-type permissions",
-      "State license and DEA alignment",
-      "Malpractice limits appropriate to procedural scope",
-      "Supervision agreements when CRNAs are primary deliverers",
+      "Cath lab privileges with documented case types",
+      "Current procedural logs if required by the facility",
+      "STEMI call expectations in writing",
+      "Malpractice appropriate to PCI and structural scope",
     ],
-    documentationFocus: "Case mix, call frequency, add-on expectations, and OB coverage responsibilities.",
-    payDrivers: ["Call burden", "Case complexity", "Supervision load", "Rural vs metro access"],
-    fitSignals: ["You want predictable OR blocks", "You need call schedules and add-on rules in the contract"],
-    pitfalls: ["Assuming CRNA coverage without a signed supervision agreement", "Unclear add-on compensation"],
+    documentationFocus: "STEMI activation, case mix, call frequency, and complication backup pathways.",
+    payDrivers: ["STEMI call", "Case mix complexity", "Night and weekend coverage", "Lab throughput pressure"],
+    fitSignals: ["You need STEMI and call rules before committing", "You want case mix and backup surgery documented"],
+    pitfalls: ["Solo STEMI coverage without documented surgical backup", "Unclear add-on case compensation"],
     faqs: [
       {
-        q: "Do CRNA and physician anesthesia locums differ contractually?",
-        a: "Yes—supervision, billing, and malpractice structures differ. Match the contract to the actual care model at the site.",
+        q: "How do STEMI call expectations affect interventional locums?",
+        a: "Activation windows, transport patterns, and whether you are primary operator vs backup should be explicit—they change lifestyle and liability.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Family Medicine"),
-    name: "Family Medicine",
-    settings: ["Outpatient clinics", "Rural health centers", "Urgent care hybrids", "SNF or light inpatient"],
+    settings: ["EP labs", "Device clinics", "Arrhythmia hospitals", "Outpatient ablation programs"],
     assignmentSnapshot:
-      "Family medicine locums span pure outpatient panels, walk-in heavy clinics, and hybrid inpatient/outpatient roles. Panel size, telehealth mix, and MA support define sustainable pace.",
+      "Electrophysiology locums cover device clinics, ablations, and inpatient arrhythmia consults. Lab access, mapping systems, and device rep support vary by site.",
     workflowNotes:
-      "Document patients per day, same-day add-ons, prior-auth load, and whether you cover nursing homes or hospital follow-ups.",
+      "Confirm device implant volume, ablation case types, overnight arrhythmia coverage, and whether you read remote monitoring between blocks.",
     credentialingChecklist: [
-      "Clinic privileging and e-prescribing setup",
-      "DEA and state controlled-substance rules",
-      "Telehealth licensure if virtual blocks are included",
+      "EP lab privileges and device implant scope",
+      "Credentialing for ablation modalities you will use",
+      "Overnight arrhythmia call clarity",
+      "Malpractice aligned with device and ablation work",
     ],
-    documentationFocus: "Daily visit volume, support staff ratios, and scope (peds, OB, procedures).",
-    payDrivers: ["Panel pace", "Procedure add-ons", "Rural incentives", "Telehealth share"],
-    fitSignals: ["You want outpatient rhythm with clear visit caps", "You prefer clinics with MA/LPN support documented"],
-    pitfalls: ["Open-ended ‘as needed’ visit volumes", "Telehealth across states without licensure plan"],
+    documentationFocus: "Ablation case mix, device clinic load, call, and remote monitoring expectations.",
+    payDrivers: ["Ablation volume", "Device clinic panels", "Call", "Lab technology constraints"],
+    fitSignals: ["You want lab capabilities and case mix confirmed before travel", "You need device clinic load in writing"],
+    pitfalls: ["Assuming lab tech and mapping support without verification", "Remote monitoring load added informally"],
     faqs: [
       {
-        q: "Can family medicine locums include OB or procedures?",
-        a: "Sometimes—privileges must match scope. Do not assume OB or scopes beyond clinic norms without written privileging.",
+        q: "Are EP locums different from general cardiology call?",
+        a: "Yes—device clinics, ablation labs, and arrhythmia call are separate workloads. Contracts should separate each.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Internal Medicine"),
-    name: "Internal Medicine",
-    settings: ["Outpatient IM clinics", "Hospitalist-adjacent IM", "SNF coverage", "Telemedicine panels"],
+    settings: ["Advanced heart failure programs", "Transplant-adjacent centers", "LVAD hospitals", "Inpatient HF units"],
     assignmentSnapshot:
-      "Internal medicine locums range from ambulatory chronic-care panels to consult-heavy inpatient roles. Complexity mix (diabetes, CHF, renal) affects sustainable daily volume.",
+      "Heart failure locums often involve advanced therapies, transplant-adjacent consults, and complex diuresis pathways. Team structure and APP support matter.",
     workflowNotes:
-      "Clarify whether you manage acute admits, SNF weeks, or clinic-only. Ask about infusion suites, anticoag clinics, and prior-auth support.",
+      "Clarify LVAD and transplant consult scope, weekend rounding expectations, and whether you manage drips and temporary MCS decisions.",
     credentialingChecklist: [
-      "Clinic or hospital privileges aligned to scope",
-      "EHR inbox expectations if extending beyond shifts",
-      "Telehealth licenses for multi-state virtual panels",
+      "Privileges for advanced HF and transplant-adjacent consults if applicable",
+      "Team-based coverage documentation",
+      "Ultrasound or RHC scope if required",
+      "Malpractice aligned with advanced therapy exposure",
     ],
-    documentationFocus: "Visit volume, inbox coverage rules, and inpatient vs outpatient boundaries.",
-    payDrivers: ["Acuity mix", "Inbox obligations", "Call for clinic patients", "Subspecialty backup availability"],
-    fitSignals: ["You want chronic-care depth with support", "You need inbox rules defined for part-time blocks"],
-    pitfalls: ["Unlimited inbox work after locum week ends", "SNF volume without travel or stipend clarity"],
+    documentationFocus: "Census on HF service, transplant-adjacent scope, weekend coverage, and therapy protocols.",
+    payDrivers: ["Advanced therapy exposure", "Weekend census", "Transplant program intensity", "APP support"],
+    fitSignals: ["You want HF census and therapy scope documented", "You need clarity on transplant-adjacent calls"],
+    pitfalls: ["Transplant-adjacent scope without backup attending coverage", "Unclear weekend rounding expectations"],
     faqs: [
       {
-        q: "How is IM locum work different from hospitalist locums?",
-        a: "IM locums may be outpatient-forward with lighter or no inpatient duty. Read privileges and schedules—titles alone are not enough.",
+        q: "What makes heart failure locums uniquely demanding?",
+        a: "Complex patients, weekend census, and advanced therapy decisions—document team backup and consult scope before you start.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Psychiatry"),
-    name: "Psychiatry",
-    settings: ["Inpatient psych units", "ED consult services", "Outpatient telepsych", "Community mental health centers"],
+    settings: ["Echo labs", "CMR programs", "Nuclear cardiology", "Multimodality read pools"],
     assignmentSnapshot:
-      "Psychiatry locums include inpatient rounding, consult-liaison, and telehealth outpatient. Coverage for involuntary holds, seclusion/restraint policies, and teleprescribing rules varies by state.",
+      "Advanced imaging locums focus on echo, nuclear, CMR, or CT reads with turnaround expectations. Remote read pools and on-site hybrid models both exist.",
     workflowNotes:
-      "Confirm census, consult-only vs primary attending roles, and whether you cover nights/weekends on-call for admissions.",
+      "Define daily read volumes, critical value callbacks, stress test supervision, and whether you interpret only or also perform studies.",
     credentialingChecklist: [
-      "DEA and state controlled-substance registration",
-      "Telepsych licensure and platform compliance",
-      "Hospital policies for holds and involuntary treatment",
+      "Modalities you will read or perform",
+      "Turnaround time expectations",
+      "Stress test supervision agreements",
+      "Malpractice for interpretive vs procedural imaging",
     ],
-    documentationFocus: "Census caps, consult turnaround expectations, and telehealth prescribing rules.",
-    payDrivers: ["Inpatient vs outpatient mix", "Call for admissions", "Telehealth panel size", "Rural need"],
-    fitSignals: ["You want defined census on inpatient units", "You need telehealth rules aligned to state law"],
-    pitfalls: ["Solo inpatient coverage without backup", "Telepsych across states without licenses"],
+    documentationFocus: "Daily read volume, modalities, turnaround SLAs, and supervision rules.",
+    payDrivers: ["Modalities covered", "Turnaround pressure", "Weekend read pools", "On-site vs remote"],
+    fitSignals: ["You want daily read counts and SLA in the contract", "You need modality scope limited to what you practice"],
+    pitfalls: ["Read volume assumptions without SLA", "Stress supervision added without compensation"],
     faqs: [
       {
-        q: "Are telepsychiatry locums licensed per state?",
-        a: "Yes—patients’ location usually governs licensure. Map states before accepting virtual blocks.",
+        q: "Can imaging cardiologists locum remotely?",
+        a: "Sometimes—licensure, hospital affiliation, and callback rules still apply. Document states and turnaround before accepting.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Radiology"),
-    name: "Radiology",
-    settings: ["Teleradiology hubs", "On-site diagnostic suites", "Night nighthawk coverage", "MSK or breast subspecialty reads"],
+    settings: ["Structural heart programs", "TAVR centers", "Watchman programs", "Hybrid cath/OR suites"],
     assignmentSnapshot:
-      "Radiology locums may be on-site or remote with RVU-based expectations. Turnaround times, subspecialty mix, and contrast reaction coverage must be explicit.",
+      "Structural heart locums may include TAVR, MitraClip, and complex valve conferences. Multidisciplinary heart teams and imaging requirements are central.",
     workflowNotes:
-      "Define RVU targets, critical result escalation paths, and whether you cover procedures (biopsies, drains). Clarify IT setup for remote reads.",
+      "Confirm case types, heart team meeting load, imaging requirements, and call for structural emergencies. Clarify partnership with interventional colleagues.",
     credentialingChecklist: [
-      "State licenses for where images are interpreted (site-dependent)",
-      "PACS access and credentialing for telerad platforms",
-      "Malpractice appropriate to read volume and procedures",
+      "Structural procedure privileges and case logs",
+      "Heart team and imaging prerequisites",
+      "Call for structural emergencies",
+      "Malpractice aligned with structural procedures",
     ],
-    documentationFocus: "RVU or study volume targets, subspecialty exclusions, and procedure coverage.",
-    payDrivers: ["RVU pace", "Night/weekend differential", "Subspecialty mix", "Remote vs on-site"],
-    fitSignals: ["You want RVU targets with realistic study mix", "You need IT and licensure clarity for telerad"],
-    pitfalls: ["Open-ended RVU clauses without study-type ranges", "Remote reads without multi-state license plan"],
+    documentationFocus: "Case mix, heart team time, imaging prerequisites, and emergency call.",
+    payDrivers: ["Case complexity", "Heart team load", "Call", "Program maturity"],
+    fitSignals: ["You want heart team time and case mix documented", "You need imaging prerequisites confirmed"],
+    pitfalls: ["TAVR coverage without defined imaging support", "Heart team meetings uncompensated"],
     faqs: [
       {
-        q: "Do teleradiology locums need a license in every state?",
-        a: "Often yes—requirements depend on where patients are located and facility policy. Confirm before starting reads.",
+        q: "How is structural heart locums different from standard cath lab work?",
+        a: "Multidisciplinary planning, imaging depth, and valve program logistics add time beyond PCI—document heart team expectations.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("Surgery & Orthopedics"),
-    name: "Surgery & Orthopedics",
-    settings: ["General surgery call pools", "Orthopedic trauma", "ASC elective blocks", "Rural broad-spectrum surgery"],
+    settings: ["Preventive clinics", "Lipid programs", "Cardiac rehab partnerships", "Corporate wellness cardiology"],
     assignmentSnapshot:
-      "Surgical locums range from elective block OR days to full trauma call. Clarify consult vs primary surgeon roles, clinic days, and rounding expectations.",
+      "Preventive cardiology locums emphasize outpatient risk reduction, lipid management, and sometimes cardio-oncology or sports cardiology niches. Panel size and prior auth load matter.",
     workflowNotes:
-      "Document call frequency, first-assist vs primary, and equipment availability for your case mix. Malpractice limits should match procedural scope.",
+      "Define daily patient volume, prior auth support, and whether you cover inpatient consults. Clarify imaging and stress test ordering pathways.",
     credentialingChecklist: [
-      "Privileging for specific procedures you will perform",
-      "Trauma activation level alignment",
-      "Assistant availability and OR block guarantees",
+      "Outpatient privileging",
+      "Scope for advanced lipid therapies",
+      "Consult vs clinic-only expectations",
+      "Malpractice for outpatient-focused practice",
     ],
-    documentationFocus: "Call schedule, case mix, clinic load, and backup for complications.",
-    payDrivers: ["Call burden", "Case mix complexity", "Clinic days added", "Rural breadth premium"],
-    fitSignals: ["You want call schedules with backup documented", "You need privileging aligned to actual cases"],
-    pitfalls: ["Broad ‘general surgery’ posts without procedure lists", "Call without post-call protection"],
+    documentationFocus: "Panel size, visit length, prior auth support, and inpatient consult scope.",
+    payDrivers: ["Panel size", "Visit complexity", "Prior auth burden", "Subspecialty niche demand"],
+    fitSignals: ["You want panel size and visit length documented", "You prefer clinic-only scope if avoiding call"],
+    pitfalls: ["Clinic panels with hidden inpatient callbacks", "Prior auth load without support staff"],
     faqs: [
       {
-        q: "Should orthopedic and general surgery locums be treated the same?",
-        a: "No—privileging, call, and equipment differ. Use specialty-specific contracts and site visits when possible.",
+        q: "Is preventive cardiology locums mostly outpatient?",
+        a: "Often yes—but confirm consult and call expectations. Some programs add inpatient lipid or cardio-oncology consults.",
       },
     ],
   },
   {
-    slug: specialtyToSlug("OB/GYN"),
-    name: "OB/GYN",
-    settings: ["Labor & delivery units", "Outpatient OB clinics", "GYN-only locums", "Rural full-scope OB"],
+    settings: ["Children's hospitals", "Pediatric heart centers", "Adult congenital programs", "Outpatient peds cardiology clinics"],
     assignmentSnapshot:
-      "OB/GYN locums may be laborist-only, clinic-heavy, or full-scope with call. Delivery volume, nursery level, and anesthesia backup define safety and pace.",
+      "Pediatric cardiology locums cover congenital heart disease, fetal cardiology consults, and ICU co-management with explicit age ranges and surgical backup.",
     workflowNotes:
-      "Confirm backup from MFMs, anesthesia, and NICU levels. Clarify GYN OR days vs pure L&D shifts.",
+      "Confirm patient age range, cath lab case types, call into the CV ICU, and relationship with pediatric cardiac surgery. Echo and fetal scope should be listed in privileges.",
     credentialingChecklist: [
-      "Delivery volume expectations and backup pathways",
-      "Privileges for operative GYN if applicable",
-      "Malpractice tail given obstetric exposure",
+      "Pediatric cardiology board certification or eligibility",
+      "Privileges aligned to congenital and ICU scope",
+      "Malpractice appropriate to pediatric procedural work",
+      "Transfer agreements for surgical backup documented",
     ],
-    documentationFocus: "Deliveries per shift/month, clinic load, and call frequency.",
-    payDrivers: ["Call and delivery volume", "Clinic add-ons", "Rural full-scope premiums", "Malpractice environment"],
-    fitSignals: ["You want L&D backup documented", "You need clinic vs laborist scope clear"],
-    pitfalls: ["Solo rural OB without anesthesia/NICU clarity", "Unlimited clinic plus heavy call"],
+    documentationFocus: "Patient age range, ICU census, call, and surgical backup pathways.",
+    payDrivers: ["ICU call", "Congenital case mix", "Clinic volume", "Geographic pediatric supply"],
+    fitSignals: ["You want age range and surgical backup in writing", "You need clarity on fetal and cath lab scope"],
+    pitfalls: ["Adult cardiology locum ads mislabeled as peds-friendly", "ICU call without documented surgical coverage"],
     faqs: [
       {
-        q: "What is a laborist locum vs full-scope OB/GYN locum?",
-        a: "Laborists focus on L&D coverage; full-scope includes clinic and GYN surgery. Contracts and malpractice should match the role.",
-      },
-    ],
-  },
-  {
-    slug: specialtyToSlug("Pediatrics"),
-    name: "Pediatrics",
-    settings: ["Children’s hospitals", "Community peds wards", "Outpatient pediatrics", "NICU-adjacent roles"],
-    assignmentSnapshot:
-      "Pediatric locums include inpatient ward attending, urgent pediatrics, and outpatient clinics. Nursery level, PICU backup, and telehealth rules should be explicit.",
-    workflowNotes:
-      "Define age ranges, procedure scope, and night call expectations. Confirm whether you cover newborns, adolescents, or both.",
-    credentialingChecklist: [
-      "PALS/BLS and hospital privileges for peds units",
-      "NICU/PICU backup pathways",
-      "Telehealth consent rules for minors if virtual",
-    ],
-    documentationFocus: "Census, age range, nursery level, and outpatient panel pace if hybrid.",
-    payDrivers: ["Inpatient vs outpatient", "Call for deliveries or NICU", "Subspecialty backup", "Seasonal URI volume"],
-    fitSignals: ["You want age range and census defined", "You need PICU backup for inpatient roles"],
-    pitfalls: ["Adult-overflow units without pediatric support", "Outpatient pace without MA support"],
-    faqs: [
-      {
-        q: "Do pediatric hospitalist locums differ from outpatient pediatrics locums?",
-        a: "Yes—inpatient roles need ward census, PICU backup, and night coverage clarity. Outpatient roles hinge on visit volume and telehealth policy.",
-      },
-    ],
-  },
-  {
-    slug: specialtyToSlug("Cardiology"),
-    name: "Cardiology",
-    settings: ["Inpatient consult services", "Non-invasive cardiology clinics", "Stress lab coverage", "Telecardiology"],
-    assignmentSnapshot:
-      "Cardiology locums may be consult-only, imaging-heavy, or include procedures depending on privileges. Clarify cath lab call, echo volume, and weekend rounding.",
-    workflowNotes:
-      "Document whether you interpret studies only or manage active inpatient ACS pathways. Confirm telemetry coverage and mid-level support.",
-    credentialingChecklist: [
-      "Privileging for echo, nuclear, cath as applicable",
-      "Call for STEMI/cath lab if required",
-      "Telecardiology licensure for remote reads",
-    ],
-    documentationFocus: "Consult volume, imaging expectations, and procedural call.",
-    payDrivers: ["Procedure call", "Imaging RVUs", "Weekend rounding", "Tele vs on-site"],
-    fitSignals: ["You want consult caps and imaging volumes documented", "You need cath call frequency explicit"],
-    pitfalls: ["Consult-only posts with hidden procedure call", "Imaging RVUs without study mix"],
-    faqs: [
-      {
-        q: "Can cardiology locums be non-invasive only?",
-        a: "Yes—many assignments are consult and imaging focused. Match privileges and malpractice to the actual scope.",
-      },
-    ],
-  },
-  {
-    slug: specialtyToSlug("Urgent Care"),
-    name: "Urgent Care",
-    settings: ["Retail urgent care", "Hospital-affiliated UC", "Occupational health hybrids", "Evening/weekend walk-in"],
-    assignmentSnapshot:
-      "Urgent care locums are shift-based with patients-per-hour targets and procedure scope (sutures, splints, minor procedures). Imaging and lab turnaround affect pace.",
-    workflowNotes:
-      "Clarify site labs, X-ray, and referral pathways. Ask about occupational health add-ons and prescription monitoring rules.",
-    credentialingChecklist: [
-      "DEA and state UC regulations",
-      "Radiation safety if reading your own films",
-      "Telehealth UC rules if hybrid",
-    ],
-    documentationFocus: "Hourly volume bands, procedures in scope, and staffing (MA/RN) per shift.",
-    payDrivers: ["Shift differentials", "Volume bands", "Procedure mix", "Holiday/weekend rates"],
-    fitSignals: ["You want hourly volume in writing", "You prefer sites with on-shift imaging and lab"],
-    pitfalls: ["Volume targets without staffing support", "Broad procedure scope without training/privileges"],
-    faqs: [
-      {
-        q: "How is urgent care locums different from ED locums?",
-        a: "UC is typically lower acuity with faster throughput targets; ED has boarding and higher acuity. Contracts and malpractice differ—do not interchange them.",
-      },
-    ],
-  },
-  {
-    slug: specialtyToSlug("Telehealth"),
-    name: "Telehealth",
-    settings: [
-      "Multi-state virtual clinics",
-      "After-hours telemedicine",
-      "Specialty teleconsults",
-      "Employer-sponsored virtual care",
-    ],
-    assignmentSnapshot:
-      "Telehealth locums depend on licensure footprint, platform compliance, and panel pacing. Pay may be per visit, per hour, or salaried shift blocks.",
-    workflowNotes:
-      "Map patient location rules, prescribing constraints, and malpractice covering virtual care. Confirm IT onboarding and documentation time outside live visits.",
-    credentialingChecklist: [
-      "Licenses where patients are located",
-      "Platform training and privacy compliance",
-      "Prescribing rules for controlled substances via telehealth",
-    ],
-    documentationFocus: "Visits per hour, on-call expectations, and cross-state licensure plan.",
-    payDrivers: ["Licensed states count", "After-hours coverage", "Specialty-specific visit complexity", "Panel size"],
-    fitSignals: ["You want licensure plan before signing", "You need per-visit vs per-hour pay explicit"],
-    pitfalls: ["Practicing where you are not licensed", "Unpaid charting time outside visit blocks"],
-    faqs: [
-      {
-        q: "Which license matters for telehealth locums?",
-        a: "Usually the patient’s location. Build a multi-state plan or limit assignments to states where you are already licensed.",
+        q: "Are pediatric cardiology locums different from adult general cardiology locums?",
+        a: "Yes—privileges, call, and backup pathways are distinct. Confirm you are matched to true pediatric programs.",
       },
     ],
   },
 ];
+
+const PROFILES: SpecialtyProfile[] = CARDIOLOGY_SUBSPECIALTIES.map((name, i) => ({
+  slug: specialtyToSlug(name),
+  name,
+  ...CARDIOLOGY_PROFILE_DATA[i]!,
+}));
 
 const bySlug = new Map(PROFILES.map((p) => [p.slug, p]));
 
@@ -355,6 +224,6 @@ export function getSpecialtyProfile(slug: string): SpecialtyProfile | undefined 
   return bySlug.get(slug);
 }
 
-export function getSpecialtyProfileByName(name: Specialty): SpecialtyProfile | undefined {
-  return bySlug.get(specialtyToSlug(name));
+export function getAllSpecialtyProfiles(): SpecialtyProfile[] {
+  return PROFILES;
 }

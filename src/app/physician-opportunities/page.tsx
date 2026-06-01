@@ -9,9 +9,9 @@ import { buildPhysicianOpportunitiesSerpMetadata } from "@/lib/serp-ctr";
 
 export const metadata: Metadata = buildPhysicianOpportunitiesSerpMetadata();
 
-const PAGE_TITLE = "Physician Locum Opportunities | Submit Your Preferences";
+const PAGE_TITLE = "Cardiologist Locum Opportunities | Submit Your Preferences";
 const PAGE_DESCRIPTION =
-  "Tell us specialty, states, and dates—get realistic locum matches with physician recruiter advocacy (not spam).";
+  "Tell us cardiology subspecialty, states, and dates—get realistic locum matches with cardiologist-only recruiter advocacy (not spam).";
 
 const LOCUM_BENEFITS = [
   {

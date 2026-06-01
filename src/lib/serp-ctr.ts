@@ -126,30 +126,29 @@ export function landingSerpOverride(slug: string): { title: string; description:
 
 export function buildHomeSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Locum Tenens Jobs for Physicians (2026) | Recruiter Support",
+    title: "Cardiologist Locum Tenens Jobs (2026) | Recruiter Support",
     description: buildSerpDescription({
-      hook: "Locum tenens jobs with transparent pay, credentialing timelines, and realistic schedules.",
-      proof: "State & specialty hubs for US physicians.",
-      cta: "Talk to a recruiter—no job-board spam.",
+      hook: "Cardiologist locum tenens jobs with transparent pay drivers, privileging context, and realistic call.",
+      proof: "Cardiologist-only recruiter—state & subspecialty hubs.",
+      cta: "Talk to a cardiology recruiter—no job-board spam.",
     }),
     path: "/",
     keywords: [
-      "locum tenens jobs",
-      "locum tenens physician",
-      "locum physician jobs",
-      "physician staffing",
-      "locum tenens recruiter",
+      "cardiologist locum tenens",
+      "cardiology locum jobs",
+      "interventional cardiologist locum",
+      "cardiologist recruiter",
     ],
   });
 }
 
 export function buildStateSerpMetadata(stateName: string, slug: string): Metadata {
   return buildSerpMetadata({
-    title: `Locum Tenens Jobs in ${stateName} (2026) | Licensing & Pay`,
+    title: `Cardiologist Locum Jobs in ${stateName} (2026) | Licensing`,
     description: buildSerpDescription({
-      hook: `${stateName} locum tenens jobs for hospitalists, ED, anesthesia, and outpatient specialties.`,
-      proof: "Credentialing paths, metros, and contract norms explained.",
-      cta: `Request ${stateName} matches today.`,
+      hook: `${stateName} cardiologist locum jobs—cath lab, consult, clinic, and imaging blocks.`,
+      proof: "Privileging paths, metros, and call norms explained.",
+      cta: `Request ${stateName} cardiology matches today.`,
     }),
     path: `/locum-tenens-jobs/${slug}`,
     keywords: [
@@ -172,7 +171,7 @@ export function buildSpecialtyStateSerpMetadata(input: {
     title: `${specialtyName} Locum Jobs in ${stateName} | Rates & Licensing`,
     description: buildSerpDescription({
       hook: `${stateName} ${specialtyName} locum roles with written census, call, and credentialing expectations.`,
-      proof: "Physician recruiter—not a generic board.",
+      proof: "Cardiologist-only recruiter—not a generic board.",
       cta: "Apply in minutes; realistic follow-up.",
     }),
     path: `/locum-tenens-jobs/${stateSlug}/${specialtySlug}`,
@@ -185,33 +184,37 @@ export function buildSpecialtyStateSerpMetadata(input: {
 }
 
 const SPECIALTY_SERP: Record<string, { title: string; hook: string }> = {
-  telehealth: {
-    title: "Telemedicine Locum Jobs | Multi-State Licensing Guide",
-    hook: "Telemedicine and telehealth locum roles with clear visit pace, licensure, and prescribing rules.",
+  "general-cardiology": {
+    title: "General Cardiologist Locum Jobs | Consult & Clinic",
+    hook: "General cardiology locums with consult census, echo reads, and call documented in writing.",
   },
-  "family-medicine": {
-    title: "Family Medicine Locum Jobs | Outpatient & Rural Blocks",
-    hook: "Family medicine locum tenens with visit caps, MA support, and scope documented in writing.",
+  "interventional-cardiology": {
+    title: "Interventional Cardiologist Locum Jobs | Cath Lab & STEMI",
+    hook: "Interventional cardiology locums with STEMI activation, case mix, and backup clarified upfront.",
   },
-  pediatrics: {
-    title: "Pediatric Locum Jobs | Inpatient & Outpatient Coverage",
-    hook: "Pediatric locum roles with age range, census, and PICU backup clarified before you start.",
+  electrophysiology: {
+    title: "EP Cardiologist Locum Jobs | Ablation & Devices",
+    hook: "Electrophysiology locums with lab capabilities, device clinic load, and arrhythmia call defined.",
+  },
+  "heart-failure": {
+    title: "Heart Failure Cardiologist Locum Jobs",
+    hook: "Advanced heart failure locums with census, transplant-adjacent scope, and weekend coverage documented.",
   },
 };
 
 export function buildSpecialtySerpMetadata(name: string, slug: string): Metadata {
   const custom = SPECIALTY_SERP[slug];
   return buildSerpMetadata({
-    title: custom?.title ?? `${name} Locum Tenens Jobs | Flexible Physician Work`,
+    title: custom?.title ?? `${name} Locum Jobs for Cardiologists`,
     description: buildSerpDescription({
       hook:
         custom?.hook ??
         `${name} locum and flexible contract work with clear volume, call, and malpractice terms.`,
       proof: "Compare travel vs local blocks by state.",
-      cta: "Request specialty matches—no spam.",
+      cta: "Request cardiology matches—no spam.",
     }),
     path: `/specialties/${slug}`,
-    keywords: [`${name} locum`, "locum tenens jobs", "flexible physician jobs", "telemedicine locums jobs"],
+    keywords: [`${name} locum`, "cardiologist locum tenens", "cardiology locum jobs"],
   });
 }
 
@@ -261,40 +264,40 @@ export function buildSalaryEstimatorSerpMetadata(): Metadata {
 
 export function buildForPhysiciansSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Locum Tenens for Physicians | Burnout & Flexible Work",
+    title: "Locum Tenens for Cardiologists | Burnout & Flexible Blocks",
     description: buildSerpDescription({
-      hook: "Locum tenens jobs and flexible careers when hospital medicine no longer fits your life.",
-      proof: "Burnout-aware guides and specialty hubs.",
-      cta: "Explore options—talk to a recruiter.",
+      hook: "Cardiology locum jobs when cath lab call and clinic load no longer fit your life.",
+      proof: "Burnout-aware guides and cardiology subspecialty hubs.",
+      cta: "Explore options—talk to a cardiology recruiter.",
     }),
     path: "/for-physicians",
-    keywords: ["locum tenens for physicians", "physician burnout", "flexible physician careers"],
+    keywords: ["cardiologist locum tenens", "cardiologist burnout", "flexible cardiology careers"],
   });
 }
 
 export function buildLocumJobsHubSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Locum Tenens Jobs by State (2026) | All 50 States",
+    title: "Cardiologist Locum Jobs by State (2026) | All 50 States",
     description: buildSerpDescription({
-      hook: "Browse locum tenens jobs in every US state—then open specialty-specific guides.",
-      proof: "Licensing, metros, and credentialing context per state.",
-      cta: "Pick your state and request matches.",
+      hook: "Browse cardiologist locum jobs in every US state—then open subspecialty guides.",
+      proof: "Licensing, metros, and privileging context per state.",
+      cta: "Pick your state and request cardiology matches.",
     }),
     path: "/locum-tenens-jobs",
-    keywords: ["locum tenens jobs", "locum tenens by state", "locum physician jobs"],
+    keywords: ["cardiologist locum jobs", "cardiology locum by state", "cardiologist locum tenens"],
   });
 }
 
 export function buildPhysicianOpportunitiesSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Physician Locum Opportunities | Submit Your Preferences",
+    title: "Cardiologist Locum Opportunities | Submit Preferences",
     description: buildSerpDescription({
-      hook: "Tell us specialty, states, and dates—get realistic locum matches, not spam.",
-      proof: "Physician recruiter advocacy on rates and credentialing.",
+      hook: "Tell us subspecialty, states, and dates—get realistic cardiology locum matches, not spam.",
+      proof: "Cardiologist-only recruiter advocacy on rates and privileging.",
       cta: "Submit the form in 2 minutes.",
     }),
     path: "/physician-opportunities",
-    keywords: ["physician opportunities", "locum tenens jobs", "physician recruiter"],
+    keywords: ["cardiologist opportunities", "cardiology locum jobs", "cardiologist recruiter"],
   });
 }
 

@@ -1,5 +1,10 @@
+/**
+ * Sitemap: indexable cardiology SEO + core hubs (excludes noindex city long-tail and legacy /cardiology-locums URLs).
+ */
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
+import { getIndexableCardiologySeoPaths } from "@/lib/cardiology-seo/registry";
+import { PRIORITY_METRO_SLUGS } from "@/lib/cardiology-seo/metro-rich-data";
 import { GLOSSARY_SLUGS } from "@/lib/glossary-data";
 import { LANDING_SLUGS } from "@/lib/landings";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
@@ -15,6 +20,10 @@ const staticRoutes = [
   "/physician-opportunities",
   "/guides",
   "/specialties",
+  "/cardiology-locum-jobs",
+  "/states",
+  "/cities",
+  "/salary",
   "/locations",
   "/blog",
   "/faq",
@@ -46,12 +55,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.52,
   }));
 
+  const cardiologySeoEntries: MetadataRoute.Sitemap = getIndexableCardiologySeoPaths().map((path) => {
+    const citySlug = path.startsWith("/cities/") ? path.replace("/cities/", "") : "";
+    const isFlagshipSalary = path.startsWith("/salary/cardiologist-salary-");
+    const isPriorityCity = citySlug && PRIORITY_METRO_SLUGS.has(citySlug);
+    const isPillar = path.includes("complete-guide");
+    const priority = isPillar || isFlagshipSalary ? 0.78 : isPriorityCity || path.startsWith("/states/") ? 0.7 : 0.64;
+    return {
+      url: `${SITE.url}${path}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority,
+    };
+  });
+
   const entries: MetadataRoute.Sitemap = [
     ...staticRoutes.map((path) => ({
       url: `${SITE.url}${path}`,
       lastModified,
       changeFrequency: "weekly" as const,
-      priority: path === "/" ? 1 : 0.7,
+      priority: path === "/" ? 1 : path === "/cardiology-locum-jobs" || path === "/salary" ? 0.9 : 0.7,
     })),
     ...LANDING_SLUGS.map((slug) => ({
       url: `${SITE.url}/${slug}`,
@@ -72,6 +95,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.63,
     })),
     ...specialtyStateEntries,
+    ...cardiologySeoEntries,
     ...glossaryEntries,
     ...BLOG_POSTS.map((p) => ({
       url: `${SITE.url}/blog/${p.slug}`,

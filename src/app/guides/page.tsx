@@ -1,79 +1,53 @@
 import type { Metadata } from "next";
-import { GuideCardLink } from "@/components/ui/GuideCardLink";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { LANDING_PAGES } from "@/lib/landings";
-import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
-import { SITE } from "@/lib/site";
-import { socialShareMetadata } from "@/lib/social-metadata";
+import Link from "next/link";
+import { getCardiologySeoPagesByCategory } from "@/lib/cardiology-seo/registry";
+import { buildSerpMetadata } from "@/lib/serp-ctr";
 
-const PAGE_TITLE = "Locum Tenens Guides | Burnout, Travel Jobs & Flexible Careers";
-const PAGE_DESCRIPTION =
-  "Locum tenens guides for physicians: burnout alternatives, travel physician jobs, side income, schedule flexibility, and credentialing—skimmable resources without pressure.";
+export const metadata: Metadata = buildSerpMetadata({
+  title: "Cardiology Locum Guides | Licensing, Tax, Career",
+  description: "Cardiologist locum guides—licensing by state, taxes, career paths, comparisons, FAQs, and pillar content.",
+  path: "/guides",
+  keywords: ["cardiology locum guide", "cardiologist licensing guide", "locum cardiology career"],
+});
 
-export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/guides" },
-  keywords: [
-    "physician career guides",
-    "locum tenens guide",
-    "physician flexibility",
-    "physician burnout resources",
-    "travel physician jobs guide",
-  ],
-  ...socialShareMetadata({
-    title: "Locum Tenens Guides | Burnout, Travel Jobs & Flexible Careers",
-    description: PAGE_DESCRIPTION,
-    path: "/guides",
-  }),
-};
+const GROUPS = [
+  { label: "Licensing", category: "licensing" as const },
+  { label: "Tax", category: "tax" as const },
+  { label: "Career", category: "career" as const },
+  { label: "Subspecialty", category: "subspecialty" as const },
+  { label: "Employers (educational)", category: "employer" as const },
+  { label: "Comparisons", category: "comparison" as const },
+  { label: "FAQ", category: "faq" as const },
+  { label: "Data", category: "data" as const },
+  { label: "Pillar guides", category: "pillar" as const },
+];
 
-export default function GuidesIndexPage() {
-  const path = "/guides";
-  const medical = medicalWebPageJsonLd({
-    name: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    path,
-    keywords: [
-      "physician career guides",
-      "locum tenens",
-      "flexible physician work",
-      "physician recruiting",
-    ],
-    aboutTopics: ["Physician careers", "Locum tenens", "Physician work-life balance"],
-  });
-  const crumbs = breadcrumbJsonLd([
-    { name: "Home", path: "/" },
-    { name: "Guides", path },
-  ]);
-
+export default function GuidesHubPage() {
   return (
     <main className="pb-24 sm:pb-0">
-      <JsonLd data={medical} />
-      <JsonLd data={crumbs} />
-
-      <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">
-        <div className="container-site max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Guides</p>
-          <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Topic guides for physicians exploring flexible work
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Each page is built to be skimmable: direct answers first, FAQs where they help, and a clear path to talk with
-            our team when you want human guidance—not a hard sell.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-14 sm:py-16">
-        <div className="container-site">
-          <ul className="grid list-none grid-cols-1 gap-4 p-0 auto-rows-fr md:grid-cols-2 lg:grid-cols-3">
-            {LANDING_PAGES.map((p) => (
-              <li key={p.slug} className="min-w-0">
-                <GuideCardLink href={`/${p.slug}`} title={p.h1} description={p.description} />
-              </li>
-            ))}
-          </ul>
+      <section className="container-site py-14 sm:py-16">
+        <h1 className="font-display text-4xl font-semibold text-slate-950">Cardiology locum guides</h1>
+        <p className="mt-6 max-w-2xl text-lg text-slate-600">
+          Educational resources for cardiologists—licensing, taxes, career paths, and locum decision-making.
+        </p>
+        <div className="mt-12 space-y-12">
+          {GROUPS.map((g) => {
+            const pages = getCardiologySeoPagesByCategory(g.category);
+            return (
+              <div key={g.category}>
+                <h2 className="font-display text-xl font-semibold text-slate-900">{g.label}</h2>
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {pages.map((p) => (
+                    <li key={p.slug}>
+                      <Link href={p.path} className="text-sm font-medium text-brand-700 hover:underline">
+                        {p.h1}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </section>
     </main>

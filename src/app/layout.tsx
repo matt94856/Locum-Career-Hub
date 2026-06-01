@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} | Modern physician careers`,
+    default: `${SITE.name} | Cardiologist locum recruiting`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.tagline,
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} | Modern physician careers`,
+    title: `${SITE.name} | Cardiologist locum recruiting`,
     description: SITE.tagline,
     images: openGraphImages(),
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | Modern physician careers`,
+    title: `${SITE.name} | Cardiologist locum recruiting`,
     description: SITE.tagline,
     images: twitterImageUrls(),
   },

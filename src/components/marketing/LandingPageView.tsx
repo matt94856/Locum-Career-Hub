@@ -34,9 +34,9 @@ export function LandingPageView({ page }: { page: LandingPage }) {
     path,
     keywords: page.keywords,
     aboutTopics: [
-      "Physician careers",
-      "Physician burnout",
-      "Flexible physician work",
+      "Cardiologist careers",
+      "Cardiologist burnout",
+      "Cardiology locum tenens",
       "Locum tenens",
     ],
   });
@@ -52,7 +52,7 @@ export function LandingPageView({ page }: { page: LandingPage }) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_circle_at_20%_0%,rgba(37,99,235,0.16),transparent_55%)]" />
         <div className="container-site relative">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Physician-first guidance</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist-only recruiting</p>
             <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 [overflow-wrap:anywhere] sm:text-5xl">
               {page.h1}
             </h1>

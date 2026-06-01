@@ -13,7 +13,7 @@ import {
 } from "@/lib/specialty-seo";
 import { FEATURED_STATES } from "@/lib/states";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
-import { SPECIALTIES } from "@/lib/specialties";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { getSpecialtyProfile } from "@/lib/seo/specialty-profiles";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { CTA } from "@/lib/site";
@@ -21,16 +21,16 @@ import { CTA } from "@/lib/site";
 const SPECIALTY_FAQ = (name: string) =>
   [
     {
-      q: `What does flexible or locum-style work look like in ${name}?`,
-      a: `Assignments vary by site, but the goal is the same: documented expectations for volume, backup, call, and documentation before you commit. We help you compare options that match your stamina and licensing footprint.`,
+      q: `What does locum work look like for ${name}?`,
+      a: `Assignments vary by site, but cath lab, consult, clinic, and call rules should be documented before you commit. We help cardiologists compare blocks that match subspecialty scope and licensing.`,
     },
     {
       q: "Do I need to know the term ‘locum tenens’ to inquire?",
-      a: "No. Many physicians start with burnout, flexibility, or income questions. Contract block coverage is one tool we can explain in plain language.",
+      a: "No. Many cardiologists start with call burden, STEMI coverage, or flexibility questions. We explain contract blocks in plain language.",
     },
     {
-      q: "What speeds up matching?",
-      a: "Share specialty, states you will consider, availability windows, travel appetite, and hard boundaries (nights, census, documentation load).",
+      q: "What speeds up cardiologist matching?",
+      a: "Share subspecialty, states you will consider, availability, travel appetite, and hard boundaries (STEMI call, consult census, clinic panel).",
     },
   ] as const;
 
@@ -52,29 +52,28 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
 
   const path = `/specialties/${slug}`;
   const faqs = SPECIALTY_FAQ(name);
-  const directAnswer = `${name} locum and flexible contract roles are short- or medium-term clinical assignments with explicit scheduling windows—often used when physicians want clearer boundaries, different intensity, or a calmer bridge while deciding what comes next.`;
+  const directAnswer = `${name} locum roles are contract-based cardiology assignments with explicit call, cath lab, consult, or clinic scope—often used when cardiologists want clearer boundaries or a bridge away from unsustainable employed schedules.`;
 
   const medical = medicalWebPageJsonLd({
-    name: `${name} locum & flexible physician work | Locum Career Hub`,
-    description: `Explore flexible and locum-style ${name} opportunities with realistic scheduling and recruiter advocacy.`,
+    name: `${name} locum jobs | Cardiologist recruiting | Locum Career Hub`,
+    description: `Explore ${name} locum opportunities with documented call, privileging context, and cardiologist-only recruiter advocacy.`,
     path,
     keywords: [
       `${name} locum`,
-      "locum tenens jobs",
-      "locum physician jobs",
-      "physician recruiter",
-      "flexible physician careers",
+      "cardiologist locum tenens",
+      "cardiology locum jobs",
+      "cardiologist recruiter",
     ],
-    aboutTopics: [name, "Locum tenens", "Physician careers", "Flexible physician work"],
+    aboutTopics: [name, "Locum tenens", "Cardiologist careers", "Cardiology"],
   });
 
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
-    { name: "Specialties", path: "/specialties" },
+    { name: "Cardiology subspecialties", path: "/specialties" },
     { name, path },
   ]);
 
-  const other = SPECIALTIES.filter((s) => specialtyToSlug(s) !== slug).slice(0, 6);
+  const other = CARDIOLOGY_SUBSPECIALTIES.filter((s) => specialtyToSlug(s) !== slug);
   const profile = getSpecialtyProfile(slug);
   const profileSections = profile
     ? [

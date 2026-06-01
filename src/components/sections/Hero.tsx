@@ -24,7 +24,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm backdrop-blur"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Modern physician careers · Locum tenens jobs · Physician recruiting
+              Cardiologist-only locum recruiting · MD/DO
             </motion.p>
 
             <motion.h1
@@ -33,7 +33,7 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.04 }}
               className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
             >
-              More flexibility. Less burnout.
+              Cardiology locums with clearer boundaries.
             </motion.h1>
 
             <motion.p
@@ -42,9 +42,10 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.1 }}
               className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl"
             >
-              If the hospital week is stealing your energy, you are not failing medicine—your environment may be failing
-              you. Locum Career Hub connects physicians with locum tenens jobs and flexible staffing options when they fit:
-              clearer schedules, stronger advocacy, and recruiting that explains tradeoffs instead of pushing quotas.
+              When cath lab call, consult census, or clinic load stop fitting your life, that is an environment
+              problem—not a personal failure. Locum Career Hub recruits{" "}
+              <strong className="font-semibold text-slate-800">cardiologists only</strong>, connecting you with hospitals
+              and groups that document STEMI rules, privileging, and malpractice before you commit.
             </motion.p>
 
             <motion.div
@@ -71,10 +72,10 @@ export function Hero() {
               transition={{ duration: 0.35, delay: 0.2 }}
               className="mt-10 grid gap-3 sm:grid-cols-3"
             >
-                {[
-                { k: "Clarity", v: "Expectations in writing" },
+              {[
+                { k: "Clarity", v: "Call & cath lab in writing" },
                 { k: "Calm pace", v: "No bait-and-switch" },
-                { k: "Advocacy", v: "Recruiters who listen first" },
+                { k: "Advocacy", v: "Cardiology recruiters" },
               ].map((x) => (
                 <div
                   key={x.k}
@@ -97,17 +98,17 @@ export function Hero() {
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-200/40 blur-3xl" />
               <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky-200/40 blur-3xl" />
 
-              <p className="text-sm font-semibold text-slate-900">Built for real clinical life</p>
+              <p className="text-sm font-semibold text-slate-900">Built for cardiology practice</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                From early attending uncertainty to semi-retirement glide paths, we help you protect autonomy—and
-                reduce the background hum of stress.
+                From new attendings to semi-retired interventionalists, we help you protect autonomy—and reduce the
+                background hum of unsustainable call.
               </p>
 
               <ul className="mt-6 space-y-3 text-sm text-slate-700">
                 {[
-                  "Name what is breaking before we talk labels",
-                  "Explore flexible blocks only when they match your life",
-                  "Keep malpractice, travel, and rates transparent from the start",
+                  "Document STEMI, consult census, and clinic panel before you fly",
+                  "Explore locum blocks only when they match your subspecialty",
+                  "Keep malpractice, travel stipends, and rates transparent from the start",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
                     <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-full bg-brand-50 text-brand-700">
@@ -129,7 +130,8 @@ export function Hero() {
               <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">Low-pressure next step</p>
                 <p className="mt-2 text-sm text-slate-200">
-                  Share your specialty and what “better” would feel like—we respond with realistic options, not spam.
+                  Share your subspecialty and what “better” would feel like—we respond with realistic cardiology locum
+                  options, not spam.
                 </p>
                 <Link
                   href="#lead-form"

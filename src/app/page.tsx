@@ -34,8 +34,9 @@ export default function HomePage() {
       <section id="get-matched" className="scroll-mt-24 border-b border-slate-100 bg-slate-50/40 py-16 sm:py-20">
         <div className="container-site">
           <LeadCaptureForm
-            title="Request locum matches"
-            subtitle="Most visitors start here—share specialty, states, and timeline. We respond with realistic options, not a generic blast."
+            title="Request cardiologist locum matches"
+            subtitle="Cardiologists only—share subspecialty, states, and timeline. We respond with realistic options, not a generic blast."
+            defaultSpecialty="General Cardiology"
           />
         </div>
       </section>

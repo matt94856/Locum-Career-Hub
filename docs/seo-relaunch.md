@@ -1,0 +1,40 @@
+# Cardiologist-only SEO relaunch
+
+## Positioning
+
+Locum Career Hub recruits **cardiologists (MD/DO) only** for locum tenens assignments. We are a physician recruiting service connecting cardiologists with hospitals and groups—we are not the hiring employer.
+
+## Sitemap
+
+- Production URL: `https://www.locumcareerhub.com/sitemap.xml`
+- Includes: static pages, landings, cardiology subspecialty hubs, legacy `/locum-tenens-jobs` hubs, state × subspecialty pages, **new SEO structure** (`/cardiology-locum-jobs`, `/states`, `/cities`, `/salary`, `/guides`), legacy `/cardiology-locums`, glossary, and blog.
+
+## New SEO URL structure
+
+| Hub | Example |
+|-----|---------|
+| Money pages | `/cardiology-locum-jobs/interventional-cardiology-locum-jobs` |
+| States (51) | `/states/florida-cardiology-locum-jobs` |
+| Cities (~180) | `/cities/miami-cardiology-locum-jobs` |
+| Salary | `/salary/locum-cardiologist-salary` |
+| Guides | `/guides/how-to-become-a-locum-cardiologist` |
+
+Root shortcuts (301): `/interventional-cardiology-locum-jobs` → `/cardiology-locum-jobs/...`
+
+## Lead form & Supabase
+
+- Table: `physician_leads` (unchanged schema)
+- API: `POST /api/lead` validates cardiology subspecialties only
+- Env required in production: `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) + `SUPABASE_SERVICE_ROLE_KEY`
+
+## Google Search Console steps
+
+1. Deploy the build to production (Netlify).
+2. Open **URL inspection** on the homepage and request indexing.
+3. Go to **Sitemaps** → submit `sitemap.xml` (or full URL above).
+4. Monitor **Pages** for redirect coverage on removed multi-specialty URLs (`/specialties/hospitalist-medicine`, etc.).
+5. Review **Queries** for cardiologist-intent terms; tune titles in `src/lib/serp-ctr.ts` as data accrues.
+
+## Redirects
+
+Removed specialty hubs and state×specialty URLs 301 to `general-cardiology` equivalents. Removed landings (`hospitalist-locum-jobs`, `emergency-medicine-locum-jobs`, `crna-locum-jobs`) redirect to cardiology hubs.

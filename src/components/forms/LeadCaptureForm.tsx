@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { SPECIALTIES } from "@/lib/specialties";
+import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
@@ -55,9 +55,9 @@ function FormSection({
 
 export function LeadCaptureForm({
   id = "lead-form",
-  title = "Physician inquiry",
-  subtitle = "Share a few details and we will follow up with realistic opportunities—not a generic blast.",
-  defaultSpecialty,
+  title = "Cardiologist inquiry",
+  subtitle = "Share a few details and we will follow up with realistic cardiology locum options—not a generic blast.",
+  defaultSpecialty = "General Cardiology",
 }: {
   id?: string;
   title?: string;
@@ -72,7 +72,7 @@ export function LeadCaptureForm({
   const [captchaLoadError, setCaptchaLoadError] = useState(false);
   const recaptchaRef = useRef<RecaptchaFieldHandle>(null);
 
-  const specialtyOptions = useMemo(() => [...SPECIALTIES], []);
+  const specialtyOptions = useMemo(() => [...CARDIOLOGY_SUBSPECIALTIES], []);
 
   const filteredStates = useMemo(() => {
     const q = stateQuery.trim().toLowerCase();
@@ -182,7 +182,7 @@ export function LeadCaptureForm({
   return (
     <div id={id} className="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl sm:p-10">
       <div className="max-w-2xl border-b border-slate-100 pb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Physician inquiry</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist inquiry (MD/DO)</p>
         <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>
         <p className="mt-4 text-xs text-slate-500">
@@ -435,8 +435,9 @@ export function LeadCaptureForm({
 
         {status === "success" ? (
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
-            Thank you—your inquiry is in. A recruiter will reach out shortly. If you requested the guide, check your inbox
-            (and spam) within a few minutes.
+            Thank you—your inquiry was received. A cardiology recruiter will review your subspecialty and preferred states
+            and contact you if realistic locum opportunities exist—typically within one business day. If nothing matches right
+            now, we will tell you directly (no mass email blast). If you requested the guide, check your inbox and spam folder.
           </div>
         ) : null}
 
