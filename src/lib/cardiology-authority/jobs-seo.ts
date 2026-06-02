@@ -65,6 +65,22 @@ function stateDemandNote(stateName: string, stateSlug: string): string {
   return `${stateName} cardiology programs use locum cardiologists for leave, volume spikes, and recruitment gaps—compare travel stipends and call documentation before committing.`;
 }
 
+function flagshipStateParagraph(stateName: string, stateSlug: string): string | null {
+  const notes: Record<string, string> = {
+    florida:
+      "Florida mixes year-round inpatient volume with seasonal population swings—interventional and general cardiologists often see cath lab call tied to STEMI networks from Tampa through South Florida, while snowbird season can tighten clinic panels on both coasts.",
+    texas:
+      "Texas spans large independent cardiology groups and system-employed models—Houston, Dallas, Austin, and San Antonio each credential differently, so travel stipends and malpractice tail language should be compared before multi-site blocks.",
+    california:
+      "California licensing and privileging timelines are among the longest—plan IMLC or direct licensure early, and document whether your locum block includes tele-EP reads, outpatient stress testing, or full cath lab activation.",
+    "new-york":
+      "New York metro programs frequently need locum coverage for consult-heavy services and cath lab backup—document inpatient census caps, weekend echo coverage, and who activates the STEMI team before you accept a block.",
+    "north-carolina":
+      "North Carolina’s growing health systems recruit locum cardiologists for heart failure clinics, structural programs, and community STEMI partnerships—Research Triangle and Charlotte markets differ on travel expectations and stipend norms.",
+  };
+  return notes[stateSlug] ?? null;
+}
+
 export function buildJobStatePage(stateSlug: string): JobSeoPageContent | undefined {
   const stateName = getStateNameBySlug(stateSlug);
   if (!stateName) return undefined;
@@ -81,7 +97,8 @@ export function buildJobStatePage(stateSlug: string): JobSeoPageContent | undefi
         h2: `Why hospitals in ${stateName} hire locum cardiologists`,
         paragraphs: [
           stateDemandNote(stateName, stateSlug),
-          "Programs reference ACC and ABIM expectations for board-certified cardiologists. Locum blocks fill leave, census growth, and permanent search gaps without implying guaranteed compensation on this page.",
+          flagshipStateParagraph(stateName, stateSlug) ??
+            "Programs reference ACC and ABIM expectations for board-certified cardiologists. Locum blocks fill leave, census growth, and permanent search gaps without implying guaranteed compensation on this page.",
         ],
       },
       {
@@ -135,7 +152,8 @@ export function buildJobStateSpecialtyPage(
         h2: `${spec.name} demand in ${stateName}`,
         paragraphs: [
           stateDemandNote(stateName, stateSlug),
-          `${spec.name} locums in ${stateName} should spell out cath lab, consult census, clinic panel, imaging SLA, or EP lab scope before day one—see our national ${spec.name.toLowerCase()} hub for subspecialty-specific checklists.`,
+          flagshipStateParagraph(stateName, stateSlug) ??
+            `${spec.name} locums in ${stateName} should spell out cath lab, consult census, clinic panel, imaging SLA, or EP lab scope before day one—see our national ${spec.name.toLowerCase()} hub for subspecialty-specific checklists.`,
         ],
       },
       {

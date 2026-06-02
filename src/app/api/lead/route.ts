@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
+import { notifyRecruiterOfLead, sendLeadAcknowledgment } from "@/lib/lead-email";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
 
@@ -20,6 +21,8 @@ type LeadBody = {
   yearsExperience?: unknown;
   availability?: unknown;
   travel?: unknown;
+  clinicalNotes?: unknown;
+  formMode?: unknown;
   smsOptIn?: unknown;
   leadMagnet?: unknown;
   pagePath?: unknown;
@@ -31,15 +34,15 @@ function isNonEmptyString(v: unknown): v is string {
 }
 
 function normalizeLead(body: LeadBody) {
+  const formMode: "quick" | "full" = body.formMode === "quick" ? "quick" : "full";
+
   if (
     !isNonEmptyString(body.firstName) ||
     !isNonEmptyString(body.lastName) ||
     !isNonEmptyString(body.email) ||
     !isNonEmptyString(body.phone) ||
     !isNonEmptyString(body.specialty) ||
-    !isNonEmptyString(body.yearsExperience) ||
-    !isNonEmptyString(body.availability) ||
-    !isNonEmptyString(body.travel)
+    !isNonEmptyString(body.availability)
   ) {
     return { ok: false as const, error: "Missing required fields." };
   }
@@ -60,12 +63,34 @@ function normalizeLead(body: LeadBody) {
     };
   }
 
+  const yearsExperience = isNonEmptyString(body.yearsExperience)
+    ? body.yearsExperience.trim()
+    : formMode === "quick"
+      ? "Exploring / no firm date"
+      : "";
+
+  const travel = isNonEmptyString(body.travel) ? body.travel.trim() : formMode === "quick" ? "maybe" : "";
+
+  if (formMode === "full" && (!yearsExperience || !travel)) {
+    return { ok: false as const, error: "Missing experience or travel preference." };
+  }
+
+  const clinicalNotes =
+    typeof body.clinicalNotes === "string" && body.clinicalNotes.trim().length > 0
+      ? body.clinicalNotes.trim().slice(0, 2000)
+      : null;
+
   const smsOptIn = body.smsOptIn === true;
   const leadMagnet = body.leadMagnet === true;
   const pagePath =
     typeof body.pagePath === "string" && body.pagePath.trim().length > 0
       ? body.pagePath.trim().slice(0, 500)
       : null;
+
+  const metadata: Record<string, string> = {};
+  if (pagePath) metadata.page_path = pagePath;
+  if (clinicalNotes) metadata.clinical_notes = clinicalNotes;
+  metadata.form_mode = formMode;
 
   return {
     ok: true as const,
@@ -76,13 +101,29 @@ function normalizeLead(body: LeadBody) {
       phone: body.phone.trim(),
       specialty,
       preferred_states: preferredStates,
-      years_experience: body.yearsExperience.trim(),
+      years_experience: yearsExperience,
       availability: body.availability.trim(),
-      travel: body.travel.trim(),
+      travel,
       sms_opt_in: smsOptIn,
       lead_magnet: leadMagnet,
       source: "lead_form",
-      metadata: pagePath ? { page_path: pagePath } : {},
+      metadata,
+    },
+    emailPayload: {
+      firstName: body.firstName.trim(),
+      lastName: body.lastName.trim(),
+      email: body.email.trim().toLowerCase(),
+      phone: body.phone.trim(),
+      specialty,
+      preferredStates,
+      yearsExperience,
+      availability: body.availability.trim(),
+      travel,
+      clinicalNotes,
+      formMode,
+      smsOptIn,
+      leadMagnet,
+      pagePath,
     },
   };
 }
@@ -93,8 +134,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
+  const formMode = json.formMode === "quick" ? "quick" : "full";
   const secret = process.env.RECAPTCHA_SECRET_KEY;
-  if (secret) {
+
+  if (secret && formMode === "full") {
     const token = typeof json.recaptchaToken === "string" ? json.recaptchaToken : "";
     const forwarded = req.headers.get("x-forwarded-for");
     const remoteip =
@@ -136,6 +179,11 @@ export async function POST(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: "Could not save your inquiry. Please try again." }, { status: 500 });
   }
+
+  void Promise.all([
+    notifyRecruiterOfLead(normalized.emailPayload),
+    sendLeadAcknowledgment(normalized.emailPayload),
+  ]).catch((e) => console.error("[lead] email side effects failed", e));
 
   return NextResponse.json({ ok: true });
 }

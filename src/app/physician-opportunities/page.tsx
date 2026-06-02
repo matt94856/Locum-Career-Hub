@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { OPPORTUNITIES_FAQ } from "@/lib/opportunities-seo";
@@ -148,11 +149,14 @@ export default function OpportunitiesPage() {
       </section>
 
       <section className="border-t border-slate-100 bg-slate-50/40 py-12 sm:py-16">
+        <div className="container-site mb-8 flex justify-center">
+          <LeadFormAltActions source="opportunities" />
+        </div>
         <LeadFormStandaloneSection withTrustPanel={false}>
           <LeadCaptureForm
             id="lead-form"
             title="Request matches"
-            subtitle="Complete the form for the fastest, most accurate follow-up from our recruiting team."
+            subtitle="Two-step form: essentials first, then experience and preferences. Or quick-submit from step 1—we will confirm details on our first call."
           />
         </LeadFormStandaloneSection>
       </section>

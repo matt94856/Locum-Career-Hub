@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { NewsletterCapture } from "@/components/forms/NewsletterCapture";
 import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { CardiologyCtaBand } from "@/components/seo/CardiologyCtaBand";
@@ -97,12 +98,13 @@ export function CardiologyAuthorityPageView({ article }: { article: CardiologyAr
             />
             <EeatArticleFooter eeat={article.eeat} />
           </div>
-          <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
+          <aside className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
               title="Talk with a cardiology recruiter"
               subtitle="Cardiologist-only matching. Response within one business day."
               layout="sidebar"
             />
+            <NewsletterCapture />
           </aside>
         </div>
       </section>

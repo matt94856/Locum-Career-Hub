@@ -16,6 +16,11 @@ const TOOLS = [
     title: "Locum vs employed calculator (W-2 vs 1099)",
     body: "Compare pay structures before you sign—educational, not tax advice.",
   },
+  {
+    href: "/tools/credentialing-timeline",
+    title: "Credentialing timeline estimator",
+    body: "Directional license and privileging weeks by state before your first cardiology locum block.",
+  },
 ] as const;
 
 export default function ToolsIndexPage() {

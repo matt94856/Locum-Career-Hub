@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
+import { NewsletterCapture } from "@/components/forms/NewsletterCapture";
 import { getAllArticles, RESOURCES_HUB_PATH } from "@/lib/cardiology-authority/articles";
 import { CARDIOLOGY_HUB_PATH } from "@/lib/seo/cardiology-locum-jobs-config";
 import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -55,7 +56,8 @@ export default function ResourcesHubPage() {
         </div>
       </section>
       <section className="py-14 sm:py-16">
-        <div className="container-site max-w-3xl">
+        <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
+          <div className="min-w-0 lg:col-span-8">
           <ul className="grid gap-4 sm:grid-cols-2">
             {articles.map((a) => (
               <li key={a.slug} className="surface-card p-5">
@@ -66,6 +68,10 @@ export default function ResourcesHubPage() {
               </li>
             ))}
           </ul>
+          </div>
+          <div className="min-w-0 lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+            <NewsletterCapture />
+          </div>
         </div>
       </section>
     </main>

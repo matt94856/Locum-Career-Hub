@@ -43,7 +43,7 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
         <Link href="/physician-opportunities#lead-form" className="font-semibold text-brand-700 hover:underline">
           Submit the cardiologist inquiry form
         </Link>
-        —most physicians complete it in under two minutes.
+        —most cardiologists complete step 1 in under a minute.
       </p>
     </aside>
   );

@@ -12,6 +12,7 @@ import {
   jobStateSpecialtyPath,
   type JobSpecialtyDef,
 } from "@/lib/cardiology-authority/jobs-seo";
+import { leadPrefillFromJobPage } from "@/lib/lead-form-context";
 import type { JobSeoPageContent } from "@/lib/cardiology-authority/types";
 import { CARDIOLOGY_HUB_PATH, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export function CardiologyJobsSeoView({ page, specialty }: Props) {
+  const prefill = leadPrefillFromJobPage(page.stateSlug, specialty?.slug);
   const path = specialty
     ? jobStateSpecialtyPath(page.stateSlug, specialty.slug)
     : jobStatePath(page.stateSlug);
@@ -122,7 +124,8 @@ export function CardiologyJobsSeoView({ page, specialty }: Props) {
             <LeadCaptureForm
               title={`${page.stateName} cardiology matches`}
               subtitle="Share subspecialty and availability—cardiologists only."
-              defaultSpecialty={specialty?.name}
+              defaultSpecialty={prefill.defaultSpecialty}
+              defaultPreferredStates={prefill.defaultPreferredStates}
               layout="sidebar"
             />
           </aside>

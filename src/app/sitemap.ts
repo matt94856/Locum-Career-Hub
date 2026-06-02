@@ -39,6 +39,7 @@ const staticRoutes = [
   "/tools",
   "/tools/locum-salary-estimator",
   "/tools/w2-vs-1099-physician",
+  "/tools/credentialing-timeline",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

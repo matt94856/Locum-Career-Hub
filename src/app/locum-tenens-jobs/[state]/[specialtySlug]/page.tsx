@@ -167,6 +167,8 @@ export default async function SpecialtyStateLocumPage({
             <LeadCaptureForm
               title={`Request ${specialtyName} in ${statePage.stateName}`}
               subtitle="Share dates, license footprint, and boundaries. We respond with realistic options—not spam."
+              defaultSpecialty={specialtyName}
+              defaultPreferredStates={[statePage.stateName]}
               layout="sidebar"
             />
             <Tier1QuickLinks />

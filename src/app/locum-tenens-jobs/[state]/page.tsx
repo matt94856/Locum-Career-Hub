@@ -232,6 +232,7 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
               title={`Request ${page.stateName} cardiology matches`}
               subtitle={`Select ${page.stateName} (and any other states) plus your subspecialty. A cardiology recruiter will contact you if realistic locum opportunities exist in those areas—usually within one business day. If nothing fits, we will tell you plainly.`}
               defaultSpecialty="General Cardiology"
+              defaultPreferredStates={[page.stateName]}
               layout="sidebar"
             />
             <Tier1QuickLinks />

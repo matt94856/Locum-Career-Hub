@@ -8,7 +8,9 @@ import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema"
 import { buildSerpMetadata, landingSerpOverride } from "@/lib/serp-ctr";
 import { stripBrandFromTitle } from "@/lib/seo-title";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { LocumVsEmployedComparisonTable } from "@/components/marketing/LocumVsEmployedComparisonTable";
 import { Button } from "@/components/ui/Button";
+import { leadPrefillFromLandingSlug } from "@/lib/lead-form-context";
 
 export function buildLandingMetadata(page: LandingPage): Metadata {
   const override = landingSerpOverride(page.slug);
@@ -23,6 +25,9 @@ export function buildLandingMetadata(page: LandingPage): Metadata {
 }
 
 export function LandingPageView({ page }: { page: LandingPage }) {
+  const prefill = leadPrefillFromLandingSlug(page.slug);
+  const showPayComparison =
+    page.slug === "locum-cardiologist-salary" || page.slug.includes("salary") || page.slug.includes("w2");
   const path = `/${page.slug}`;
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
@@ -144,6 +149,17 @@ export function LandingPageView({ page }: { page: LandingPage }) {
               </div>
             ) : null}
 
+            {showPayComparison ? (
+              <div>
+                <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">
+                  Locum vs employed cardiology (at a glance)
+                </h2>
+                <div className="mt-6">
+                  <LocumVsEmployedComparisonTable />
+                </div>
+              </div>
+            ) : null}
+
             <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
               <h3 className="text-sm font-semibold text-slate-900">Topics covered on this page</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -158,6 +174,7 @@ export function LandingPageView({ page }: { page: LandingPage }) {
             <LeadCaptureForm
               title="Request matches for this intent"
               subtitle="Tell us your specialty and availability. We will respond with realistic options aligned to this page’s focus."
+              defaultSpecialty={prefill.defaultSpecialty}
               layout="sidebar"
             />
           </div>

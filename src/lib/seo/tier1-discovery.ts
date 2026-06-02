@@ -67,6 +67,13 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     ctaLabel: "Compare pay →",
   },
   {
+    href: "/tools/credentialing-timeline",
+    title: "Credentialing timeline by state",
+    shortTitle: "Credentialing timeline",
+    description: "Estimate license and privileging weeks before your first cardiology locum block.",
+    ctaLabel: "Estimate timeline →",
+  },
+  {
     href: "/cardiologist-travel-locums",
     title: "Travel cardiologist locum jobs",
     shortTitle: "Travel cardiology locums",
