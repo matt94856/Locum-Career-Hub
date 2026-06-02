@@ -12,14 +12,13 @@ export type Tier1Link = {
   ctaLabel?: string;
   /** Short label for footer / compact lists */
   shortTitle?: string;
-  badge?: string;
 };
 
 export type Tier1Group = {
   id: string;
   eyebrow: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   links: Tier1Link[];
 };
 
@@ -31,7 +30,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Cardiology locum jobs",
     description: "Browse interventional, EP, heart failure, imaging, and general cardiology locum subspecialties.",
     ctaLabel: "Browse subspecialties →",
-    badge: "Primary hub",
   },
   {
     href: "/what-is-a-locum-cardiologist",
@@ -39,7 +37,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "What is a locum cardiologist?",
     description: "Answer-first definition, duties, and how cardiologists start locum tenens work.",
     ctaLabel: "Read definition →",
-    badge: "Top query",
   },
   {
     href: "/locum-cardiologist-salary",
@@ -47,7 +44,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Locum cardiologist salary",
     description: "Directional pay ranges by subspecialty and call—not guaranteed offers.",
     ctaLabel: "Compare pay drivers →",
-    badge: "Top query",
   },
   {
     href: "/physician-opportunities",
@@ -55,7 +51,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Get matched (lead form)",
     description: "Share subspecialty, states, and dates—cardiology recruiter follow-up, not a job-board blast.",
     ctaLabel: "Start matching →",
-    badge: "Best for leads",
   },
   {
     href: "/tools/locum-salary-estimator",
@@ -63,7 +58,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Locum salary calculator",
     description: "Model weekly gross ranges for cardiologist locums—educational, not a guaranteed offer.",
     ctaLabel: "Run calculator →",
-    badge: "Top search query",
   },
   {
     href: "/tools/w2-vs-1099-physician",
@@ -71,7 +65,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "W-2 vs 1099 calculator",
     description: "Compare structures before you sign—educational, not tax advice.",
     ctaLabel: "Compare pay →",
-    badge: "Top search query",
   },
   {
     href: "/cardiologist-travel-locums",
@@ -79,7 +72,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Travel cardiology locums",
     description: "Stipends, cath lab call, and STEMI rules documented before you commit.",
     ctaLabel: "Explore travel roles →",
-    badge: "Trending",
   },
   {
     href: "/leaving-employed-cardiology",
@@ -87,7 +79,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Leaving employed cardiology",
     description: "Structured paths without quitting medicine—locums as a bridge when it fits.",
     ctaLabel: "Read guide →",
-    badge: "Career transition",
   },
   {
     href: "/physician-burnout-alternatives",
@@ -95,7 +86,6 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     shortTitle: "Burnout alternatives",
     description: "Locums, hybrid blocks, and defined call when the week no longer fits.",
     ctaLabel: "See options →",
-    badge: "Problem-aware",
   },
   {
     href: "/interventional-cardiologist-locum-jobs",
@@ -120,7 +110,6 @@ export const TIER1_STATE_LINKS: Tier1Link[] = [
     shortTitle: "New York",
     description: "Metro and upstate cardiology demand with licensing context.",
     ctaLabel: "NY guide →",
-    badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/tennessee",
@@ -128,7 +117,6 @@ export const TIER1_STATE_LINKS: Tier1Link[] = [
     shortTitle: "Tennessee",
     description: "Nashville, Memphis, and community cath lab / consult coverage.",
     ctaLabel: "TN guide →",
-    badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/washington",
@@ -136,7 +124,6 @@ export const TIER1_STATE_LINKS: Tier1Link[] = [
     shortTitle: "Washington",
     description: "Seattle, Spokane, and Pacific Northwest cardiology blocks.",
     ctaLabel: "WA guide →",
-    badge: "High impressions",
   },
   {
     href: "/locum-tenens-jobs/florida",
@@ -188,7 +175,6 @@ export const TIER1_GLOSSARY_LINKS: Tier1Link[] = [
     shortTitle: "Credentialing",
     description: "Timelines, owners, and what speeds up hospital start dates.",
     ctaLabel: "Credentialing guide →",
-    badge: "High impressions",
   },
   {
     href: "/glossary/locum-tenens-pay",
@@ -211,8 +197,6 @@ export const TIER1_HUB_GROUPS: Tier1Group[] = [
     id: "priority",
     eyebrow: "Start here",
     title: "Pages cardiologists find in search",
-    subtitle:
-      "High-intent cardiology hubs and tools—we link to them prominently so users and crawlers find cardiologist-specific answers fast.",
     links: TIER1_PRIORITY_LINKS,
   },
   {
