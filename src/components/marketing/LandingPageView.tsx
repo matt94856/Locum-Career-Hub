@@ -158,6 +158,7 @@ export function LandingPageView({ page }: { page: LandingPage }) {
             <LeadCaptureForm
               title="Request matches for this intent"
               subtitle="Tell us your specialty and availability. We will respond with realistic options aligned to this page’s focus."
+              layout="sidebar"
             />
           </div>
         </div>

@@ -36,7 +36,7 @@ export const CTA = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: "/for-physicians", label: "For cardiologists" },
+  { href: "/#cardiologist-guides", label: "Cardiologist guides" },
   { href: "/physician-opportunities", label: "Opportunities" },
   { href: "/locum-jobs/cardiology", label: "Cardiology jobs" },
   { href: "/states", label: "By state" },

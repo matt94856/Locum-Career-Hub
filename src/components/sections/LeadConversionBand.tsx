@@ -36,8 +36,8 @@ export function LeadConversionBand({
           Locum salary calculator
         </Link>{" "}
         ·{" "}
-        <Link href="/for-physicians" className="font-semibold text-brand-700 hover:underline">
-          For cardiologists hub
+        <Link href="/#cardiologist-guides" className="font-semibold text-brand-700 hover:underline">
+          Cardiologist guides
         </Link>
       </p>
     </aside>

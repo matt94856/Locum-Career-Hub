@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
@@ -50,13 +51,13 @@ export default function ContactPage() {
       </section>
 
       <section className="py-14 sm:py-16">
-        <div className="container-site max-w-4xl">
+        <LeadFormStandaloneSection>
           <LeadCaptureForm
             id="lead-form"
             title="Physician inquiry"
             subtitle="Complete the form and we will route you to the right recruiting pod for your specialty and states."
           />
-        </div>
+        </LeadFormStandaloneSection>
       </section>
     </main>
   );

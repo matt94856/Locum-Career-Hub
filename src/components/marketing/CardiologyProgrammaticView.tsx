@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import type { CardiologyProgrammaticPage } from "@/lib/cardiology-programmatic";
@@ -125,13 +126,13 @@ export function CardiologyProgrammaticView({ page }: { page: CardiologyProgramma
       />
 
       <section className="py-14 sm:py-16">
-        <div className="container-site max-w-2xl">
+        <LeadFormStandaloneSection withTrustPanel={false}>
           <LeadCaptureForm
             title="Request cardiologist locum matches"
             subtitle="MD/DO cardiologists only. We follow up with documented options—not a generic blast."
             defaultSpecialty="General Cardiology"
           />
-        </div>
+        </LeadFormStandaloneSection>
       </section>
     </main>
   );

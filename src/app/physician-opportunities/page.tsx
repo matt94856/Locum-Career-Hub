@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { OPPORTUNITIES_FAQ } from "@/lib/opportunities-seo";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -135,8 +136,8 @@ export default function OpportunitiesPage() {
             full topic guides
           </Link>
           , the{" "}
-          <Link className="font-semibold text-brand-700 hover:underline" href="/for-physicians">
-            For physicians
+          <Link className="font-semibold text-brand-700 hover:underline" href="/#cardiologist-guides">
+            Cardiologist guides on the homepage
           </Link>{" "}
           hub, or{" "}
           <Link className="font-semibold text-brand-700 hover:underline" href="/blog">
@@ -146,16 +147,14 @@ export default function OpportunitiesPage() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16">
-        <div className="container-site flex justify-center">
-          <div className="w-full max-w-md">
-            <LeadCaptureForm
-              id="lead-form"
-              title="Request matches"
-              subtitle="Complete the form for the fastest, most accurate follow-up from our recruiting team."
-            />
-          </div>
-        </div>
+      <section className="border-t border-slate-100 bg-slate-50/40 py-12 sm:py-16">
+        <LeadFormStandaloneSection withTrustPanel={false}>
+          <LeadCaptureForm
+            id="lead-form"
+            title="Request matches"
+            subtitle="Complete the form for the fastest, most accurate follow-up from our recruiting team."
+          />
+        </LeadFormStandaloneSection>
       </section>
 
       <section className="border-t border-slate-100 bg-white pb-16 pt-4 sm:pb-20">

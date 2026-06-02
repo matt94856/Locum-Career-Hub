@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getCardiologyProgrammaticPageCount } from "@/lib/cardiology-programmatic";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
@@ -85,13 +86,13 @@ export default function CardiologyLocumsHubPage() {
       </section>
 
       <section className="border-t border-slate-100 bg-slate-50/50 py-14 sm:py-16">
-        <div className="container-site max-w-2xl">
+        <LeadFormStandaloneSection withTrustPanel={false}>
           <LeadCaptureForm
             title="Cardiologist inquiry"
             subtitle="We recruit cardiologists only. Share subspecialty, states, and availability."
             defaultSpecialty="General Cardiology"
           />
-        </div>
+        </LeadFormStandaloneSection>
       </section>
     </main>
   );

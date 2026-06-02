@@ -42,7 +42,7 @@ export function RecruiterCta() {
                   <li>Specialty board status and DEA needs</li>
                   <li>Travel preferences and dealbreakers</li>
                 </ul>
-                <Link href="#lead-form" className="mt-6 inline-flex text-sm font-semibold text-brand-100 hover:text-white">
+                <Link href="#get-matched" className="mt-6 inline-flex text-sm font-semibold text-brand-100 hover:text-white">
                   Prefer a form? Submit an inquiry →
                 </Link>
               </div>

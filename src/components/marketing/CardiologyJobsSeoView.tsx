@@ -123,6 +123,7 @@ export function CardiologyJobsSeoView({ page, specialty }: Props) {
               title={`${page.stateName} cardiology matches`}
               subtitle="Share subspecialty and availability—cardiologists only."
               defaultSpecialty={specialty?.name}
+              layout="sidebar"
             />
           </aside>
         </div>

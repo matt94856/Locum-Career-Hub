@@ -130,7 +130,7 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
             <Button href="/physician-opportunities#lead-form" className="justify-center">
               {CTA.explore}
             </Button>
-            <Button href="/for-physicians" variant="secondary" className="justify-center">
+            <Button href="/#cardiologist-guides" variant="secondary" className="justify-center">
               For physicians hub →
             </Button>
           </div>
@@ -255,6 +255,7 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
             <LeadCaptureForm
               title={`Request ${name} matches`}
               subtitle="Share availability, states, and boundaries. We will respond with realistic options—not spam."
+              layout="sidebar"
             />
           </aside>
         </div>

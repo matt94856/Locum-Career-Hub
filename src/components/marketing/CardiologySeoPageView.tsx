@@ -133,6 +133,7 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
                 title={page.geoLabel ? `Inquiry: ${page.geoLabel}` : "Cardiologist inquiry"}
                 subtitle={`Select ${page.geoLabel ? `${page.geoLabel} and ` : ""}any other states you would consider. A recruiter will follow up if realistic cardiology locum opportunities exist—not a mass email blast.`}
                 defaultSpecialty="General Cardiology"
+                layout="sidebar"
               />
               <LeadConversionBand
                 headline="Questions before you apply?"

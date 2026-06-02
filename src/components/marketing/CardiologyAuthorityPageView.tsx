@@ -101,6 +101,7 @@ export function CardiologyAuthorityPageView({ article }: { article: CardiologyAr
             <LeadCaptureForm
               title="Talk with a cardiology recruiter"
               subtitle="Cardiologist-only matching. Response within one business day."
+              layout="sidebar"
             />
           </aside>
         </div>

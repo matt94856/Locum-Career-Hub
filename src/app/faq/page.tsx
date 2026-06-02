@@ -47,6 +47,7 @@ export default function FaqPage() {
             <LeadCaptureForm
               title="Still have questions?"
               subtitle="Submit a complete inquiry and a recruiter will respond with specifics for your specialty, states, and timeline."
+              layout="sidebar"
             />
           </div>
         </div>

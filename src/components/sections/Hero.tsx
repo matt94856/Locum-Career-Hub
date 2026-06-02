@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { trackCtaClick } from "@/lib/analytics-events";
+import { HOME_H1 } from "@/lib/seo/cardiology-locum-jobs-config";
+import { HOME_LEAD_ANCHOR } from "@/lib/seo/tier1-discovery";
 import { CTA } from "@/lib/site";
 
 export function Hero() {
@@ -33,7 +35,7 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.04 }}
               className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
             >
-              Locum Tenens Physician Staffing Solutions
+              {HOME_H1}
             </motion.h1>
 
             <motion.p
@@ -42,10 +44,10 @@ export function Hero() {
               transition={{ duration: 0.32, delay: 0.1 }}
               className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl"
             >
-              When cath lab call, consult census, or clinic load stop fitting your life, that is an environment
-              problem—not a personal failure. Locum Career Hub recruits{" "}
-              <strong className="font-semibold text-slate-800">cardiologists only</strong>, connecting you with hospitals
-              and groups that document STEMI rules, privileging, and malpractice before you commit.
+              Practice cardiology on your terms—without staffing-agency noise. When cath lab call, consult census, or
+              clinic load stop fitting your life, locum tenens can offer defined blocks and documented STEMI rules. Locum
+              Career Hub recruits{" "}
+              <strong className="font-semibold text-slate-800">cardiologists only</strong>.
             </motion.p>
 
             <motion.div
@@ -55,11 +57,11 @@ export function Hero() {
               className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2"
             >
               <Button
-                href="/#lead-form"
+                href={HOME_LEAD_ANCHOR}
                 className="w-full justify-center"
-                onClick={() => trackCtaClick("hero_submit_inquiry", "/#lead-form")}
+                onClick={() => trackCtaClick("hero_submit_inquiry", HOME_LEAD_ANCHOR)}
               >
-                Submit inquiry
+                {CTA.explore}
               </Button>
               <CalendlyBookButton source="hero" variant="secondary" className="w-full justify-center">
                 {CTA.bookCall}
@@ -134,7 +136,7 @@ export function Hero() {
                   options, not spam.
                 </p>
                 <Link
-                  href="#lead-form"
+                  href={HOME_LEAD_ANCHOR}
                   className="mt-4 inline-flex text-sm font-semibold text-brand-200 hover:text-white"
                 >
                   Jump to the inquiry form →

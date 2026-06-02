@@ -33,7 +33,6 @@ const staticRoutes = [
   "/locations",
   "/blog",
   "/faq",
-  "/for-physicians",
   "/physicians-guide-to-locum-tenens",
   "/locum-tenens-jobs",
   "/glossary",

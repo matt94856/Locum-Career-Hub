@@ -238,6 +238,10 @@ export const TIER1_HUB_GROUPS: Tier1Group[] = [
   },
 ];
 
+export const LEAD_FORM_HREF = "/physician-opportunities#lead-form" as const;
+export const HOME_LEAD_ANCHOR = "#get-matched" as const;
+export const HOME_GUIDES_HREF = "/#cardiologist-guides" as const;
+
 /** Footer “Popular searches” — compact set for every page. */
 export const TIER1_FOOTER_LINKS: Tier1Link[] = [
   ...TIER1_PRIORITY_LINKS.slice(0, 4),
@@ -249,12 +253,9 @@ export const TIER1_FOOTER_LINKS: Tier1Link[] = [
     description: "",
   },
   {
-    href: "/for-physicians",
-    title: "For cardiologists hub",
-    shortTitle: "For cardiologists",
+    href: HOME_GUIDES_HREF,
+    title: "Cardiologist guides on the homepage",
+    shortTitle: "Cardiologist guides",
     description: "",
   },
 ];
-
-export const LEAD_FORM_HREF = "/physician-opportunities#lead-form" as const;
-export const HOME_LEAD_ANCHOR = "#get-matched" as const;

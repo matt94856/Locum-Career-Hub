@@ -236,6 +236,7 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               title="Talk with a cardiology recruiter"
               subtitle="Share subspecialty, states, and boundaries. Cardiologist-only recruiter follow-up."
               defaultSpecialty={specialty.name}
+              layout="sidebar"
             />
           </aside>
         </div>

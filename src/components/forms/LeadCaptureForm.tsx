@@ -58,11 +58,16 @@ export function LeadCaptureForm({
   title = "Cardiologist inquiry",
   subtitle = "Share a few details and we will follow up with realistic cardiology locum options—not a generic blast.",
   defaultSpecialty = "General Cardiology",
+  layout = "full",
+  className = "",
 }: {
   id?: string;
   title?: string;
   subtitle?: string;
   defaultSpecialty?: string;
+  /** `full` = standalone/wide sections; `sidebar` = narrow sticky aside on content pages */
+  layout?: "full" | "sidebar";
+  className?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -179,9 +184,14 @@ export function LeadCaptureForm({
     }
   }
 
+  const isSidebar = layout === "sidebar";
+
   return (
-    <div id={id} className="scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl sm:p-10">
-      <div className="max-w-2xl border-b border-slate-100 pb-6">
+    <div
+      id={id}
+      className={`scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl sm:p-8 lg:p-10 ${isSidebar ? "" : "w-full"} ${className}`.trim()}
+    >
+      <div className={`border-b border-slate-100 pb-6 ${isSidebar ? "max-w-2xl" : ""}`}>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist inquiry (MD/DO)</p>
         <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>
@@ -191,7 +201,7 @@ export function LeadCaptureForm({
         </p>
       </div>
 
-      <form className="mt-8 flex flex-col gap-10" onSubmit={onSubmit}>
+      <form className="mt-8 flex flex-col gap-8 lg:gap-10" onSubmit={onSubmit}>
         <FormSection
           title="Contact"
           description="We use this information to respond to your inquiry and route you to the right recruiting pod."
