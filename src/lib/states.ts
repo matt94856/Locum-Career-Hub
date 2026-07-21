@@ -1,11 +1,11 @@
 export const FEATURED_STATES = [
-  { name: "Florida", slug: "florida", code: "FL", note: "High demand, coastal assignments" },
-  { name: "Texas", slug: "texas", code: "TX", note: "Metro & community hospital coverage" },
-  { name: "California", slug: "california", code: "CA", note: "Academic & community placements" },
-  { name: "New York", slug: "new-york", code: "NY", note: "Metro density and strong inpatient demand" },
-  { name: "North Carolina", slug: "north-carolina", code: "NC", note: "Growing health systems" },
-  { name: "Arizona", slug: "arizona", code: "AZ", note: "Seasonal & year-round needs" },
-  { name: "Washington", slug: "washington", code: "WA", note: "Pacific Northwest flexibility" },
+  { name: "Florida", slug: "florida", code: "FL", note: "Coastal travel and facility-specific credentialing" },
+  { name: "Texas", slug: "texas", code: "TX", note: "Metro, regional, and multi-site planning" },
+  { name: "California", slug: "california", code: "CA", note: "Licensing lead times and travel economics" },
+  { name: "New York", slug: "new-york", code: "NY", note: "Metro and regional coverage planning" },
+  { name: "North Carolina", slug: "north-carolina", code: "NC", note: "Charlotte and Triangle travel preferences" },
+  { name: "Arizona", slug: "arizona", code: "AZ", note: "Calendar, housing, and travel planning" },
+  { name: "Washington", slug: "washington", code: "WA", note: "Pacific Northwest licensing and travel context" },
 ] as const;
 
 export const US_STATES = [

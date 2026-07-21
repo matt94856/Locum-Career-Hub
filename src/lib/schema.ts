@@ -42,7 +42,6 @@ export function organizationJsonLd() {
         availableLanguage: ["English"],
       },
     ],
-    sameAs: [],
   };
 }
 
@@ -53,11 +52,6 @@ export function websiteJsonLd() {
     name: SITE.name,
     url: SITE.url,
     description: SITE.tagline,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE.url}/physician-opportunities?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -277,7 +271,7 @@ export function webApplicationJsonLd(input: {
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     name: input.name,
     description: input.description,
     url: `${SITE.url}${input.path}`,

@@ -22,12 +22,43 @@ export function trackGenerateLead(source = "inquiry_form") {
   });
 }
 
-/** Calendly / booking link click (mark as Key event in GA4). */
-export function trackBookMeeting(source: string) {
-  trackEvent("book_meeting", {
+/** Calendly outbound click. A click is not a confirmed booking. */
+export function trackBookingClick(source: string) {
+  trackEvent("booking_link_click", {
     method: "calendly",
     source,
     page_path: window.location.pathname,
+  });
+}
+
+export function trackCalculatorEvent(
+  action: "start" | "step_complete" | "results_view" | "report_gate_view" | "lead_success" | "lead_error" | "compare_view" | "share",
+  params?: Record<string, string | number | boolean>,
+) {
+  trackEvent(`locums_calculator_${action}`, {
+    page_path: window.location.pathname,
+    ...params,
+  });
+}
+
+export function trackDecisionToolEvent(
+  toolId: string,
+  action:
+    | "start"
+    | "step_complete"
+    | "result"
+    | "share"
+    | "print"
+    | "report_gate"
+    | "lead_success"
+    | "lead_error"
+    | "related_tool_click",
+  params?: Record<string, string | number | boolean>,
+) {
+  trackEvent(`decision_tool_${action}`, {
+    tool_id: toolId,
+    page_path: window.location.pathname,
+    ...params,
   });
 }
 

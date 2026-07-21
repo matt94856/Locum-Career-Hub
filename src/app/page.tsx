@@ -6,7 +6,6 @@ import { Process } from "@/components/sections/Process";
 import { RecruiterCta } from "@/components/sections/RecruiterCta";
 import { Segments } from "@/components/sections/Segments";
 import { SpecialtiesSection } from "@/components/sections/SpecialtiesSection";
-import { StatsAnimated } from "@/components/sections/StatsAnimated";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
@@ -31,7 +30,7 @@ export default function HomePage() {
 
       <Hero />
 
-      <Tier1DiscoveryHub leadHref={HOME_LEAD_ANCHOR} />
+      <Tier1DiscoveryHub variant="compact" leadHref={HOME_LEAD_ANCHOR} />
 
       <HomeCardiologistGuides />
 
@@ -49,7 +48,6 @@ export default function HomePage() {
       <TrustBar />
       <Segments />
       <SpecialtiesSection />
-      <StatsAnimated />
       <Process />
       <FeaturedStates />
 

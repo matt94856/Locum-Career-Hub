@@ -1,17 +1,10 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
-import { trackCtaClick } from "@/lib/analytics-events";
 import { HOME_H1 } from "@/lib/seo/cardiology-locum-jobs-config";
 import { HOME_LEAD_ANCHOR } from "@/lib/seo/tier1-discovery";
-import { CTA } from "@/lib/site";
 
 export function Hero() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_circle_at_20%_-10%,rgba(37,99,235,0.18),transparent_55%),radial-gradient(700px_circle_at_90%_10%,rgba(14,165,233,0.12),transparent_55%)]" />
@@ -19,61 +12,30 @@ export function Hero() {
       <div className="container-site relative py-16 sm:py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <div className="min-w-0 lg:col-span-7">
-            <motion.p
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28 }}
-              className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm backdrop-blur"
-            >
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Cardiologist-only locum recruiting · MD/DO
-            </motion.p>
+              The cardiology locum tenens resource built for cardiologists
+            </p>
 
-            <motion.h1
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.32, delay: 0.04 }}
-              className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
-            >
+            <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
               {HOME_H1}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.32, delay: 0.1 }}
-              className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl"
-            >
-              Practice cardiology on your terms—without staffing-agency noise. When cath lab call, consult census, or
-              clinic load stop fitting your life, locum tenens can offer defined blocks and documented STEMI rules. Locum
-              Career Hub recruits{" "}
-              <strong className="font-semibold text-slate-800">cardiologists only</strong>.
-            </motion.p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
+              You spent years building your career. Your schedule should work for you. Explore carefully selected
+              cardiology locum opportunities around your specialty, availability, and lifestyle goals.
+            </p>
 
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.32, delay: 0.14 }}
-              className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2"
-            >
-              <Button
-                href={HOME_LEAD_ANCHOR}
-                className="w-full justify-center"
-                onClick={() => trackCtaClick("hero_submit_inquiry", HOME_LEAD_ANCHOR)}
-              >
-                {CTA.explore}
+            <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
+              <Button href="/cardiologist-locums-calculator" className="w-full justify-center">
+                Calculate earning potential
               </Button>
               <CalendlyBookButton source="hero" variant="secondary" className="w-full justify-center">
-                {CTA.bookCall}
+                Talk with a cardiology specialist
               </CalendlyBookButton>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.35, delay: 0.2 }}
-              className="mt-10 grid gap-3 sm:grid-cols-3"
-            >
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
               {[
                 { k: "Clarity", v: "Call & cath lab in writing" },
                 { k: "Calm pace", v: "No bait-and-switch" },
@@ -87,16 +49,11 @@ export function Hero() {
                   <p className="mt-2 text-sm font-semibold text-slate-900">{x.v}</p>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           <div className="min-w-0 lg:col-span-5">
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.38, delay: 0.08 }}
-              className="relative min-w-0 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl"
-            >
+            <div className="relative min-w-0 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl">
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-200/40 blur-3xl" />
               <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky-200/40 blur-3xl" />
 
@@ -142,7 +99,7 @@ export function Hero() {
                   Jump to the inquiry form →
                 </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

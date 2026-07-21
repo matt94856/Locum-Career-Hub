@@ -26,10 +26,10 @@ export function clampSerpDescription(text: string, max = SERP_DESCRIPTION_MAX): 
 
 export function clampSerpTitle(text: string, max = SERP_TITLE_MAX): string {
   const t = text.replace(/\s+/g, " ").trim();
-  if (t.length <= max) return t;
-  const cut = t.slice(0, max - 1);
-  const lastSpace = cut.lastIndexOf(" ");
-  return (lastSpace > 24 ? cut.slice(0, lastSpace) : cut).trimEnd() + "…";
+  // Preserve complete title language in metadata. Google may rewrite or visually
+  // truncate titles, but a literal ellipsis wastes space and can cut the query.
+  void max;
+  return t;
 }
 
 /** Benefit + proof + CTA — tuned for search snippets. */
@@ -282,7 +282,7 @@ export function buildToolsIndexSerpMetadata(): Metadata {
     description: buildSerpDescription({
       hook: "Free locum salary and tax-structure calculators built for physicians.",
       proof: "Illustrative ranges with clear disclaimers.",
-      cta: "Run a estimate, then talk to a recruiter.",
+      cta: "Run an estimate, then talk to a recruiter.",
     }),
     path: "/tools",
     keywords: ["locum tenens calculator", "locum pay calculator", "physician locum tools"],
@@ -291,18 +291,18 @@ export function buildToolsIndexSerpMetadata(): Metadata {
 
 export function buildSalaryEstimatorSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Locum Tenens Salary Calculator (Free) | Weekly Pay Range",
+    title: "Cardiologist Locums Earnings Calculator",
     description: buildSerpDescription({
-      hook: "Free locum tenens income calculator—model weekly gross ranges by specialty and schedule.",
-      proof: "Illustrative only; not a quote or tax advice.",
-      cta: "Estimate pay, then request real matches.",
+      hook: "Calculate cardiologist locums earning potential by subspecialty, schedule, licenses, and travel flexibility.",
+      proof: "Get a personalized fit score and career comparison.",
+      cta: "Build your free report in under 2 minutes.",
     }),
-    path: "/tools/locum-salary-estimator",
+    path: "/cardiologist-locums-calculator",
     keywords: [
-      "locum tenens income calculator",
-      "locum pay calculator",
-      "locum salary calculator",
-      "locum tenens salary",
+      "cardiologist locums calculator",
+      "cardiology locum tenens salary calculator",
+      "interventional cardiology locums pay",
+      "cardiologist salary calculator",
     ],
   });
 }

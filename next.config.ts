@@ -37,13 +37,11 @@ const removedSpecialtyHubRedirects = REMOVED_SPECIALTY_SLUGS.map((slug) => ({
   permanent: true as const,
 }));
 
-const removedStateSpecialtyRedirects = US_STATE_SLUGS.flatMap((state) =>
-  REMOVED_SPECIALTY_SLUGS.map((specialtySlug) => ({
-    source: `/locum-tenens-jobs/${state}/${specialtySlug}`,
-    destination: `/locum-tenens-jobs/${state}/general-cardiology`,
-    permanent: true as const,
-  })),
-);
+const removedStateSpecialtyRedirects = REMOVED_SPECIALTY_SLUGS.map((specialtySlug) => ({
+  source: `/locum-tenens-jobs/:state/${specialtySlug}`,
+  destination: "/locum-tenens-jobs/:state/general-cardiology",
+  permanent: true as const,
+}));
 
 const locumJobsLegacyRedirects = US_STATES.map((stateName) => {
   const s = stateNameToSlug(stateName);
@@ -85,6 +83,40 @@ const moneyPageRootRedirects = MONEY_PAGE_SLUGS.map((slug) => ({
   permanent: true as const,
 }));
 
+const auditConsolidationRedirects = [
+  { source: "/jobs/:state/:specialty", destination: "/locum-tenens-jobs/:state/:specialty", permanent: true as const },
+  { source: "/jobs/:state", destination: "/locum-tenens-jobs/:state", permanent: true as const },
+  { source: "/cardiology-locums", destination: "/locum-jobs/cardiology", permanent: true as const },
+  { source: "/cardiology-locum-tenens", destination: "/locum-jobs/cardiology", permanent: true as const },
+  { source: "/cardiologist-locum-jobs", destination: "/locum-jobs/cardiology", permanent: true as const },
+  { source: "/cardiology-locums-by-state", destination: "/locum-tenens-jobs", permanent: true as const },
+  {
+    source: "/interventional-cardiology-locums",
+    destination: "/locum-jobs/cardiology/interventional",
+    permanent: true as const,
+  },
+  {
+    source: "/electrophysiology-locums",
+    destination: "/locum-jobs/cardiology/electrophysiology",
+    permanent: true as const,
+  },
+  {
+    source: "/weekend-cardiology-jobs",
+    destination: "/cardiology-locum-jobs/cardiology-moonlighting-jobs",
+    permanent: true as const,
+  },
+  {
+    source: "/new-attending-cardiologist-jobs",
+    destination: "/guides/locum-cardiology-for-new-graduates",
+    permanent: true as const,
+  },
+  {
+    source: "/tools/locum-salary-estimator",
+    destination: "/cardiologist-locums-calculator",
+    permanent: true as const,
+  },
+] as const;
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -94,6 +126,7 @@ const nextConfig: NextConfig = {
       { source: "/locum-tenens-florida", destination: "/locum-tenens-jobs/florida", permanent: true },
       { source: "/locum-tenens-texas", destination: "/locum-tenens-jobs/texas", permanent: true },
       { source: "/locum-tenens-california", destination: "/locum-tenens-jobs/california", permanent: true },
+      ...auditConsolidationRedirects,
       ...buildCardiologyLocumJobsUrlRedirects(),
       ...locumJobsLegacyRedirects,
       ...removedSpecialtyHubRedirects,

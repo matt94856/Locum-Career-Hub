@@ -53,7 +53,7 @@ export const TIER1_PRIORITY_LINKS: Tier1Link[] = [
     ctaLabel: "Start matching →",
   },
   {
-    href: "/tools/locum-salary-estimator",
+    href: "/cardiologist-locums-calculator",
     title: "Cardiology locum salary calculator",
     shortTitle: "Locum salary calculator",
     description: "Model weekly gross ranges for cardiologist locums—educational, not a guaranteed offer.",

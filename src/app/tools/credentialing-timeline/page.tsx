@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { CredentialingTimelineTool } from "@/components/tools/CredentialingTimelineTool";
+import { PortfolioToolPage } from "@/components/tools/PortfolioToolPage";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
+import { PORTFOLIO_TOOL_BY_ID } from "@/lib/tools/portfolio-tools";
 
-export const metadata: Metadata = buildSerpMetadata({
-  title: "Cardiology Locum Credentialing Timeline | State Estimator",
-  description:
-    "Estimate medical license and hospital privileging timelines by state before your first cardiology locum block—educational, not legal advice.",
-  path: "/tools/credentialing-timeline",
-  keywords: ["cardiology locum credentialing", "physician licensing timeline", "hospital privileging cardiologist"],
-});
+const definition = PORTFOLIO_TOOL_BY_ID.credentialing;
+
+export const metadata: Metadata = {
+  ...buildSerpMetadata({
+    title: definition.name,
+    description: definition.description,
+    path: definition.path,
+    keywords: definition.keywords,
+  }),
+  robots: { index: true, follow: true },
+};
 
 export default function CredentialingTimelinePage() {
-  return (
-    <main className="pb-24 sm:pb-0">
-      <CredentialingTimelineTool />
-    </main>
-  );
+  return <PortfolioToolPage definition={definition} />;
 }

@@ -4,7 +4,6 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { getAllArticleSlugs } from "@/lib/cardiology-authority/articles";
-import { JOB_SPECIALTY_SLUGS, jobStatePath, jobStateSpecialtyPath } from "@/lib/cardiology-authority/jobs-seo";
 import { getIndexableCardiologySeoPaths } from "@/lib/cardiology-seo/registry";
 import { PRIORITY_METRO_SLUGS } from "@/lib/cardiology-seo/metro-rich-data";
 import { CARDIOLOGY_LOCUM_SPECIALTIES, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
@@ -14,6 +13,7 @@ import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { SPECIALTY_SEO_SLUGS } from "@/lib/specialty-seo";
 import { STATE_LOCUM_SLUGS } from "@/lib/state-locum-seo";
 import { SITE } from "@/lib/site";
+import { INDEXABLE_PORTFOLIO_TOOL_PATHS } from "@/lib/tools/portfolio-tools";
 import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 
 const staticRoutes = [
@@ -37,18 +37,19 @@ const staticRoutes = [
   "/locum-tenens-jobs",
   "/glossary",
   "/tools",
-  "/tools/locum-salary-estimator",
-  "/tools/w2-vs-1099-physician",
-  "/tools/credentialing-timeline",
+  "/cardiologist-locums-calculator",
+  "/interventional-cardiology-locums-pay",
+  "/ep-cardiology-locums-pay",
+  "/how-much-do-cardiologists-make-doing-locums",
+  "/best-states-for-cardiology-locums",
+  "/part-time-cardiologist-jobs",
+  "/cardiologist-burnout-solutions",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   const specialtyStateEntries: MetadataRoute.Sitemap = US_STATE_SLUGS.flatMap((state) =>
     SPECIALTY_SEO_SLUGS.map((specialtySlug) => ({
       url: `${SITE.url}${specialtyStatePath(state, specialtySlug)}`,
-      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.62,
     })),
@@ -56,14 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const glossaryEntries: MetadataRoute.Sitemap = GLOSSARY_SLUGS.map((slug) => ({
     url: `${SITE.url}/glossary/${slug}`,
-    lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.52,
   }));
 
   const cardiologyLocumSpecialtyEntries: MetadataRoute.Sitemap = CARDIOLOGY_LOCUM_SPECIALTIES.map((s) => ({
     url: `${SITE.url}${cardiologySpecialtyPath(s.pathSlug)}`,
-    lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.82,
   }));
@@ -76,7 +75,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const priority = isPillar || isFlagshipSalary ? 0.78 : isPriorityCity || path.startsWith("/states/") ? 0.7 : 0.64;
     return {
       url: `${SITE.url}${path}`,
-      lastModified,
       changeFrequency: "weekly" as const,
       priority,
     };
@@ -85,39 +83,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     ...staticRoutes.map((path) => ({
       url: `${SITE.url}${path}`,
-      lastModified,
       changeFrequency: "weekly" as const,
-      priority: path === "/" ? 1 : path === "/locum-jobs/cardiology" || path === "/salary" ? 0.9 : 0.7,
+      priority:
+        path === "/"
+          ? 1
+          : path === "/locum-jobs/cardiology" || path === "/salary" || path === "/cardiologist-locums-calculator"
+            ? 0.9
+            : 0.7,
+    })),
+    ...INDEXABLE_PORTFOLIO_TOOL_PATHS.map((path) => ({
+      url: `${SITE.url}${path}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.78,
     })),
     ...LANDING_SLUGS.map((slug) => ({
       url: `${SITE.url}/${slug}`,
-      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.65,
     })),
     ...getAllArticleSlugs().map((slug) => ({
       url: `${SITE.url}/resources/${slug}`,
-      lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.76,
     })),
-    ...US_STATE_SLUGS.map((state) => ({
-      url: `${SITE.url}${jobStatePath(state)}`,
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.68,
-    })),
-    ...US_STATE_SLUGS.flatMap((state) =>
-      JOB_SPECIALTY_SLUGS.map((specialtySlug) => ({
-        url: `${SITE.url}${jobStateSpecialtyPath(state, specialtySlug)}`,
-        lastModified,
-        changeFrequency: "weekly" as const,
-        priority: 0.66,
-      })),
-    ),
     ...STATE_LOCUM_SLUGS.map((slug) => ({
       url: `${SITE.url}/locum-tenens-jobs/${slug}`,
-      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.63,
     })),

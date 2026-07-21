@@ -32,7 +32,7 @@ export function LeadConversionBand({
       </div>
       <p className="mt-4 text-xs text-slate-500">
         Prefer tools first?{" "}
-        <Link href="/tools/locum-salary-estimator" className="font-semibold text-brand-700 hover:underline">
+        <Link href="/cardiologist-locums-calculator" className="font-semibold text-brand-700 hover:underline">
           Locum salary calculator
         </Link>{" "}
         ·{" "}

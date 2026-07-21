@@ -736,7 +736,7 @@ export const LANDING_PAGES: LandingPage[] = [
     relatedSlugs: ["what-is-a-locum-cardiologist", "national-locum-tenens-jobs-guide"],
     relatedLinks: [
       { href: "/salary", title: "Cardiology salary guides by state" },
-      { href: "/tools/locum-salary-estimator", title: "Locum salary calculator" },
+      { href: "/cardiologist-locums-calculator", title: "Cardiologist locums calculator" },
       { href: "/resources/locum-cardiologist-salary-guide", title: "Full locum cardiologist salary guide" },
     ],
     answer:

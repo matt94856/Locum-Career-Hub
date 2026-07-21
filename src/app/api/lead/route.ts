@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
+import { US_STATES } from "@/lib/states";
 import { notifyRecruiterOfLead, sendLeadAcknowledgment } from "@/lib/lead-email";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
@@ -10,6 +11,7 @@ const ALLOWED_SPECIALTIES = new Set<string>([
   "General Cardiology",
   "Non-Invasive Cardiology",
 ]);
+const ALLOWED_STATES = new Set<string>(US_STATES);
 
 type LeadBody = {
   firstName?: unknown;
@@ -26,11 +28,26 @@ type LeadBody = {
   smsOptIn?: unknown;
   leadMagnet?: unknown;
   pagePath?: unknown;
+  attribution?: unknown;
+  calculatorProfile?: unknown;
+  homeState?: unknown;
+  source?: unknown;
   recaptchaToken?: unknown;
 };
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
+}
+
+function safeJsonObject(value: unknown, maxLength = 12000): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  try {
+    const serialized = JSON.stringify(value);
+    if (serialized.length > maxLength) return null;
+    return JSON.parse(serialized) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
 }
 
 function normalizeLead(body: LeadBody) {
@@ -53,6 +70,19 @@ function normalizeLead(body: LeadBody) {
 
   if (preferredStates.length === 0) {
     return { ok: false as const, error: "Select at least one preferred state." };
+  }
+  if (preferredStates.some((state) => !ALLOWED_STATES.has(state))) {
+    return { ok: false as const, error: "One or more selected states are invalid." };
+  }
+  if (isNonEmptyString(body.homeState) && !ALLOWED_STATES.has(body.homeState.trim())) {
+    return { ok: false as const, error: "Select a valid home or practice state." };
+  }
+  const email = body.email.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { ok: false as const, error: "Enter a valid email address." };
+  }
+  if (body.phone.replace(/\D/g, "").length < 10) {
+    return { ok: false as const, error: "Enter a valid phone number." };
   }
 
   const specialty = body.specialty.trim();
@@ -87,17 +117,23 @@ function normalizeLead(body: LeadBody) {
       ? body.pagePath.trim().slice(0, 500)
       : null;
 
-  const metadata: Record<string, string> = {};
+  const metadata: Record<string, unknown> = {};
   if (pagePath) metadata.page_path = pagePath;
   if (clinicalNotes) metadata.clinical_notes = clinicalNotes;
   metadata.form_mode = formMode;
+  const attribution = safeJsonObject(body.attribution, 5000);
+  if (attribution) metadata.attribution = attribution;
+  const calculatorProfile = safeJsonObject(body.calculatorProfile);
+  if (calculatorProfile) metadata.calculator_profile = calculatorProfile;
+  if (isNonEmptyString(body.homeState)) metadata.home_state = body.homeState.trim().slice(0, 100);
+  const source = isNonEmptyString(body.source) ? body.source.trim().slice(0, 100) : "lead_form";
 
   return {
     ok: true as const,
     value: {
       first_name: body.firstName.trim(),
       last_name: body.lastName.trim(),
-      email: body.email.trim().toLowerCase(),
+      email,
       phone: body.phone.trim(),
       specialty,
       preferred_states: preferredStates,
@@ -106,13 +142,13 @@ function normalizeLead(body: LeadBody) {
       travel,
       sms_opt_in: smsOptIn,
       lead_magnet: leadMagnet,
-      source: "lead_form",
+      source,
       metadata,
     },
     emailPayload: {
       firstName: body.firstName.trim(),
       lastName: body.lastName.trim(),
-      email: body.email.trim().toLowerCase(),
+      email,
       phone: body.phone.trim(),
       specialty,
       preferredStates,
@@ -124,6 +160,10 @@ function normalizeLead(body: LeadBody) {
       smsOptIn,
       leadMagnet,
       pagePath,
+      attribution,
+      calculatorProfile,
+      homeState: isNonEmptyString(body.homeState) ? body.homeState.trim() : null,
+      source,
     },
   };
 }

@@ -26,7 +26,7 @@ export function SiteFooter() {
                 {SITE.email}
               </a>
             </p>
-            <p className="text-xs text-slate-500">{SITE.domain}</p>
+            <p className="text-xs text-slate-400">{SITE.domain}</p>
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export function SiteFooter() {
             by facility, specialty, and credentialing requirements. Nothing on this site constitutes medical
             or legal advice.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3 text-xs text-slate-500">
+          <div className="mt-6 flex flex-wrap gap-3 text-xs text-slate-400">
             <span>© {new Date().getFullYear()} {SITE.name}</span>
             <span>·</span>
             <Link className="hover:text-white" href="/faq">

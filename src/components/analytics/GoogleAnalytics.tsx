@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 
 declare global {
@@ -17,25 +17,30 @@ declare global {
  */
 export function GoogleAnalytics() {
   const pathname = usePathname();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID) return;
+    if (!GA_MEASUREMENT_ID || !ready) return;
     const { gtag } = window;
     if (typeof gtag !== "function") return;
-    gtag("config", GA_MEASUREMENT_ID, { page_path: pathname || "/" });
-  }, [pathname]);
+    gtag("event", "page_view", {
+      page_path: pathname || "/",
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [pathname, ready]);
 
   if (!GA_MEASUREMENT_ID) return null;
 
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
+      <Script id="google-analytics" strategy="lazyOnload" onReady={() => setReady(true)}>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
+          gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
         `}
       </Script>
     </>

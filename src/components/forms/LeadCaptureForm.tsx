@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
 import { trackGenerateLead, trackEvent } from "@/lib/analytics-events";
+import { readLeadAttribution } from "@/lib/attribution";
 import { SITE } from "@/lib/site";
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
@@ -90,6 +91,11 @@ export function LeadCaptureForm({
   const recaptchaRef = useRef<RecaptchaFieldHandle>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  useEffect(() => {
+    readLeadAttribution();
+    trackEvent("lead_form_view", { form_layout: layout, page_path: window.location.pathname });
+  }, [layout]);
+
   const specialtyOptions = useMemo(() => [...CARDIOLOGY_SUBSPECIALTIES], []);
 
   const filteredStates = useMemo(() => {
@@ -128,6 +134,7 @@ export function LeadCaptureForm({
       leadMagnet: fd.get("leadMagnet") === "on",
       formMode,
       pagePath: typeof window !== "undefined" ? window.location.pathname : "",
+      attribution: readLeadAttribution(),
       recaptchaToken: recaptchaSiteConfigured ? (recaptchaRef.current?.getToken() ?? "") : "",
     };
   }
@@ -215,6 +222,7 @@ export function LeadCaptureForm({
 
       trackGenerateLead(payload.pagePath || "inquiry_form");
       trackEvent("form_submit", { form_mode: formMode, form_step: formMode === "quick" ? 1 : 2 });
+      window.sessionStorage.setItem("lch_lead_submitted", "1");
 
       const params = new URLSearchParams();
       params.set("specialty", payload.specialty);

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { trackBookMeeting, trackCtaClick } from "@/lib/analytics-events";
+import { trackBookingClick, trackCtaClick } from "@/lib/analytics-events";
 import { SITE } from "@/lib/site";
 
 export function StickyMobileCta() {
@@ -37,7 +37,7 @@ export function StickyMobileCta() {
           className="min-w-0 flex-1 basis-0 justify-center px-2 text-[11px] leading-snug"
           onClick={() => {
             trackCtaClick("sticky_book_call", bookHref);
-            if (bookExternal) trackBookMeeting("sticky_mobile");
+            if (bookExternal) trackBookingClick("sticky_mobile");
           }}
         >
           {SITE.calendlyUrl ? "Book" : "Email"}

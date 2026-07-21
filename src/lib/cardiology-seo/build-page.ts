@@ -40,7 +40,7 @@ function defaultRelatedLinks(def: PageDef): { href: string; title: string }[] {
   const links: { href: string; title: string }[] = [
     { href: "/physician-opportunities#lead-form", title: "Submit cardiologist inquiry" },
     { href: "/cardiology-locum-jobs", title: "Cardiology locum jobs hub" },
-    { href: "/tools/locum-salary-estimator", title: "Locum salary estimator" },
+    { href: "/cardiologist-locums-calculator", title: "Cardiologist locums calculator" },
   ];
   if (def.stateSlug) {
     links.push({

@@ -470,7 +470,7 @@ function buildMetroPage(metro: (typeof CARDIOLOGY_METROS)[number]): CardiologyPr
       { href: stateHref, title: `Cardiology locums in ${metro.state}` },
       { href: "/physician-opportunities#lead-form", title: "Submit cardiologist preferences" },
       { href: "/specialties/general-cardiology", title: "General cardiology locums" },
-      { href: "/tools/locum-salary-estimator", title: "Locum salary estimator" },
+      { href: "/cardiologist-locums-calculator", title: "Cardiologist locums calculator" },
     ],
   };
 }

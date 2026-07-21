@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { trackBookMeeting, trackCtaClick } from "@/lib/analytics-events";
+import { trackBookingClick, trackCtaClick } from "@/lib/analytics-events";
 import { CTA, SITE } from "@/lib/site";
 
 type Props = {
@@ -24,7 +24,7 @@ export function CalendlyBookButton({ source, variant = "primary", className = ""
       className={className}
       onClick={() => {
         trackCtaClick(`book_call_${source}`, href);
-        if (external) trackBookMeeting(source);
+        if (external) trackBookingClick(source);
       }}
     >
       {children ?? (SITE.calendlyUrl ? CTA.bookCall : "Email to schedule a call")}

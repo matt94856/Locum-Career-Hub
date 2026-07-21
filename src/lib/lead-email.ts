@@ -15,6 +15,10 @@ type LeadEmailPayload = {
   smsOptIn: boolean;
   leadMagnet: boolean;
   pagePath?: string | null;
+  attribution?: Record<string, unknown> | null;
+  calculatorProfile?: Record<string, unknown> | null;
+  homeState?: string | null;
+  source?: string;
 };
 
 function resendConfigured(): boolean {
@@ -53,14 +57,23 @@ function leadSummaryHtml(p: LeadEmailPayload): string {
   const notes = p.clinicalNotes?.trim()
     ? `<p><strong>Clinical boundaries:</strong> ${escapeHtml(p.clinicalNotes.trim())}</p>`
     : "";
+  const calculator = p.calculatorProfile
+    ? `<p><strong>Calculator profile:</strong> ${escapeHtml(JSON.stringify(p.calculatorProfile))}</p>`
+    : "";
+  const attribution = p.attribution
+    ? `<p><strong>Attribution:</strong> ${escapeHtml(JSON.stringify(p.attribution))}</p>`
+    : "";
   return `
     <p><strong>${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}</strong> — ${escapeHtml(p.specialty)}</p>
     <p>Email: ${escapeHtml(p.email)} · Phone: ${escapeHtml(p.phone)}</p>
     <p>States: ${escapeHtml(states)}</p>
     <p>Experience: ${escapeHtml(p.yearsExperience)} · Availability: ${escapeHtml(p.availability)} · Travel: ${escapeHtml(p.travel)}</p>
     <p>SMS opt-in: ${p.smsOptIn ? "Yes" : "No"} · Guide requested: ${p.leadMagnet ? "Yes" : "No"}</p>
-    <p>Form: ${p.formMode} · Source page: ${escapeHtml(p.pagePath ?? "/")}</p>
+    <p>Form: ${p.formMode} · Source: ${escapeHtml(p.source ?? "lead_form")} · Source page: ${escapeHtml(p.pagePath ?? "/")}</p>
+    ${p.homeState ? `<p>Home/practice state: ${escapeHtml(p.homeState)}</p>` : ""}
     ${notes}
+    ${calculator}
+    ${attribution}
   `;
 }
 
@@ -70,6 +83,29 @@ function escapeHtml(s: string): string {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function calculatorReportHtml(profile: Record<string, unknown> | null | undefined): string {
+  if (!profile) return "";
+  const answers = profile.answers && typeof profile.answers === "object" ? profile.answers as Record<string, unknown> : {};
+  const result = profile.result && typeof profile.result === "object" ? profile.result as Record<string, unknown> : {};
+  const fitScore = typeof result.fitScore === "number" ? result.fitScore : null;
+  const annualLow = typeof result.annualLow === "number" ? result.annualLow : null;
+  const annualHigh = typeof result.annualHigh === "number" ? result.annualHigh : null;
+  const specialty = typeof answers.specialty === "string" ? answers.specialty : null;
+  if (fitScore === null || annualLow === null || annualHigh === null) return "";
+  const money = (value: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
+  return `
+    <h2>Your Cardiologist Locums Report</h2>
+    <p><strong>${escapeHtml(specialty ?? pFallbackSpecialty(profile))}</strong></p>
+    <p>Locums Fit Score: <strong>${fitScore}/100</strong></p>
+    <p>Directional annual gross earning potential: <strong>${money(annualLow)}–${money(annualHigh)}</strong></p>
+    <p>This educational estimate is not a quote, guaranteed offer, or tax advice. Actual economics depend on written assignment scope, call, travel, credentialing, and contract terms.</p>
+  `;
+}
+
+function pFallbackSpecialty(profile: Record<string, unknown>): string {
+  return typeof profile.specialty === "string" ? profile.specialty : "Cardiology";
 }
 
 /** Notify recruiter inbox when a new lead is saved. */
@@ -91,6 +127,7 @@ export async function sendLeadAcknowledgment(p: LeadEmailPayload): Promise<void>
   const guideNote = p.leadMagnet
     ? `<p>We will send <strong>The Physician’s Guide to Locum Tenens</strong> to this inbox shortly. Check spam if you do not see it within a few minutes.</p>`
     : "";
+  const calculatorReport = calculatorReportHtml(p.calculatorProfile);
 
   await sendResendEmail(
     p.email,
@@ -98,6 +135,7 @@ export async function sendLeadAcknowledgment(p: LeadEmailPayload): Promise<void>
     `
       <p>Hi ${escapeHtml(p.firstName)},</p>
       <p>Thank you for reaching out to ${SITE.name}. A cardiology recruiter will review your subspecialty (${escapeHtml(p.specialty)}) and preferred states.</p>
+      ${calculatorReport}
       <p><strong>What happens next:</strong></p>
       <ul>
         <li>If realistic locum opportunities match your profile, we typically follow up within one business day (often sooner).</li>
