@@ -83,6 +83,12 @@ const moneyPageRootRedirects = MONEY_PAGE_SLUGS.map((slug) => ({
   permanent: true as const,
 }));
 
+const stateSeoConsolidationRedirects = US_STATE_SLUGS.map((state) => ({
+  source: `/states/${state}-cardiology-locum-jobs`,
+  destination: `/locum-tenens-jobs/${state}`,
+  permanent: true as const,
+}));
+
 const auditConsolidationRedirects = [
   { source: "/jobs/:state/:specialty", destination: "/locum-tenens-jobs/:state/:specialty", permanent: true as const },
   { source: "/jobs/:state", destination: "/locum-tenens-jobs/:state", permanent: true as const },
@@ -115,6 +121,21 @@ const auditConsolidationRedirects = [
     destination: "/cardiologist-locums-calculator",
     permanent: true as const,
   },
+  {
+    source: "/locum-physician-jobs",
+    destination: "/locum-jobs/cardiology",
+    permanent: true as const,
+  },
+  {
+    source: "/locum-opportunities",
+    destination: "/physician-opportunities",
+    permanent: true as const,
+  },
+  {
+    source: "/states",
+    destination: "/locum-tenens-jobs",
+    permanent: true as const,
+  },
 ] as const;
 
 const nextConfig: NextConfig = {
@@ -127,6 +148,7 @@ const nextConfig: NextConfig = {
       { source: "/locum-tenens-texas", destination: "/locum-tenens-jobs/texas", permanent: true },
       { source: "/locum-tenens-california", destination: "/locum-tenens-jobs/california", permanent: true },
       ...auditConsolidationRedirects,
+      ...stateSeoConsolidationRedirects,
       ...buildCardiologyLocumJobsUrlRedirects(),
       ...locumJobsLegacyRedirects,
       ...removedSpecialtyHubRedirects,

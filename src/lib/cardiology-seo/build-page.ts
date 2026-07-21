@@ -44,7 +44,7 @@ function defaultRelatedLinks(def: PageDef): { href: string; title: string }[] {
   ];
   if (def.stateSlug) {
     links.push({
-      href: `/states/${def.stateSlug}-cardiology-locum-jobs`,
+      href: `/locum-tenens-jobs/${def.stateSlug}`,
       title: `${def.geoLabel ?? def.stateSlug} cardiology locums`,
     });
     links.push({
@@ -152,6 +152,6 @@ export function buildPageFromDef(def: PageDef): CardiologySeoPage {
     showRecruiterTrust:
       def.showRecruiterTrust ?? (def.category === "state" || def.category === "city" || def.slug.startsWith("cardiologist-salary-")),
     contentTier: tier,
-    noindex: def.category === "city" && !isPriorityMetroSlug(def.slug),
+    noindex: def.category === "state" || (def.category === "city" && !isPriorityMetroSlug(def.slug)),
   };
 }

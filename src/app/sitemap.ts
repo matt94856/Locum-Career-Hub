@@ -27,7 +27,6 @@ const staticRoutes = [
   "/editorial-policy",
   "/content-review-policy",
   "/team",
-  "/states",
   "/cities",
   "/salary",
   "/locations",

@@ -26,7 +26,7 @@ export async function generateMetadata({
   return buildSerpMetadata({
     title: page.title.replace(` | Locum Career Hub`, ""),
     description: page.metaDescription,
-    path: `/jobs/${state}/${specialtySlug}`,
+    path: `/locum-tenens-jobs/${state}/${specialtySlug}`,
     keywords: [page.title, "locum cardiologist jobs"],
   });
 }

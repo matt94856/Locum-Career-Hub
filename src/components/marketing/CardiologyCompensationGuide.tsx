@@ -79,7 +79,7 @@ export function CardiologyCompensationGuide({
       <section className="border-t border-slate-100 bg-slate-50 py-10">
         <div className="container-site flex max-w-4xl flex-wrap gap-x-6 gap-y-3 text-sm">
           <Link href="/locum-jobs/cardiology" className="font-semibold text-brand-700 hover:underline">Cardiology locums hub</Link>
-          <Link href="/states" className="font-semibold text-brand-700 hover:underline">Browse by state</Link>
+          <Link href="/locum-tenens-jobs" className="font-semibold text-brand-700 hover:underline">Browse by state</Link>
           <Link href="/tools/cardiology-locum-offer-comparison" className="font-semibold text-brand-700 hover:underline">Compare locum offers</Link>
           <Link href="/tools/cardiology-call-burden-calculator" className="font-semibold text-brand-700 hover:underline">Calculate call burden</Link>
           <Link href="/tools/w2-vs-1099-physician" className="font-semibold text-brand-700 hover:underline">W-2 vs 1099</Link>

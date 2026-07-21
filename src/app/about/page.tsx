@@ -4,14 +4,14 @@ import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
 
 const ABOUT_DESC =
-  "Locum Career Hub is a cardiologist-only locum tenens recruiting partner—transparent expectations, credentialing clarity, and calm cardiology recruiter guidance nationwide.";
+  "Meet the cardiologist-only locum recruiting team at Locum Career Hub—transparent call expectations, credentialing clarity, and career tools built for MD/DO cardiologists.";
 
 export const metadata: Metadata = {
-  title: "About Locum Career Hub | Cardiologist Locum Recruiting",
+  title: "About Our Cardiology Locum Recruiters",
   description: ABOUT_DESC,
   alternates: { canonical: "/about" },
   ...socialShareMetadata({
-    title: "About Locum Career Hub | Cardiologist Locum Recruiting",
+    title: "About Our Cardiology Locum Recruiters | Locum Career Hub",
     description: ABOUT_DESC,
     path: "/about",
   }),

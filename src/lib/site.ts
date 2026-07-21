@@ -39,7 +39,7 @@ export const NAV_LINKS = [
   { href: "/#cardiologist-guides", label: "Cardiologist guides" },
   { href: "/physician-opportunities", label: "Opportunities" },
   { href: "/locum-jobs/cardiology", label: "Cardiology jobs" },
-  { href: "/states", label: "By state" },
+  { href: "/locum-tenens-jobs", label: "By state" },
   { href: "/cities", label: "By city" },
   { href: "/locations", label: "Locations" },
   { href: "/blog", label: "Insights" },

@@ -107,12 +107,12 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "physician-travel-jobs",
-    title: "Travel Cardiologist Locum Jobs | Stipends & Blocks | Locum Career Hub",
+    title: "Travel Cardiologist Locum Jobs | Stipends & STEMI Clarity",
     description:
-      "Travel cardiologist locum jobs with premium stipends, cath lab call clarity, and cardiology recruiter support from day one. MD/DO cardiologists only.",
+      "Travel cardiologist locum jobs with transparent stipends, cath lab call clarity, and cardiology recruiter support. MD/DO cardiologists only.",
     h1: "Travel Cardiologist Locum Jobs With Premium Support",
     h2: "See new places, keep clinical autonomy, and protect your call schedule",
-    keywords: ["travel cardiologist locum", "cardiology locum tenens", "travel cardiology jobs"],
+    keywords: ["travel cardiologist locum", "travel doctor jobs", "traveling physician jobs"],
     intro:
       "Travel cardiology locums pair geographic variety with predictable workflows. We align cardiologists to teams that respect handoffs, STEMI activation rules, consult census, and cath lab scope—so your trip feels sustainable, not chaotic.",
     bullets: [
@@ -219,14 +219,14 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "retired-physician-opportunities",
-    title: "Semi-Retirement & Retired Physician Opportunities | Locum Career Hub",
+    title: "Semi-Retired Cardiologist Locum Jobs | Flexible Blocks",
     description:
-      "Semi-retirement physician work with lighter blocks, flexible travel, and curated teams. Stay clinical on your schedule with locum tenens.",
-    h1: "Retired Physician Opportunities With True Flexibility",
-    h2: "Keep your license active, stay sharp, and protect your freedom",
-    keywords: ["semi-retirement physician work", "retired physician opportunities", "flexible physician jobs"],
+      "Semi-retired cardiologist locum opportunities with lighter call, selective blocks, and schedule control. Stay clinical without full-time employment pressure.",
+    h1: "Semi-Retired Cardiologist Locum Opportunities",
+    h2: "Keep your skills sharp on a schedule you control",
+    keywords: ["semi-retired cardiologist locums", "retired physician opportunities", "part-time cardiologist jobs"],
     intro:
-      "Many physicians want a glide path—not a hard stop. Locums during retirement offers selective shifts, lower administrative burden, and the ability to pause between assignments without guilt.",
+      "Many cardiologists want a glide path—not a hard stop. Selective locum blocks during retirement or semi-retirement can preserve clinical sharpness with lower administrative burden and the ability to pause between assignments.",
     bullets: [
       "Selective schedules: seasonal, short blocks, or occasional weekends",
       "Sites accustomed to experienced clinicians and efficient workflows",

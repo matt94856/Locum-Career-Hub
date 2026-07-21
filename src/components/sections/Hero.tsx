@@ -34,22 +34,14 @@ export function Hero() {
                 Talk with a cardiology specialist
               </CalendlyBookButton>
             </div>
-
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {[
-                { k: "Clarity", v: "Call & cath lab in writing" },
-                { k: "Calm pace", v: "No bait-and-switch" },
-                { k: "Advocacy", v: "Cardiology recruiters" },
-              ].map((x) => (
-                <div
-                  key={x.k}
-                  className="rounded-2xl border border-slate-100 bg-white/70 p-4 shadow-sm backdrop-blur"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">{x.k}</p>
-                  <p className="mt-2 text-sm font-semibold text-slate-900">{x.v}</p>
-                </div>
-              ))}
-            </div>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600">
+              Free personalized report in under 2 minutes—specialty, schedule, licenses, and travel. No spam.
+              Prefer to browse first?{" "}
+              <Link href="/locum-jobs/cardiology" className="font-semibold text-brand-700 hover:underline">
+                See cardiology locum jobs
+              </Link>
+              .
+            </p>
           </div>
 
           <div className="min-w-0 lg:col-span-5">

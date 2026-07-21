@@ -54,7 +54,7 @@ export function buildCardiologyLocumsLegacyRedirects(stateSlugs: readonly string
   const settingRedirects = stateSlugs.flatMap((state) =>
     SETTING_KEYS.map((key) => ({
       source: `/cardiology-locums/${key}-cardiology-locums-${state}`,
-      destination: `/states/${state}-cardiology-locum-jobs`,
+      destination: `/locum-tenens-jobs/${state}`,
       permanent: true as const,
     })),
   );

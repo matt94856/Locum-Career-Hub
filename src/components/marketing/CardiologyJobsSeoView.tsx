@@ -30,7 +30,7 @@ export function CardiologyJobsSeoView({ page, specialty }: Props) {
 
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
-    { name: "Jobs", path: "/jobs/florida" },
+    { name: "Locum tenens jobs", path: "/locum-tenens-jobs" },
     { name: page.stateName, path: jobStatePath(page.stateSlug) },
     ...(specialty ? [{ name: specialty.name, path }] : []),
   ]);

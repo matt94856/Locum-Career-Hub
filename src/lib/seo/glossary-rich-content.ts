@@ -11,6 +11,12 @@ const BY_SLUG: Record<string, string[]> = {
     "Locum assignments usually require both licensure and privileging timelines; the longer pole often determines your real start date.",
     "Before you commit, ask which procedures and settings are included in your privilege set and whether temporary or disaster privileges apply.",
   ],
+  "locum-malpractice-insurance": [
+    "Locum malpractice insurance is the professional liability coverage that protects a cardiologist during temporary hospital or clinic assignments—and often after them if the policy is claims-made.",
+    "For cardiology locums, confirm whether coverage is occurrence or claims-made, who is the named insured (facility, agency, or you), policy limits, covered procedures (STEMI, EP lab, structural), and who pays for tail when the assignment ends.",
+    "Occurrence policies generally do not require separate tail; claims-made policies do. Gaps here are one of the most expensive post-assignment surprises physicians face.",
+    "Use this as an educational checklist before signing—not legal advice. Pair it with our contract red-flag checker and ask a healthcare attorney to review exact policy language.",
+  ],
   credentialing: [
     "Credentialing verifies training, licenses, work history, and references—typically through a hospital committee or centralized credentialing body.",
     "For locum tenens, credentialing runs in parallel with contract negotiation; delays here are the most common reason start dates slip.",

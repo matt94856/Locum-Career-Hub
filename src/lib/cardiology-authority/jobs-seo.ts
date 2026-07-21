@@ -49,11 +49,11 @@ export function getJobSpecialtyDef(slug: string): JobSpecialtyDef | undefined {
 }
 
 export function jobStatePath(stateSlug: string): string {
-  return `/jobs/${stateSlug}`;
+  return `/locum-tenens-jobs/${stateSlug}`;
 }
 
 export function jobStateSpecialtyPath(stateSlug: string, specialtySlug: string): string {
-  return `/jobs/${stateSlug}/${specialtySlug}`;
+  return `/locum-tenens-jobs/${stateSlug}/${specialtySlug}`;
 }
 
 const HIGH_VOLUME_STATES = new Set(["florida", "texas", "california", "new-york", "north-carolina"]);

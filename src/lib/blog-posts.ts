@@ -159,13 +159,13 @@ const CORE_POSTS: BlogPost[] = [
   },
   {
     slug: "tax-advantages-locum-tenens",
-    title: "Tax Planning Considerations for Locum Tenens Physicians",
+    title: "Tax Advantages of Locum Tenens for Cardiologists",
     description:
-      "High-level considerations for deductions, entity structures, and travel expenses—plus when to involve a CPA who understands medicine.",
+      "Educational overview of locum tax considerations for cardiologists—deductions, entities, multi-state income, and when to involve a CPA. Not tax advice.",
     date: "2026-03-21",
     readMinutes: 10,
     category: "Finance",
-    keywords: ["locum tenens jobs", "flexible physician jobs", "physician opportunities"],
+    keywords: ["locum tenens tax advantages", "1099 cardiologist", "locum vs employed calculator"],
     content: [
       {
         type: "callout",

@@ -14,7 +14,7 @@ import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 
 const CATEGORY_CRUMB: Record<CardiologySeoPage["category"], { label: string; path: string }> = {
   money: { label: "Cardiology locum jobs", path: "/cardiology-locum-jobs" },
-  state: { label: "States", path: "/states" },
+  state: { label: "Locum jobs by state", path: "/locum-tenens-jobs" },
   city: { label: "Cities", path: "/cities" },
   salary: { label: "Salary", path: "/salary" },
   licensing: { label: "Guides", path: "/guides" },

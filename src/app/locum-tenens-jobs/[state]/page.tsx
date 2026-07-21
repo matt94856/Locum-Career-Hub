@@ -11,7 +11,6 @@ import {
   STATE_LOCUM_SLUGS,
 } from "@/lib/state-locum-seo";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
-import { getPageByStateSlug } from "@/lib/cardiology-seo/registry";
 import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
@@ -65,7 +64,6 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
   const otherStates = STATE_LOCUM_PAGES.filter((s) => s.slug !== page.slug).slice(0, 5);
   const stateProfile = getStateProfile(page.slug);
   const profileSections = stateProfile ? getStateProfileSections(stateProfile) : [];
-  const richStatePage = getPageByStateSlug(`${page.slug}-cardiology-locum-jobs`);
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -88,13 +86,20 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
             </p>
             <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">{page.intro}</p>
             <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-              <Button href="/physician-opportunities#lead-form" className="w-full justify-center">
+              <Button href="/cardiologist-locums-calculator" className="w-full justify-center">
+                Calculate earning potential
+              </Button>
+              <Button href="/physician-opportunities#lead-form" variant="secondary" className="w-full justify-center">
                 {CTA.explore}
               </Button>
-              <Button href="/contact" variant="secondary" className="w-full justify-center">
-                {CTA.recruiter}
-              </Button>
             </div>
+            <p className="mt-4 text-sm text-slate-600">
+              Or{" "}
+              <Link href="/contact" className="font-semibold text-brand-700 hover:underline">
+                talk with a cardiology specialist
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>
@@ -104,21 +109,24 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
           <div className="min-w-0 lg:col-span-7 space-y-10">
             <RecruiterInquiryTrust geoLabel={page.stateName} />
 
-            {richStatePage ? (
-              <div className="rounded-2xl border border-brand-100 bg-brand-50/30 p-5 sm:p-6">
-                <h2 className="font-display text-lg font-semibold text-slate-950">Expanded {page.stateName} cardiology guide</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  For additional market context, licensing notes, and FAQs specific to cardiologist locums in{" "}
-                  {page.stateName}, see our dedicated state page.
-                </p>
-                <Link
-                  href={richStatePage.path}
-                  className="mt-4 inline-flex text-sm font-semibold text-brand-700 hover:underline"
-                >
-                  {page.stateName} cardiology locum jobs (full guide) →
+            <div className="rounded-2xl border border-brand-100 bg-brand-50/30 p-5 sm:p-6">
+              <h2 className="font-display text-lg font-semibold text-slate-950">Plan {page.stateName} before you commit</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                Use the cardiologist locums calculator for income scenarios, then check IMLC eligibility and
+                credentialing readiness before promising a start date in {page.stateName}.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                <Link href="/cardiologist-locums-calculator" className="text-brand-700 hover:underline">
+                  Earnings calculator →
+                </Link>
+                <Link href="/tools/imlc-eligibility-calculator" className="text-brand-700 hover:underline">
+                  IMLC eligibility →
+                </Link>
+                <Link href="/tools/credentialing-timeline" className="text-brand-700 hover:underline">
+                  Credentialing timeline →
                 </Link>
               </div>
-            ) : null}
+            </div>
 
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5 sm:p-6">
               <h2 className="font-display text-lg font-semibold text-slate-950">Who should read this</h2>

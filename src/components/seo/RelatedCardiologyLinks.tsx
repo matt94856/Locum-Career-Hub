@@ -38,7 +38,7 @@ export function RelatedCardiologyLinks({
         </li>
         {stateSlug ? (
           <li>
-            <Link href={`/jobs/${stateSlug}`} className="font-semibold text-brand-700 hover:underline">
+            <Link href={`/locum-tenens-jobs/${stateSlug}`} className="font-semibold text-brand-700 hover:underline">
               Locum cardiology jobs in this state
             </Link>
           </li>

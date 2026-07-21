@@ -79,11 +79,19 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
     }),
   },
   "physician-travel-jobs": {
-    title: "Travel Cardiologist Locum Jobs (2026) | Stipends & Blocks",
+    title: "Travel Cardiologist Locum Jobs | Stipends & STEMI Clarity",
     description: buildSerpDescription({
-      hook: "Travel cardiology locums with transparent stipends, cath lab call, and STEMI rules.",
+      hook: "Travel cardiologist locum jobs with transparent stipends, cath lab call, and STEMI rules in writing.",
       proof: "Cardiologist-only recruiter—metro and community blocks nationwide.",
-      cta: "Request travel cardiology matches in minutes.",
+      cta: "Calculate earning potential or request travel matches.",
+    }),
+  },
+  "retired-physician-opportunities": {
+    title: "Semi-Retired Cardiologist Locum Jobs | Flexible Blocks",
+    description: buildSerpDescription({
+      hook: "Semi-retired cardiologist locum opportunities with lighter call and selective blocks.",
+      proof: "Cardiologist-only recruiter support—not a generic job board.",
+      cta: "Explore part-time and retirement-bridge options.",
     }),
   },
   "moonlighting-physician-jobs": {
@@ -187,20 +195,50 @@ export function buildCardiologyHubSerpMetadata(): Metadata {
   });
 }
 
+/** High-impression state hubs from GSC — query-aligned titles for CTR recovery. */
+const PRIORITY_STATE_SERP: Record<string, { title: string; hook: string; proof: string }> = {
+  "new-york": {
+    title: "NY Cardiology Locum Jobs | EP, Interventional & General",
+    hook: "New York cardiology locum jobs by subspecialty—EP, interventional, and general consult/clinic blocks.",
+    proof: "Metro privileging, STEMI networks, and licensing timelines explained.",
+  },
+  washington: {
+    title: "Washington Cardiology Locum Jobs | Licensing & Call",
+    hook: "Washington cardiologist locum jobs with clear cath lab, consult, and imaging expectations.",
+    proof: "IMLC-friendly planning notes plus Pacific Northwest market context.",
+  },
+  california: {
+    title: "California Cardiology Locum Jobs | Non-IMLC Planning",
+    hook: "California cardiology locums with longer licensing lead times planned upfront.",
+    proof: "Direct-board pathway notes for LA, Bay Area, San Diego, and Sacramento.",
+  },
+  texas: {
+    title: "Texas Cardiology Locum Jobs | IMLC & Metro Blocks",
+    hook: "Texas cardiologist locum jobs across Houston, Dallas, Austin, and San Antonio markets.",
+    proof: "IMLC pathway plus call and stipend norms by metro.",
+  },
+  tennessee: {
+    title: "Tennessee Cardiology Locum Jobs | Rates & Licensing",
+    hook: "Tennessee cardiology locum coverage for community and regional systems.",
+    proof: "Licensing, privileging, and travel vs local block tradeoffs.",
+  },
+};
+
 export function buildStateSerpMetadata(stateName: string, slug: string): Metadata {
+  const custom = PRIORITY_STATE_SERP[slug];
   return buildSerpMetadata({
-    title: `Cardiologist Locum Jobs in ${stateName} (2026) | Licensing`,
+    title: custom?.title ?? `Cardiologist Locum Jobs in ${stateName} (2026)`,
     description: buildSerpDescription({
-      hook: `${stateName} cardiologist locum jobs—cath lab, consult, clinic, and imaging blocks.`,
-      proof: "Privileging paths, metros, and call norms explained.",
-      cta: `Request ${stateName} cardiology matches today.`,
+      hook: custom?.hook ?? `${stateName} cardiologist locum jobs—cath lab, consult, clinic, and imaging blocks.`,
+      proof: custom?.proof ?? "Privileging paths, metros, and call norms explained.",
+      cta: `Calculate earning potential or request ${stateName} cardiology matches.`,
     }),
     path: `/locum-tenens-jobs/${slug}`,
     keywords: [
-      `locum tenens ${stateName}`,
+      `cardiologist locum jobs ${stateName}`,
+      `cardiology locums ${stateName}`,
       `locum tenens jobs in ${stateName}`,
-      "locum physician jobs",
-      "travel physician jobs",
+      "locum cardiologist jobs",
     ],
   });
 }
@@ -263,13 +301,29 @@ export function buildSpecialtySerpMetadata(name: string, slug: string): Metadata
   });
 }
 
+const GLOSSARY_SERP: Record<string, { title: string; hook: string; cta: string }> = {
+  "locum-malpractice-insurance": {
+    title: "Locum Malpractice Insurance & Tail for Cardiologists",
+    hook: "How occurrence vs claims-made malpractice and tail coverage work for cardiology locum assignments.",
+    cta: "Review contract flags, then talk with a cardiology specialist.",
+  },
+  credentialing: {
+    title: "Physician Credentialing for Cardiology Locums",
+    hook: "What credentialing means for locum cardiologists—and how it affects your real start date.",
+    cta: "Estimate your timeline with the credentialing planner.",
+  },
+};
+
 export function buildGlossarySerpMetadata(title: string, slug: string): Metadata {
+  const custom = GLOSSARY_SERP[slug];
   return buildSerpMetadata({
-    title: `What Is ${title}? Locum Tenens Definition`,
+    title: custom?.title ?? `What Is ${title}? Locum Tenens Definition`,
     description: buildSerpDescription({
-      hook: `Plain-English definition of “${title}” for physicians exploring locum tenens and staffing.`,
+      hook:
+        custom?.hook ??
+        `Plain-English definition of “${title}” for physicians exploring locum tenens and staffing.`,
       proof: "Educational guide—not legal or tax advice.",
-      cta: "Ready for matches? Submit your states & dates.",
+      cta: custom?.cta ?? "Ready for matches? Submit your states & dates.",
     }),
     path: `/glossary/${slug}`,
     keywords: [title.toLowerCase(), "locum tenens glossary", "physician staffing terms"],
@@ -278,31 +332,36 @@ export function buildGlossarySerpMetadata(title: string, slug: string): Metadata
 
 export function buildToolsIndexSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Physician Locum Tools | Salary & W-2 vs 1099 Calculators",
+    title: "Cardiologist Calculators | Pay, IMLC, Call & Offers",
     description: buildSerpDescription({
-      hook: "Free locum salary and tax-structure calculators built for physicians.",
-      proof: "Illustrative ranges with clear disclaimers.",
-      cta: "Run an estimate, then talk to a recruiter.",
+      hook: "Free cardiologist decision tools for locums earnings, IMLC eligibility, call burden, and offer comparison.",
+      proof: "Evidence-versioned formulas with clear limitations.",
+      cta: "Open a calculator—anonymous until you request follow-up.",
     }),
     path: "/tools",
-    keywords: ["locum tenens calculator", "locum pay calculator", "physician locum tools"],
+    keywords: [
+      "cardiologist calculator",
+      "locum tenens income calculator",
+      "locum vs employed calculator",
+      "IMLC eligibility calculator",
+    ],
   });
 }
 
 export function buildSalaryEstimatorSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Cardiologist Locums Earnings Calculator",
+    title: "Locum Tenens Income Calculator for Cardiologists",
     description: buildSerpDescription({
-      hook: "Calculate cardiologist locums earning potential by subspecialty, schedule, licenses, and travel flexibility.",
-      proof: "Get a personalized fit score and career comparison.",
-      cta: "Build your free report in under 2 minutes.",
+      hook: "Calculate cardiologist locums income by specialty, schedule, licenses, travel, and assignment style.",
+      proof: "Personalized fit score, income scenarios, and career comparison—not a generic pay table.",
+      cta: "Build your free earning report in under 2 minutes.",
     }),
     path: "/cardiologist-locums-calculator",
     keywords: [
+      "locum tenens income calculator",
       "cardiologist locums calculator",
+      "locum vs employed calculator",
       "cardiology locum tenens salary calculator",
-      "interventional cardiology locums pay",
-      "cardiologist salary calculator",
     ],
   });
 }

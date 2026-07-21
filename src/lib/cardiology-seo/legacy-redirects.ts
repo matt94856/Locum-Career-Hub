@@ -12,7 +12,7 @@ export function getLegacyCardiologyLocumsRedirectDestination(legacySlug: string)
   for (const state of US_STATE_SLUGS) {
     for (const key of LEGACY_SETTING_KEYS) {
       if (legacySlug === `${key}-cardiology-locums-${state}`) {
-        return `/states/${state}-cardiology-locum-jobs`;
+        return `/locum-tenens-jobs/${state}`;
       }
     }
   }

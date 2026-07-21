@@ -48,10 +48,10 @@ export const CARDIOLOGY_HUB_H1 = "Locum Cardiologist Jobs & Recruitment";
 export const CARDIOLOGY_HUB_DESCRIPTION =
   "Find top locum cardiologist positions and locum tenens job opportunities. Nationwide cardiology placements in interventional, EP, heart failure, imaging, and pediatric. Connect with expert recruiters at Locum Career Hub.";
 
-export const HOME_TITLE = "Cardiology Locum Tenens Resources for Cardiologists";
+export const HOME_TITLE = "Cardiologist Locum Jobs & Career Tools (2026)";
 export const HOME_H1 = "Cardiology Locum Tenens Opportunities Designed Around Your Life";
 export const HOME_DESCRIPTION =
-  "Career intelligence and cardiology locum tenens opportunities for cardiologists seeking flexibility, supplemental income, and sustainable schedules.";
+  "Cardiologist-only locum tenens resources: calculate earning potential, compare offers, and explore EP, interventional, and general cardiology blocks built around your schedule.";
 
 export const CARDIOLOGY_HUB_FAQS: { q: string; a: string }[] = [
   {

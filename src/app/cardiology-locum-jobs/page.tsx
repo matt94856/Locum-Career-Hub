@@ -33,7 +33,7 @@ export default function CardiologyLocumJobsHubPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form">{CTA.explore}</Button>
-            <Button href="/states" variant="secondary">
+            <Button href="/locum-tenens-jobs" variant="secondary">
               Browse by state
             </Button>
             <Button href="/cities" variant="secondary">

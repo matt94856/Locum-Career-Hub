@@ -61,7 +61,10 @@ export default function HomePage() {
               subtitle="Still exploring? Start here—then submit an inquiry when you want specifics for your subspecialty and timeline."
             />
             <div className="mt-8 space-y-4">
-              <Button href={HOME_LEAD_ANCHOR} className="w-full justify-center sm:w-auto sm:min-w-0">
+              <Button href="/cardiologist-locums-calculator" className="w-full justify-center sm:w-auto sm:min-w-0">
+                Calculate earning potential
+              </Button>
+              <Button href={HOME_LEAD_ANCHOR} variant="secondary" className="w-full justify-center sm:w-auto sm:min-w-0">
                 Request matches
               </Button>
               <Button href="/faq" variant="secondary" className="w-full justify-center sm:w-auto sm:min-w-0">

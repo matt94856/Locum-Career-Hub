@@ -2,19 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
-import { buildSerpMetadata } from "@/lib/serp-ctr";
+import { buildToolsIndexSerpMetadata } from "@/lib/serp-ctr";
 import { PORTFOLIO_TOOLS } from "@/lib/tools/portfolio-tools";
 import { SITE } from "@/lib/site";
 
 const indexed = PORTFOLIO_TOOLS.filter((tool) => tool.risk === "standard");
 const staged = PORTFOLIO_TOOLS.filter((tool) => tool.risk === "expert-review");
 
-export const metadata: Metadata = buildSerpMetadata({
-  title: "Cardiologist Calculators and Decision Tools",
-  description: "Use evidence-versioned calculators for cardiology locums earnings, IMLC eligibility, credentialing, offer comparison, call burden, licenses, contracts, RVUs, and career planning.",
-  path: "/tools",
-  keywords: ["cardiologist calculator", "physician locum tools", "cardiology compensation tools"],
-});
+export const metadata: Metadata = buildToolsIndexSerpMetadata();
 
 function ToolCard({ tool }: { tool: (typeof PORTFOLIO_TOOLS)[number] }) {
   return (
