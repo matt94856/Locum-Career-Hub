@@ -1,10 +1,16 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { DistributionStrip } from "@/components/share/DistributionStrip";
+import { PdfEmailGate } from "@/components/share/PdfEmailGate";
+import { ShareResultCard } from "@/components/share/ShareResultCard";
+import { ViralShareKit } from "@/components/share/ViralShareKit";
 import { readLeadAttribution } from "@/lib/attribution";
 import { trackDecisionToolEvent, trackGenerateLead } from "@/lib/analytics-events";
 import { calculatePortfolioTool, type ToolResult, type ToolValues } from "@/lib/tools/calculate-portfolio-tool";
 import type { PortfolioToolDefinition, ToolField } from "@/lib/tools/portfolio-tools";
+import { buildResultShareLandingUrl, toolLinkedInPost } from "@/lib/share";
+import { SITE } from "@/lib/site";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { US_STATES } from "@/lib/states";
 
@@ -78,61 +84,100 @@ function Metric({ label, value, note }: { label: string; value: string; note?: s
   );
 }
 
-function Results({ definition, result }: { definition: PortfolioToolDefinition; result: ToolResult }) {
+function Results({
+  definition,
+  result,
+  values,
+}: {
+  definition: PortfolioToolDefinition;
+  result: ToolResult;
+  values: ToolValues;
+}) {
+  const primaryMetric = result.metrics[0];
+  const headlineStat =
+    typeof result.score === "number"
+      ? `${result.score}/100`
+      : primaryMetric?.value ?? "Scenario ready";
+  const shareUrl = buildResultShareLandingUrl({
+    kind: "tool",
+    title: definition.shortName,
+    stat: headlineStat,
+    subtitle: result.headline,
+    path: definition.path,
+  });
+  const linkedInPost = toolLinkedInPost({
+    toolName: definition.shortName,
+    headline: result.headline,
+    shareUrl,
+  });
+
   return (
-    <section aria-live="polite" className="mt-8 rounded-3xl border border-brand-100 bg-gradient-to-b from-brand-50/70 to-white p-5 shadow-sm sm:p-8">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">Your scenario</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-slate-950">{result.headline}</h2>
+    <section aria-live="polite" className="mt-8 space-y-8">
+      <ShareResultCard
+        eyebrow={definition.eyebrow}
+        title={result.headline}
+        headlineStat={headlineStat}
+        headlineLabel={typeof result.score === "number" ? "Scenario score" : primaryMetric?.label ?? "Key result"}
+        metrics={result.metrics.slice(0, 3).map((metric) => ({ label: metric.label, value: metric.value }))}
+        footerNote={`${definition.shortName} · Confidence: ${result.confidence} · Educational scenario — verify with official sources.`}
+      />
+
+      <ViralShareKit
+        payload={{
+          title: definition.name,
+          text: `${result.headline} — ${headlineStat}`,
+          url: shareUrl,
+          headlineStat,
+          toolId: definition.id,
+        }}
+        linkedInPost={linkedInPost}
+      />
+
+      <div className="rounded-3xl border border-brand-100 bg-gradient-to-b from-brand-50/70 to-white p-5 shadow-sm sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">Full scenario — ungated</p>
+        <h2 className="mt-2 font-display text-3xl font-semibold text-slate-950">{result.headline}</h2>
+        <p className="mt-4 max-w-3xl leading-7 text-slate-700">{result.summary}</p>
+        <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">Confidence: {result.confidence}</p>
+        <dl className="mt-7 grid gap-4 sm:grid-cols-2">
+          {result.metrics.map((metric) => <Metric key={metric.label} {...metric} />)}
+        </dl>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div>
+            <h3 className="font-display text-xl font-semibold text-slate-950">Recommended next steps</h3>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+              {result.actions.map((action) => (
+                <li key={action} className="flex gap-2">
+                  <span aria-hidden="true" className="text-brand-600">✓</span>
+                  <span>{action}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+            <h3 className="font-semibold text-amber-950">Important limitations</h3>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-950/80">
+              {result.warnings.map((warning) => (
+                <li key={warning}>• {warning}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        {typeof result.score === "number" ? (
-          <div className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">{result.score}/100</div>
-        ) : null}
       </div>
-      <p className="mt-4 max-w-3xl leading-7 text-slate-700">{result.summary}</p>
-      <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">Confidence: {result.confidence}</p>
-      <dl className="mt-7 grid gap-4 sm:grid-cols-2">
-        {result.metrics.map((metric) => <Metric key={metric.label} {...metric} />)}
-      </dl>
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
-        <div>
-          <h3 className="font-display text-xl font-semibold text-slate-950">Recommended next steps</h3>
-          <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
-            {result.actions.map((action) => <li key={action} className="flex gap-2"><span aria-hidden="true" className="text-brand-600">✓</span><span>{action}</span></li>)}
-          </ul>
-        </div>
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-          <h3 className="font-semibold text-amber-950">Important limitations</h3>
-          <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-950/80">
-            {result.warnings.map((warning) => <li key={warning}>• {warning}</li>)}
-          </ul>
-        </div>
-      </div>
-      <div className="mt-7 flex flex-wrap gap-3 print:hidden">
-        <button
-          type="button"
-          onClick={async () => {
-            trackDecisionToolEvent(definition.id, "share", { source_version: definition.sourceIds.join(",") });
-            const data = { title: definition.name, text: result.headline, url: window.location.href };
-            if (navigator.share) await navigator.share(data).catch(() => undefined);
-            else await navigator.clipboard?.writeText(window.location.href);
-          }}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-        >
-          Share this tool
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            trackDecisionToolEvent(definition.id, "print", { source_version: definition.sourceIds.join(",") });
-            window.print();
-          }}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-        >
-          Print / save PDF
-        </button>
-      </div>
+
+      <PdfEmailGate
+        source={`decision_tool_${definition.id}_pdf`}
+        specialty="General Cardiology"
+        preferredStates={["Florida"]}
+        profile={{ toolId: definition.id, sourceVersions: definition.sourceIds, inputs: values, result }}
+        onUnlocked={() => trackDecisionToolEvent(definition.id, "lead_success", { source_version: definition.sourceIds.join(",") })}
+      />
+
+      <DistributionStrip
+        shareUrl={shareUrl}
+        hook={`this ${definition.shortName} result (${headlineStat})`}
+        toolId={definition.id}
+        creatorPitch={`Hi — Locum Career Hub has a free ${definition.shortName} for cardiologists. Happy to demo for your audience or fellowship group. ${SITE.url}${definition.path}`}
+      />
     </section>
   );
 }
@@ -278,7 +323,7 @@ export function PortfolioDecisionTool({ definition }: { definition: PortfolioToo
       </section>
       {complete ? (
         <div id="tool-results" tabIndex={-1} className="outline-none">
-          <Results definition={definition} result={result} />
+          <Results definition={definition} result={result} values={values} />
           <ReportGate definition={definition} values={values} result={result} />
         </div>
       ) : null}

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CardiologistLocumsCalculator } from "@/components/tools/CardiologistLocumsCalculator";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   breadcrumbJsonLd,
@@ -17,6 +19,8 @@ import {
 const PATH = "/cardiologist-locums-calculator";
 const DESCRIPTION =
   "Calculate cardiologist locums earning potential by subspecialty, availability, licenses, assignment style, and travel preference.";
+const DIRECT_ANSWER =
+  "Cardiologists can estimate directional locums earning potential by combining subspecialty weekly benchmarks with realistic weeks worked. Locum Career Hub’s calculator returns educational gross ranges—not quotes—and recruits MD/DO cardiologists only.";
 
 const FAQS = [
   {
@@ -55,12 +59,26 @@ export default function CardiologistLocumsCalculatorPage() {
       "EP cardiology locums opportunities",
     ],
     aboutTopics: ["Cardiology locum tenens", "Cardiologist compensation", "Flexible cardiology careers"],
+    speakableCssSelectors: ["#direct-answer"],
   });
 
   return (
     <main className="pb-24 sm:pb-0">
       <JsonLd data={medical} />
-      <JsonLd data={webApplicationJsonLd({ name: "Cardiologist Locums Earnings Calculator", description: DESCRIPTION, path: PATH })} />
+      <JsonLd
+        data={webApplicationJsonLd({
+          name: "Cardiologist Locums Earnings Calculator",
+          description: DESCRIPTION,
+          path: PATH,
+          applicationCategory: "HealthApplication",
+          featureList: [
+            "Specialty-specific weekly benchmarks",
+            "Fit score and demand index",
+            "Screenshot-ready share card",
+            "Educational ranges only — not guaranteed offers",
+          ],
+        })}
+      />
       <JsonLd data={faqJsonLd(FAQS)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Cardiologist Locums Calculator", path: PATH }])} />
 
@@ -74,10 +92,14 @@ export default function CardiologistLocumsCalculatorPage() {
             Discover how much additional income you could earn, how much flexibility you could gain, and which locums
             opportunities match your cardiology career profile.
           </p>
+          <div className="mx-auto mt-6 max-w-3xl text-left">
+            <AnswerFirstBlock answer={DIRECT_ANSWER} />
+          </div>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs font-semibold text-slate-600">
             <span className="rounded-full border border-slate-200 bg-white px-3 py-2">About 2 minutes</span>
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Value before contact details</span>
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Cardiologists only</span>
+            <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Numbers visible before any form</span>
+            <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Screenshot + LinkedIn share card</span>
+            <span className="rounded-full border border-slate-200 bg-white px-3 py-2">PDF is the only light gate</span>
           </div>
         </div>
       </section>
@@ -171,6 +193,9 @@ export default function CardiologistLocumsCalculatorPage() {
             {" "}or explore{" "}
             <Link href="/tools/w2-vs-1099-physician" className="font-semibold text-brand-700 hover:underline">W-2 vs 1099 considerations</Link>.
           </p>
+          <div className="mt-10">
+            <AiCitePanel claimIds={["cardiologist-only", "not-employer", "pay-educational", "imlc-not-multistate"]} />
+          </div>
         </div>
       </section>
     </main>

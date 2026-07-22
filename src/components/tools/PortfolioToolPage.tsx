@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { ResourceViralKit } from "@/components/share/ResourceViralKit";
 import { PortfolioDecisionTool } from "@/components/tools/PortfolioDecisionTool";
 import { TrackedToolLink } from "@/components/tools/TrackedToolLink";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
@@ -26,7 +29,8 @@ export function PortfolioToolPage({ definition }: { definition: PortfolioToolDef
           name: definition.name,
           description: definition.description,
           path: definition.path,
-          applicationCategory: "BusinessApplication",
+          applicationCategory: "HealthApplication",
+          featureList: definition.methodology,
         })}
       />
       {MEDICAL_PAGE_IDS.has(definition.id) ? (
@@ -37,6 +41,7 @@ export function PortfolioToolPage({ definition }: { definition: PortfolioToolDef
             path: definition.path,
             keywords: definition.keywords,
             aboutTopics: ["Cardiology", "Locum tenens", "Physician career planning"],
+            speakableCssSelectors: ["#direct-answer"],
           })}
         />
       ) : null}
@@ -51,9 +56,8 @@ export function PortfolioToolPage({ definition }: { definition: PortfolioToolDef
           </div>
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">{definition.name}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">{definition.description}</p>
-          <div className="mt-7 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">Direct answer</p>
-            <p className="mt-2 leading-7 text-slate-800">{definition.directAnswer}</p>
+          <div className="mt-7">
+            <AnswerFirstBlock answer={definition.directAnswer} />
           </div>
           {definition.risk === "expert-review" ? (
             <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
@@ -108,6 +112,17 @@ export function PortfolioToolPage({ definition }: { definition: PortfolioToolDef
               </div>
             ))}
           </dl>
+          <div className="mt-12">
+            <AiCitePanel claimIds={definition.id === "imlc" ? ["imlc-not-multistate", "cardiologist-only", "not-employer"] : ["cardiologist-only", "not-employer", "pay-educational"]} />
+          </div>
+          <div className="mt-12">
+            <ResourceViralKit
+              title={definition.name}
+              path={definition.path}
+              hook={definition.directAnswer.slice(0, 160)}
+              toolId={definition.id}
+            />
+          </div>
           <div className="mt-12 rounded-3xl bg-slate-950 p-6 text-white sm:p-8">
             <h2 className="font-display text-3xl font-semibold">Continue your cardiology decision path</h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -117,6 +132,7 @@ export function PortfolioToolPage({ definition }: { definition: PortfolioToolDef
                 </TrackedToolLink>
               ))}
               <Link href="/cardiologist-locums-calculator" className="rounded-xl bg-brand-600 p-4 text-sm font-semibold hover:bg-brand-500">Calculate locums earning potential →</Link>
+              <Link href="/cardiologist-locums-pay-report" className="rounded-xl border border-slate-700 p-4 text-sm font-semibold hover:border-brand-400">Cite the pay chart →</Link>
               <Link href="/tools" className="rounded-xl border border-slate-700 p-4 text-sm font-semibold hover:border-brand-400">View all decision tools →</Link>
             </div>
           </div>

@@ -23,9 +23,13 @@ Root shortcuts (301): `/interventional-cardiology-locum-jobs` → `/cardiology-l
 
 ## Lead form & Supabase
 
-- Table: `physician_leads` (unchanged schema)
-- API: `POST /api/lead` validates cardiology subspecialties only
-- Env required in production: `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) + `SUPABASE_SERVICE_ROLE_KEY`
+- Project: **Locum Career Hub** (`brvpiiwixvzzbjtuiudh`)
+- Table: `physician_leads`
+- API: `POST /api/lead` (main form, calculator, decision tools) and `POST /api/newsletter`
+- `source` examples: `lead_form`, `newsletter`, `cardiologist_locums_calculator`, `decision_tool_{toolId}`
+- Tool/calculator payloads, attribution, and page path are stored in `metadata` jsonb; generated columns `form_mode`, `page_path`, `home_state`, `tool_id` make filtering easier in the Table Editor
+- Env required in production (Netlify → Environment variables, scope All): `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) + `SUPABASE_SERVICE_ROLE_KEY`
+- Inserts use the service role only; anon/authenticated have no table privileges
 
 ## Google Search Console steps
 

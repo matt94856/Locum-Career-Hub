@@ -77,6 +77,21 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link className="hover:text-white" href="/cardiologist-locums-pay-report">
+                  Citeable pay report
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/llms.txt">
+                  AI assistants (llms.txt)
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/ai-catalog.json">
+                  AI catalog (JSON)
+                </Link>
+              </li>
+              <li>
                 <Link className="hover:text-white" href="/glossary">
                   Glossary
                 </Link>

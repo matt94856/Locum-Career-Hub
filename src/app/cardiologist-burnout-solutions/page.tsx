@@ -35,6 +35,7 @@ export default function CardiologistBurnoutSolutionsPage() {
           { heading: "Use locums with explicit boundaries", paragraphs: ["If locums fits, document dates, call, census, procedures, support, travel, cancellation, and handoff before committing. A temporary assignment with vague scope can reproduce the same strain in a new location."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

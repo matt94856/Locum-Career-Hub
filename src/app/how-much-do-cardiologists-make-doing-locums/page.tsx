@@ -35,6 +35,7 @@ export default function HowMuchDoCardiologistsMakeDoingLocumsPage() {
           { heading: "Compare total economics, not gross pay alone", paragraphs: ["Review taxes, benefits, retirement contributions, malpractice, travel, housing, cancellation language, unpaid credentialing, orientation, and schedule recovery. A higher gross number may not be the better assignment if the scope or unpaid time is materially heavier."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

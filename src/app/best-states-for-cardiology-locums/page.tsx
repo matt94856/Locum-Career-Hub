@@ -35,6 +35,7 @@ export default function BestStatesForCardiologyLocumsPage() {
           { heading: "IMLC is a pathway, not a blanket license", paragraphs: ["Eligible physicians may use the Interstate Medical Licensure Compact to pursue separate licenses from participating states more efficiently. Verify current participation and eligibility with official sources. Every assignment still requires the relevant state license and facility privileging."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

@@ -35,6 +35,7 @@ export default function EpCardiologyLocumsPayPage() {
           { heading: "Credentialing and lab readiness", paragraphs: ["Recent procedural logs, board status, vendor familiarity, facility proctoring, and malpractice review influence start timing. Confirm that the site can support the procedures it expects rather than treating every EP physician and lab as interchangeable."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

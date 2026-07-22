@@ -63,6 +63,12 @@ export async function POST(req: Request) {
   });
 
   if (error) {
+    console.error("[newsletter] supabase insert failed", {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+    });
     return NextResponse.json({ ok: false, error: "Could not save subscription. Please try again." }, { status: 500 });
   }
 

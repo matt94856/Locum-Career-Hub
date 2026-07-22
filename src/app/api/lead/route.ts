@@ -39,7 +39,7 @@ function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
 }
 
-function safeJsonObject(value: unknown, maxLength = 12000): Record<string, unknown> | null {
+function safeJsonObject(value: unknown, maxLength = 50000): Record<string, unknown> | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   try {
     const serialized = JSON.stringify(value);
@@ -217,6 +217,13 @@ export async function POST(req: Request) {
   const { error } = await supabase.from("physician_leads").insert(normalized.value);
 
   if (error) {
+    console.error("[lead] supabase insert failed", {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      source: normalized.value.source,
+    });
     return NextResponse.json({ ok: false, error: "Could not save your inquiry. Please try again." }, { status: 500 });
   }
 

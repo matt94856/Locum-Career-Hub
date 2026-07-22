@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { SITE, CTA } from "@/lib/site";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { AI_ENTITY } from "@/lib/ai-seo/catalog";
 
 const ABOUT_DESC =
   "Meet the cardiologist-only locum recruiting team at Locum Career Hub—transparent call expectations, credentialing clarity, and career tools built for MD/DO cardiologists.";
@@ -26,7 +29,9 @@ export default function AboutPage() {
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             A cardiology recruiting experience that feels calm, modern, and credible
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-slate-600">{SITE.tagline}</p>
+          <div className="mt-6">
+            <AnswerFirstBlock answer={AI_ENTITY.legalPositioning} />
+          </div>
         </div>
       </section>
 
@@ -84,6 +89,12 @@ export default function AboutPage() {
               </a>
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-100 bg-slate-50 py-12">
+        <div className="container-site max-w-4xl">
+          <AiCitePanel claimIds={["cardiologist-only", "not-employer", "imlc-not-multistate", "pay-educational"]} />
         </div>
       </section>
     </main>

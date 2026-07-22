@@ -17,12 +17,31 @@ import {
 } from "@/lib/locums-calculator/model";
 import { US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
-import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
-import { readLeadAttribution } from "@/lib/attribution";
+import { DistributionStrip } from "@/components/share/DistributionStrip";
+import { PdfEmailGate } from "@/components/share/PdfEmailGate";
+import { ShareResultCard } from "@/components/share/ShareResultCard";
+import { ViralShareKit } from "@/components/share/ViralShareKit";
 import { trackCalculatorEvent, trackGenerateLead } from "@/lib/analytics-events";
+import {
+  buildResultShareLandingUrl,
+  calculatorLinkedInPost,
+  formatUsdRange,
+} from "@/lib/share";
 import { SITE } from "@/lib/site";
 
-const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
+const STEP_LABELS = [
+  "Specialty",
+  "Experience",
+  "Practice",
+  "Availability",
+  "Assignment",
+  "Licenses",
+  "IMLC",
+  "Travel",
+  "Compensation",
+  "Goal",
+] as const;
+
 const NON_IMLC_STATES = new Set([
   "California",
   "Connecticut",
@@ -37,19 +56,6 @@ const NON_IMLC_STATES = new Set([
   "Rhode Island",
   "Vermont",
 ]);
-
-const STEP_LABELS = [
-  "Specialty",
-  "Experience",
-  "Practice",
-  "Availability",
-  "Assignment",
-  "Licenses",
-  "IMLC",
-  "Travel",
-  "Compensation",
-  "Goal",
-] as const;
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
@@ -93,11 +99,7 @@ export function CardiologistLocumsCalculator() {
   const [licensesTouched, setLicensesTouched] = useState(false);
   const [stateQuery, setStateQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const [reportUnlocked, setReportUnlocked] = useState(false);
-  const [leadStatus, setLeadStatus] = useState<"idle" | "submitting" | "error">("idle");
-  const [leadError, setLeadError] = useState("");
-  const [captchaReady, setCaptchaReady] = useState(!recaptchaSiteConfigured);
-  const captchaRef = useRef<RecaptchaFieldHandle>(null);
+  const [pdfUnlocked, setPdfUnlocked] = useState(false);
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
 
   const result = useMemo(() => (isComplete(answers) ? calculateLocumsProfile(answers) : null), [answers]);
@@ -105,10 +107,6 @@ export function CardiologistLocumsCalculator() {
     const query = stateQuery.trim().toLowerCase();
     return query ? US_STATES.filter((state) => state.toLowerCase().includes(query)) : US_STATES;
   }, [stateQuery]);
-
-  useEffect(() => {
-    if (showResults && !reportUnlocked) trackCalculatorEvent("report_gate_view");
-  }, [reportUnlocked, showResults]);
 
   useEffect(() => {
     if (!showResults) questionHeadingRef.current?.focus();
@@ -147,76 +145,6 @@ export function CardiologistLocumsCalculator() {
     if (selected.has(state)) selected.delete(state);
     else selected.add(state);
     setAnswer("licenses", [...selected].sort((a, b) => a.localeCompare(b)));
-  }
-
-  async function submitReport(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!result || !isComplete(answers)) return;
-    const form = new FormData(event.currentTarget);
-    const firstName = String(form.get("firstName") ?? "").trim();
-    const lastName = String(form.get("lastName") ?? "").trim();
-    const email = String(form.get("email") ?? "").trim();
-    const phone = String(form.get("phone") ?? "").trim();
-    const homeState = String(form.get("homeState") ?? "").trim();
-    if (!firstName || !lastName || !email || !phone || !homeState) {
-      setLeadStatus("error");
-      setLeadError("Complete your name, email, phone, and home or practice state.");
-      return;
-    }
-    if (recaptchaSiteConfigured && (!captchaReady || !captchaRef.current?.getToken())) {
-      setLeadStatus("error");
-      setLeadError("Complete the security verification before sending your report.");
-      return;
-    }
-
-    setLeadStatus("submitting");
-    setLeadError("");
-    const preferredStates = answers.licenses.length ? answers.licenses : [homeState];
-    const calculatorProfile = { answers, result, benchmarkEffectiveDate: "2026-07-21" };
-
-    try {
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          phone,
-          homeState,
-          specialty: toLeadSpecialty(answers.specialty),
-          preferredStates,
-          yearsExperience: answers.experience,
-          availability: answers.availability,
-          travel: answers.travelPreference,
-          clinicalNotes: `Preferred assignment style: ${answers.assignmentStyle}. Primary goal: ${answers.careerGoal}.`,
-          formMode: "full",
-          source: "cardiologist_locums_calculator",
-          pagePath: window.location.pathname,
-          attribution: readLeadAttribution(),
-          calculatorProfile,
-          recaptchaToken: recaptchaSiteConfigured ? (captchaRef.current?.getToken() ?? "") : "",
-        }),
-      });
-      const data = (await response.json().catch(() => null)) as { error?: string } | null;
-      if (!response.ok) throw new Error(data?.error || "We could not send your report. Please try again.");
-      setReportUnlocked(true);
-      setLeadStatus("idle");
-      trackGenerateLead("cardiologist_locums_calculator");
-      trackCalculatorEvent("lead_success", { specialty: answers.specialty, fit_score: result.fitScore });
-    } catch (error) {
-      setLeadStatus("error");
-      setLeadError(error instanceof Error ? error.message : "We could not send your report. Please try again.");
-      trackCalculatorEvent("lead_error");
-    }
-  }
-
-  async function shareReport() {
-    if (!result || !isComplete(answers)) return;
-    const text = `My ${answers.specialty} locums profile: ${result.fitScore}/100 fit score and ${formatCurrency(result.annualLow)}–${formatCurrency(result.annualHigh)} estimated annual earning potential.`;
-    if (navigator.share) await navigator.share({ title: "My Cardiologist Locums Profile", text, url: window.location.href });
-    else await navigator.clipboard.writeText(`${text} ${window.location.href}`);
-    trackCalculatorEvent("share");
   }
 
   function renderQuestion() {
@@ -277,106 +205,127 @@ export function CardiologistLocumsCalculator() {
   ];
 
   if (showResults && result && isComplete(answers)) {
+    const weeklyLabel = `${formatUsdRange(result.weeklyLow, result.weeklyHigh)}/wk`;
+    const shareUrl = buildResultShareLandingUrl({
+      kind: "calc",
+      title: `${answers.specialty} locums profile`,
+      stat: weeklyLabel,
+      subtitle: `Fit ${result.fitScore}/100 · ${formatUsdRange(result.annualLow, result.annualHigh)} annual directional`,
+      path: "/cardiologist-locums-calculator",
+    });
+    const linkedInPost = calculatorLinkedInPost({
+      specialty: answers.specialty,
+      weeklyLow: result.weeklyLow,
+      weeklyHigh: result.weeklyHigh,
+      fitScore: result.fitScore,
+      shareUrl,
+    });
+
     return (
       <div className="space-y-8" aria-live="polite">
-        <div className="rounded-3xl border border-brand-100 bg-white p-5 shadow-card sm:p-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Your locums opportunity profile</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-slate-950">{result.fitScore}/100 Locums Fit Score</h2>
-              <p className="mt-2 text-slate-600">{result.fitScore >= 85 ? "You are highly marketable for cardiology locums opportunities." : result.fitScore >= 70 ? "Your profile aligns with many common cardiology coverage models." : "Your profile has a practical path to locums with targeted planning."}</p>
-            </div>
-            <div className="rounded-2xl bg-slate-950 px-5 py-4 text-white">
-              <p className="text-xs uppercase tracking-wider text-slate-300">Demand index</p>
-              <p className="mt-1 font-display text-3xl font-semibold">{result.demandScore}/100</p>
-            </div>
-          </div>
+        <ShareResultCard
+          eyebrow="Cardiologist locums earnings"
+          title={`${answers.specialty} · ${answers.availability}`}
+          headlineStat={weeklyLabel}
+          headlineLabel="Directional weekly gross"
+          metrics={[
+            { label: "Annual range", value: formatUsdRange(result.annualLow, result.annualHigh) },
+            { label: "Fit score", value: `${result.fitScore}/100` },
+            { label: "Demand index", value: `${result.demandScore}/100` },
+          ]}
+          footerNote="Screenshot this card. Educational market-intelligence estimate — not a quote or guaranteed offer."
+        />
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl bg-brand-50 p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-800">Estimated additional income</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-slate-950">{formatCurrency(result.annualLow)}–{formatCurrency(result.annualHigh)}</p>
-              <p className="mt-2 text-xs text-slate-600">Annual gross range based on {answers.availability.toLowerCase()}.</p>
-            </div>
-            <div className="rounded-2xl bg-slate-50 p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">Weekly benchmark</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-slate-950">{formatCurrency(result.weeklyLow)}–{formatCurrency(result.weeklyHigh)}</p>
-              <p className="mt-2 text-xs text-slate-600">Directional gross range; not a quote or guaranteed offer.</p>
-            </div>
-          </div>
+        <ViralShareKit
+          payload={{
+            title: "My Cardiologist Locums Profile",
+            text: `My ${answers.specialty} locums profile: ${weeklyLabel} directional weekly range, ${result.fitScore}/100 fit.`,
+            url: shareUrl,
+            headlineStat: weeklyLabel,
+            toolId: "cardiologist_locums_calculator",
+          }}
+          linkedInPost={linkedInPost}
+        />
+
+        <div className="rounded-3xl border border-brand-100 bg-white p-5 shadow-card sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Full result — ungated</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold text-slate-950">{result.fitScore}/100 Locums Fit Score</h2>
+          <p className="mt-2 text-slate-600">
+            {result.fitScore >= 85
+              ? "You are highly marketable for cardiology locums opportunities."
+              : result.fitScore >= 70
+                ? "Your profile aligns with many common cardiology coverage models."
+                : "Your profile has a practical path to locums with targeted planning."}
+          </p>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             <div>
               <h3 className="font-semibold text-slate-950">Your biggest advantages</h3>
               <ul className="mt-3 space-y-2 text-sm text-slate-700">
-                {result.advantages.slice(0, 2).map((item) => <li key={item}>✓ {item}</li>)}
+                {result.advantages.map((item) => <li key={item}>✓ {item}</li>)}
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-slate-950">A likely match</h3>
-              <p className="mt-3 text-sm text-slate-700">{result.matchedOpportunities[0]}</p>
-              <p className="mt-2 text-xs text-slate-500">Unlock the complete report for all matches, opportunity unlocks, and career comparison.</p>
+              <h3 className="font-semibold text-slate-950">Matching opportunity styles</h3>
+              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                {result.matchedOpportunities.map((item) => <li key={item}>✓ {item}</li>)}
+              </ul>
             </div>
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 className="font-semibold text-slate-950">Compare current career vs locums</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-3">
+              <Metric label="Current compensation" value={result.currentCompMidpoint ? `~${formatCurrency(result.currentCompMidpoint)}` : "Not provided"} />
+              <Metric label="Locums earning potential" value={formatUsdRange(result.annualLow, result.annualHigh)} />
+              <Metric label="Schedule modeled" value={`${result.annualWeeks} weeks/year`} />
+            </div>
+            <p className="mt-4 text-sm text-slate-600">
+              {answers.careerGoal === "Increase income" && result.incomeIncreasePercent
+                ? `The modeled locums midpoint equals about ${result.incomeIncreasePercent}% of your current compensation benchmark in additional gross income.`
+                : answers.careerGoal === "Retirement bridge"
+                  ? "Your schedule is best evaluated as a retirement bridge: clinical continuity with defined blocks rather than maximum annual utilization."
+                  : answers.careerGoal === "Reduce burnout"
+                    ? "Locums is not a treatment for burnout, but defined scope, call, and end dates may create more control."
+                    : "The strongest potential difference is control: assignment scope, travel radius, and availability can be defined before you commit."}
+            </p>
+            {result.unlocks.length ? (
+              <div className="mt-5">
+                <h4 className="text-sm font-semibold text-slate-900">Opportunity unlocks</h4>
+                <ul className="mt-2 space-y-1 text-sm text-slate-700">
+                  {result.unlocks.map((item) => <li key={item}>✓ {item}</li>)}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3 print:hidden">
+            <Button href={SITE.calendlyUrl || "/contact"}>Discuss my profile</Button>
+            <Button href="/cardiologist-locums-pay-survey" variant="secondary">Contribute anonymous pay data</Button>
           </div>
         </div>
 
-        {!reportUnlocked ? (
-          <form onSubmit={submitReport} className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Your personalized report is ready</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold text-slate-950">Where should we send your Cardiologist Locums Report?</h2>
-            <p className="mt-3 text-sm text-slate-600">You already received the core estimate. These details unlock the full report and let a cardiology specialist follow up only when relevant.</p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <input aria-label="First name" name="firstName" required placeholder="First name" autoComplete="given-name" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-              <input aria-label="Last name" name="lastName" required placeholder="Last name" autoComplete="family-name" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-              <input aria-label="Email" name="email" required type="email" placeholder="Email" autoComplete="email" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-              <input aria-label="Phone" name="phone" required type="tel" placeholder="Phone" autoComplete="tel" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-              <select aria-label="Home or primary practice state" name="homeState" required defaultValue="" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm sm:col-span-2">
-                <option value="" disabled>Home or primary practice state</option>
-                {US_STATES.map((state) => <option key={state} value={state}>{state}</option>)}
-              </select>
-            </div>
-            {recaptchaSiteConfigured ? <div className="mt-5"><RecaptchaField ref={captchaRef} onReady={() => setCaptchaReady(true)} onLoadError={() => setCaptchaReady(false)} /></div> : null}
-            {leadStatus === "error" ? <p className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{leadError}</p> : null}
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <Button type="submit" disabled={leadStatus === "submitting"}>{leadStatus === "submitting" ? "Sending report…" : "Unlock my full report"}</Button>
-              <p className="text-xs text-slate-500">No job-board blast. Your information is used for your report and relevant cardiology follow-up.</p>
-            </div>
-          </form>
-        ) : (
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 sm:p-8">
-              <p className="text-sm font-semibold text-emerald-900">Your report is unlocked. A copy request has been sent to Locum Career Hub.</p>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              <ReportList title="All matching opportunity styles" items={result.matchedOpportunities} />
-              <ReportList title="Opportunity unlocks" items={result.unlocks.length ? result.unlocks : ["Your current profile is already broadly accessible; keep license and availability details current."]} />
-              <ReportList title="Profile strengths" items={result.advantages} />
-            </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-8">
-              <h2 className="font-display text-3xl font-semibold text-slate-950">Compare your current career vs locums</h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <Metric label="Current compensation" value={result.currentCompMidpoint ? `~${formatCurrency(result.currentCompMidpoint)}` : "Not provided"} />
-                <Metric label="Locums earning potential" value={`${formatCurrency(result.annualLow)}–${formatCurrency(result.annualHigh)}`} />
-                <Metric label="Schedule modeled" value={`${result.annualWeeks} weeks/year`} />
-              </div>
-              <p className="mt-5 text-sm text-slate-600">
-                {answers.careerGoal === "Increase income" && result.incomeIncreasePercent
-                  ? `The modeled locums midpoint equals about ${result.incomeIncreasePercent}% of your current compensation benchmark in additional gross income.`
-                  : answers.careerGoal === "Retirement bridge"
-                    ? "Your schedule is best evaluated as a retirement bridge: clinical continuity with defined blocks rather than maximum annual utilization."
-                    : answers.careerGoal === "Reduce burnout"
-                      ? "Locums is not a treatment for burnout, but defined scope, call, and end dates may create more control. Discuss urgent mental-health concerns with a licensed professional."
-                      : "The strongest potential difference is control: assignment scope, travel radius, and availability can be defined before you commit."}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button type="button" onClick={() => { trackCalculatorEvent("compare_view"); void shareReport(); }}>Share my profile</Button>
-                <Button href={SITE.calendlyUrl || "/contact"} variant="secondary">Discuss my report</Button>
-              </div>
-            </div>
-          </div>
-        )}
+        <PdfEmailGate
+          source="cardiologist_locums_calculator_pdf"
+          specialty={toLeadSpecialty(answers.specialty)}
+          preferredStates={answers.licenses.length ? answers.licenses : ["Florida"]}
+          availability={answers.availability}
+          profile={{ answers, result, benchmarkEffectiveDate: "2026-07-21" }}
+          onUnlocked={() => {
+            setPdfUnlocked(true);
+            trackGenerateLead("cardiologist_locums_calculator_pdf");
+            trackCalculatorEvent("lead_success", { specialty: answers.specialty, fit_score: result.fitScore });
+          }}
+        />
 
-        <button type="button" className="text-sm font-semibold text-brand-700 hover:underline" onClick={() => { setShowResults(false); setStep(0); }}>
+        <DistributionStrip
+          shareUrl={shareUrl}
+          hook={`this ${answers.specialty} locums earnings model (${weeklyLabel} directional weekly)`}
+          toolId="cardiologist_locums_calculator"
+          creatorPitch={`Hi — we built a free cardiologist locums earnings calculator with screenshot-ready weekly ranges and fit scores. Happy to walk your audience or fellowship cohort through a live demo (no job-board spam). Try it: ${SITE.url}/cardiologist-locums-calculator`}
+        />
+
+        <button type="button" className="text-sm font-semibold text-brand-700 hover:underline print:hidden" onClick={() => { setShowResults(false); setStep(0); setPdfUnlocked(false); }}>
           Recalculate my profile
         </button>
       </div>
@@ -418,20 +367,9 @@ function OptionGrid<T extends string>({ options, value, onSelect }: { options: r
   );
 }
 
-function ReportList({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5">
-      <h3 className="font-semibold text-slate-950">{title}</h3>
-      <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
-        {items.map((item) => <li key={item}>✓ {item}</li>)}
-      </ul>
-    </div>
-  );
-}
-
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-slate-50 p-4">
+    <div className="rounded-2xl bg-white p-4">
       <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</p>
       <p className="mt-2 font-display text-xl font-semibold text-slate-950">{value}</p>
     </div>

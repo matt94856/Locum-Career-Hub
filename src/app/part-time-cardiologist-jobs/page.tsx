@@ -35,6 +35,7 @@ export default function PartTimeCardiologistJobsPage() {
           { heading: "Compare administrative cost with recurring value", paragraphs: ["Licensing, privileging, payer enrollment, EHR training, and orientation take time. Ask whether the site expects repeat blocks, guarantees dates, pays orientation, and defines cancellation terms."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

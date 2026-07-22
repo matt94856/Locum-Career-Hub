@@ -36,13 +36,15 @@ const staticRoutes = [
   "/locum-tenens-jobs",
   "/glossary",
   "/tools",
-  "/cardiologist-locums-calculator",
-  "/interventional-cardiology-locums-pay",
-  "/ep-cardiology-locums-pay",
-  "/how-much-do-cardiologists-make-doing-locums",
-  "/best-states-for-cardiology-locums",
-  "/part-time-cardiologist-jobs",
-  "/cardiologist-burnout-solutions",
+      "/cardiologist-locums-calculator",
+      "/cardiologist-locums-pay-survey",
+      "/cardiologist-locums-pay-report",
+      "/interventional-cardiology-locums-pay",
+      "/ep-cardiology-locums-pay",
+      "/how-much-do-cardiologists-make-doing-locums",
+      "/best-states-for-cardiology-locums",
+      "/part-time-cardiologist-jobs",
+      "/cardiologist-burnout-solutions",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

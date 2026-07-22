@@ -5,33 +5,46 @@ export const SCHEMA_LOGO_URL = `${SITE.url}/logo.svg` as const;
 
 /** Topics and entities this organization is positioned to help with (semantic + AI retrieval signals). */
 const KNOWS_ABOUT = [
-  "Physician burnout",
-  "Flexible physician careers",
-  "Locum tenens",
-  "Locum tenens jobs",
-  "Physician recruiting",
-  "Physician staffing agency",
-  "Physician work-life balance",
-  "Moonlighting and side income for cardiologists",
+  "Cardiologist locum tenens",
+  "Cardiology locum jobs",
   "Interventional cardiology locum jobs",
   "Electrophysiology locum jobs",
   "Heart failure cardiology locums",
   "General cardiology locum jobs",
-  "Cardiology locum jobs",
+  "Cardiologist locums pay",
+  "IMLC for physicians",
   "Physician credentialing",
+  "Physician burnout",
+  "Flexible physician careers",
+  "Locum tenens",
+  "Physician recruiting",
+  "Cardiologist staffing agency",
   "Medical malpractice insurance for locums",
   "Physician compensation and 1099 income",
+] as const;
+
+const SAME_AS = [
+  SITE.url,
+  `${SITE.url}/about`,
+  `${SITE.url}/llms.txt`,
+  `${SITE.url}/ai-catalog.json`,
 ] as const;
 
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "MedicalOrganization"],
     name: SITE.name,
+    alternateName: ["LocumCareerHub", "Locum Career Hub cardiologist recruiting"],
     url: SITE.url,
     logo: SCHEMA_LOGO_URL,
+    image: SCHEMA_LOGO_URL,
     description: SITE.tagline,
+    slogan: "Cardiologist-only locum tenens recruiting",
+    foundingDate: "2025",
+    areaServed: { "@type": "Country", name: "United States" },
     knowsAbout: KNOWS_ABOUT.map((name) => ({ "@type": "Thing", name })),
+    sameAs: [...SAME_AS],
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -42,6 +55,8 @@ export function organizationJsonLd() {
         availableLanguage: ["English"],
       },
     ],
+    publishingPrinciples: `${SITE.url}/editorial-policy`,
+    ethicsPolicy: `${SITE.url}/content-review-policy`,
   };
 }
 
@@ -52,6 +67,8 @@ export function websiteJsonLd() {
     name: SITE.name,
     url: SITE.url,
     description: SITE.tagline,
+    inLanguage: "en-US",
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
   };
 }
 
@@ -70,21 +87,15 @@ export function professionalServiceJsonLd() {
       name: "United States",
     },
     serviceType: [
-      "Physician career consulting",
-      "Physician recruiting",
-      "Locum tenens staffing",
-      "Locum tenens jobs",
-      "Physician staffing agency",
-      "Flexible physician work arrangements",
-      "Physician credentialing support",
+      "Cardiologist locum tenens recruiting",
+      "Cardiology physician staffing",
+      "Physician career consulting for cardiologists",
+      "Locum tenens credentialing support",
+      "Cardiologist decision tools and calculators",
     ],
-    knowsAbout: [
-      { "@type": "Thing", name: "Physician burnout" },
-      { "@type": "Thing", name: "Flexible physician careers" },
-      { "@type": "Thing", name: "Locum tenens" },
-      { "@type": "Thing", name: "Physician work-life balance" },
-    ],
+    knowsAbout: KNOWS_ABOUT.map((name) => ({ "@type": "Thing", name })),
     description: SITE.tagline,
+    sameAs: [...SAME_AS],
   };
 }
 
@@ -241,6 +252,7 @@ export function medicalWebPageJsonLd(input: {
   path: string;
   keywords?: string[];
   aboutTopics?: string[];
+  speakableCssSelectors?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -259,6 +271,19 @@ export function medicalWebPageJsonLd(input: {
           })),
         }
       : {}),
+    ...(input.speakableCssSelectors?.length
+      ? {
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: input.speakableCssSelectors,
+          },
+        }
+      : {
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: ["#direct-answer", "[data-speakable='true']"],
+          },
+        }),
   };
 }
 
@@ -268,16 +293,18 @@ export function webApplicationJsonLd(input: {
   description: string;
   path: string;
   applicationCategory?: string;
+  featureList?: string[];
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": ["SoftwareApplication", "WebApplication"],
     name: input.name,
     description: input.description,
     url: `${SITE.url}${input.path}`,
-    applicationCategory: input.applicationCategory ?? "FinanceApplication",
+    applicationCategory: input.applicationCategory ?? "HealthApplication",
     operatingSystem: "Any",
     browserRequirements: "Requires JavaScript",
+    ...(input.featureList?.length ? { featureList: input.featureList } : {}),
     offers: {
       "@type": "Offer",
       price: "0",
@@ -288,5 +315,34 @@ export function webApplicationJsonLd(input: {
       name: SITE.name,
       url: SITE.url,
     },
+    isAccessibleForFree: true,
+  };
+}
+
+/** Citeable pay / survey datasets for AI and journalist grounding. */
+export function datasetJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  dateModified: string;
+  keywords?: string[];
+  variableMeasured?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: input.name,
+    description: input.description,
+    url: `${SITE.url}${input.path}`,
+    dateModified: input.dateModified,
+    license: `${SITE.url}/editorial-policy`,
+    creator: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    isAccessibleForFree: true,
+    ...(input.keywords?.length ? { keywords: input.keywords.join(", ") } : {}),
+    ...(input.variableMeasured?.length
+      ? { variableMeasured: input.variableMeasured.map((name) => ({ "@type": "PropertyValue", name })) }
+      : {}),
+    measurementTechnique: "Directional educational benchmarks and anonymized physician survey aggregates",
   };
 }

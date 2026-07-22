@@ -34,6 +34,7 @@ export default function InterventionalCardiologyLocumsPayPage() {
           { heading: "Credentialing affects opportunity access", paragraphs: ["Recent case logs, privilege delineation, active licenses, malpractice history, and facility-specific proctoring can determine whether an assignment is feasible. A high headline rate has little value if the requested start date cannot be credentialed safely."] },
         ]}
         faqs={FAQS}
+        path={PATH}
       />
     </>
   );

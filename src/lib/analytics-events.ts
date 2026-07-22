@@ -70,3 +70,16 @@ export function trackCtaClick(ctaName: string, destination: string) {
     page_path: window.location.pathname,
   });
 }
+
+/**
+ * Remarketing-friendly share/PDF/survey events.
+ * In GA4 mark `viral_share` as a key event; use method for LinkedIn vs copy vs pdf_email_gate.
+ * Use the same event name in Google Ads / Meta custom conversions once the calculator proves shareability.
+ */
+export function trackViralShare(method: string, toolId: string) {
+  trackEvent("viral_share", {
+    method,
+    tool_id: toolId,
+    page_path: window.location.pathname,
+  });
+}
