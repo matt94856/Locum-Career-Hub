@@ -473,6 +473,20 @@ export const LANDING_PAGES: LandingPage[] = [
           "Geographic testing without relocating on day one",
         ],
       },
+      {
+        h2: "A calm exit sequence (so you do not burn bridges)",
+        paragraphs: [
+          "Map licenses and privileging lead times before you resign when you can. Ambiguous timelines turn a strategic exit into a scramble.",
+          "Review covenants, tail, PTO payout, and moonlighting rules with counsel. Then decide whether your next chapter is another employed role, hybrid locums, or a defined bridge.",
+        ],
+      },
+      {
+        h2: "What 'better' has to include",
+        paragraphs: [
+          "A new title without recovery is not a plan. Write non-negotiables: nights, census, travel radius, and how you will protect sleep.",
+          "If you only needed permission to redesign the job—not leave medicine—you have it. Locum Career Hub can help when you want cardiologist-only matching with transparent scope conversations.",
+        ],
+      },
     ],
     faqs: [
       {
@@ -482,6 +496,10 @@ export const LANDING_PAGES: LandingPage[] = [
       {
         q: "What if I am burned out?",
         a: "Then pacing matters even more. We prioritize realistic consult census, cath lab scope, and recovery time—not stacking call until you feel better.",
+      },
+      {
+        q: "Should I resign before I have a next step?",
+        a: "Usually no. Plan licensing, finances, and at least one credible option first—unless safety or dignity requires an immediate exit with support.",
       },
     ],
   },

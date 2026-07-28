@@ -28,7 +28,17 @@ yarn-debug.log*
 yarn-error.log*
 
 # env files
+.env
 .env*.local
+
+# Google Search Console MCP secrets
+mcp-gsc/.env
+mcp-gsc/.venv/
+mcp-gsc/credentials/**
+!mcp-gsc/credentials/.gitkeep
+**/credentials.json
+**/token.json
+**/client_secret*.json
 
 # vercel
 .vercel

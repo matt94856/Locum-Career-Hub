@@ -6,6 +6,7 @@ import {
   isPriorityMetroSlug,
 } from "@/lib/cardiology-seo/metro-rich-data";
 import { getPillarDeepContent, PILLAR_SLUGS } from "@/lib/cardiology-seo/pillar-content";
+import { getEditorialGuideBody, hasEditorialGuideBody } from "@/lib/cardiology-content";
 import {
   buildStateSalaryFaqs,
   buildStateSalarySections,
@@ -28,7 +29,7 @@ function pathFor(def: PageDef): string {
 }
 
 function resolveContentTier(def: PageDef): ContentTier {
-  if (PILLAR_SLUGS.has(def.slug)) return "flagship";
+  if (PILLAR_SLUGS.has(def.slug) || hasEditorialGuideBody(def.slug)) return "flagship";
   if (def.category === "salary" && def.slug.startsWith("cardiologist-salary-")) return "flagship";
   if (def.category === "city" && isPriorityMetroSlug(def.slug)) return "flagship";
   if (def.category === "state") return "enhanced";
@@ -82,6 +83,9 @@ function buildEnrichedSections(def: PageDef, path: string): CardiologySeoPage["s
     if (pillar) return pillar.sections;
   }
 
+  const editorial = getEditorialGuideBody(def.slug);
+  if (editorial) return editorial.sections;
+
   return buildCoreSections({
     seed: path,
     topic: def.topic,
@@ -100,6 +104,8 @@ function buildEnrichedFaqs(def: PageDef, path: string): CardiologySeoPage["faqs"
     const pillar = getPillarDeepContent(def.slug);
     if (pillar?.extraFaqs.length) return [...base, ...pillar.extraFaqs];
   }
+  const editorial = getEditorialGuideBody(def.slug);
+  if (editorial?.faqs.length) return [...base, ...editorial.faqs];
   return base;
 }
 
@@ -121,7 +127,7 @@ export function buildPageFromDef(def: PageDef): CardiologySeoPage {
       ? `Cardiology programs in ${geo ?? "this market"} periodically need locum coverage for leave, volume growth, and service-line expansion. This page explains what to document before you accept a block—and how our inquiry process works. When you submit the form with ${geo ? `${geo} among your ` : ""}preferred states, a cardiology recruiter will review your subspecialty and timeline. If there are realistic opportunities in the areas you selected, we will reach out shortly (typically within one business day). If nothing fits, we will tell you directly.`
       : def.category === "salary" && def.slug.startsWith("cardiologist-salary-")
         ? `Cardiologists comparing offers in ${geo ?? "this state"} need more than a single number from a forum post. This guide explains how subspecialty, STEMI call, consult census, clinic panels, and licensing timelines interact with compensation—employed and locum. Figures are directional market context, not promises.`
-        : PILLAR_SLUGS.has(def.slug)
+        : PILLAR_SLUGS.has(def.slug) || hasEditorialGuideBody(def.slug)
           ? `This pillar guide is a long-form reference for cardiologists. It is educational—not medical, legal, or tax advice. For recruiter-led matching after you read it, submit an inquiry with your subspecialty and preferred states.`
           : `This guide covers ${def.topic} for cardiologists considering locum tenens. We recruit cardiologists only—not other physician specialties. Content is educational, not medical, legal, or tax advice.`;
 

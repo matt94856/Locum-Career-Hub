@@ -75,6 +75,14 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
         h2: "Pay drivers for interventional locums",
         paragraphs: [
           "STEMI call, night coverage, case volume, and add-on emergency cases drive weekly rates. A lab with strong backup and predictable block schedules differs from a solo interventionalist covering 24/7 activation.",
+          "Compare offers on call intensity, weekend coverage, peripheral add-ons, and whether complication backup is truly available—not headline weekly rate alone. See interventional cardiology locums pay and the locums calculator for directional modeling.",
+        ],
+      },
+      {
+        h2: "When interventional locums fits—and when it does not",
+        paragraphs: [
+          "IC locums can bridge between employed jobs, sample markets, or create defined recovery weeks between intense blocks. It does not fix every burnout story: if your pain is STEMI intensity itself, swapping employers without changing call design may recreate the same week.",
+          "Confirm moonlighting clauses, tail coverage, and recovery gaps before stacking employed call with locum STEMI. Write non-negotiables before you travel.",
         ],
       },
     ],
@@ -82,6 +90,14 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
       {
         q: "What is a typical interventional locum block length?",
         a: "Blocks range from one to four weeks or longer—match length to privileging lead time and recovery needs.",
+      },
+      {
+        q: "Do interventional locums always include STEMI call?",
+        a: "No. Some labs need elective PCI coverage without primary STEMI activation. Require call scope in writing.",
+      },
+      {
+        q: "How do IC locum rates compare to general cardiology?",
+        a: "STEMI and night coverage usually command a premium—but intensity and malpractice cost rise with scope. Compare total design, not just weekly gross.",
       },
     ],
   },
@@ -96,12 +112,21 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
         h2: "EP lab workflow and device clinics",
         paragraphs: [
           "EP locums may cover ablation days, device implant cases, and device clinic panels with remote monitoring responsibilities between blocks. Mapping system familiarity, EP tech staffing, and vendor support vary by site—confirm before travel blocks.",
+          "Clarify whether you own inpatient arrhythmia consults, weekend device emergencies, and remote monitoring volume between travel weeks—those items change lifestyle as much as ablation days.",
         ],
       },
       {
         h2: "Credentialing for EP locums",
         paragraphs: [
           "Hospitals expect EP fellowship training or documented ablation and device experience, cath/EP lab privileges, and malpractice aligned with procedural scope.",
+          "Bring recent procedure logs, device implant volumes, and mapping platform experience. Privileging lag for EP labs can exceed general consult timelines—build lead time into resignation plans.",
+        ],
+      },
+      {
+        h2: "Compensation and schedule design",
+        paragraphs: [
+          "EP locum rates move with ablation mix, device implant volume, call for arrhythmia emergencies, and whether device clinic panels travel with you. A lab-heavy week without nights differs from continuous remote-monitor burden plus weekend call.",
+          "Model EP offers against employed packages using benefits gaps, tail, and recoverability—see EP cardiology locums pay for directional context.",
         ],
       },
     ],
@@ -109,6 +134,14 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
       {
         q: "Do EP locums cover both ablation and devices?",
         a: "Most assignments include a mix—define weekly targets for each before starting.",
+      },
+      {
+        q: "Can EP locums be device-clinic heavy?",
+        a: "Yes. Some sites need implant and clinic coverage more than complex ablation days. Confirm case mix in writing.",
+      },
+      {
+        q: "Is EP locums less intense than STEMI call?",
+        a: "Often different intensity, not zero intensity. Arrhythmia emergencies and remote monitoring still need clear boundaries.",
       },
     ],
   },
@@ -144,6 +177,20 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
         h2: "Advanced heart failure and MCS scope",
         paragraphs: [
           "Assignments may include inpatient advanced HF census, outpatient transplant clinic, and device management. Clarify LVAD and MCS operator scope if advertised—the American Heart Association (AHA) highlights growing HF burden driving hospital demand.",
+          "Write census caps, weekend coverage, and whether you cover MCS emergencies or consult-only pathways. Ambiguous HF blocks recreate employed intensity without employed infrastructure.",
+        ],
+      },
+      {
+        h2: "Credentialing and program fit",
+        paragraphs: [
+          "Programs may require advanced HF fellowship experience for transplant or LVAD clinics, while community HF consult roles focus on decompensated HF and GDMT titration. Match your logs to the advertised acuity.",
+          "Privileging timelines for advanced programs can run long—confirm start dates against licensing and FPPE before resigning.",
+        ],
+      },
+      {
+        h2: "Compensation and recoverability",
+        paragraphs: [
+          "HF locum rates reflect acuity, call, and census—not title alone. A transplant-adjacent week differs from community HF clinic blocks. Model benefits gaps and recovery weeks the same way you would for interventional intensity.",
         ],
       },
     ],
@@ -151,6 +198,10 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
       {
         q: "Do HF locums require transplant experience?",
         a: "Not always—confirm consult-only vs transplant clinic vs LVAD scope before signing.",
+      },
+      {
+        q: "Are HF locums less intense than STEMI call?",
+        a: "Different intensity. High-acuity census and weekend coverage can still erase recovery if undefined.",
       },
     ],
   },

@@ -131,10 +131,25 @@ function GuideBody() {
       </div>
 
       <div>
-        <h2 className="font-display text-2xl font-semibold text-slate-950">6) A simple decision framework</h2>
+        <h2 className="font-display text-2xl font-semibold text-slate-950">6) Cardiology-specific diligence</h2>
+        <p className="mt-4">
+          For cardiologists, written scope must cover STEMI or consult expectations, cath/EP privileges, census caps,
+          imaging read pools, and night backup. Malpractice must match procedural risk. IMLC and hospital privileging
+          timelines often dominate start dates more than recruiter optimism.
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-5">
+          <li>Confirm primary vs backup interventional roles when advertised.</li>
+          <li>Separate clinical rate from travel, housing, and unpaid credentialing days.</li>
+          <li>Model 1099 taxes and benefits gaps before comparing to employed total comp.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="font-display text-2xl font-semibold text-slate-950">7) A simple decision framework</h2>
         <p className="mt-4">
           If an assignment improves either autonomy, income, recovery time, or skill fit—without unacceptable safety
-          tradeoffs—it is worth serious consideration. If it only chases a headline rate, pause.
+          tradeoffs—it is worth serious consideration. If it only chases a headline rate, pause. Revisit the scorecard
+          every 12–24 months as life stage changes.
         </p>
       </div>
     </div>

@@ -13,91 +13,104 @@ const PILLAR_CONTENT: Record<string, { sections: ContentSection[]; extraFaqs: { 
   "complete-guide-to-locum-cardiology": {
     sections: [
       {
-        h2: "What locum cardiology is (and is not)",
+        h2: "Who cardiology locums is (and isn't) for",
         paragraphs: [
-          "Locum tenens cardiology is contract-based clinical work where you are typically employed or contracted for defined blocks—often through a hospital, physician group, or staffing arrangement introduced by a recruiter. You are not joining a permanent partnership by default.",
-          "Locum cardiology is not a guarantee of higher pay, lighter work, or freedom from call. The value proposition is clarity: defined dates, written scope, and the ability to step away when the block ends.",
-          "Locum Career Hub recruits cardiologists only. We connect MD/DO cardiologists with organizations seeking temporary coverage—we are not the hospital employer.",
+          "Locum tenens cardiology is contract-based clinical work for defined blocks—consult, clinic, cath lab, EP lab, imaging, or a mix—usually introduced through a hospital, group, or staffing arrangement. You are not joining a permanent partnership by default, and you should not treat a weekly rate like a career plan.",
+          "Locums fits cardiologists who want clearer start and stop dates, geographic flexibility, a structured way to sample practice settings, or a bridge while deciding what permanent looks like. It also fits semi-retired clinicians who want lower-intensity clinical work without owning the full administrative load of employment.",
+          "Locums fits poorly when you need income tomorrow and have no licenses ready, when you cannot tolerate EHR and documentation variability, when you refuse to get call and census in writing, or when you are hoping locums will magically fix burnout without changing workload design.",
+          "Locum Career Hub recruits MD/DO cardiologists only. We connect you with organizations seeking temporary coverage. We are not your hospital employer, and we will tell you when we do not have a realistic match.",
         ],
       },
       {
-        h2: "Who locum cardiology fits best",
+        h2: "Subspecialty realities: general, IC, EP, heart failure, structural, imaging",
         paragraphs: [
-          "Cardiologists exploring locums often include: physicians easing call burden at their home job, semi-retired clinicians wanting part-time clinic or read pools, interventionalists willing to travel for STEMI networks, and employed doctors testing a market before relocation.",
-          "Locums fit poorly when you need immediate income without licensing lead time, when you cannot tolerate documentation variability across EHRs, or when you refuse to negotiate call and census in writing.",
+          "General and non-invasive cardiologists should treat consult caps, clinic volume, echo and stress supervision, and after-hours callbacks as first-class contract terms—not soft conversation. A 'clinic-only' week that still includes night callbacks is a different job.",
+          "Interventional cardiologists live and die by STEMI pathway clarity: activation windows, primary vs backup responsibility, case mix, complication backup, and whether add-on cases are compensated. A high weekly rate with chaotic activation is not a good assignment—it is an expensive way to be miserable.",
+          "EP locums require honest matching of your skills to lab reality: ablation vs devices vs both, anesthesia support, device clinic load, and remote monitoring expectations between blocks. Scarcity does not excuse a wrong-fit lab.",
+          "Heart failure and structural work is program-dependent. Confirm weekend census, advanced therapies adjacency, heart-team meetings, and what you are not expected to cover. Imaging-heavy roles need read volume SLAs, turnaround expectations, and clarity on on-site vs remote reads.",
         ],
       },
       {
-        h2: "Subspecialty considerations",
+        h2: "Licensing strategy and IMLC sequencing",
         paragraphs: [
-          "General/non-invasive cardiologists should document consult caps, echo/stress supervision, and whether inpatient callbacks exist after clinic-only days.",
-          "Interventional cardiologists must clarify STEMI activation, PCI case mix, complication backup, and add-on case economics.",
-          "EP cardiologists need lab capabilities, device rep support, ablation case types, and remote monitoring load defined.",
-          "Heart failure and structural cardiologists should confirm weekend census, transplant-adjacent scope, and heart-team meeting time.",
+          "Multi-state locums is a licensing strategy problem before it is a travel problem. Map the states you actually want to work, then sequence applications so credentialing is not waiting on a board you started too late.",
+          "The Interstate Medical Licensure Compact (IMLC) can accelerate eligible physicians into compact states. It does not replace hospital privileging, payer enrollment when required, or non-compact state friction. California and other high-friction boards deserve their own timeline—do not assume 'IMLC solves everything.'",
+          "Read our IMLC guide and state licensing pages early. If travel is part of your model, treat licenses like inventory: maintain them deliberately, not reactively after an attractive block appears.",
         ],
       },
       {
-        h2: "Credentialing and privileging timeline",
+        h2: "Credentialing and privileging timelines that won't surprise you",
         paragraphs: [
-          "Start with a backward plan from day one: state license → payer enrollment (if required) → hospital privileging → FPPE/OPPE expectations → travel booking.",
-          "Allow more time for procedural subspecialties because hospitals request case logs and references. Imaging-heavy roles need read volume SLAs and turnaround expectations in the contract.",
-          "Temporary privileges may exist but are not universal—do not assume you can start in two weeks unless documented.",
+          "Credentialing and privileging are related and not interchangeable. Credentialing verifies who you are. Privileging defines what you may do at that hospital. Temporary privileges exist at some sites and are not universal—never plan income on an assumed two-week start unless it is written.",
+          "Work backward from day one: state license → required enrollments → hospital application complete → privileges approved → orientation → travel. Procedural roles need case logs and references that match requested privileges. Imaging roles need documented read experience.",
+          "Use the credentialing timeline tool as a planning aid, then ask for site-specific ranges. Marketing timelines lie. Document hygiene is the part you control: CV, licenses, board certificates, malpractice history, procedure logs, and references ready before you say yes.",
         ],
       },
       {
-        h2: "Malpractice essentials",
+        h2: "What good contracts specify in writing",
         paragraphs: [
-          "Understand claims-made vs occurrence, per-claim vs aggregate limits, tail coverage, and who purchases insurance for the assignment.",
-          "Cath lab and STEMI roles carry higher exposure—match limits to scope. If you are 1099, confirm whether the agency or the facility provides coverage and what happens after the assignment ends.",
+          "A usable cardiology locum contract specifies dates, clinical scope, call rules, census expectations, malpractice structure, stipends, cancellation terms, and orientation expectations. Verbal promises about 'light call' or 'manageable consults' are not terms.",
+          "Ask who provides malpractice, whether it is claims-made or occurrence, limits, and who pays for tail if claims-made. Cath lab and STEMI roles carry higher exposure—match coverage to scope.",
+          "Cancellation clauses should address facility cancellations, physician illness, weather, and credentialing delays that prevent start. Travel details—airfare, lodging standard, rental car, distance to hospital—belong in writing, not a recruiter's optimistic email.",
         ],
       },
       {
-        h2: "Pay structure: weekly rate, daily rate, and stipends",
+        h2: "Pay drivers without fake guarantees",
         paragraphs: [
-          "Weekly rates dominate cardiology locums, but compare: call pay, holiday multipliers, orientation days, travel and housing stipends, and cancellation clauses.",
-          "A higher weekly rate with heavy call may net less than a moderate rate with no nights—model hours, not headlines.",
-          "Use calculators as directional tools only; your contract is the source of truth.",
+          "Cardiology locum pay is usually quoted as weekly gross and varies by subspecialty, call burden, acuity, geography, and travel. Interventional and EP blocks with overnight responsibility often sit higher than clinic-heavy general roles—but only when the work matches the rate.",
+          "Compare offers on the same rubric: weekly gross, call premiums, holiday multipliers, orientation days, stipends, malpractice, and cancellation. A higher weekly rate with heavy nights may net less recoverability—and less life—than a moderate rate with cleaner boundaries.",
+          "Locum Career Hub does not guarantee rates. Hospitals set offers. Use the cardiologist locums calculator and pay guides as directional tools; your signed contract is the source of truth.",
         ],
       },
       {
-        h2: "1099 vs W-2 locum structures",
+        h2: "Taxes and entity basics (CPA territory)",
         paragraphs: [
-          "1099 locums shift tax withholding and benefit responsibility to you. W-2 locum roles may simplify taxes but can reduce deduction flexibility—consult professionals.",
-          "Business structure (LLC, S corp) questions arise frequently for 1099 cardiologists—do not adopt a structure from internet advice alone.",
+          "Many locum cardiologists work as 1099 independent contractors. That can mean quarterly estimates, self-employment tax considerations, and more deduction complexity—not free money. W-2 locum roles may simplify withholding while changing deduction patterns.",
+          "LLC and S corporation questions come up once income becomes meaningful and irregular. Entity choice depends on facts, state rules, and risk tolerance. This guide is not tax advice. Talk to a CPA who understands locum physicians before you copy a forum structure.",
+          "If you are comparing employed W-2 packages to locum 1099 economics, model benefits you forgo, retirement contributions, and health coverage—not headline weekly rates alone. The W-2 vs 1099 tool is a framing aid, not a substitute for professional advice.",
         ],
       },
       {
-        h2: "Travel, housing, and cancellation",
+        h2: "A 90-day start plan",
         paragraphs: [
-          "Document airfare class, baggage, rental car, lodging standard, and distance to hospital. Ask who pays when weather cancels a shift.",
-          "Cancellation clauses should address facility cancellations, physician illness, and credentialing delays that prevent start.",
+          "Days 1–30: Define non-negotiables—subspecialty scope, states, earliest start, travel radius, max call intensity, and census limits. Build a credentialing folder. Decide whether locums is a bridge, a hybrid add-on, or a primary model for the next year.",
+          "Days 31–60: Start or advance licenses. Parallel hospital applications for realistic targets. Interview sites like an attending with standards: STEMI pathway, backup, partners, EHR, and recovery rules. Decline vague offers early.",
+          "Days 61–90: Compare written offers on one spreadsheet. Confirm malpractice and stipends. Complete privileging. Book travel only after start certainty. Orient with a first-week checklist: STEMI path, consult workflow, who to call at 2 a.m., and documentation expectations.",
         ],
       },
       {
-        h2: "How to work with a cardiology recruiter ethically",
+        h2: "How Locum Career Hub fits (cardiology-only matching)",
         paragraphs: [
-          "A good recruiter states plainly when no roles match your states or subspecialty. Share hard boundaries early: no solo STEMI, max consult census, no telemonitoring between blocks.",
-          "After you submit an inquiry to Locum Career Hub, a recruiter reviews your profile. If opportunities exist in your selected states, we follow up—typically within one business day. If not, we tell you directly.",
-        ],
-      },
-      {
-        h2: "30-day launch checklist",
-        paragraphs: [
-          "Week 1: Define subspecialty scope, target states, earliest start, and travel radius. Gather license list, CV, case logs, and references.",
-          "Week 2: Begin licensing if needed; parallel hospital applications for top targets.",
-          "Week 3: Compare written offers using the same rubric (call, census, malpractice, stipends).",
-          "Week 4: Privileging, orientation, and travel booking—confirm first day responsibilities in writing.",
+          "Specialty-only recruiting exists because cardiology scope is not interchangeable with generic hospitalist coverage. A recruiter who understands STEMI, EP lab needs, and privileging friction can filter noise—and should also admit when nothing fits.",
+          "After you submit an inquiry, a recruiter reviews your profile. If opportunities exist in your selected states and scope, we follow up—typically within one business day. If not, we tell you directly. That honesty is part of the product.",
+          "Use this guide with the jobs hub, state pages, calculator, and credentialing tools. Locums is a tool for career design. It is not a personality test, and it is not a moral failure if you prefer a well-built employed role instead.",
         ],
       },
     ],
     extraFaqs: [
       {
+        q: "Can new cardiology graduates do locums?",
+        a: "Sometimes, after fellowship completion, licensure, and attending-level privileging. First blocks should match documented training scope. Many new attendings use locums as a structured sample of practice settings—not as an escape from incomplete credentialing.",
+      },
+      {
+        q: "How long until a first cardiology locum assignment?",
+        a: "Licensing and privileging dominate the timeline. Some local non-procedural blocks move faster; multi-state interventional or EP starts often take longer. Plan in months, not marketing slogans measured in days.",
+      },
+      {
+        q: "Do I need multiple state licenses before starting?",
+        a: "Not always for a first local block. If travel is central to your model, build a deliberate license footprint early—especially if you will rely on IMLC for compact states.",
+      },
+      {
+        q: "Will locums hurt future permanent offers?",
+        a: "Used intentionally, locums can improve permanent options by giving you site knowledge and negotiation leverage. Stigma is real in some rooms; outcomes depend on how you explain the chapter and what clinical continuity you maintained.",
+      },
+      {
         q: "Can I locum while employed full-time?",
-        a: "Sometimes, if your employment contract and malpractice allow moonlighting. Review non-compete and call commitments before signing locum contracts.",
+        a: "Only if your employment contract, malpractice, and non-compete allow it. Moonlighting and locums are not identical. Get written clarity before you stack weekends onto an already unsustainable job.",
       },
       {
         q: "How long are typical cardiology locum blocks?",
-        a: "Common ranges span a few days to several months. Extensions should be re-documented—not assumed.",
+        a: "Common ranges span a few days to several months. Extensions should be re-documented—not assumed. Plan income gaps between blocks if you are fully locums-based.",
       },
     ],
   },

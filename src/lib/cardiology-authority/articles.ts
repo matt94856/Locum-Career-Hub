@@ -2,6 +2,7 @@ import { CARDIOLOGY_HUB_PATH, cardiologySpecialtyPath } from "@/lib/seo/cardiolo
 import type { CardiologyArticle } from "@/lib/cardiology-authority/types";
 import { defaultEeatMeta } from "@/lib/cardiology-authority/eeat";
 import { expandArticleSections } from "@/lib/cardiology-authority/article-expansion";
+import { ALL_EDITORIAL_RESOURCES } from "@/lib/cardiology-content";
 
 const RESOURCES_PATH = "/resources" as const;
 
@@ -388,9 +389,13 @@ export const CARDIOLOGY_ARTICLES: CardiologyArticle[] = [
     directAnswer:
       "New cardiology attendings can use locums to sample practice environments before permanent contracts, but must complete licensing, board steps, and procedural credentialing. First assignments should match fellowship scope with documented supervision rules if needed.",
     keywords: ["cardiology fellowship locums", "new cardiologist locum jobs", "first locum assignment"],
-    relatedArticleSlugs: ["how-to-become-a-locum-cardiologist", "credentialing-for-locum-cardiologists"],
+    relatedArticleSlugs: [
+      "things-nobody-tells-you-cardiology-fellowship",
+      "how-to-become-a-locum-cardiologist",
+      "credentialing-for-locum-cardiologists",
+    ],
     relatedSpecialtyPathSlugs: ["general", "pediatric-cardiology"],
-    eeat: defaultEeatMeta(),
+    eeat: defaultEeatMeta("2026-07-28"),
     sections: [
       {
         h2: "First contract cautions",
@@ -403,6 +408,122 @@ export const CARDIOLOGY_ARTICLES: CardiologyArticle[] = [
       {
         q: "Should I take a permanent job first?",
         a: "Many fellows choose permanent roles for stability; locums can still be a structured sample if credentialing timelines align.",
+      },
+    ],
+  },
+  {
+    slug: "things-nobody-tells-you-cardiology-fellowship",
+    path: articlePath("things-nobody-tells-you-cardiology-fellowship"),
+    title: "Things Nobody Tells You During Cardiology Fellowship",
+    metaDescription:
+      "What cardiology fellowship leaves out: job search timing, call culture, RVUs, money anxiety, and career options including locums—written for fellows, not recruiters.",
+    h1: "Things Nobody Tells You During Cardiology Fellowship",
+    directAnswer:
+      "Cardiology fellowship trains clinical excellence and systematically under-trains career agency. Fellows are rarely taught how early the job search starts, how call culture hides outside the contract PDF, how RVU stories become marketing, or that wanting recoverability is not a character flaw. The gap is normal. Filling it is your job—not your program’s brochure.",
+    keywords: [
+      "cardiology fellowship advice",
+      "things nobody tells you cardiology fellowship",
+      "cardiology fellow job search",
+      "cardiology fellowship career tips",
+    ],
+    relatedArticleSlugs: [
+      "fellowship-to-locums-transition",
+      "locum-vs-permanent-cardiology-jobs",
+      "leaving-hospital-employment-for-locums",
+      "cardiologist-burnout-alternatives",
+      "rvu-compensation-cardiologists",
+    ],
+    relatedSpecialtyPathSlugs: ["general", "interventional", "electrophysiology"],
+    eeat: defaultEeatMeta("2026-07-28"),
+    sections: [
+      {
+        h2: "Your job search starts earlier than your program admits",
+        paragraphs: [
+          "Programs protect service lines. They do not always protect your timeline. If you wait until spring of your final year to understand contracts, non-competes, and tail coverage, you are not 'focused on training'—you are late to a market that does not care that you were on call last night.",
+          "A practical rhythm: mid final year, you should already know your geography constraints, whether you want academic vs employed vs private, and which three deal-breakers you will not negotiate away. Interviews are not the time to learn what an RVU threshold is.",
+          "If you are behind, start this week. Not with panic applications—with a one-page brief: states you can live in, schedule needs, procedural volume needs, and money floor. Clarity beats scatter.",
+        ],
+      },
+      {
+        h2: "Call culture is not in the contract PDF",
+        paragraphs: [
+          "Contracts sketch legal frameworks. Day-to-day call culture lives in partners, nursing patterns, STEMI logistics, and whether 'backup' means someone who answers the phone.",
+          "Ask for activation counts, weekend census ranges, and what happens the morning after a brutal night. Ask who takes the next STEMI if you are post-call. Ask whether clinic gets canceled—or whether you are expected to be a hero and a clinic machine simultaneously.",
+          "If a group gets vague when you ask operational questions, believe the vagueness. Vagueness is data.",
+        ],
+      },
+      {
+        h2: "RVU stories are marketing until verified",
+        paragraphs: [
+          "You will hear about 'tremendous upside' and 'easily hit thresholds.' Upside is not a number. Thresholds move. Conversion factors hide. 'Other duties as assigned' is where weekends go to die.",
+          "Request written definitions: what counts, what does not, how often thresholds change, and what historical partners actually produced. If they will not share patterns, you are negotiating with a story.",
+          "Salary is loud. Schedule and exit terms are quiet. Quiet terms usually decide whether you still like medicine in year three.",
+        ],
+      },
+      {
+        h2: "Money anxiety is normal—and actionable",
+        paragraphs: [
+          "Fellows carry debt, delayed earnings, and a sudden identity shift into attending pay. Anxiety does not mean you are greedy. It means you are doing arithmetic in a profession that romanticizes suffering.",
+          "Actionable beats rumination: know your monthly floor, model taxes if you explore 1099 work, and understand that a higher offer with crushing call can be a lower quality-of-life wage. Compare effective recoverability, not just W-2 headlines.",
+          "If locums enters the conversation as a debt sprint or a bridge year, treat it like a business chapter with licensing lead time—not a weekend fantasy. See our fellowship-to-locums transition guide when you are ready for logistics.",
+        ],
+      },
+      {
+        h2: "Identity whiplash from trainee to attending",
+        paragraphs: [
+          "In fellowship you are supervised, evaluated, and structurally contained. As an attending you are suddenly the person others call when the room goes quiet. That transition is clinically real and emotionally under-discussed.",
+          "Imposter feelings are common. So is overcompensation—saying yes to every committee, every extra clinic, every 'quick favor' until your calendar is a crime scene. Early attending years reward boundary skills as much as ECG skills.",
+          "Build a small peer circle outside your program: co-fellows who tell the truth, an attending who survived a bad first job, maybe a contract attorney when an offer is real. Isolation is how bad jobs recruit.",
+        ],
+      },
+      {
+        h2: "Partners matter more than the hospital logo",
+        paragraphs: [
+          "Prestige letterhead does not take call for you. Partners do—or they do not. Culture shows up in who gets protected after a hard night, how conflict is handled, and whether productivity theater replaces patient care.",
+          "During interviews, watch how partners speak about each other when they think you are not evaluating them. Ask junior attendings the questions the chair cannot answer honestly. Ask what happened to the last person who left.",
+          "A mid-tier logo with decent humans often beats a famous logo with extractive call expectations. You already know this clinically. Apply it to your career.",
+        ],
+      },
+      {
+        h2: "You are allowed to want recoverability",
+        paragraphs: [
+          "Wanting sleep, family time, and a schedule that does not erase you is not weakness. It is how sustainable clinicians stay in the field. Cardiology culture still confuses martyrdom with excellence. You do not have to inherit that confusion.",
+          "Recoverability means post-call rules that exist in practice, clinic volumes that do not pretend physics is optional, and the ability to decline work that trades your judgment for short-term throughput.",
+          "If you are already burned out in fellowship, a high-intensity first job is not a badge. It is a risk factor. Design the first two years like a human who plans to practice for decades.",
+        ],
+      },
+      {
+        h2: "Locums and hybrid paths are not moral failures",
+        paragraphs: [
+          "Some rooms still treat locums as what you do when you 'could not get a real job.' That stigma is outdated and often self-serving. Physicians use locums to sample markets, pay down debt, protect autonomy, or exit a toxic employed chapter without leaving medicine.",
+          "Locums is not automatically better than employment. Employment is not automatically safer than locums. Both can be excellent or miserable depending on contracts, call, and your real constraints—spouse career, visas, geography, risk tolerance.",
+          "If you are exploring flexibility, start with education: locum vs permanent comparisons, credentialing realities, and honest pay drivers. Locum Career Hub recruits cardiologists only and will say when we do not have a fit. Use tools when useful. Ignore anyone who sells locums as a personality upgrade.",
+        ],
+      },
+      {
+        h2: "A calm next step if you are reading this at 1 a.m.",
+        paragraphs: [
+          "Write down three non-negotiables and three preferences. Forward this page to one co-fellow who tells you the truth. If an offer is on the table, slow down long enough to verify call, volume, and exit terms in writing.",
+          "If you want a structured conversation about flexible cardiology paths—including locums as one option among several—submit an inquiry. If you only needed the permission to want a sustainable career, you already have it.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "When should I hire a physician contract attorney?",
+        a: "When an offer is real and includes non-compete, tail, complex RVU language, or anything you cannot explain simply to a peer. A physician-specific attorney is cheap compared with a six-figure mistake.",
+      },
+      {
+        q: "Is it weird to ask about locums as a fellow?",
+        a: "No. Asking is information-gathering. Signing something that conflicts with training or employment rules without reading them is the actual problem.",
+      },
+      {
+        q: "What if I only got one offer?",
+        a: "One offer is leverage scarcity, not destiny. Verify the operational reality harder, not softer. A bad sole offer can cost more than a delayed better fit.",
+      },
+      {
+        q: "Can fellows work locums during training?",
+        a: "Independent locum attending contracts generally require completed fellowship and attending privileges. Moonlighting rules are separate and program-specific—do not conflate them.",
       },
     ],
   },
@@ -464,7 +585,27 @@ export const CARDIOLOGY_ARTICLES: CardiologyArticle[] = [
   },
 ];
 
-const ENRICHED_ARTICLES: CardiologyArticle[] = CARDIOLOGY_ARTICLES.map((a) => ({
+const EDITORIAL_RESOURCE_ARTICLES: CardiologyArticle[] = ALL_EDITORIAL_RESOURCES.map((draft) => ({
+  slug: draft.slug,
+  path: articlePath(draft.slug),
+  title: draft.title,
+  metaDescription: draft.metaDescription,
+  h1: draft.h1,
+  directAnswer: draft.directAnswer,
+  keywords: draft.keywords,
+  relatedArticleSlugs: draft.relatedArticleSlugs,
+  relatedSpecialtyPathSlugs: draft.relatedSpecialtyPathSlugs,
+  eeat: defaultEeatMeta(draft.lastUpdated ?? "2026-07-28"),
+  sections: draft.sections,
+  faqs: draft.faqs,
+}));
+
+const editorialSlugs = new Set(EDITORIAL_RESOURCE_ARTICLES.map((a) => a.slug));
+
+const ENRICHED_ARTICLES: CardiologyArticle[] = [
+  ...CARDIOLOGY_ARTICLES.filter((a) => !editorialSlugs.has(a.slug)),
+  ...EDITORIAL_RESOURCE_ARTICLES,
+].map((a) => ({
   ...a,
   sections: expandArticleSections(a.slug, a.sections),
 }));

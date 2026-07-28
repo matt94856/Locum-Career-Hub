@@ -13,6 +13,7 @@ import {
   SUBSPECIALTY_PAGE_DEFS,
   TAX_PAGE_DEFS,
 } from "@/lib/cardiology-seo/definitions";
+import { getEditorialPageDefs } from "@/lib/cardiology-content";
 import { buildAllStateSalaryDefs } from "@/lib/cardiology-seo/state-salary-content";
 import { buildPageFromDef } from "@/lib/cardiology-seo/build-page";
 import type { CardiologySeoPage } from "@/lib/cardiology-seo/types";
@@ -32,6 +33,7 @@ const ALL_DEFS = [
   ...FAQ_PAGE_DEFS,
   ...DATA_PAGE_DEFS,
   ...PILLAR_PAGE_DEFS,
+  ...getEditorialPageDefs(),
 ];
 
 const PAGES: CardiologySeoPage[] = ALL_DEFS.map(buildPageFromDef);
