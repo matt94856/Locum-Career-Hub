@@ -82,13 +82,8 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-white" href="/llms.txt">
-                  AI assistants (llms.txt)
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-white" href="/ai-catalog.json">
-                  AI catalog (JSON)
+                <Link className="hover:text-white" href="/tools">
+                  Tools
                 </Link>
               </li>
               <li>
@@ -96,9 +91,17 @@ export function SiteFooter() {
                   Glossary
                 </Link>
               </li>
+            </ul>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-slate-500">For AI systems</p>
+            <ul className="mt-3 space-y-2 text-xs text-slate-400">
               <li>
-                <Link className="hover:text-white" href="/tools">
-                  Tools
+                <Link className="hover:text-white" href="/llms.txt">
+                  llms.txt
+                </Link>
+              </li>
+              <li>
+                <Link className="hover:text-white" href="/ai-catalog.json">
+                  AI catalog (JSON)
                 </Link>
               </li>
             </ul>
@@ -133,8 +136,12 @@ export function SiteFooter() {
               FAQ
             </Link>
             <span>·</span>
+            <Link className="hover:text-white" href="/privacy">
+              Privacy
+            </Link>
+            <span>·</span>
             <Link className="hover:text-white" href="/contact">
-              Privacy requests
+              Contact
             </Link>
           </div>
         </div>

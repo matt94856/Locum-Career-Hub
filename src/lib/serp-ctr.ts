@@ -26,10 +26,11 @@ export function clampSerpDescription(text: string, max = SERP_DESCRIPTION_MAX): 
 
 export function clampSerpTitle(text: string, max = SERP_TITLE_MAX): string {
   const t = text.replace(/\s+/g, " ").trim();
-  // Preserve complete title language in metadata. Google may rewrite or visually
-  // truncate titles, but a literal ellipsis wastes space and can cut the query.
-  void max;
-  return t;
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  const base = (lastSpace > 24 ? cut.slice(0, lastSpace) : cut).trimEnd();
+  return `${base}…`;
 }
 
 /** Benefit + proof + CTA — tuned for search snippets. */
@@ -111,19 +112,19 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
     }),
   },
   "leaving-employed-cardiology": {
-    title: "Leaving Employed Cardiology? Flexible Paths for Cardiologists",
+    title: "Leaving Employed Cardiology | Calm Next Steps",
     description: buildSerpDescription({
-      hook: "Structured alternatives to quitting medicine—locums, hybrid, and part-time cardiology models.",
-      proof: "Burnout-aware, cardiology recruiter clarity.",
+      hook: "Leaving employed cardiology without burning bridges—locums, hybrid, and part-time paths.",
+      proof: "Cardiologist-only recruiter clarity for call, census, and cath lab scope.",
       cta: "Explore next steps without judgment.",
     }),
   },
   "leaving-hospital-medicine": {
-    title: "Leaving Employed Cardiology? Flexible Paths for Cardiologists",
+    title: "Leaving Hospital Medicine | Flexible Cardiology Paths",
     description: buildSerpDescription({
-      hook: "Structured alternatives to quitting medicine—locums, hybrid, and part-time cardiology models.",
-      proof: "Burnout-aware, cardiology recruiter clarity.",
-      cta: "Explore next steps without judgment.",
+      hook: "Hospital medicine exits often need structure—defined blocks, clearer call, and recovery time.",
+      proof: "Burnout-aware guidance for cardiologists redesigning the week.",
+      cta: "Get a calm options review.",
     }),
   },
   "physician-burnout-alternatives": {

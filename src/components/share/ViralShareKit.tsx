@@ -81,28 +81,28 @@ export function ViralShareKit({ payload, linkedInPost, className = "" }: Props) 
         <button
           type="button"
           onClick={openLinkedIn}
-          className="rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
+          className="min-h-11 rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
         >
           Share on LinkedIn
         </button>
         <button
           type="button"
           onClick={() => void nativeShare()}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
         >
           Share / copy
         </button>
         <button
           type="button"
           onClick={openX}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
         >
           Post on X
         </button>
         <button
           type="button"
           onClick={() => void copy(payload.url, "link")}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
         >
           {copied === "link" ? "Link copied" : "Copy share link"}
         </button>

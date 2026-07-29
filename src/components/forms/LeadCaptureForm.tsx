@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
@@ -136,26 +137,45 @@ export function LeadCaptureForm({
       pagePath: typeof window !== "undefined" ? window.location.pathname : "",
       attribution: readLeadAttribution(),
       recaptchaToken: recaptchaSiteConfigured ? (recaptchaRef.current?.getToken() ?? "") : "",
+      companyWebsite: String(fd.get("companyWebsite") ?? "").trim(),
     };
   }
 
   function validatePayload(
     payload: ReturnType<typeof readPayload>,
     formMode: "quick" | "full",
+    stage: "step1" | "submit" = "submit",
   ): string | null {
     if (!payload.firstName || !payload.lastName || !payload.email || !payload.phone) {
       return "Please complete your name, email, and phone so we can respond.";
     }
-    if (!payload.specialty || !payload.availability) {
-      return "Select your subspecialty and availability timeline.";
+    if (!payload.specialty) {
+      return "Select your cardiology subspecialty.";
+    }
+    if (stage === "step1") return null;
+    if (!payload.availability) {
+      return "Select your availability timeline.";
     }
     if (payload.preferredStates.length === 0) {
       return "Select at least one state where you would consider working.";
     }
     if (formMode === "full") {
       if (!payload.yearsExperience || !payload.travel) {
-        return "Complete experience and travel preference on step 2.";
+        return "Complete experience and travel preference before submitting.";
       }
+    }
+    return null;
+  }
+
+  async function ensureCaptchaToken(payload: ReturnType<typeof readPayload>): Promise<string | null> {
+    if (!recaptchaSiteConfigured) return null;
+    if (!captchaReady || captchaLoadError) {
+      return captchaLoadError
+        ? "Security verification could not load. Please refresh the page or try again later."
+        : "Security verification is still loading—please wait a moment and try again.";
+    }
+    if (!payload.recaptchaToken.trim()) {
+      return "Please complete the security verification before submitting.";
     }
     return null;
   }
@@ -168,33 +188,19 @@ export function LeadCaptureForm({
     setError(null);
 
     const payload = readPayload(form, formMode);
-    const validationError = validatePayload(payload, formMode);
+    const validationError = validatePayload(payload, formMode, "submit");
     if (validationError) {
       setStatus("error");
       setError(validationError);
       return;
     }
 
-    if (recaptchaSiteConfigured && formMode === "full") {
-      if (!captchaReady || captchaLoadError) {
-        setStatus("error");
-        setError(
-          captchaLoadError
-            ? "Security verification could not load. Please refresh the page or try again later."
-            : "Security verification is still loading—please wait a moment and try again.",
-        );
-        return;
-      }
-      if (!payload.recaptchaToken.trim()) {
-        setStatus("error");
-        setError("Please complete the security verification on step 2.");
-        setStep(2);
-        return;
-      }
-    }
-
-    if (recaptchaSiteConfigured && formMode === "quick") {
-      payload.recaptchaToken = "";
+    const captchaError = await ensureCaptchaToken(payload);
+    if (captchaError) {
+      setStatus("error");
+      setError(captchaError);
+      if (step === 1) setStep(2);
+      return;
     }
 
     try {
@@ -241,7 +247,7 @@ export function LeadCaptureForm({
     const form = formRef.current;
     if (!form) return;
     const payload = readPayload(form, "quick");
-    const validationError = validatePayload(payload, "quick");
+    const validationError = validatePayload(payload, "quick", "step1");
     if (validationError) {
       setStatus("error");
       setError(validationError);
@@ -272,130 +278,120 @@ export function LeadCaptureForm({
     >
       <div className={`border-b border-slate-100 pb-6 ${isSidebar ? "max-w-2xl" : ""}`}>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist inquiry (MD/DO)</p>
-        <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
+        <h2 className="mt-3 font-display text-2xl font-normal tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>
         <div className="mt-5">
           <LeadFormAltActions source={isSidebar ? "sidebar" : "full"} compact={isSidebar} />
         </div>
-        <div className="mt-5 flex items-center gap-3 text-xs text-slate-500">
+        <div className="mt-5 flex items-center gap-3 text-xs text-slate-500" aria-label="Form progress">
           <span
+            aria-current={step === 1 ? "step" : undefined}
             className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 1 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
           >
             <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">1</span>
-            Essentials
+            Contact
           </span>
           <span className="text-slate-300" aria-hidden>
             →
           </span>
           <span
+            aria-current={step === 2 ? "step" : undefined}
             className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 2 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
           >
             <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">2</span>
-            Details
+            Preferences
           </span>
         </div>
       </div>
 
-      <form ref={formRef} className="mt-8 flex flex-col gap-8 lg:gap-10" onSubmit={step === 1 ? onContinueToStep2 : onFullSubmit}>
+      <form
+        ref={formRef}
+        className="relative mt-8 flex flex-col gap-8 lg:gap-10"
+        onSubmit={step === 1 ? onContinueToStep2 : onFullSubmit}
+      >
+        <input
+          type="text"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute left-[-9999px] h-0 w-0 opacity-0"
+        />
         {step === 1 ? (
+          <FormSection title="Step 1 — Contact" description="Name, email, phone, and subspecialty only. Preferences come next.">
+            <label className="lg:col-span-1">
+              <FieldLabel required>First name</FieldLabel>
+              <input
+                name="firstName"
+                required
+                autoComplete="given-name"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              />
+            </label>
+            <label className="lg:col-span-1">
+              <FieldLabel required>Last name</FieldLabel>
+              <input
+                name="lastName"
+                required
+                autoComplete="family-name"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              />
+            </label>
+            <label className="lg:col-span-1">
+              <FieldLabel required>Email</FieldLabel>
+              <input
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              />
+            </label>
+            <label className="lg:col-span-1">
+              <FieldLabel required>Phone</FieldLabel>
+              <input
+                name="phone"
+                type="tel"
+                required
+                autoComplete="tel"
+                placeholder="Best number for follow-up"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              />
+            </label>
+            <label className="lg:col-span-2">
+              <FieldLabel required>Subspecialty</FieldLabel>
+              <select
+                name="specialty"
+                defaultValue={defaultSpecialty}
+                required
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              >
+                <option value="" disabled>
+                  Select your specialty
+                </option>
+                {specialtyOptions.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="lg:col-span-2">
+              <FieldLabel>Call, cath lab and clinical boundaries</FieldLabel>
+              <p className="mt-1 text-xs text-slate-600">
+                Optional but helpful—e.g. no solo STEMI, max consult census, weekends-only EP lab.
+              </p>
+              <textarea
+                name="clinicalNotes"
+                rows={3}
+                maxLength={2000}
+                placeholder="Share non-negotiables so we do not waste your time…"
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              />
+            </label>
+          </FormSection>
+        ) : (
           <>
-            <FormSection
-              title="Step 1 — Contact & timeline"
-              description="Most cardiologists finish this step in under a minute. You can quick-submit or add credentialing details on step 2."
-            >
-              <label className="lg:col-span-1">
-                <FieldLabel required>First name</FieldLabel>
-                <input
-                  name="firstName"
-                  required
-                  autoComplete="given-name"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                />
-              </label>
-              <label className="lg:col-span-1">
-                <FieldLabel required>Last name</FieldLabel>
-                <input
-                  name="lastName"
-                  required
-                  autoComplete="family-name"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                />
-              </label>
-              <label className="lg:col-span-1">
-                <FieldLabel required>Email</FieldLabel>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                />
-              </label>
-              <label className="lg:col-span-1">
-                <FieldLabel required>Phone</FieldLabel>
-                <input
-                  name="phone"
-                  type="tel"
-                  required
-                  autoComplete="tel"
-                  placeholder="Best number for follow-up"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                />
-              </label>
-
-              <label className="lg:col-span-1">
-                <FieldLabel required>Subspecialty</FieldLabel>
-                <select
-                  name="specialty"
-                  defaultValue={defaultSpecialty}
-                  required
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                >
-                  <option value="" disabled>
-                    Select your specialty
-                  </option>
-                  {specialtyOptions.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="lg:col-span-1">
-                <FieldLabel required>When could you start?</FieldLabel>
-                <select
-                  name="availability"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                  defaultValue=""
-                  required
-                >
-                  <option value="" disabled>
-                    Select timeline
-                  </option>
-                  {availabilityOptions.map((x) => (
-                    <option key={x} value={x}>
-                      {x}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="lg:col-span-2">
-                <FieldLabel>Call, cath lab & clinical boundaries</FieldLabel>
-                <p className="mt-1 text-xs text-slate-600">
-                  Optional but helpful—e.g. no solo STEMI, max consult census, weekends-only EP lab, telemonitoring limits.
-                </p>
-                <textarea
-                  name="clinicalNotes"
-                  rows={3}
-                  maxLength={2000}
-                  placeholder="Share non-negotiables so we do not waste your time…"
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                />
-              </label>
-            </FormSection>
-
             <FormSection title="Preferred states" description="Tap quick-add markets or search the full list below.">
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex flex-wrap gap-2">
@@ -425,43 +421,57 @@ export function LeadCaptureForm({
                     </span>
                   </p>
                 ) : null}
-                {!isSidebar ? (
-                  <div>
-                    <label className="block">
-                      <span className="text-xs font-semibold text-slate-800">Search all states</span>
-                      <input
-                        type="search"
-                        value={stateQuery}
-                        onChange={(e) => setStateQuery(e.target.value)}
-                        placeholder="Type to filter"
-                        className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                      />
-                    </label>
-                    <div className="mt-3 max-h-40 overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-inner">
-                      <ul className="grid gap-1 sm:grid-cols-2">
-                        {filteredStates.map((s) => (
-                          <li key={s}>
-                            <label className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-slate-800 hover:bg-slate-50">
-                              <input
-                                type="checkbox"
-                                checked={selectedStates.has(s)}
-                                onChange={() => toggleState(s)}
-                                className="size-4 rounded border-slate-300 accent-brand-600"
-                              />
-                              <span>{s}</span>
-                            </label>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                <div>
+                  <label className="block">
+                    <span className="text-xs font-semibold text-slate-800">Search all states</span>
+                    <input
+                      type="search"
+                      value={stateQuery}
+                      onChange={(e) => setStateQuery(e.target.value)}
+                      placeholder="Type to filter"
+                      className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+                    />
+                  </label>
+                  <div className="mt-3 max-h-40 overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-inner">
+                    <ul className="grid gap-1 sm:grid-cols-2">
+                      {filteredStates.map((s) => (
+                        <li key={s}>
+                          <label className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-slate-800 hover:bg-slate-50">
+                            <input
+                              type="checkbox"
+                              checked={selectedStates.has(s)}
+                              onChange={() => toggleState(s)}
+                              className="size-4 rounded border-slate-300 accent-brand-600"
+                            />
+                            <span>{s}</span>
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ) : null}
+                </div>
               </div>
             </FormSection>
-          </>
-        ) : (
-          <>
-            <FormSection title="Step 2 — Experience & preferences">
+
+            <FormSection title="Step 2 — Timeline and preferences">
+              <label className="lg:col-span-1">
+                <FieldLabel required>When could you start?</FieldLabel>
+                <select
+                  name="availability"
+                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+                  defaultValue=""
+                  required
+                >
+                  <option value="" disabled>
+                    Select timeline
+                  </option>
+                  {availabilityOptions.map((x) => (
+                    <option key={x} value={x}>
+                      {x}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <label className="lg:col-span-1">
                 <FieldLabel required>Years of experience</FieldLabel>
                 <select
@@ -480,8 +490,7 @@ export function LeadCaptureForm({
                   ))}
                 </select>
               </label>
-
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-2">
                 <FieldLabel required>Travel interest</FieldLabel>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {(
@@ -501,49 +510,20 @@ export function LeadCaptureForm({
                   ))}
                 </div>
               </div>
-
-              {isSidebar ? (
-                <div className="lg:col-span-2 space-y-3">
-                  <FieldLabel required>Preferred states</FieldLabel>
-                  <div className="max-h-44 overflow-y-auto rounded-xl border border-slate-200 bg-white p-2">
-                    <ul className="grid gap-1">
-                      {US_STATES.map((s) => (
-                        <li key={s}>
-                          <label className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1 text-sm">
-                            <input
-                              type="checkbox"
-                              checked={selectedStates.has(s)}
-                              onChange={() => toggleState(s)}
-                              className="size-4 accent-brand-600"
-                            />
-                            {s}
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ) : null}
-            </FormSection>
-
-            <FormSection title="Communication preferences">
               <label className="lg:col-span-2 flex cursor-pointer items-start gap-3 rounded-xl border border-brand-200 bg-brand-50/40 p-4 text-sm text-slate-700 shadow-sm">
                 <input name="smsOptIn" type="checkbox" className="mt-1 size-4 accent-brand-600" />
                 <span>
                   <span className="font-semibold text-slate-900">Text me about time-sensitive cardiology openings</span>
                   <span className="mt-1 block text-xs text-slate-600">
-                    Ideal for EP or interventional travelers—message/data rates may apply. Reply STOP to opt out.
+                    Message/data rates may apply. Reply STOP to opt out.
                   </span>
                 </span>
               </label>
-
               <label className="lg:col-span-2 flex cursor-pointer items-start gap-3 rounded-xl border border-brand-100 bg-brand-50/50 p-4 text-sm text-slate-700 shadow-sm">
                 <input name="leadMagnet" type="checkbox" className="mt-1 size-4 accent-brand-600" defaultChecked />
                 <span>
                   <span className="font-semibold text-slate-900">Email me “The Physician’s Guide to Locum Tenens”</span>
-                  <span className="mt-1 block text-xs text-slate-600">
-                    Sent to the email from step 1—check spam if it does not arrive within a few minutes.
-                  </span>
+                  <span className="mt-1 block text-xs text-slate-600">Sent to the email from step 1.</span>
                 </span>
               </label>
             </FormSection>
@@ -563,15 +543,29 @@ export function LeadCaptureForm({
         )}
 
         {status === "error" && error ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">{error}</div>
+          <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">
+            {error}
+          </div>
         ) : null}
 
         <div className="flex flex-col gap-3 border-t border-slate-100 pt-6">
           {step === 1 ? (
             <>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button type="submit" size="md" className="w-full sm:w-auto">
-                  Continue to step 2
+              <Button type="submit" size="md" className="w-full sm:w-auto">
+                Continue to preferences
+              </Button>
+              <p className="text-xs text-slate-500">
+                Next: preferred states, timeline, and a short security check—then submit.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <Button type="button" variant="ghost" size="md" className="w-full sm:w-auto" onClick={() => setStep(1)}>
+                  ← Back
+                </Button>
+                <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
+                  {status === "submitting" ? "Submitting…" : "Submit inquiry"}
                 </Button>
                 <Button
                   type="button"
@@ -581,28 +575,21 @@ export function LeadCaptureForm({
                   disabled={status === "submitting"}
                   onClick={onQuickSubmit}
                 >
-                  {status === "submitting" ? "Submitting…" : "Quick submit (step 1 only)"}
+                  {status === "submitting" ? "Submitting…" : "Submit without experience details"}
                 </Button>
               </div>
               <p className="text-xs text-slate-500">
-                Quick submit skips experience and travel details—we will confirm on our first call. Step 2 is recommended
-                for faster matching.
+                Full submit includes experience and travel for faster matching. Lighter submit still requires states,
+                timeline, and security verification.
               </p>
-            </>
-          ) : (
-            <>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button type="button" variant="ghost" size="md" className="w-full sm:w-auto" onClick={() => setStep(1)}>
-                  ← Back
-                </Button>
-                <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
-                  {status === "submitting" ? "Submitting…" : "Submit inquiry"}
-                </Button>
-              </div>
             </>
           )}
           <p className="text-xs leading-relaxed text-slate-500">
-            By submitting, you agree we may contact you about opportunities. This is not an employment offer. Need help?{" "}
+            By submitting, you agree we may contact you about opportunities. This is not an employment offer. See our{" "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/privacy">
+              Privacy Policy
+            </Link>
+            . Need help?{" "}
             <a className="font-semibold text-brand-700 hover:underline" href={`mailto:${SITE.email}`}>
               Email us
             </a>

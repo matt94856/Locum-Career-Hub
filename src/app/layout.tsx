@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`}>
-      <body className="min-h-screen bg-white pb-24 font-sans antialiased sm:pb-0">
+      <body className="min-h-screen bg-white pb-[max(6rem,calc(5.5rem+env(safe-area-inset-bottom)))] font-sans antialiased sm:pb-0">
         <GoogleAnalytics />
         <MarketingPixels />
         <JsonLd data={organizationJsonLd()} />

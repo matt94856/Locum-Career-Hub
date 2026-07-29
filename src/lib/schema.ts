@@ -1,7 +1,7 @@
 import { SITE } from "@/lib/site";
 
 /** Absolute logo URL for structured data (prefer on-site asset over remote GitHub). */
-export const SCHEMA_LOGO_URL = `${SITE.url}/logo.svg` as const;
+export const SCHEMA_LOGO_URL = `${SITE.url}/locumcareerhublogo.png` as const;
 
 /** Topics and entities this organization is positioned to help with (semantic + AI retrieval signals). */
 const KNOWS_ABOUT = [

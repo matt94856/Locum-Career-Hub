@@ -27,16 +27,21 @@ export function Hero() {
             </p>
 
             <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-              <Button href="/cardiologist-locums-calculator" className="w-full justify-center">
-                Calculate earning potential
+              <Button href={HOME_LEAD_ANCHOR} className="w-full justify-center">
+                Request matches
               </Button>
-              <CalendlyBookButton source="hero" variant="secondary" className="w-full justify-center">
+              <Button href="/cardiologist-locums-calculator" variant="secondary" className="w-full justify-center">
+                Estimate pay
+              </Button>
+            </div>
+            <div className="mt-3 max-w-xl">
+              <CalendlyBookButton source="hero" variant="ghost" className="w-full justify-center sm:w-auto">
                 Talk with a cardiology specialist
               </CalendlyBookButton>
             </div>
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600">
-              Free personalized report in under 2 minutes—specialty, schedule, licenses, and travel. No spam.
-              Prefer to browse first?{" "}
+              Request cardiologist-only matches, or estimate pay in about two minutes—specialty, schedule, licenses,
+              and travel. No spam. Prefer to browse first?{" "}
               <Link href="/locum-jobs/cardiology" className="font-semibold text-brand-700 hover:underline">
                 See cardiology locum jobs
               </Link>

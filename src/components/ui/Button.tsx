@@ -49,8 +49,18 @@ export function Button({
         </Link>
       );
     }
+    const isHttp = /^https?:\/\//i.test(href);
+    const isAppProtocol = /^(tel:|mailto:|sms:)/i.test(href);
     return (
-      <a href={href} className={cls} target="_blank" rel="noopener noreferrer" title={title} onClick={onClick}>
+      <a
+        href={href}
+        className={cls}
+        title={title}
+        onClick={onClick}
+        {...(isHttp && !isAppProtocol
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
         {children}
       </a>
     );

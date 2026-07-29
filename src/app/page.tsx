@@ -34,6 +34,8 @@ export default function HomePage() {
 
       <HomeCardiologistGuides />
 
+      <TrustBar />
+
       <section id="get-matched" className="scroll-mt-24 border-y border-slate-100 bg-slate-50/40 py-16 sm:py-20">
         <LeadFormStandaloneSection>
           <LeadCaptureForm
@@ -45,7 +47,6 @@ export default function HomePage() {
         </LeadFormStandaloneSection>
       </section>
 
-      <TrustBar />
       <Segments />
       <SpecialtiesSection />
       <Process />

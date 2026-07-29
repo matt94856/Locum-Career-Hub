@@ -103,8 +103,8 @@ export function PdfEmailGate({
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
         <input required name="firstName" autoComplete="given-name" placeholder="First name" aria-label="First name" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
         <input required name="lastName" autoComplete="family-name" placeholder="Last name" aria-label="Last name" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-        <input required type="email" name="email" autoComplete="email" placeholder="Email" aria-label="Email" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
-        <input required type="tel" name="phone" autoComplete="tel" placeholder="Phone" aria-label="Phone" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm" />
+        <input required type="email" name="email" autoComplete="email" placeholder="Email" aria-label="Email" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm sm:col-span-2" />
+        <input type="tel" name="phone" autoComplete="tel" placeholder="Phone (optional)" aria-label="Phone optional" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm sm:col-span-2" />
         {!homeState ? (
           <input name="homeState" placeholder="Home or practice state" aria-label="Home or practice state" className="min-h-12 rounded-xl border border-slate-200 bg-white px-4 text-sm sm:col-span-2" />
         ) : (

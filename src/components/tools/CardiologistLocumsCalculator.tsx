@@ -99,7 +99,7 @@ export function CardiologistLocumsCalculator() {
   const [licensesTouched, setLicensesTouched] = useState(false);
   const [stateQuery, setStateQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const [pdfUnlocked, setPdfUnlocked] = useState(false);
+  const [, setPdfUnlocked] = useState(false);
   const questionHeadingRef = useRef<HTMLHeadingElement>(null);
 
   const result = useMemo(() => (isComplete(answers) ? calculateLocumsProfile(answers) : null), [answers]);

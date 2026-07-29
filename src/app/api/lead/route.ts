@@ -33,7 +33,12 @@ type LeadBody = {
   homeState?: unknown;
   source?: unknown;
   recaptchaToken?: unknown;
+  companyWebsite?: unknown;
 };
+
+function isToolOrPdfSource(source: string): boolean {
+  return /pdf|calculator|tool|gate|estimator|portfolio/i.test(source);
+}
 
 function isNonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
@@ -52,15 +57,20 @@ function safeJsonObject(value: unknown, maxLength = 50000): Record<string, unkno
 
 function normalizeLead(body: LeadBody) {
   const formMode: "quick" | "full" = body.formMode === "quick" ? "quick" : "full";
+  const source = isNonEmptyString(body.source) ? body.source.trim().slice(0, 100) : "lead_form";
+  const toolOrPdf = isToolOrPdfSource(source);
 
   if (
     !isNonEmptyString(body.firstName) ||
     !isNonEmptyString(body.lastName) ||
     !isNonEmptyString(body.email) ||
-    !isNonEmptyString(body.phone) ||
     !isNonEmptyString(body.specialty) ||
     !isNonEmptyString(body.availability)
   ) {
+    return { ok: false as const, error: "Missing required fields." };
+  }
+
+  if (!toolOrPdf && !isNonEmptyString(body.phone)) {
     return { ok: false as const, error: "Missing required fields." };
   }
 
@@ -81,7 +91,11 @@ function normalizeLead(body: LeadBody) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false as const, error: "Enter a valid email address." };
   }
-  if (body.phone.replace(/\D/g, "").length < 10) {
+  const phone = isNonEmptyString(body.phone) ? body.phone.trim() : "";
+  if (phone && phone.replace(/\D/g, "").length < 10) {
+    return { ok: false as const, error: "Enter a valid phone number." };
+  }
+  if (!toolOrPdf && phone.replace(/\D/g, "").length < 10) {
     return { ok: false as const, error: "Enter a valid phone number." };
   }
 
@@ -126,7 +140,6 @@ function normalizeLead(body: LeadBody) {
   const calculatorProfile = safeJsonObject(body.calculatorProfile);
   if (calculatorProfile) metadata.calculator_profile = calculatorProfile;
   if (isNonEmptyString(body.homeState)) metadata.home_state = body.homeState.trim().slice(0, 100);
-  const source = isNonEmptyString(body.source) ? body.source.trim().slice(0, 100) : "lead_form";
 
   return {
     ok: true as const,
@@ -134,7 +147,7 @@ function normalizeLead(body: LeadBody) {
       first_name: body.firstName.trim(),
       last_name: body.lastName.trim(),
       email,
-      phone: body.phone.trim(),
+      phone: phone || "not-provided",
       specialty,
       preferred_states: preferredStates,
       years_experience: yearsExperience,
@@ -149,7 +162,7 @@ function normalizeLead(body: LeadBody) {
       firstName: body.firstName.trim(),
       lastName: body.lastName.trim(),
       email,
-      phone: body.phone.trim(),
+      phone: phone || "not provided",
       specialty,
       preferredStates,
       yearsExperience,
@@ -174,10 +187,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  const formMode = json.formMode === "quick" ? "quick" : "full";
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  // Honeypot: bots often fill hidden fields
+  if (isNonEmptyString(json.companyWebsite)) {
+    return NextResponse.json({ ok: true });
+  }
 
-  if (secret && formMode === "full") {
+  // formMode is normalized inside normalizeLead
+  const source = isNonEmptyString(json.source) ? json.source.trim() : "lead_form";
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  const skipCaptcha = isToolOrPdfSource(source);
+
+  if (secret && !skipCaptcha) {
     const token = typeof json.recaptchaToken === "string" ? json.recaptchaToken : "";
     const forwarded = req.headers.get("x-forwarded-for");
     const remoteip =
