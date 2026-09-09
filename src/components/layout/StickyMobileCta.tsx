@@ -9,9 +9,11 @@ import { SITE } from "@/lib/site";
 export function StickyMobileCta() {
   const pathname = usePathname();
   const [formInView, setFormInView] = useState(false);
+  const [hasLocalForm, setHasLocalForm] = useState(false);
 
   useEffect(() => {
     const el = document.getElementById("lead-form");
+    setHasLocalForm(Boolean(el));
     if (!el) {
       setFormInView(false);
       return;
@@ -30,6 +32,12 @@ export function StickyMobileCta() {
     SITE.calendlyUrl ||
     `mailto:${SITE.email}?subject=${encodeURIComponent("Schedule a call — Locum Career Hub")}`;
   const bookExternal = bookHref.startsWith("http");
+  const formHref = hasLocalForm
+    ? "#lead-form"
+    : "/physician-opportunities#lead-form";
+  const isFeaturedOpportunity = pathname.startsWith(
+    "/featured-cardiology-jobs/",
+  );
 
   return (
     <div
@@ -38,12 +46,19 @@ export function StickyMobileCta() {
     >
       <div className="pointer-events-auto mx-auto flex max-w-lg gap-2 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-card backdrop-blur">
         <Button
-          href="/#lead-form"
+          href={formHref}
           size="md"
           className="min-h-11 min-w-0 flex-1 basis-0 justify-center px-2 text-sm leading-snug"
-          onClick={() => trackCtaClick("sticky_submit_inquiry", "/#lead-form")}
+          onClick={() =>
+            trackCtaClick(
+              isFeaturedOpportunity
+                ? "sticky_featured_job_inquiry"
+                : "sticky_submit_inquiry",
+              formHref,
+            )
+          }
         >
-          Request matches
+          {isFeaturedOpportunity ? "Ask about job" : "Request matches"}
         </Button>
         <Button
           href={`tel:${SITE.phoneTel}`}

@@ -127,18 +127,18 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
 
             {contextualLinks.length > 0 ? (
               <p className="text-sm leading-relaxed text-slate-700">
-                {contextualLinks.map((link) => (
-                  <span key={link.targetPathSlug}>
-                    {link.prefix}{" "}
-                    <Link
-                      href={cardiologySpecialtyPath(link.targetPathSlug)}
-                      className="font-semibold text-brand-700 hover:underline"
-                    >
-                      {link.anchor}
-                    </Link>
-                    {link.suffix ? ` ${link.suffix}` : null}
-                  </span>
-                ))}
+                {contextualLinks.map((link) => {
+                  const href = link.href ?? (link.targetPathSlug ? cardiologySpecialtyPath(link.targetPathSlug) : "#");
+                  return (
+                    <span key={`${href}-${link.anchor}`}>
+                      {link.prefix}{" "}
+                      <Link href={href} className="font-semibold text-brand-700 hover:underline">
+                        {link.anchor}
+                      </Link>
+                      {link.suffix ? ` ${link.suffix}` : null}{" "}
+                    </span>
+                  );
+                })}
               </p>
             ) : null}
 
@@ -226,7 +226,33 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
             <RelatedCardiologyLinks
               specialtyPathSlugs={specialty.relatedPathSlugs}
               articleSlugs={["how-much-do-locum-cardiologists-make", "credentialing-for-locum-cardiologists"]}
+              stateSlug={specialty.pathSlug === "electrophysiology" ? "new-york" : undefined}
             />
+            {specialty.pathSlug === "electrophysiology" ? (
+              <p className="text-sm text-slate-600">
+                Also see the{" "}
+                <Link href="/ep-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
+                  EP cardiology locums pay guide
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/locum-tenens-jobs/new-york/electrophysiology"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  New York EP locum jobs
+                </Link>
+                .
+              </p>
+            ) : null}
+            {specialty.pathSlug === "cardiac-imaging" ? (
+              <p className="text-sm text-slate-600">
+                Estimate imaging-block economics with the{" "}
+                <Link href="/cardiologist-locums-calculator" className="font-semibold text-brand-700 hover:underline">
+                  cardiologist locums calculator
+                </Link>
+                .
+              </p>
+            ) : null}
 
             {eeat ? <EeatArticleFooter eeat={eeat} /> : null}
           </div>

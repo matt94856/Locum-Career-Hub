@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { US_STATES } from "@/lib/states";
+import { getFeaturedCardiologyOpportunity } from "@/lib/featured-cardiology-opportunities";
 import { notifyRecruiterOfLead, sendLeadAcknowledgment } from "@/lib/lead-email";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
@@ -32,6 +33,8 @@ type LeadBody = {
   calculatorProfile?: unknown;
   homeState?: unknown;
   source?: unknown;
+  opportunitySlug?: unknown;
+  qualificationResponses?: unknown;
   recaptchaToken?: unknown;
   companyWebsite?: unknown;
 };
@@ -57,7 +60,17 @@ function safeJsonObject(value: unknown, maxLength = 50000): Record<string, unkno
 
 function normalizeLead(body: LeadBody) {
   const formMode: "quick" | "full" = body.formMode === "quick" ? "quick" : "full";
-  const source = isNonEmptyString(body.source) ? body.source.trim().slice(0, 100) : "lead_form";
+  const opportunitySlug = isNonEmptyString(body.opportunitySlug)
+    ? body.opportunitySlug.trim()
+    : "";
+  const opportunity = opportunitySlug
+    ? getFeaturedCardiologyOpportunity(opportunitySlug)
+    : undefined;
+  const source = opportunity
+    ? `featured_opportunity_${opportunity.slug}`.slice(0, 100)
+    : isNonEmptyString(body.source)
+      ? body.source.trim().slice(0, 100)
+      : "lead_form";
   const toolOrPdf = isToolOrPdfSource(source);
 
   if (
@@ -110,7 +123,7 @@ function normalizeLead(body: LeadBody) {
   const yearsExperience = isNonEmptyString(body.yearsExperience)
     ? body.yearsExperience.trim()
     : formMode === "quick"
-      ? "Exploring / no firm date"
+      ? "Not provided (quick submit)"
       : "";
 
   const travel = isNonEmptyString(body.travel) ? body.travel.trim() : formMode === "quick" ? "maybe" : "";
@@ -139,6 +152,30 @@ function normalizeLead(body: LeadBody) {
   if (attribution) metadata.attribution = attribution;
   const calculatorProfile = safeJsonObject(body.calculatorProfile);
   if (calculatorProfile) metadata.calculator_profile = calculatorProfile;
+  const rawQualificationResponses = safeJsonObject(
+    body.qualificationResponses,
+    5000,
+  );
+  const qualificationResponses = (() => {
+    if (!opportunity || !rawQualificationResponses) return null;
+    const responses = Object.fromEntries(
+      opportunity.screeningQuestions.flatMap((question) => {
+        const response = rawQualificationResponses[question.id];
+        return typeof response === "string" &&
+          question.options.includes(response)
+          ? [[question.label, response]]
+          : [];
+      }),
+    );
+    return Object.keys(responses).length > 0 ? responses : null;
+  })();
+  if (qualificationResponses) {
+    metadata.qualification_responses = qualificationResponses;
+  }
+  if (opportunity) {
+    metadata.opportunity_slug = opportunity.slug;
+    metadata.opportunity_title = opportunity.title;
+  }
   if (isNonEmptyString(body.homeState)) metadata.home_state = body.homeState.trim().slice(0, 100);
 
   return {
@@ -177,6 +214,9 @@ function normalizeLead(body: LeadBody) {
       calculatorProfile,
       homeState: isNonEmptyString(body.homeState) ? body.homeState.trim() : null,
       source,
+      opportunitySlug: opportunity?.slug ?? null,
+      opportunityTitle: opportunity?.title ?? null,
+      qualificationResponses,
     },
   };
 }
@@ -247,10 +287,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Could not save your inquiry. Please try again." }, { status: 500 });
   }
 
-  void Promise.all([
+  const emailResults = await Promise.allSettled([
     notifyRecruiterOfLead(normalized.emailPayload),
     sendLeadAcknowledgment(normalized.emailPayload),
-  ]).catch((e) => console.error("[lead] email side effects failed", e));
+  ]);
+  emailResults.forEach((result) => {
+    if (result.status === "rejected") {
+      console.error("[lead] email side effect failed", result.reason);
+    }
+  });
 
   return NextResponse.json({ ok: true });
 }

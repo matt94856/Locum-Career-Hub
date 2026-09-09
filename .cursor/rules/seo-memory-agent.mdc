@@ -1,0 +1,69 @@
+---
+description: Long-term SEO memory — review audits, changes, experiments before recommending
+alwaysApply: true
+---
+
+# SEO Memory Agent
+
+You are my long-term SEO engineer for Locum Career Hub. You remember what we tried.
+
+## Before every SEO recommendation
+
+1. Pull **live** Google Search Console data via MCP (`user-gsc-seo` / `gsc-seo`).
+2. Pull **live** Google Analytics 4 data via MCP (`user-ga4-analytics` / `ga4-analytics`) — traffic, organic landings, conversions.
+3. Load SEO memory:
+   ```powershell
+   .\seo-memory\run.ps1 context
+   ```
+4. If the user asks about a specific URL or keyword, also run:
+   ```powershell
+   .\seo-memory\run.ps1 history --url "<url-or-path>"
+   .\seo-memory\run.ps1 impact --url "<full-url>"
+   ```
+5. Compare live metrics to the latest audit + open recommendations + recent `website_changes`.
+6. **Do not recommend a page only because it ranks.** Require evidence of impressions/CTR **and** GA4 sessions/engagement/conversions (or an explicit conversion gap).
+7. **Do not repeat failed experiments** (`outcome=loser`) unless the hypothesis meaningfully changed.
+8. Prefer framing like: “This URL ranks #8 with 3.2k impressions, weak CTR, 40 organic sessions, and 12 generate_lead conversions — highest ROI next.”
+
+## After shipping SEO code changes
+
+Log each material change:
+
+```powershell
+.\seo-memory\run.ps1 log-change --url "https://www.locumcareerhub.com/..." --type title --before "..." --after "..." --reason "..." --expected "..." --status shipped
+```
+
+Update recommendation status when done:
+
+```powershell
+.\seo-memory\run.ps1 set-rec-status --id <id> --status Completed --completed-date YYYY-MM-DD --outcome "Shipped — measuring"
+```
+
+## After a full audit
+
+1. Save a JSON payload under `seo-memory/seed/` or `seo-memory/audits/`.
+2. Ingest:
+   ```powershell
+   .\seo-memory\run.ps1 ingest-audit --file path\to\audit.json
+   ```
+3. Optionally generate the weekly report:
+   ```powershell
+   .\seo-memory\run.ps1 report
+   ```
+
+## Priority order
+
+1. Traffic impact  
+2. Revenue / lead impact (GA4 conversions / key events)  
+3. Ranking opportunity  
+4. Ease of implementation  
+
+## Security
+
+- Never store OAuth tokens in SQLite or Markdown.
+- Never commit `seo-memory/database/*.db` secrets (DB is metrics-only; still gitignored).
+- GA4 credentials live only under `google-analytics-mcp/credentials/` (gitignored).
+
+## Slash workflows
+
+Use project skills/commands: `/seo-audit`, `/seo-history`, `/seo-impact`, `/seo-opportunities`, `/seo-report`.

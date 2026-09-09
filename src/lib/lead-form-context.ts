@@ -67,6 +67,38 @@ export function leadPrefillFromLandingSlug(slug: string) {
 
 export function thankYouReadingLinks(pagePath?: string | null) {
   if (!pagePath) return THANK_YOU_READING_BY_TOPIC.default;
+  if (
+    pagePath.includes(
+      "featured-cardiology-jobs/kansas-inpatient-non-invasive",
+    )
+  ) {
+    return [
+      {
+        href: "/guides/cardiology-locum-schedule-examples",
+        title: "Compare cardiology block schedules",
+      },
+      {
+        href: "/guides/interstate-medical-licensure-compact-guide",
+        title: "Prepare for multi-state physician licensing",
+      },
+    ];
+  }
+  if (
+    pagePath.includes(
+      "featured-cardiology-jobs/north-carolina-outpatient",
+    )
+  ) {
+    return [
+      {
+        href: "/part-time-cardiologist-jobs",
+        title: "Design a sustainable part-time cardiology schedule",
+      },
+      {
+        href: "/cardiology-locum-jobs/outpatient-cardiology-locum-jobs",
+        title: "Review outpatient cardiology locum scope",
+      },
+    ];
+  }
   if (pagePath.includes("salary") || pagePath.includes("pay")) return THANK_YOU_READING_BY_TOPIC.salary;
   if (pagePath.includes("credential")) return THANK_YOU_READING_BY_TOPIC.credentialing;
   if (pagePath.includes("burnout") || pagePath.includes("leaving-employed")) {

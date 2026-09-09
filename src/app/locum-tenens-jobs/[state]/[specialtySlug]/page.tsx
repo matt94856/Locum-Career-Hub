@@ -7,6 +7,10 @@ import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
+import {
+  featuredOpportunityPath,
+  getFeaturedOpportunitiesForState,
+} from "@/lib/featured-cardiology-opportunities";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { buildSpecialtyStatePageContent } from "@/lib/seo/specialty-state-content";
 import { buildSpecialtyStateMetadata, specialtyStatePath } from "@/lib/specialty-state-seo";
@@ -83,6 +87,7 @@ export default async function SpecialtyStateLocumPage({
   ]);
 
   const otherSpecs = CARDIOLOGY_SUBSPECIALTIES.filter((s) => specialtyToSlug(s) !== specialtySlug);
+  const featuredOpportunities = getFeaturedOpportunitiesForState(state, specialtySlug);
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -114,9 +119,58 @@ export default async function SpecialtyStateLocumPage({
             <Button href={`/locum-tenens-jobs/${state}`} variant="secondary" className="justify-center">
               All {statePage.stateName} cardiology locums →
             </Button>
+            {specialtySlug === "electrophysiology" ? (
+              <>
+                <Button href="/ep-cardiology-locums-pay" variant="secondary" className="justify-center">
+                  EP locums pay guide →
+                </Button>
+                <Button href="/locum-jobs/cardiology/electrophysiology" variant="secondary" className="justify-center">
+                  EP specialty hub →
+                </Button>
+              </>
+            ) : null}
+            {specialtySlug === "advanced-imaging" || specialtyName.toLowerCase().includes("imaging") ? (
+              <Button href="/locum-jobs/cardiology/cardiac-imaging" variant="secondary" className="justify-center">
+                Cardiac imaging hub →
+              </Button>
+            ) : null}
           </div>
         </div>
       </section>
+
+      {featuredOpportunities.length ? (
+        <section className="border-b border-brand-100 bg-brand-50 py-10">
+          <div className="container-site">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
+              Currently recruiting
+            </p>
+            <div className="mt-4 grid gap-4">
+              {featuredOpportunities.map((opportunity) => (
+                <article
+                  key={opportunity.slug}
+                  className="rounded-3xl border border-brand-200 bg-white p-6 shadow-sm sm:flex sm:items-center sm:justify-between sm:gap-8"
+                >
+                  <div>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-slate-950">
+                      {opportunity.shortLabel}
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+                      {opportunity.setting}. {opportunity.schedule}. Travel, lodging,
+                      and malpractice insurance covered.
+                    </p>
+                  </div>
+                  <Button
+                    href={featuredOpportunityPath(opportunity.slug)}
+                    className="mt-5 shrink-0 sm:mt-0"
+                  >
+                    View featured job
+                  </Button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">

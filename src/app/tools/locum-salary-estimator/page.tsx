@@ -10,7 +10,7 @@ const PATH = "/tools/locum-salary-estimator";
 const DESC =
   "Illustrative locum tenens salary range calculator for physicians—gross-only modeling with explicit disclaimers (not a quote or tax advice).";
 
-export const metadata: Metadata = buildSalaryEstimatorSerpMetadata();
+export const metadata: Metadata = buildSalaryEstimatorSerpMetadata("/tools/locum-salary-estimator");
 
 export default function LocumSalaryEstimatorPage() {
   const medical = medicalWebPageJsonLd({
@@ -42,12 +42,16 @@ export default function LocumSalaryEstimatorPage() {
         <div className="container-site max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Tools</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Locum tenens salary range estimator
+            Cardiologist locum salary range calculator
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Use this page as a structured reference for how locum gross pay is often discussed: shifts, weeks, and a
-            blended hourly band. It is not a quote, guarantee, or tax plan—real offers depend on specialty, call, acuity,
-            stipends, malpractice, and market timing.
+            Estimate a directional gross range for cardiology locum blocks using shifts, weeks, and a blended hourly
+            band. This is educational math—not a quote, guarantee, or tax plan. For a fuller specialty-and-schedule
+            model, use the{" "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/cardiologist-locums-calculator">
+              cardiologist locums earning calculator
+            </Link>
+            .
           </p>
         </div>
       </section>

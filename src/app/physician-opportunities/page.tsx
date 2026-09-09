@@ -4,6 +4,10 @@ import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  FEATURED_CARDIOLOGY_OPPORTUNITIES,
+  featuredOpportunityPath,
+} from "@/lib/featured-cardiology-opportunities";
 import { OPPORTUNITIES_FAQ } from "@/lib/opportunities-seo";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { FEATURED_STATES } from "@/lib/states";
@@ -79,6 +83,42 @@ export default function OpportunitiesPage() {
             Locum tenens is not the only answer, but when it fits it can restore margin: clearer boundaries, competitive
             weekly structure, and a recruiter who explains the tradeoffs instead of pushing a quota.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-brand-100 bg-brand-50 py-12 sm:py-14">
+        <div className="container-site max-w-5xl">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
+            Featured cardiology jobs
+          </p>
+          <h2 className="mt-3 text-center font-display text-3xl font-semibold tracking-tight text-slate-950">
+            Current non-invasive cardiology opportunities
+          </h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {FEATURED_CARDIOLOGY_OPPORTUNITIES.map((opportunity) => (
+              <article
+                key={opportunity.slug}
+                className="rounded-3xl border border-brand-200 bg-white p-6 shadow-sm"
+              >
+                <p className="text-xs font-bold uppercase tracking-wider text-brand-700">
+                  {opportunity.state}
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-bold tracking-tight text-slate-950">
+                  {opportunity.setting}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-slate-700">
+                  {opportunity.schedule}. Travel, lodging, and malpractice insurance
+                  covered.
+                </p>
+                <Link
+                  href={featuredOpportunityPath(opportunity.slug)}
+                  className="mt-5 inline-flex min-h-11 items-center rounded-full bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
+                >
+                  View assignment details
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "gsc-seo": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "C:\\Users\\matt9\\Desktop\\MPLT Health\\mcp-gsc\\.venv\\Scripts\\python.exe",
+        "-m",
+        "gsc_mcp"
+      ],
+      "cwd": "C:\\Users\\matt9\\Desktop\\MPLT Health\\mcp-gsc",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "envFile": "C:\\Users\\matt9\\Desktop\\MPLT Health\\mcp-gsc\\.env"
+    },
+    "ga4-analytics": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp\\.venv\\Scripts\\python.exe",
+        "server.py"
+      ],
+      "cwd": "C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "envFile": "C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp\\.env"
+    }
+  }
+}

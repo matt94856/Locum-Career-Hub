@@ -245,6 +245,39 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+export function jobPostingJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  datePosted: string;
+  state: string;
+  employmentType?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: input.title,
+    description: input.description,
+    datePosted: input.datePosted,
+    employmentType: input.employmentType ?? "CONTRACTOR",
+    industry: "Healthcare",
+    occupationalCategory: "29-1212 Cardiologists",
+    url: `${SITE.url}${input.path}`,
+    hiringOrganization: {
+      "@type": "Organization",
+      name: "Confidential healthcare facility",
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: input.state,
+        addressCountry: "US",
+      },
+    },
+  };
+}
+
 /** Medical/clinical career intent pages — helps Google + AI systems classify topical authority. */
 export function medicalWebPageJsonLd(input: {
   name: string;

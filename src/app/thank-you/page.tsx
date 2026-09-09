@@ -4,6 +4,10 @@ import { ThankYouConversionTracker } from "@/components/analytics/ThankYouConver
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import {
+  featuredOpportunityPath,
+  getFeaturedCardiologyOpportunity,
+} from "@/lib/featured-cardiology-opportunities";
 import { thankYouReadingLinks } from "@/lib/lead-form-context";
 import { SITE, CTA } from "@/lib/site";
 
@@ -15,7 +19,12 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ specialty?: string; states?: string; from?: string }>;
+  searchParams: Promise<{
+    specialty?: string;
+    states?: string;
+    from?: string;
+    opportunity?: string;
+  }>;
 };
 
 export default async function ThankYouPage({ searchParams }: Props) {
@@ -23,11 +32,17 @@ export default async function ThankYouPage({ searchParams }: Props) {
   const specialty = params.specialty?.trim();
   const states = params.states?.split("|").filter(Boolean) ?? [];
   const fromPath = params.from?.trim();
+  const opportunity = params.opportunity
+    ? getFeaturedCardiologyOpportunity(params.opportunity)
+    : undefined;
   const reading = thankYouReadingLinks(fromPath ?? null);
 
   return (
     <main className="pb-24 sm:pb-0">
-      <ThankYouConversionTracker />
+      <ThankYouConversionTracker
+        opportunitySlug={opportunity?.slug}
+        sourcePath={fromPath}
+      />
       <section className="border-b border-emerald-100 bg-gradient-to-b from-emerald-50/80 to-white py-14 sm:py-20">
         <div className="container-site max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800">Inquiry received</p>
@@ -36,6 +51,15 @@ export default async function ThankYouPage({ searchParams }: Props) {
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
             A cardiology recruiter will review your profile
+            {opportunity ? (
+              <>
+                {" "}
+                for{" "}
+                <strong className="font-semibold text-slate-800">
+                  {opportunity.shortLabel}
+                </strong>
+              </>
+            ) : null}
             {specialty ? (
               <>
                 {" "}
@@ -62,7 +86,10 @@ export default async function ThankYouPage({ searchParams }: Props) {
               <span className="text-emerald-600" aria-hidden>
                 ✓
               </span>
-              <span>Check your inbox (and spam) for our confirmation and optional locum guide.</span>
+              <span>
+                Check your inbox (and spam) for our confirmation
+                {opportunity ? "." : " and optional locum guide."}
+              </span>
             </li>
           </ul>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -72,6 +99,15 @@ export default async function ThankYouPage({ searchParams }: Props) {
             <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center sm:w-auto">
               Call {SITE.phoneDisplay}
             </Button>
+            {opportunity ? (
+              <Button
+                href={featuredOpportunityPath(opportunity.slug)}
+                variant="ghost"
+                className="w-full justify-center sm:w-auto"
+              >
+                Review opportunity details
+              </Button>
+            ) : null}
           </div>
         </div>
       </section>
@@ -117,8 +153,11 @@ export default async function ThankYouPage({ searchParams }: Props) {
             <div className="mt-6 rounded-2xl border border-brand-100 bg-brand-50/40 p-6">
               <h3 className="font-display text-lg font-semibold text-slate-950">One more thing that helps us match you</h3>
               <p className="mt-2 text-sm text-slate-600">
-                Reply to our confirmation email with your hardest boundary—solo STEMI, max consult census, cath lab
-                frequency, or travel radius. It saves a round trip on the first call.
+                {opportunity?.stateSlug === "north-carolina"
+                  ? "Reply to our confirmation email with any must-have clinic dates, patient-volume limits, or inbox and callback questions. It saves a round trip on the first call."
+                  : opportunity?.stateSlug === "kansas"
+                    ? "Reply to our confirmation email with questions about call frequency, nuclear scope, TEE expectations, licensing, or travel. It saves a round trip on the first call."
+                    : "Reply to our confirmation email with your hardest boundary—solo STEMI, max consult census, cath lab frequency, or travel radius. It saves a round trip on the first call."}
               </p>
             </div>
           </div>

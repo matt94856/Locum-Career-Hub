@@ -23,6 +23,85 @@ function pick<T>(items: T[], seed: number, offset = 0): T {
   return items[(seed + offset) % items.length]!;
 }
 
+/** High-impression GSC combos that need unique depth beyond the Mad Libs template. */
+function applyPrioritySpecialtyStateEnrichment(
+  content: SpecialtyStatePageContent,
+  input: {
+    stateSlug: string;
+    stateName: string;
+    specialtySlug: string;
+    specialtyName: string;
+  },
+): SpecialtyStatePageContent {
+  if (input.stateSlug === "new-york" && input.specialtySlug === "electrophysiology") {
+    return {
+      ...content,
+      heroSubhead: "Ablation, devices, and arrhythmia call — written before you start",
+      directAnswer:
+        "Electrophysiology locum tenens jobs in New York are contract-based EP lab and device-clinic blocks where a full NY license, facility privileging, and written ablation/device scope must align before your start date. Demand clusters in NYC, Buffalo, Rochester, and Albany systems, but fit depends on lab capabilities, device clinic load, and after-hours arrhythmia call—not headline weekly rates.",
+      intro:
+        "New York EP locums sit at the intersection of dense metro privileging timelines and high-acuity arrhythmia programs. Whether you want ablation-heavy weeks in NYC, device clinic coverage upstate, or hybrid travel blocks, insist on written EP lab staffing, mapping systems, and call boundaries before you accept.",
+      sections: [
+        {
+          h2: "What NY electrophysiology locum assignments look like",
+          paragraphs: [
+            "Typical New York EP blocks mix ablation days, device implants/revisions, and device clinic or remote monitoring coverage. Confirm whether you cover inpatient arrhythmia consults, weekend device interrogations, and STEMI-adjacent backup when labs share cath resources.",
+            "Metro programs (NYC, Long Island, Westchester) often move slower on privileging; regional systems in Buffalo, Rochester, and Albany can start faster when your case logs and device credentials are current.",
+          ],
+        },
+        {
+          h2: "Licensing and privileging for EP in New York",
+          paragraphs: [
+            "New York is not an IMLC shortcut for most physicians—plan a full NY license early if you are expanding footprint. EP privileges are separate: labs usually want ablation and device case volume documented within a recent window.",
+            "Sequence license → hospital credentialing → EP lab privileges. Share target start dates with a cardiology recruiter so privileging owners and temporary privilege options are mapped before you book travel.",
+          ],
+        },
+        {
+          h2: "Pay drivers specific to NY EP locums",
+          paragraphs: [
+            "Rates move with ablation complexity, device mix, after-hours arrhythmia call, remote monitoring burden, and whether you cover solo vs backed-up lab days. Compare offers using the same variables—not weekly headlines alone.",
+            "Use the EP cardiology locums pay guide and the cardiologist locums calculator to set a directional range before you negotiate stipends and call differentials.",
+          ],
+        },
+        {
+          h2: "Documentation to insist on before you sign",
+          paragraphs: [
+            "Require written EP lab capabilities (mapping systems, anesthesia support), device clinic volume, after-hours call frequency, backup layers, malpractice structure, and cancellation terms.",
+            "Strong fit signals: clear ablation vs device split, protected reporting time for remote monitoring, and named credentialing owners with realistic NY timelines.",
+          ],
+        },
+        {
+          h2: "Avoidable pitfalls for EP locums in New York",
+          paragraphs: [
+            "Verbal promises about “light call” or “mostly devices” that never make the deal memo. Underestimating NY privileging lead time. Accepting shared-lab schedules without backup language when cath and EP compete for rooms.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Do I need a New York license before applying for EP locums?",
+          a: "For on-site New York EP work, yes—plan a full NY license early. Privileging and payer enrollment are separate steps. Share licenses and target dates so we can map a realistic start.",
+        },
+        {
+          q: "What should NY electrophysiology contracts specify?",
+          a: "Ablation vs device scope, EP lab systems, device clinic or remote monitoring load, arrhythmia call frequency, backup coverage, malpractice, stipends, and cancellation terms—in writing.",
+        },
+        {
+          q: "Where are EP locum jobs concentrated in New York?",
+          a: "NYC and surrounding metros see steady EP lab demand; Buffalo, Rochester, and Albany systems often need leave coverage and device clinic support. We match site type to your boundaries.",
+        },
+        {
+          q: "How is Locum Career Hub different from a national job board?",
+          a: "You still choose what to pursue—but you get cardiologist-only context on NY licensing, EP lab fit, and credentialing pacing instead of generic blasts.",
+        },
+        ...content.faqs.slice(0, 2),
+      ].slice(0, 7),
+    };
+  }
+  return content;
+}
+
 export function buildSpecialtyStatePageContent(input: {
   stateSlug: string;
   stateName: string;
@@ -129,19 +208,22 @@ export function buildSpecialtyStatePageContent(input: {
 
   const metaDescription = `${input.stateName} ${input.specialtyName} locum tenens jobs: ${state.region} licensing context, ${specialty.settings[0]?.toLowerCase() ?? "clinical"} settings, credentialing checklist, and recruiter advocacy—transparent expectations for physicians.`;
 
-  return {
-    metaDescription,
-    heroSubhead: pick(
-      [
-        `${state.region} · ${specialty.name} · licensing & workload clarity`,
-        `${input.stateName} metros & community sites · ${input.specialtyName} blocks`,
-        `Credentialing-first ${input.specialtyName} locums in ${input.stateName}`,
-      ],
-      seed,
-    ),
-    directAnswer,
-    intro: pick(introVariants, seed),
-    sections,
-    faqs: faqs.slice(0, 7),
-  };
+  return applyPrioritySpecialtyStateEnrichment(
+    {
+      metaDescription,
+      heroSubhead: pick(
+        [
+          `${state.region} · ${specialty.name} · licensing & workload clarity`,
+          `${input.stateName} metros & community sites · ${input.specialtyName} blocks`,
+          `Credentialing-first ${input.specialtyName} locums in ${input.stateName}`,
+        ],
+        seed,
+      ),
+      directAnswer,
+      intro: pick(introVariants, seed),
+      sections,
+      faqs: faqs.slice(0, 7),
+    },
+    input,
+  );
 }

@@ -1,0 +1,220 @@
+{
+  "date": "2026-08-03",
+  "period_start": "2026-07-04",
+  "period_end": "2026-07-31",
+  "pages_analyzed": 40,
+  "priority_level": "high",
+  "expected_traffic_impact": "high — recover NY EP clicks + lift mid-pack CTR on homepage/imaging/tools",
+  "source": "gsc-mcp",
+  "traffic_clicks": 23,
+  "traffic_impressions": 3696,
+  "traffic_ctr": 0.6223,
+  "traffic_position": 38.89,
+  "clicks_pct_change": 4.55,
+  "impressions_pct_change": -34.75,
+  "summary": "Clicks held (+4.5%) while impressions fell ~35%. CTR improved. Priority: recover NY EP (7→0 clicks), push cardiac imaging (pos 11.5), rewrite homepage/tools SERP, fix salary-estimator canonical.",
+  "problems_found": [
+    {
+      "issue": "NY EP page lost all clicks",
+      "target": "https://www.locumcareerhub.com/locum-tenens-jobs/new-york/electrophysiology",
+      "why": "Clicks 7→0; was #1 click URL over 90d"
+    },
+    {
+      "issue": "Homepage mid-pack low CTR",
+      "target": "https://www.locumcareerhub.com/",
+      "why": "125 imps @ pos 18.4, 1.6% CTR"
+    },
+    {
+      "issue": "Tools index CTR waste",
+      "target": "https://www.locumcareerhub.com/tools",
+      "why": "529 imps / 90d @ 0.19% CTR"
+    },
+    {
+      "issue": "Salary estimator canonical mismatch",
+      "target": "https://www.locumcareerhub.com/tools/locum-salary-estimator",
+      "why": "Canonical pointed at flagship calculator"
+    },
+    {
+      "issue": "Off-niche impression noise",
+      "target": "sitewide programmatic leftovers",
+      "why": "FM/EM/psych/CRNA/PA queries inflate impressions"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "p0",
+      "type": "recover_declining_page",
+      "target": "https://www.locumcareerhub.com/locum-tenens-jobs/new-york/electrophysiology",
+      "recommendation": "Deepen NY EP content + SERP title; link from EP hub and NY hub"
+    },
+    {
+      "priority": "p0",
+      "type": "title_rewrite",
+      "target": "https://www.locumcareerhub.com/",
+      "recommendation": "Rewrite homepage title/meta for cardiologist locum + recruiter intent"
+    },
+    {
+      "priority": "p0",
+      "type": "rank_push",
+      "target": "https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging",
+      "recommendation": "Strengthen cardiac imaging title/content and internal links"
+    },
+    {
+      "priority": "p1",
+      "type": "title_rewrite",
+      "target": "https://www.locumcareerhub.com/tools",
+      "recommendation": "CTR-focused tools index title/H1"
+    },
+    {
+      "priority": "p1",
+      "type": "canonical_fix",
+      "target": "https://www.locumcareerhub.com/tools/locum-salary-estimator",
+      "recommendation": "Give salary estimator self-canonical + distinct SERP copy"
+    },
+    {
+      "priority": "p1",
+      "type": "content",
+      "target": "best locum tenens platforms for cardiologists?",
+      "recommendation": "Capture near-win query already at ~pos 9"
+    },
+    {
+      "priority": "p2",
+      "type": "footprint",
+      "target": "off-niche URLs",
+      "recommendation": "Deprioritize/noindex non-cardiology programmatic leftovers"
+    }
+  ],
+  "completed_actions": [
+    "Homepage SERP rewrite shipped 2026-08-03",
+    "NY EP unique content + SERP + internal links shipped 2026-08-03",
+    "Cardiac imaging deepen + SERP shipped 2026-08-03",
+    "Tools index + salary estimator SERP/canonical shipped 2026-08-03"
+  ],
+  "recommendation_rows": [
+    {
+      "recommendation": "Recover NY EP page with unique content, SERP title, and hub links",
+      "priority": "p0",
+      "status": "Completed",
+      "target_url": "https://www.locumcareerhub.com/locum-tenens-jobs/new-york/electrophysiology",
+      "expected_impact": "high",
+      "completed_date": "2026-08-03",
+      "outcome": "Shipped — measuring 7–14 days"
+    },
+    {
+      "recommendation": "Rewrite homepage title/meta for cardiologist locum recruiting",
+      "priority": "p0",
+      "status": "Completed",
+      "target_url": "https://www.locumcareerhub.com/",
+      "expected_impact": "high",
+      "completed_date": "2026-08-03",
+      "outcome": "Shipped — measuring 7–14 days"
+    },
+    {
+      "recommendation": "Strengthen cardiac imaging SERP + content depth",
+      "priority": "p0",
+      "status": "Completed",
+      "target_url": "https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging",
+      "expected_impact": "high",
+      "completed_date": "2026-08-03",
+      "outcome": "Shipped — measuring 7–14 days"
+    },
+    {
+      "recommendation": "Rewrite /tools SERP + H1 for calculator intent",
+      "priority": "p1",
+      "status": "Completed",
+      "target_url": "https://www.locumcareerhub.com/tools",
+      "expected_impact": "medium",
+      "completed_date": "2026-08-03",
+      "outcome": "Shipped — measuring 7–14 days"
+    },
+    {
+      "recommendation": "Fix /tools/locum-salary-estimator self-canonical and title",
+      "priority": "p1",
+      "status": "Completed",
+      "target_url": "https://www.locumcareerhub.com/tools/locum-salary-estimator",
+      "expected_impact": "medium",
+      "completed_date": "2026-08-03",
+      "outcome": "Shipped — measuring 7–14 days"
+    },
+    {
+      "recommendation": "Create/align page for 'best locum tenens platforms for cardiologists?'",
+      "priority": "p1",
+      "status": "New",
+      "target_url": "https://www.locumcareerhub.com/",
+      "expected_impact": "medium"
+    },
+    {
+      "recommendation": "Deprioritize off-niche FM/EM/psych/CRNA programmatic URLs still earning impressions",
+      "priority": "p2",
+      "status": "New",
+      "target_url": "sitewide",
+      "expected_impact": "medium — relevance / crawl budget"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://www.locumcareerhub.com/",
+      "clicks": 2,
+      "impressions": 125,
+      "ctr": 1.6,
+      "average_position": 18.42
+    },
+    {
+      "url": "https://www.locumcareerhub.com/locum-tenens-jobs/new-york/electrophysiology",
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "average_position": null,
+      "notes": "Lost prior 7 clicks / 27 imps in previous 28d"
+    },
+    {
+      "url": "https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging",
+      "clicks": 1,
+      "impressions": 65,
+      "ctr": 1.5385,
+      "average_position": 11.54
+    },
+    {
+      "url": "https://www.locumcareerhub.com/tools",
+      "clicks": 1,
+      "impressions": 529,
+      "ctr": 0.189,
+      "average_position": 55.66,
+      "notes": "90d snapshot from date-dimension top_pages"
+    },
+    {
+      "url": "https://www.locumcareerhub.com/tools/locum-salary-estimator",
+      "clicks": 2,
+      "impressions": 340,
+      "ctr": 0.5882,
+      "average_position": 69.07,
+      "notes": "90d; was sharing flagship canonical"
+    }
+  ],
+  "keywords": [
+    {
+      "keyword": "telecardiology jobs",
+      "url": "https://www.locumcareerhub.com/cardiology-locum-jobs/telecardiology-jobs",
+      "clicks": 1,
+      "impressions": 2,
+      "ctr": 50,
+      "average_position": 8.5
+    },
+    {
+      "keyword": "best locum tenens platforms for cardiologists?",
+      "url": null,
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "average_position": 9.33
+    },
+    {
+      "keyword": "cardiology locum jobs",
+      "url": null,
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "average_position": 34.67
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import { organizationJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/
 import { openGraphImages, twitterImageUrls } from "@/lib/social-metadata";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { MarketingPixels } from "@/components/analytics/MarketingPixels";
+import { AttributionTracker } from "@/components/analytics/AttributionTracker";
 import { SITE } from "@/lib/site";
 
 /** Raster icons in `public/` — Google Search uses PNG/ICO, not SVG. */
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-white pb-[max(6rem,calc(5.5rem+env(safe-area-inset-bottom)))] font-sans antialiased sm:pb-0">
         <GoogleAnalytics />
         <MarketingPixels />
+        <AttributionTracker />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={professionalServiceJsonLd()} />

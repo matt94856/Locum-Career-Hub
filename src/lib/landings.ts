@@ -410,18 +410,18 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "careers-after-residency",
-    title: "Careers After Residency | Explore Before You Commit | Locum Career Hub",
+    title: "Careers After Residency for Cardiologists | Locum Career Hub",
     description:
-      "Careers after residency: compare practice settings, protect wellbeing, and learn how flexible blocks can complement training and financial goals.",
-    h1: "Careers After Residency: Curiosity Before Lock-In",
+      "Careers after cardiology residency: compare employed vs locum blocks, licensing timelines, and early-career tradeoffs before you lock in a first job.",
+    h1: "Careers After Residency for Cardiologists",
     h2: "Sample cultures and volumes while you decide what sustainable looks like",
-    keywords: ["careers after residency", "locum tenens jobs", "physician opportunities"],
+    keywords: ["careers after residency", "cardiologist after residency", "locum tenens jobs"],
     intro:
-      "The first job after residency does not have to be your forever answer. Many new attendings want real-world data: how a hospital runs, how documentation behaves on the floor, and what busy means in numbers—not rumors. Short-term assignments can be one way to learn quickly—alongside thoughtful W-2 exploration. We help you weigh tradeoffs without jargon or a hard sell.",
+      "The first cardiology job after residency does not have to be your forever answer. Many new attendings want real-world data: how a hospital runs, how documentation behaves on the floor, and what busy means in numbers—not rumors. Short-term locum blocks can be one way to learn quickly—alongside thoughtful W-2 exploration. We help you weigh EP, interventional, and general tradeoffs without jargon or a hard sell.",
     bullets: [
-      "Sites suited to early-career models when clinically appropriate",
-      "Realistic licensing and credentialing roadmaps",
-      "Side-by-side thinking when you are choosing between offers",
+      "Sites suited to early-career cardiology models when clinically appropriate",
+      "Realistic licensing and credentialing roadmaps by state",
+      "Side-by-side thinking when you are choosing between employed offers and locum blocks",
     ],
     relatedSlugs: ["locum-jobs-for-new-graduates", "moonlighting-physician-jobs", "physician-side-income"],
   },

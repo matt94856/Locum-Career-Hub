@@ -48,10 +48,10 @@ export const CARDIOLOGY_HUB_H1 = "Locum Cardiologist Jobs & Recruitment";
 export const CARDIOLOGY_HUB_DESCRIPTION =
   "Find top locum cardiologist positions and locum tenens job opportunities. Nationwide cardiology placements in interventional, EP, heart failure, imaging, and pediatric. Connect with expert recruiters at Locum Career Hub.";
 
-export const HOME_TITLE = "Cardiologist Locum Jobs & Career Tools (2026)";
+export const HOME_TITLE = "Cardiologist Locum Jobs | Recruiter + Pay Tools";
 export const HOME_H1 = "Cardiology Locum Tenens Opportunities Designed Around Your Life";
 export const HOME_DESCRIPTION =
-  "Cardiologist-only locum tenens resources: calculate earning potential, compare offers, and explore EP, interventional, and general cardiology blocks built around your schedule.";
+  "Cardiologist-only locum recruiting: EP, interventional, and general blocks with written call and rates. Free pay calculator—request matches without a job-board blast.";
 
 export const CARDIOLOGY_HUB_FAQS: { q: string; a: string }[] = [
   {
@@ -126,7 +126,7 @@ export function specialtySerpTitle(name: string): string {
 /** Contextual in-paragraph cross-links between specialty pages. */
 export const SPECIALTY_CONTEXTUAL_LINKS: Record<
   string,
-  { prefix: string; targetPathSlug: string; anchor: string; suffix?: string }[]
+  { prefix: string; targetPathSlug?: string; href?: string; anchor: string; suffix?: string }[]
 > = {
   interventional: [
     {
@@ -151,6 +151,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       anchor: "interventional cardiology locum jobs",
       suffix: "at combined arrhythmia and cath lab programs.",
     },
+    {
+      prefix: "For metro EP demand, start with",
+      href: "/locum-tenens-jobs/new-york/electrophysiology",
+      anchor: "New York electrophysiology locum jobs",
+      suffix: "—then compare rates on the EP pay guide.",
+    },
   ],
   general: [
     {
@@ -174,6 +180,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       targetPathSlug: "general",
       anchor: "general cardiology locum jobs",
       suffix: "consult and clinic coverage.",
+    },
+    {
+      prefix: "Estimate imaging-block economics with the",
+      href: "/cardiologist-locums-calculator",
+      anchor: "cardiologist locums pay calculator",
+      suffix: "before you negotiate.",
     },
   ],
   "pediatric-cardiology": [
@@ -351,29 +363,37 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     pathSlug: "cardiac-imaging",
     legacySlug: "advanced-imaging",
     name: "Advanced Cardiac Imaging",
-    h1: "Locum Cardiac Imaging Cardiology Jobs",
-    titleKeyword: "cardiac imaging cardiology locum jobs",
-    metaDescription: specialtyMeta("cardiac imaging"),
+    h1: "Cardiac Imaging Locum Jobs for Cardiologists",
+    titleKeyword: "cardiac imaging locum jobs",
+    metaDescription:
+      "Cardiac imaging locum jobs: echo, nuclear, MRI, and CT read blocks with written volume and turnaround. Cardiologist-only matching—estimate pay, then request fits.",
     intro:
-      "Cardiac imaging locum jobs include echo, nuclear, cardiac MRI and CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, and on-site vs remote expectations must be defined.",
+      "Cardiac imaging locum jobs cover echo, nuclear, cardiac MRI/CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, PACS access, and on-site vs remote rules must be written before you accept a block.",
     relatedPathSlugs: ["general", "preventive-cardiology", "heart-failure"],
     sections: [
       {
         h2: "About Cardiac Imaging Locum Jobs",
         paragraphs: [
-          "Imaging-heavy locums may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access and licensure for tele-reads.",
+          "Imaging-heavy locums may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access, modality mix, and licensure for tele-reads before day one.",
+          "Programs hire imagers for backlog clearance, leave coverage, and weekend read pools. Fit depends on Level II/III credentials and whether stress supervision or procedural oversight is on-site.",
         ],
       },
       {
         h2: "Job Requirements",
         paragraphs: [
-          "Level II/III echo or nuclear credentials as required, state license for on-site work, and privileging aligned with modality mix.",
+          "Level II/III echo or nuclear credentials as required, active state license for on-site work, and privileging aligned with modality mix. Remote-only pools still need clear malpractice and turnaround language.",
         ],
       },
       {
         h2: "Typical Locations & Pay",
         paragraphs: [
-          "Community hospitals and teleradiology-style read pools hire locum imagers for backlog clearance. Volume and turnaround drive compensation more than geography alone.",
+          "Community hospitals and multimodality read pools hire locum imagers nationwide. Volume, after-hours coverage, and turnaround SLAs drive compensation more than geography alone—compare offers with the same variables.",
+        ],
+      },
+      {
+        h2: "How to evaluate an imaging locum offer",
+        paragraphs: [
+          "Ask for daily study volume by modality, expected report turnaround, weekend/holiday coverage, and whether you supervise stress tests on site. Then run a directional range in the cardiologist locums calculator before you negotiate.",
         ],
       },
     ],
@@ -381,6 +401,10 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
       {
         q: "Can cardiac imaging locums be remote?",
         a: "Some read pools are remote; on-site stress supervision and procedural oversight may still require travel—confirm in the contract.",
+      },
+      {
+        q: "What drives cardiac imaging locum pay?",
+        a: "Modality mix, daily volume, after-hours reads, turnaround SLAs, and whether stress supervision is included. Headline weekly rates without those variables are hard to compare.",
       },
     ],
   },

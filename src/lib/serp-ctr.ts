@@ -153,6 +153,14 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
       cta: "Start with a 30-minute intro.",
     }),
   },
+  "careers-after-residency": {
+    title: "Careers After Residency for Cardiologists",
+    description: buildSerpDescription({
+      hook: "Careers after cardiology residency: compare employed vs locum blocks before you lock in a first job.",
+      proof: "Licensing timelines, call boundaries, and early-career EP/interventional tradeoffs.",
+      cta: "Explore options with a cardiology recruiter.",
+    }),
+  },
 };
 
 export function landingSerpOverride(slug: string): { title: string; description: string } | undefined {
@@ -179,9 +187,13 @@ export function buildCardiologySpecialtySerpMetadata(spec: {
   pathSlug: string;
   titleKeyword: string;
 }): Metadata {
+  const titleOverride: Record<string, string> = {
+    "cardiac-imaging": "Cardiac Imaging Locum Jobs | Echo, MRI & CT",
+    electrophysiology: "EP Locum Jobs | Ablation, Devices & Call",
+  };
   return buildSerpMetadata({
-    title: specialtySerpTitle(spec.name),
-    description: spec.metaDescription,
+    title: titleOverride[spec.pathSlug] ?? specialtySerpTitle(spec.name),
+    description: clampSerpDescription(spec.metaDescription),
     path: cardiologySpecialtyPath(spec.pathSlug),
     keywords: [spec.titleKeyword, "locum cardiologist jobs", "cardiology locum tenens"],
   });
@@ -223,6 +235,11 @@ const PRIORITY_STATE_SERP: Record<string, { title: string; hook: string; proof: 
     hook: "Tennessee cardiology locum coverage for community and regional systems.",
     proof: "Licensing, privileging, and travel vs local block tradeoffs.",
   },
+  wyoming: {
+    title: "Wyoming Cardiology Locum Jobs | Travel & Call",
+    hook: "Wyoming cardiologist locum jobs—consult, imaging, and travel-friendly blocks with clear call rules.",
+    proof: "IMLC-eligible planning plus Mountain West market context.",
+  },
 };
 
 export function buildStateSerpMetadata(stateName: string, slug: string): Metadata {
@@ -244,6 +261,15 @@ export function buildStateSerpMetadata(stateName: string, slug: string): Metadat
   });
 }
 
+/** GSC priority state×specialty combos — keep titles ≤52 chars before brand. */
+const PRIORITY_SPECIALTY_STATE_SERP: Record<string, { title: string; hook: string; proof: string }> = {
+  "new-york/electrophysiology": {
+    title: "NY Electrophysiology Locum Jobs | Ablation",
+    hook: "New York EP locum jobs with ablation, devices, and arrhythmia call documented before you start.",
+    proof: "NYC, Buffalo, Rochester, and Albany privileging paths—not a generic board blast.",
+  },
+};
+
 export function buildSpecialtyStateSerpMetadata(input: {
   stateName: string;
   stateSlug: string;
@@ -251,11 +277,14 @@ export function buildSpecialtyStateSerpMetadata(input: {
   specialtySlug: string;
 }): Metadata {
   const { stateName, specialtyName, stateSlug, specialtySlug } = input;
+  const custom = PRIORITY_SPECIALTY_STATE_SERP[`${stateSlug}/${specialtySlug}`];
   return buildSerpMetadata({
-    title: `${specialtyName} Locum Jobs in ${stateName} | Rates & Licensing`,
+    title: custom?.title ?? `${specialtyName} Locum Jobs in ${stateName}`,
     description: buildSerpDescription({
-      hook: `${stateName} ${specialtyName} locum roles with written census, call, and credentialing expectations.`,
-      proof: "Cardiologist-only recruiter—not a generic board.",
+      hook:
+        custom?.hook ??
+        `${stateName} ${specialtyName} locum roles with written census, call, and credentialing expectations.`,
+      proof: custom?.proof ?? "Cardiologist-only recruiter—not a generic board.",
       cta: "Apply in minutes; realistic follow-up.",
     }),
     path: `/locum-tenens-jobs/${stateSlug}/${specialtySlug}`,
@@ -333,11 +362,11 @@ export function buildGlossarySerpMetadata(title: string, slug: string): Metadata
 
 export function buildToolsIndexSerpMetadata(): Metadata {
   return buildSerpMetadata({
-    title: "Cardiologist Calculators | Pay, IMLC, Call & Offers",
+    title: "Free Cardiologist Locum Calculators | Pay & IMLC",
     description: buildSerpDescription({
-      hook: "Free cardiologist decision tools for locums earnings, IMLC eligibility, call burden, and offer comparison.",
-      proof: "Evidence-versioned formulas with clear limitations.",
-      cta: "Open a calculator—anonymous until you request follow-up.",
+      hook: "Free cardiologist locum calculators for earnings, IMLC eligibility, call burden, and offer comparison.",
+      proof: "Evidence-versioned formulas with clear limitations—built for MD/DO cardiologists.",
+      cta: "Open a tool—anonymous until you request follow-up.",
     }),
     path: "/tools",
     keywords: [
@@ -349,19 +378,30 @@ export function buildToolsIndexSerpMetadata(): Metadata {
   });
 }
 
-export function buildSalaryEstimatorSerpMetadata(): Metadata {
+export function buildSalaryEstimatorSerpMetadata(
+  path: "/cardiologist-locums-calculator" | "/tools/locum-salary-estimator" = "/cardiologist-locums-calculator",
+): Metadata {
+  const isLegacyToolsPath = path === "/tools/locum-salary-estimator";
   return buildSerpMetadata({
-    title: "Locum Tenens Income Calculator for Cardiologists",
+    title: isLegacyToolsPath
+      ? "Cardiologist Locum Salary Calculator | Free Range"
+      : "Locum Tenens Income Calculator for Cardiologists",
     description: buildSerpDescription({
-      hook: "Calculate cardiologist locums income by specialty, schedule, licenses, travel, and assignment style.",
-      proof: "Personalized fit score, income scenarios, and career comparison—not a generic pay table.",
-      cta: "Build your free earning report in under 2 minutes.",
+      hook: isLegacyToolsPath
+        ? "Estimate cardiologist locum salary ranges by shifts, weeks, and blended hourly bands."
+        : "Calculate cardiologist locums income by specialty, schedule, licenses, travel, and assignment style.",
+      proof: isLegacyToolsPath
+        ? "Illustrative gross math with disclaimers—not a quote or tax plan."
+        : "Personalized fit score, income scenarios, and career comparison—not a generic pay table.",
+      cta: isLegacyToolsPath
+        ? "Run the estimator, then request real cardiology matches."
+        : "Build your free earning report in under 2 minutes.",
     }),
-    path: "/cardiologist-locums-calculator",
+    path,
     keywords: [
       "locum tenens income calculator",
       "cardiologist locums calculator",
-      "locum vs employed calculator",
+      "locum salary calculator",
       "cardiology locum tenens salary calculator",
     ],
   });

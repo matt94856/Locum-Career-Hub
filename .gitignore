@@ -36,9 +36,21 @@ mcp-gsc/.env
 mcp-gsc/.venv/
 mcp-gsc/credentials/**
 !mcp-gsc/credentials/.gitkeep
+
+# Google Analytics 4 MCP secrets
+google-analytics-mcp/.env
+google-analytics-mcp/.venv/
+google-analytics-mcp/credentials/**
+!google-analytics-mcp/credentials/.gitkeep
+
 **/credentials.json
 **/token.json
 **/client_secret*.json
+
+# SEO memory SQLite (local history — back up separately; no OAuth secrets allowed)
+seo-memory/database/*.db
+seo-memory/database/*.db-*
+seo-memory/**/__pycache__/
 
 # vercel
 .vercel

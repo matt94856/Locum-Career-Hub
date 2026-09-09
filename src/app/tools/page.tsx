@@ -44,9 +44,15 @@ export default function ToolsIndexPage() {
       <JsonLd data={itemList} />
       <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">
         <div className="container-site max-w-4xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist decision tools</p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Make clearer cardiology career and locums decisions</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">Ten transparent calculators turn licensing, credentialing, offer economics, call burden, contract terms, compensation, and career timing into structured next steps. Calculations are anonymous unless you explicitly request follow-up.</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Free cardiologist locum calculators</p>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+            Free cardiologist locum calculators for pay, IMLC, call, and offers
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+            Ten transparent tools turn licensing, credentialing, offer economics, call burden, contract terms,
+            compensation, and career timing into structured next steps—built for MD/DO cardiologists. Calculations stay
+            anonymous unless you request follow-up.
+          </p>
           <div className="mt-8 rounded-3xl bg-slate-950 p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-brand-300">Flagship shareable report</p>

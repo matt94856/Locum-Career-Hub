@@ -127,7 +127,7 @@ export function LeadCaptureForm({
       preferredStates,
       yearsExperience:
         String(fd.get("yearsExperience") ?? "").trim() ||
-        (formMode === "quick" ? "Exploring / no firm date" : ""),
+        (formMode === "quick" ? "Not provided (quick submit)" : ""),
       availability: String(fd.get("availability") ?? "").trim(),
       travel: String(fd.get("travel") ?? "").trim() || (formMode === "quick" ? "maybe" : ""),
       clinicalNotes: String(fd.get("clinicalNotes") ?? "").trim() || null,

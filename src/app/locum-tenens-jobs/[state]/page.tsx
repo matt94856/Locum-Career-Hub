@@ -181,6 +181,17 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
                 <Link className="font-semibold text-brand-700 hover:underline" href="/cardiology-locum-jobs">
                   cardiology locum job types
                 </Link>
+                {page.slug === "new-york" ? (
+                  <>
+                    . High-demand NY EP coverage:{" "}
+                    <Link
+                      className="font-semibold text-brand-700 hover:underline"
+                      href="/locum-tenens-jobs/new-york/electrophysiology"
+                    >
+                      New York electrophysiology locum jobs
+                    </Link>
+                  </>
+                ) : null}
                 .
               </p>
             </div>

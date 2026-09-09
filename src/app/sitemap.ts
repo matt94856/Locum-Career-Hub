@@ -7,6 +7,10 @@ import { getAllArticleSlugs } from "@/lib/cardiology-authority/articles";
 import { getIndexableCardiologySeoPaths } from "@/lib/cardiology-seo/registry";
 import { PRIORITY_METRO_SLUGS } from "@/lib/cardiology-seo/metro-rich-data";
 import { CARDIOLOGY_LOCUM_SPECIALTIES, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
+import {
+  FEATURED_CARDIOLOGY_OPPORTUNITIES,
+  featuredOpportunityPath,
+} from "@/lib/featured-cardiology-opportunities";
 import { GLOSSARY_SLUGS } from "@/lib/glossary-data";
 import { LANDING_SLUGS } from "@/lib/landings";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
@@ -102,6 +106,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE.url}/${slug}`,
       changeFrequency: "weekly" as const,
       priority: 0.65,
+    })),
+    ...FEATURED_CARDIOLOGY_OPPORTUNITIES.map((opportunity) => ({
+      url: `${SITE.url}${featuredOpportunityPath(opportunity.slug)}`,
+      lastModified: new Date(opportunity.datePosted),
+      changeFrequency: "daily" as const,
+      priority: 0.9,
     })),
     ...getAllArticleSlugs().map((slug) => ({
       url: `${SITE.url}/resources/${slug}`,

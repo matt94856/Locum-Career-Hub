@@ -19,6 +19,9 @@ type LeadEmailPayload = {
   calculatorProfile?: Record<string, unknown> | null;
   homeState?: string | null;
   source?: string;
+  opportunitySlug?: string | null;
+  opportunityTitle?: string | null;
+  qualificationResponses?: Record<string, unknown> | null;
 };
 
 function resendConfigured(): boolean {
@@ -63,8 +66,15 @@ function leadSummaryHtml(p: LeadEmailPayload): string {
   const attribution = p.attribution
     ? `<p><strong>Attribution:</strong> ${escapeHtml(JSON.stringify(p.attribution))}</p>`
     : "";
+  const opportunity = p.opportunityTitle
+    ? `<p><strong>Featured opportunity:</strong> ${escapeHtml(p.opportunityTitle)}</p>`
+    : "";
+  const qualifications = p.qualificationResponses
+    ? `<p><strong>Opportunity fit responses:</strong> ${escapeHtml(JSON.stringify(p.qualificationResponses))}</p>`
+    : "";
   return `
     <p><strong>${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}</strong> — ${escapeHtml(p.specialty)}</p>
+    ${opportunity}
     <p>Email: ${escapeHtml(p.email)} · Phone: ${escapeHtml(p.phone)}</p>
     <p>States: ${escapeHtml(states)}</p>
     <p>Experience: ${escapeHtml(p.yearsExperience)} · Availability: ${escapeHtml(p.availability)} · Travel: ${escapeHtml(p.travel)}</p>
@@ -72,6 +82,7 @@ function leadSummaryHtml(p: LeadEmailPayload): string {
     <p>Form: ${p.formMode} · Source: ${escapeHtml(p.source ?? "lead_form")} · Source page: ${escapeHtml(p.pagePath ?? "/")}</p>
     ${p.homeState ? `<p>Home/practice state: ${escapeHtml(p.homeState)}</p>` : ""}
     ${notes}
+    ${qualifications}
     ${calculator}
     ${attribution}
   `;
@@ -115,7 +126,9 @@ export async function notifyRecruiterOfLead(p: LeadEmailPayload): Promise<void> 
 
   await sendResendEmail(
     notifyTo,
-    `[New cardiologist inquiry] ${p.specialty} — ${p.preferredStates[0] ?? "multi-state"}`,
+    p.opportunityTitle
+      ? `[Featured job lead] ${p.opportunityTitle}`
+      : `[New cardiologist inquiry] ${p.specialty} — ${p.preferredStates[0] ?? "multi-state"}`,
     `<h2>New cardiologist inquiry</h2>${leadSummaryHtml(p)}<p><a href="mailto:${escapeHtml(p.email)}">Reply to candidate</a></p>`,
   );
 }
@@ -128,13 +141,16 @@ export async function sendLeadAcknowledgment(p: LeadEmailPayload): Promise<void>
     ? `<p>We will send <strong>The Physician’s Guide to Locum Tenens</strong> to this inbox shortly. Check spam if you do not see it within a few minutes.</p>`
     : "";
   const calculatorReport = calculatorReportHtml(p.calculatorProfile);
+  const opportunityNote = p.opportunityTitle
+    ? `<p>We received your interest in <strong>${escapeHtml(p.opportunityTitle)}</strong>. We will confirm current availability, dates, and written scope before asking you to invest time in credentialing.</p>`
+    : `<p>Thank you for reaching out to ${SITE.name}. A cardiology recruiter will review your subspecialty (${escapeHtml(p.specialty)}) and preferred states.</p>`;
 
   await sendResendEmail(
     p.email,
     "We received your cardiology locum inquiry | Locum Career Hub",
     `
       <p>Hi ${escapeHtml(p.firstName)},</p>
-      <p>Thank you for reaching out to ${SITE.name}. A cardiology recruiter will review your subspecialty (${escapeHtml(p.specialty)}) and preferred states.</p>
+      ${opportunityNote}
       ${calculatorReport}
       <p><strong>What happens next:</strong></p>
       <ul>
