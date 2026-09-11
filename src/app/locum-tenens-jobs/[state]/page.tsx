@@ -15,6 +15,7 @@ import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { CTA } from "@/lib/site";
+import { LatticeUpLinks } from "@/components/marketing/LatticeUpLinks";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
 import { ContentSections } from "@/components/seo/ContentSections";
@@ -195,6 +196,8 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
                 .
               </p>
             </div>
+
+            <LatticeUpLinks />
 
             <div>
               <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">

@@ -99,6 +99,278 @@ function applyPrioritySpecialtyStateEnrichment(
       ].slice(0, 7),
     };
   }
+
+  if (input.stateSlug === "new-jersey" && input.specialtySlug === "interventional-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "STEMI networks, cath lab backup, and written activation rules",
+      directAnswer:
+        "Interventional cardiology locum tenens jobs in New Jersey are cath-lab and STEMI-coverage blocks that require a NJ license, current PCI logs, and written activation, backup-surgery, and call rules before you start. Demand sits in the NYC-adjacent corridor, shore hospitals, and inland community PCI programs—not in a single metro.",
+      intro:
+        "New Jersey interventional locums are often about STEMI network density and how labs share backup, not headline weekly rates. Whether you want primary STEMI, diagnostic-only PCI, or weekend moonlighting around an employed job, insist on activation windows, transport patterns, and complication pathways in writing.",
+      sections: [
+        {
+          h2: "What NJ interventional locum assignments look like",
+          paragraphs: [
+            "Typical blocks mix elective PCI days with STEMI call, inpatient rounding, and sometimes clinic. Confirm whether you are the primary STEMI operator, backup, or diagnostic-only coverage. Shore and community labs can be 24/7 activation with thinner surgical backup than academic NYC affiliates.",
+            "Employed interventionalists adding income should treat NJ weekend STEMI as extra call—not light moonlighting—unless the contract excludes nights.",
+          ],
+        },
+        {
+          h2: "Licensing and privileging for interventional work in New Jersey",
+          paragraphs: [
+            "New Jersey is not an IMLC shortcut for most physicians. Plan a full NJ license early. Cath-lab privileges need recent PCI volume; hospitals will not treat general cardiology privileges as interchangeable.",
+            "Sequence license → hospital credentialing → cath-lab privileges. Share target start dates so temporary privilege options are mapped before you book travel.",
+          ],
+        },
+        {
+          h2: "Pay drivers specific to NJ interventional locums",
+          paragraphs: [
+            "Rates move with STEMI frequency, night coverage, add-on emergency cases, and whether you cover a solo lab. Compare offers using the same variables—see the interventional cardiology locums pay guide.",
+          ],
+        },
+        {
+          h2: "Who this market fits",
+          paragraphs: [
+            "New interventional graduates need independent operator logs and a written STEMI vs diagnostic split. Semi-retired interventionalists can sometimes drop STEMI and keep diagnostic cath—only if the lab agrees in writing.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Do NJ interventional locums always include STEMI call?",
+          a: "No. Some labs need elective PCI or diagnostic coverage without primary STEMI. Require call scope in writing before you accept.",
+        },
+        {
+          q: "Can I moonlight interventional locums in New Jersey while employed?",
+          a: "Sometimes, with employer moonlighting approval, malpractice that covers PCI, and recovery rules so you are not stacking two STEMI schedules.",
+        },
+        ...content.faqs.slice(0, 3),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "texas" && input.specialtySlug === "general-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "Consult, clinic, and imaging blocks across a high-volume market",
+      directAnswer:
+        "General cardiology locum tenens jobs in Texas are contract-based consult, clinic, and imaging blocks. Texas licensing, hospital privileging, and written census or clinic-panel rules should be clear before you start. Demand spans Houston, Dallas–Fort Worth, Austin, San Antonio, and large community systems in between.",
+      intro:
+        "Texas general cardiology locums work for new attendings sampling markets, employed cardiologists adding local income, locums-primary travel physicians, and late-career cardiologists who want clinic without STEMI. The useful split is inpatient consult vs outpatient clinic vs nuclear/echo—not “Texas cardiology” as one job.",
+      sections: [
+        {
+          h2: "What Texas general cardiology locum assignments look like",
+          paragraphs: [
+            "Inpatient consult services, 7-on/7-off hospitalist-style cardiology, outpatient clinic panels, and imaging supervision all appear. Confirm ICU consults, weekend coverage, and whether nuclear or TEE is required.",
+            "Metro systems can be slower to privilege; community hospitals often start faster when licenses and logs are current.",
+          ],
+        },
+        {
+          h2: "Licensing for general cardiology locums in Texas",
+          paragraphs: [
+            "Texas is IMLC-eligible for many physicians, which can shorten a license once the compact application is complete. Privileging and payer enrollment still take their own time. Do not treat compact eligibility as a two-week start.",
+          ],
+        },
+        {
+          h2: "Who this market fits",
+          paragraphs: [
+            "Fellowship graduates can use Texas as a locums-first sample of large-system vs community culture. Semi-retired cardiologists often prefer clinic or defined consult caps. Moonlighting works best as local or regional blocks so credentialing cost is worth the extra days.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is Texas a good first locum state after cardiology fellowship?",
+          a: "Often yes if you start licensing early. Compact eligibility can help, but hospital privileging still needs completed fellowship and documented consult or imaging scope.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "ohio" && input.specialtySlug === "electrophysiology") {
+    return {
+      ...content,
+      heroSubhead: "Ablation weeks, device clinic, and community EP lab coverage",
+      directAnswer:
+        "Electrophysiology locum tenens jobs in Ohio are EP-lab, device-clinic, and arrhythmia-consult blocks. Ohio licensing or IMLC, mapping-system familiarity, and a written ablation vs device split must align before you start. Community programs often need device and clinic coverage more than complex ablation days.",
+      intro:
+        "Ohio EP locums split between ablation-capable labs and device-heavy community programs. Semi-retired electrophysiologists and moonlighting EPs often fit 2-day lab or device-clinic coverage; full locums-primary physicians more often take ablation weeks with defined call.",
+      sections: [
+        {
+          h2: "What Ohio EP locum assignments look like",
+          paragraphs: [
+            "Expect some mix of ablation, implants, device clinic, and inpatient arrhythmia consults. Confirm mapping systems, EP tech staffing, vendor support, and whether remote monitoring alerts travel with you between blocks.",
+            "No-call weekday coverage exists in this market type—only if the contract says so. Verbal “light call” is not a deal memo.",
+          ],
+        },
+        {
+          h2: "Licensing and privileging for EP in Ohio",
+          paragraphs: [
+            "Ohio is IMLC-eligible for many physicians. EP lab privileges still need recent ablation and/or device logs. Sequence license, credentialing, and lab privileges; do not assume compact speed equals a next-month start.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Can Ohio EP locums be device-clinic only?",
+          a: "Yes. Some community programs need implants and clinic more than complex ablation. Confirm case mix in writing.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "kansas" && input.specialtySlug === "general-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "Inpatient blocks, nuclear coverage, and 7-on/7-off schedules",
+      directAnswer:
+        "General cardiology locum tenens jobs in Kansas are often inpatient consult and rounding blocks, including 7-on/7-off coverage, with nuclear competency required on some assignments. Kansas licensing assistance, travel, lodging, and malpractice are commonly covered when a site is actively recruiting.",
+      intro:
+        "Kansas general cardiology locums fit travel-ready locums-primary physicians and block-schedule cardiologists more than local weekend moonlighting. Nuclear coverage and facility-specific eligibility rules can matter as much as the schedule. Review the featured Kansas inpatient opportunity if you want a current example of that model.",
+      sections: [
+        {
+          h2: "What Kansas general cardiology locum assignments look like",
+          paragraphs: [
+            "Inpatient consults, rounding, and non-invasive coverage are the core. Some sites require nuclear cardiology; TEE may be preferred. Confirm 24-hour call expectations even when after-hours volume is described as rare.",
+            "7-on/7-off is a common block shape here. It works for physicians who want concentrated clinical weeks and protected time away—not for anyone expecting a no-call clinic job.",
+          ],
+        },
+        {
+          h2: "Licensing and eligibility in Kansas",
+          paragraphs: [
+            "Kansas licensing support is often available for out-of-state cardiologists. Some facilities have additional professional-liability eligibility rules that must be verified before presentation. Share prior Kansas practice history early so we do not waste a credentialing cycle.",
+          ],
+        },
+        {
+          h2: "Currently recruiting",
+          paragraphs: [
+            "When a Kansas inpatient non-invasive locum is open, it is listed on the featured cardiology jobs page with schedule, nuclear, and screening questions. That is the fastest path if you already know you want this model.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is nuclear cardiology required for Kansas general locums?",
+          a: "It is required on some inpatient assignments, including the featured Kansas opportunity. Ask before you invest in licensing.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "north-carolina" && input.specialtySlug === "general-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "Outpatient clinic blocks and 2-weeks-per-month schedules",
+      directAnswer:
+        "General cardiology locum tenens jobs in North Carolina include outpatient clinic coverage, hybrid consult work, and recurring 2-weeks-per-month blocks. Board certification, licensing, and written clinic-panel expectations should be clear before you start. This market is a strong fit for part-time, semi-retired, and locums-primary cardiologists who do not want STEMI.",
+      intro:
+        "North Carolina general cardiology locums often look like clinic days rather than 24-hour inpatient call. If you want a current example, see the featured North Carolina outpatient locum: two weeks per month, outpatient only, with travel, lodging, and malpractice covered.",
+      sections: [
+        {
+          h2: "What NC general cardiology locum assignments look like",
+          paragraphs: [
+            "Outpatient clinic, occasional hospital coverage, and recurring part-month blocks are common. Confirm inbox, callbacks, and whether you cover stress tests or imaging on site.",
+            "This shape fits scale-down cardiologists and employed physicians adding income more than full-time STEMI operators.",
+          ],
+        },
+        {
+          h2: "Licensing in North Carolina",
+          paragraphs: [
+            "North Carolina is IMLC-eligible for many physicians. Clinic privileges still take time. Recurring 2-weeks/month blocks make the unpaid onboarding cost more rational than a one-off weekend.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Are North Carolina cardiology locums outpatient only?",
+          a: "Some are, including the featured 2-weeks/month clinic assignment. Others include hospital coverage. Require setting in writing.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "alaska" && input.specialtySlug === "electrophysiology") {
+    return {
+      ...content,
+      heroSubhead: "Travel EP coverage in a shortage market",
+      directAnswer:
+        "Electrophysiology locum tenens jobs in Alaska are travel-heavy EP-lab and device-coverage blocks in a workforce-shortage market. A full Alaska license, travel logistics, and a written ablation vs device split must be planned before you fly. This is locums-primary or defined-block work more than local moonlighting.",
+      intro:
+        "Alaska EP locums exist because programs cannot staff every ablation and device clinic locally. If you will travel, the assignment has to pay for licensing, weather delays, and time away. Device-clinic and consult coverage can fit late-career EPs; complex ablation weeks fit physicians who still want lab volume.",
+      sections: [
+        {
+          h2: "What Alaska EP locum assignments look like",
+          paragraphs: [
+            "Expect travel, lodging, and concentrated lab or clinic weeks rather than a commute. Confirm mapping systems, device vendors, and after-hours arrhythmia coverage before you accept a winter block.",
+          ],
+        },
+        {
+          h2: "Licensing and logistics",
+          paragraphs: [
+            "Alaska is not a typical compact shortcut for most physicians. Start the license early. Travel and weather can move start dates; cancellation and lodging terms should be written.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is Alaska EP locums realistic for part-time work?",
+          a: "Usually as defined travel blocks, not weekend moonlighting. Credentialing cost needs enough assignment days to be worth it.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "nevada" && input.specialtySlug === "interventional-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "Western shortage STEMI coverage and IMLC licensing paths",
+      directAnswer:
+        "Interventional cardiology locum tenens jobs in Nevada are cath-lab and STEMI-coverage blocks in a state with documented cardiologist shortage. Nevada is IMLC-eligible for many physicians, but PCI privileges still need current logs and written activation rules. This market fits locums-primary travel interventionalists more than local clinic moonlighting.",
+      intro:
+        "Nevada interventional locums are a nationwide-niche play: shortage, STEMI need, and compact licensing for physicians who will travel. Confirm whether the lab wants primary STEMI, diagnostic-only PCI, or both. Do not treat IMLC speed as a next-week start—privileging still sits on the critical path.",
+      sections: [
+        {
+          h2: "What Nevada interventional locum assignments look like",
+          paragraphs: [
+            "Community PCI programs and regional STEMI coverage dominate. Las Vegas and Reno systems differ from rural or resort coverage. Backup surgery, activation windows, and night volume must be in the deal memo.",
+          ],
+        },
+        {
+          h2: "Licensing via IMLC",
+          paragraphs: [
+            "Many physicians can use the Interstate Medical Licensure Compact for Nevada. Compact eligibility does not replace cath-lab privileging or DEA. Start both tracks before you resign from an employed role.",
+          ],
+        },
+        {
+          h2: "Who this market fits",
+          paragraphs: [
+            "Travel-ready interventionalists, new IC graduates with independent logs, and employed physicians who can take defined STEMI blocks without stacking two call schedules.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Does IMLC mean I can start interventional locums in Nevada quickly?",
+          a: "It can shorten the license. Cath-lab privileging, PCI logs, and payer enrollment still take additional time.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
   return content;
 }
 

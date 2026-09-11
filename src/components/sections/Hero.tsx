@@ -34,6 +34,38 @@ export function Hero() {
                 Estimate pay
               </Button>
             </div>
+            <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+              <li>
+                <Link href="/locum-jobs/cardiology/general" className="font-semibold text-brand-700 hover:underline">
+                  General
+                </Link>
+              </li>
+              <li>
+                <Link href="/locum-jobs/cardiology/interventional" className="font-semibold text-brand-700 hover:underline">
+                  Interventional
+                </Link>
+              </li>
+              <li>
+                <Link href="/locum-jobs/cardiology/electrophysiology" className="font-semibold text-brand-700 hover:underline">
+                  Electrophysiology
+                </Link>
+              </li>
+              <li>
+                <Link href="/locum-jobs-for-new-graduates" className="text-slate-700 hover:underline">
+                  Fellowship
+                </Link>
+              </li>
+              <li>
+                <Link href="/moonlighting-physician-jobs" className="text-slate-700 hover:underline">
+                  Moonlighting
+                </Link>
+              </li>
+              <li>
+                <Link href="/retired-physician-opportunities" className="text-slate-700 hover:underline">
+                  Scale-down
+                </Link>
+              </li>
+            </ul>
             <div className="mt-3 max-w-xl">
               <CalendlyBookButton source="hero" variant="ghost" className="w-full justify-center sm:w-auto">
                 Talk with a cardiology specialist

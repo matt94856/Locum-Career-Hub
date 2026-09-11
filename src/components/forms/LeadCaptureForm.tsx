@@ -10,6 +10,12 @@ import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
 import { trackGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
+import {
+  CAREER_STAGES,
+  isCareerStageId,
+  screensForSpecialty,
+  type CareerStageId,
+} from "@/lib/lead-lattice";
 import { SITE } from "@/lib/site";
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
@@ -64,6 +70,7 @@ export type LeadCaptureFormProps = {
   defaultSpecialty?: string;
   /** Pre-select states (e.g. from state job pages) */
   defaultPreferredStates?: string[];
+  defaultCareerStage?: CareerStageId;
   layout?: "full" | "sidebar";
   className?: string;
 };
@@ -74,6 +81,7 @@ export function LeadCaptureForm({
   subtitle = "Share a few details and we will follow up with realistic cardiology locum options—not a generic blast.",
   defaultSpecialty = "General Cardiology",
   defaultPreferredStates = [],
+  defaultCareerStage,
   layout = "full",
   className = "",
 }: LeadCaptureFormProps) {
@@ -91,6 +99,8 @@ export function LeadCaptureForm({
   const [captchaLoadError, setCaptchaLoadError] = useState(false);
   const recaptchaRef = useRef<RecaptchaFieldHandle>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const [specialty, setSpecialty] = useState(defaultSpecialty);
+  const [careerStage, setCareerStage] = useState(defaultCareerStage ?? "");
 
   useEffect(() => {
     readLeadAttribution();
@@ -98,6 +108,7 @@ export function LeadCaptureForm({
   }, [layout]);
 
   const specialtyOptions = useMemo(() => [...CARDIOLOGY_SUBSPECIALTIES], []);
+  const screeningQuestions = useMemo(() => screensForSpecialty(specialty), [specialty]);
 
   const filteredStates = useMemo(() => {
     const q = stateQuery.trim().toLowerCase();
@@ -123,7 +134,13 @@ export function LeadCaptureForm({
       lastName: String(fd.get("lastName") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
-      specialty: String(fd.get("specialty") ?? "").trim(),
+      specialty: String(fd.get("specialty") ?? "").trim() || specialty,
+      careerStage: String(fd.get("careerStage") ?? "").trim() || careerStage,
+      qualificationResponses: Object.fromEntries(
+        screeningQuestions
+          .map((question) => [question.id, String(fd.get(`screening_${question.id}`) ?? "").trim()])
+          .filter(([, value]) => Boolean(value)),
+      ),
       preferredStates,
       yearsExperience:
         String(fd.get("yearsExperience") ?? "").trim() ||
@@ -151,6 +168,9 @@ export function LeadCaptureForm({
     }
     if (!payload.specialty) {
       return "Select your cardiology subspecialty.";
+    }
+    if (!payload.careerStage || !isCareerStageId(payload.careerStage)) {
+      return "Select the career stage that best matches how you want to work.";
     }
     if (stage === "step1") return null;
     if (!payload.availability) {
@@ -226,12 +246,21 @@ export function LeadCaptureForm({
         return;
       }
 
-      trackGenerateLead(payload.pagePath || "inquiry_form");
-      trackEvent("form_submit", { form_mode: formMode, form_step: formMode === "quick" ? 1 : 2 });
+      trackGenerateLead(payload.pagePath || "inquiry_form", {
+        specialty: payload.specialty,
+        career_stage: payload.careerStage,
+      });
+      trackEvent("form_submit", {
+        form_mode: formMode,
+        form_step: formMode === "quick" ? 1 : 2,
+        specialty: payload.specialty,
+        career_stage: payload.careerStage,
+      });
       window.sessionStorage.setItem("lch_lead_submitted", "1");
 
       const params = new URLSearchParams();
       params.set("specialty", payload.specialty);
+      params.set("stage", payload.careerStage);
       if (payload.preferredStates.length) params.set("states", payload.preferredStates.join("|"));
       if (payload.pagePath) params.set("from", payload.pagePath.slice(0, 200));
 
@@ -317,8 +346,8 @@ export function LeadCaptureForm({
           aria-hidden="true"
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
-        {step === 1 ? (
-          <FormSection title="Step 1 — Contact" description="Name, email, phone, and subspecialty only. Preferences come next.">
+        <div className={step === 1 ? "" : "hidden"}>
+          <FormSection title="Step 1 — Contact" description="Name, email, phone, subspecialty, and how you want to work. Preferences come next.">
             <label className="lg:col-span-1">
               <FieldLabel required>First name</FieldLabel>
               <input
@@ -358,11 +387,12 @@ export function LeadCaptureForm({
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
               />
             </label>
-            <label className="lg:col-span-2">
+            <label className="lg:col-span-1">
               <FieldLabel required>Subspecialty</FieldLabel>
               <select
                 name="specialty"
-                defaultValue={defaultSpecialty}
+                value={specialty}
+                onChange={(e) => setSpecialty(e.target.value)}
                 required
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
               >
@@ -372,6 +402,25 @@ export function LeadCaptureForm({
                 {specialtyOptions.map((s) => (
                   <option key={s} value={s}>
                     {s}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="lg:col-span-1">
+              <FieldLabel required>Career stage</FieldLabel>
+              <select
+                name="careerStage"
+                value={careerStage}
+                onChange={(e) => setCareerStage(e.target.value)}
+                required
+                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+              >
+                <option value="" disabled>
+                  How do you want to work?
+                </option>
+                {CAREER_STAGES.map((stage) => (
+                  <option key={stage.id} value={stage.id}>
+                    {stage.label}
                   </option>
                 ))}
               </select>
@@ -390,8 +439,33 @@ export function LeadCaptureForm({
               />
             </label>
           </FormSection>
-        ) : (
+        </div>
+        {step === 2 ? (
           <>
+            {screeningQuestions.length > 0 ? (
+              <FormSection
+                title="Assignment fit"
+                description="Optional—two questions that keep us from sending the wrong cath lab, clinic, or EP lab."
+              >
+                {screeningQuestions.map((question) => (
+                  <label key={question.id} className="lg:col-span-1">
+                    <FieldLabel>{question.label}</FieldLabel>
+                    <select
+                      name={`screening_${question.id}`}
+                      defaultValue=""
+                      className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+                    >
+                      <option value="">Skip for now</option>
+                      {question.options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                ))}
+              </FormSection>
+            ) : null}
             <FormSection title="Preferred states" description="Tap quick-add markets or search the full list below.">
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex flex-wrap gap-2">
@@ -540,7 +614,7 @@ export function LeadCaptureForm({
               }}
             />
           </>
-        )}
+        ) : null}
 
         {status === "error" && error ? (
           <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">

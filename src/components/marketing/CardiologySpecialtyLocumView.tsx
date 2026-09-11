@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { LatticePersonaCards } from "@/components/marketing/LatticePersonaCards";
 import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { CardiologyCtaBand } from "@/components/seo/CardiologyCtaBand";
@@ -123,6 +124,8 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
+            <LatticePersonaCards pathSlug={specialty.pathSlug} />
+
             <ContentSections sections={[...specialty.sections, ...pillarSections, ...profileSections]} />
 
             {contextualLinks.length > 0 ? (
@@ -233,13 +236,56 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 Also see the{" "}
                 <Link href="/ep-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
                   EP cardiology locums pay guide
-                </Link>{" "}
-                and{" "}
+                </Link>
+                , the{" "}
+                <Link href="/salary/electrophysiologist-salary" className="font-semibold text-brand-700 hover:underline">
+                  electrophysiologist salary guide
+                </Link>
+                , and{" "}
                 <Link
                   href="/locum-tenens-jobs/new-york/electrophysiology"
                   className="font-semibold text-brand-700 hover:underline"
                 >
                   New York EP locum jobs
+                </Link>
+                .
+              </p>
+            ) : null}
+            {specialty.pathSlug === "interventional" ? (
+              <p className="text-sm text-slate-600">
+                Compare rates on the{" "}
+                <Link href="/interventional-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
+                  interventional cardiology locums pay guide
+                </Link>{" "}
+                and review{" "}
+                <Link
+                  href="/locum-tenens-jobs/new-jersey/interventional-cardiology"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  New Jersey interventional locum jobs
+                </Link>
+                .
+              </p>
+            ) : null}
+            {specialty.pathSlug === "general" ? (
+              <p className="text-sm text-slate-600">
+                See the{" "}
+                <Link href="/cardiologist-locums-pay-report" className="font-semibold text-brand-700 hover:underline">
+                  cardiologist locums pay report
+                </Link>
+                , the{" "}
+                <Link
+                  href="/featured-cardiology-jobs/kansas-inpatient-non-invasive-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  Kansas 7-on/7-off inpatient locum
+                </Link>
+                , and the{" "}
+                <Link
+                  href="/featured-cardiology-jobs/north-carolina-outpatient-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  North Carolina 2-weeks/month outpatient locum
                 </Link>
                 .
               </p>
@@ -260,7 +306,7 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
           <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
               title="Talk with a cardiology recruiter"
-              subtitle="Share subspecialty, states, and boundaries. Cardiologist-only recruiter follow-up."
+              subtitle="Share subspecialty, career stage, states, and boundaries. Cardiologist-only recruiter follow-up."
               defaultSpecialty={specialty.name}
               layout="sidebar"
             />

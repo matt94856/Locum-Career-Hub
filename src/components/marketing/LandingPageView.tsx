@@ -11,6 +11,7 @@ import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { LocumVsEmployedComparisonTable } from "@/components/marketing/LocumVsEmployedComparisonTable";
 import { Button } from "@/components/ui/Button";
 import { leadPrefillFromLandingSlug } from "@/lib/lead-form-context";
+import { LatticeSpecialtyDoors } from "@/components/marketing/LatticeSpecialtyDoors";
 
 export function buildLandingMetadata(page: LandingPage): Metadata {
   const override = landingSerpOverride(page.slug);
@@ -98,6 +99,8 @@ export function LandingPageView({ page }: { page: LandingPage }) {
               </div>
             ) : null}
 
+            {prefill.defaultCareerStage ? <LatticeSpecialtyDoors /> : null}
+
             <div>
               <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">What you can expect</h2>
               <ul className="mt-6 space-y-4 text-sm leading-relaxed text-slate-700">
@@ -173,8 +176,9 @@ export function LandingPageView({ page }: { page: LandingPage }) {
           <div className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
               title="Request matches for this intent"
-              subtitle="Tell us your specialty and availability. We will respond with realistic options aligned to this page’s focus."
+              subtitle="Tell us your specialty, career stage, and availability. We will respond with realistic options aligned to this page’s focus."
               defaultSpecialty={prefill.defaultSpecialty}
+              defaultCareerStage={prefill.defaultCareerStage}
               layout="sidebar"
             />
           </div>

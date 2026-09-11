@@ -2,6 +2,26 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-09-11 — `https://www.locumcareerhub.com/moonlighting-physician-jobs`
+
+- Type: `content`
+- Status: shipped
+- Before: Generic physician moonlighting landing
+- After: Cardiologist-only moonlighting door with General, IC, and EP CTAs
+- Reason: Convert high-impression moonlighting queries into qualified cardiology leads
+- Expected: CTR lift and moonlighting-stage generate_lead events
+- Actual: pending
+
+## 2026-09-11 — `https://www.locumcareerhub.com/`
+
+- Type: `conversion-funnel`
+- Status: shipped
+- Before: Generic physician inquiry form; homepage and life-stage landings mixed all-physician copy
+- After: Career-stage plus specialty-fit screens on the inquiry form; cardiologist-only fellowship, moonlighting, locums-primary, and scale-down doors; persona cards on general, IC, and EP hubs
+- Reason: Qualify general, interventional, and EP leads by life stage instead of adding thin nationwide job URLs
+- Expected: Higher-quality cardiology inquiries segmented by specialty and career stage; better CTR on moonlighting, retired, and new-grad URLs
+- Actual: pending
+
 ## 2026-09-09 — `https://www.locumcareerhub.com/featured-cardiology-jobs/`
 
 - Type: `conversion-measurement`

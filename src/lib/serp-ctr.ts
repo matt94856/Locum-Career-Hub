@@ -161,6 +161,14 @@ const LANDING_SERP: Record<string, { title: string; description: string }> = {
       cta: "Explore options with a cardiology recruiter.",
     }),
   },
+  "locum-jobs-for-new-graduates": {
+    title: "Cardiology Locums After Fellowship | First Blocks",
+    description: buildSerpDescription({
+      hook: "Locum cardiology jobs after fellowship with licensing lead time and first-attending scope.",
+      proof: "General, interventional, and EP matching—not a generic new-grad board.",
+      cta: "Start the credentialing clock with a cardiology recruiter.",
+    }),
+  },
 };
 
 export function landingSerpOverride(slug: string): { title: string; description: string } | undefined {
@@ -173,9 +181,10 @@ export function buildHomeSerpMetadata(): Metadata {
     description: clampSerpDescription(HOME_DESCRIPTION),
     path: "/",
     keywords: [
-      "locum tenens physician staffing",
       "locum cardiologist jobs",
       "cardiology locum jobs",
+      "interventional cardiology locums",
+      "electrophysiology locums",
       "cardiologist recruiter",
     ],
   });
@@ -190,6 +199,8 @@ export function buildCardiologySpecialtySerpMetadata(spec: {
   const titleOverride: Record<string, string> = {
     "cardiac-imaging": "Cardiac Imaging Locum Jobs | Echo, MRI & CT",
     electrophysiology: "EP Locum Jobs | Ablation, Devices & Call",
+    general: "General Cardiology Locum Jobs | Consult & Clinic",
+    interventional: "Interventional Cardiology Locum Jobs | STEMI",
   };
   return buildSerpMetadata({
     title: titleOverride[spec.pathSlug] ?? specialtySerpTitle(spec.name),

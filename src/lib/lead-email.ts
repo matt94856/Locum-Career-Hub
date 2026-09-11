@@ -22,6 +22,7 @@ type LeadEmailPayload = {
   opportunitySlug?: string | null;
   opportunityTitle?: string | null;
   qualificationResponses?: Record<string, unknown> | null;
+  careerStage?: string | null;
 };
 
 function resendConfigured(): boolean {
@@ -72,9 +73,13 @@ function leadSummaryHtml(p: LeadEmailPayload): string {
   const qualifications = p.qualificationResponses
     ? `<p><strong>Opportunity fit responses:</strong> ${escapeHtml(JSON.stringify(p.qualificationResponses))}</p>`
     : "";
+  const stage = p.careerStage
+    ? `<p><strong>Career stage:</strong> ${escapeHtml(p.careerStage)}</p>`
+    : "";
   return `
     <p><strong>${escapeHtml(p.firstName)} ${escapeHtml(p.lastName)}</strong> — ${escapeHtml(p.specialty)}</p>
     ${opportunity}
+    ${stage}
     <p>Email: ${escapeHtml(p.email)} · Phone: ${escapeHtml(p.phone)}</p>
     <p>States: ${escapeHtml(states)}</p>
     <p>Experience: ${escapeHtml(p.yearsExperience)} · Availability: ${escapeHtml(p.availability)} · Travel: ${escapeHtml(p.travel)}</p>

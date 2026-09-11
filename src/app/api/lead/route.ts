@@ -5,6 +5,7 @@ import { getFeaturedCardiologyOpportunity } from "@/lib/featured-cardiology-oppo
 import { notifyRecruiterOfLead, sendLeadAcknowledgment } from "@/lib/lead-email";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 import { verifyRecaptchaToken } from "@/lib/recaptcha-server";
+import { isCareerStageId, screensForSpecialty, type CareerStageId } from "@/lib/lead-lattice";
 
 const ALLOWED_SPECIALTIES = new Set<string>([
   ...CARDIOLOGY_SUBSPECIALTIES,
@@ -35,6 +36,7 @@ type LeadBody = {
   source?: unknown;
   opportunitySlug?: unknown;
   qualificationResponses?: unknown;
+  careerStage?: unknown;
   recaptchaToken?: unknown;
   companyWebsite?: unknown;
 };
@@ -156,7 +158,7 @@ function normalizeLead(body: LeadBody) {
     body.qualificationResponses,
     5000,
   );
-  const qualificationResponses = (() => {
+  const opportunityResponses = (() => {
     if (!opportunity || !rawQualificationResponses) return null;
     const responses = Object.fromEntries(
       opportunity.screeningQuestions.flatMap((question) => {
@@ -169,9 +171,30 @@ function normalizeLead(body: LeadBody) {
     );
     return Object.keys(responses).length > 0 ? responses : null;
   })();
+  const latticeResponses = (() => {
+    if (!rawQualificationResponses) return null;
+    const responses = Object.fromEntries(
+      screensForSpecialty(specialty).flatMap((question) => {
+        const response = rawQualificationResponses[question.id];
+        return typeof response === "string" &&
+          question.options.includes(response)
+          ? [[question.label, response]]
+          : [];
+      }),
+    );
+    return Object.keys(responses).length > 0 ? responses : null;
+  })();
+  const qualificationResponses =
+    opportunityResponses || latticeResponses
+      ? { ...(opportunityResponses ?? {}), ...(latticeResponses ?? {}) }
+      : null;
   if (qualificationResponses) {
     metadata.qualification_responses = qualificationResponses;
   }
+  const careerStage: CareerStageId | null = isNonEmptyString(body.careerStage) && isCareerStageId(body.careerStage)
+    ? body.careerStage
+    : null;
+  if (careerStage) metadata.career_stage = careerStage;
   if (opportunity) {
     metadata.opportunity_slug = opportunity.slug;
     metadata.opportunity_title = opportunity.title;
@@ -217,6 +240,7 @@ function normalizeLead(body: LeadBody) {
       opportunitySlug: opportunity?.slug ?? null,
       opportunityTitle: opportunity?.title ?? null,
       qualificationResponses,
+      careerStage,
     },
   };
 }

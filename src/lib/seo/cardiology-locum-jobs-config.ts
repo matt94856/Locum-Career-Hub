@@ -48,10 +48,10 @@ export const CARDIOLOGY_HUB_H1 = "Locum Cardiologist Jobs & Recruitment";
 export const CARDIOLOGY_HUB_DESCRIPTION =
   "Find top locum cardiologist positions and locum tenens job opportunities. Nationwide cardiology placements in interventional, EP, heart failure, imaging, and pediatric. Connect with expert recruiters at Locum Career Hub.";
 
-export const HOME_TITLE = "Cardiologist Locum Jobs | Recruiter + Pay Tools";
-export const HOME_H1 = "Cardiology Locum Tenens Opportunities Designed Around Your Life";
+export const HOME_TITLE = "Cardiologist Locum Jobs | General, IC & EP";
+export const HOME_H1 = "Cardiology Locum Tenens for General, Interventional, and EP Physicians";
 export const HOME_DESCRIPTION =
-  "Cardiologist-only locum recruiting: EP, interventional, and general blocks with written call and rates. Free pay calculator—request matches without a job-board blast.";
+  "Cardiologist-only locum recruiting for fellowship finishers, moonlighting, locums-primary, and semi-retirement. General, interventional, and EP blocks with written call—request matches.";
 
 export const CARDIOLOGY_HUB_FAQS: { q: string; a: string }[] = [
   {
@@ -135,6 +135,18 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       anchor: "Structural Heart locum jobs",
       suffix: "page.",
     },
+    {
+      prefix: "Employed interventionalists adding weekend cath lab days should read",
+      href: "/moonlighting-physician-jobs",
+      anchor: "cardiologist moonlighting jobs",
+      suffix: "before stacking STEMI call.",
+    },
+    {
+      prefix: "Compare weekly rate drivers on the",
+      href: "/interventional-cardiology-locums-pay",
+      anchor: "interventional cardiology locums pay guide",
+      suffix: ".",
+    },
   ],
   "structural-heart": [
     {
@@ -157,6 +169,18 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       anchor: "New York electrophysiology locum jobs",
       suffix: "—then compare rates on the EP pay guide.",
     },
+    {
+      prefix: "Device-clinic and 2-day lab coverage for late-career EPs is covered in",
+      href: "/retired-physician-opportunities",
+      anchor: "semi-retired cardiologist locum jobs",
+      suffix: ".",
+    },
+    {
+      prefix: "Salary context lives on the",
+      href: "/salary/electrophysiologist-salary",
+      anchor: "electrophysiologist salary guide",
+      suffix: ".",
+    },
   ],
   general: [
     {
@@ -164,6 +188,18 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       targetPathSlug: "interventional",
       anchor: "interventional cardiology locum jobs",
       suffix: "—confirm cath lab scope before signing.",
+    },
+    {
+      prefix: "Fellowship finishers should start with",
+      href: "/locum-jobs-for-new-graduates",
+      anchor: "cardiology locums after fellowship",
+      suffix: "before they shop rates.",
+    },
+    {
+      prefix: "Semi-retired clinic and 2-weeks/month outpatient paths live on",
+      href: "/retired-physician-opportunities",
+      anchor: "semi-retired cardiologist locum jobs",
+      suffix: ".",
     },
   ],
   "heart-failure": [
@@ -180,6 +216,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       targetPathSlug: "general",
       anchor: "general cardiology locum jobs",
       suffix: "consult and clinic coverage.",
+    },
+    {
+      prefix: "Fellows searching imaging locums after training should start with",
+      href: "/locum-jobs-for-new-graduates",
+      anchor: "cardiology locums after fellowship",
+      suffix: ".",
     },
     {
       prefix: "Estimate imaging-block economics with the",
@@ -405,6 +447,10 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
       {
         q: "What drives cardiac imaging locum pay?",
         a: "Modality mix, daily volume, after-hours reads, turnaround SLAs, and whether stress supervision is included. Headline weekly rates without those variables are hard to compare.",
+      },
+      {
+        q: "Can a new imaging attending do locums after fellowship?",
+        a: "Yes if privileging matches documented Level II/III credentials. Start licensing 4–5 months before graduation so July is not an unpaid gap.",
       },
     ],
   },

@@ -56,6 +56,9 @@ export const LANDING_PAGES: LandingPage[] = [
       "part-time-physician-jobs",
     ],
     relatedLinks: [
+      { href: "/locum-jobs/cardiology/general", title: "General cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/electrophysiology", title: "Electrophysiology locum jobs" },
       { href: "/locum-tenens-jobs/florida", title: "Locum tenens jobs in Florida" },
       { href: "/locum-tenens-jobs/texas", title: "Locum tenens jobs in Texas" },
       { href: "/locum-tenens-jobs/california", title: "Locum tenens jobs in California" },
@@ -185,54 +188,190 @@ export const LANDING_PAGES: LandingPage[] = [
   },
   {
     slug: "locum-jobs-for-new-graduates",
-    title: "Locum Jobs for New Graduates & Early-Career Physicians",
+    title: "Cardiology Locums After Fellowship | First Attending Blocks",
     description:
-      "Post-residency physician jobs through locum tenens: build skills, increase income, and explore practice settings before you commit long-term.",
-    h1: "Locum Jobs for New Graduates Who Want Options",
-    h2: "Bridge to your ideal role with mentorship-aligned placements",
-    keywords: ["post-residency physician jobs", "physician opportunities", "locum tenens jobs"],
+      "Locum cardiology jobs after fellowship: licensing lead time, first-attending scope, and recruiter matching for general, interventional, and EP new grads.",
+    h1: "Cardiology Locums After Fellowship",
+    h2: "Start the licensing clock 4–5 months before June 30—or you will have an income gap",
+    keywords: [
+      "locums after cardiology fellowship",
+      "new attending locums",
+      "board-eligible cardiology locum",
+      "new cardiologist locum jobs",
+    ],
     intro:
-      "Early career does not have to mean locking into the wrong culture. Locums after residency helps you sample volumes, documentation styles, and communities—while accelerating loan paydown with premium shifts.",
+      "Cardiology fellowship trains you to practice—not to license, privilege, and negotiate a first attending year. Locums can be a structured sample of markets while you finish boards, but independent attending contracts generally require completed fellowship. Locum Career Hub recruits MD/DO cardiologists only and maps first-block scope to your logs—not a generic new-grad job board.",
     bullets: [
-      "Sites open to new grads with appropriate supervision models",
-      "Credentialing roadmaps for first-time state licenses",
-      "Guidance on moonlighting vs full-time locums tradeoffs",
+      "General, interventional, and EP first blocks matched to documented training scope",
+      "Credentialing timelines that start before graduation—not the week after",
+      "Clear talk about board-eligible vs board-certified hospital rules",
     ],
     relatedSlugs: ["moonlighting-physician-jobs", "interventional-cardiologist-locum-jobs", "cardiologist-travel-locums"],
+    relatedLinks: [
+      { href: "/locum-jobs/cardiology/general", title: "General cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/electrophysiology", title: "Electrophysiology locum jobs" },
+      { href: "/guides/start-cardiology-locums-after-fellowship", title: "Start locums after cardiology fellowship" },
+    ],
+    answer:
+      "New cardiology attendings can use locums as a first-year sample if licensing and privileging start 4–5 months before graduation. Independent locum contracts require completed fellowship; first assignments should match documented general, interventional, or EP scope.",
+    whoFor: [
+      "General cardiology fellows comparing locums-first vs permanent offers",
+      "Interventional fellows who want STEMI volume and independent PCI logs written before they travel",
+      "EP fellows choosing ablation-lab weeks vs device-clinic first blocks",
+      "Board-eligible cardiologists who need a realistic July–October start plan",
+    ],
+    sections: [
+      {
+        h2: "Treat locums and permanent jobs as parallel tracks",
+        paragraphs: [
+          "Competitive cardiology job searches often start 18–12 months before graduation. Locums licensing is shorter but still slow: state license, CAQH, facility credentialing, and privileging stack. Waiting until July is how new attendings lose August and September income.",
+          "Tell a cardiology recruiter your earliest start date, states you will license, and whether you want general consults, STEMI, or EP lab work. Two or three serious conversations beat seven agencies.",
+        ],
+      },
+      {
+        h2: "Match the first block to your logs",
+        paragraphs: [
+          "General cardiology first blocks are usually consult, clinic, and imaging—not cath-lab operator work. Interventional first blocks should state STEMI vs diagnostic-only PCI. EP first blocks should separate ablation days from device clinic and remote monitoring.",
+          "If a site needs privileges you have not documented, it is not a “stretch assignment.” It is a delay.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can I do locums during cardiology fellowship?",
+        a: "Independent attending locum contracts generally require completed fellowship. Moonlighting rules inside a training program are separate and program-specific.",
+      },
+      {
+        q: "When should a June graduate start locums paperwork?",
+        a: "About 4–5 months before graduation. Credentialing commonly takes 90–180 days. IMLC can shorten some licenses but does not skip hospital privileging.",
+      },
+    ],
   },
   {
     slug: "moonlighting-physician-jobs",
-    title: "Moonlighting Physician Jobs | Extra Shifts & Locum Moonlighting",
+    title: "Cardiologist Moonlighting Jobs | Weekend Cath Lab & Clinic",
     description:
-      "Find cardiologist moonlighting jobs that fit around your primary role. Weekend cath lab, consult, echo read, and clinic blocks with compliance-first support.",
-    h1: "Moonlighting Jobs That Respect Your Primary Practice",
-    h2: "Stack shifts without sacrificing boundaries or compliance",
-    keywords: ["moonlighting physician jobs", "moonlighting jobs", "flexible physician jobs"],
+      "Cardiologist moonlighting that fits around a primary role—weekend STEMI, extra cath lab, consults, echo reads, and device clinic with employer-policy clarity.",
+    h1: "Cardiologist Moonlighting Jobs That Respect Your Primary Practice",
+    h2: "Add income without stacking employed call on locum STEMI nights",
+    keywords: [
+      "cardiologist moonlighting",
+      "cardiology moonlighting jobs",
+      "weekend STEMI locums",
+      "physician moonlighting jobs",
+    ],
     intro:
-      "Moonlighting should feel additive—not extractive. We coordinate tightly scoped shifts, clarify malpractice coverage, and align expectations with your employer policies when applicable.",
+      "Moonlighting should feel additive—not a second full-time job. Employed general, interventional, and EP cardiologists use tightly scoped locum blocks for extra income when employer policy, malpractice, and recovery time allow it. Locum Career Hub recruits cardiologists only and will not pretend a weekend STEMI shift is “light coverage.”",
     bullets: [
-      "Local and regional options to limit travel fatigue",
-      "Rapid credentialing for repeat health system networks",
-      "Clear communication templates for employer transparency",
+      "Weekend or local blocks that fit around clinic and call already on your calendar",
+      "STEMI, consult, echo-read, and device-clinic options matched to subspecialty",
+      "Employer moonlighting, non-compete, and malpractice questions asked before we shop rates",
     ],
     relatedSlugs: ["part-time-physician-jobs", "interventional-cardiologist-locum-jobs", "locum-jobs-for-new-graduates"],
+    relatedLinks: [
+      { href: "/locum-jobs/cardiology/general", title: "General cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/electrophysiology", title: "Electrophysiology locum jobs" },
+      { href: "/cardiology-locum-jobs/cardiology-moonlighting-jobs", title: "Cardiology moonlighting guide" },
+    ],
+    answer:
+      "Cardiologist moonlighting is extra clinical work around a primary employed role—weekend cath lab, consults, clinic, reads, or device coverage—only after employer policy, malpractice, and fatigue limits are clear.",
+    whoFor: [
+      "Employed general cardiologists who want weekend rounding or echo-read income",
+      "Interventional cardiologists considering extra STEMI or diagnostic cath coverage",
+      "Electrophysiologists who can add device clinic or 2-day lab days without remote-monitor burden",
+      "New attendings whose W-2 job allows defined moonlighting",
+    ],
+    sections: [
+      {
+        h2: "The constraint is your employed contract, not the locum rate",
+        paragraphs: [
+          "Read moonlighting, conflict, non-compete, and malpractice language before you look at assignments. A high weekend rate is irrelevant if you cannot legally work it—or if it recreates the call you were trying to escape.",
+          "Stacking employed STEMI nights with locum STEMI nights is the most common way interventional moonlighting fails. Write recovery rules first.",
+        ],
+      },
+      {
+        h2: "What extra work looks like by subspecialty",
+        paragraphs: [
+          "General cardiology: weekend consults, clinic overflow, nuclear/stress supervision, or echo reads. Interventional: defined cath-lab days or STEMI call with documented backup. EP: device clinic, generator changes, or scheduled ablation days—not always 24/7 arrhythmia call.",
+          "If you need local-only work, say so. Travel moonlighting only works when the block is worth the credentialing cost.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can an employed cardiologist moonlight locums?",
+        a: "Often, with written employer approval and malpractice that covers the extra scope. We ask about policy before presenting STEMI or EP lab work.",
+      },
+      {
+        q: "Is cardiologist moonlighting the same as locums-primary?",
+        a: "No. Moonlighting is extra income around a primary job. Locums-primary is the job. The schedules, licensing investment, and tax picture differ.",
+      },
+    ],
   },
   {
     slug: "retired-physician-opportunities",
     title: "Semi-Retired Cardiologist Locum Jobs | Flexible Blocks",
     description:
-      "Semi-retired cardiologist locum opportunities with lighter call, selective blocks, and schedule control. Stay clinical without full-time employment pressure.",
-    h1: "Semi-Retired Cardiologist Locum Opportunities",
-    h2: "Keep your skills sharp on a schedule you control",
-    keywords: ["semi-retired cardiologist locums", "retired physician opportunities", "part-time cardiologist jobs"],
+      "Semi-retired cardiologist locum jobs: clinic-only, consult, device coverage, and part-time blocks without full-time employment. General, interventional, and EP scale-down paths.",
+    h1: "Semi-Retired Cardiologist Locum Jobs",
+    h2: "Stay clinical on a schedule you control—without STEMI you no longer want",
+    keywords: [
+      "semi-retired cardiologist locums",
+      "retired cardiologist jobs",
+      "part-time cardiologist jobs",
+      "retired physician opportunities",
+    ],
     intro:
-      "Many cardiologists want a glide path—not a hard stop. Selective locum blocks during retirement or semi-retirement can preserve clinical sharpness with lower administrative burden and the ability to pause between assignments.",
+      "Many cardiologists want a glide path—not a hard stop. Selective locum blocks can preserve clinical work with lighter call, capped travel, and the ability to pause. Locum Career Hub recruits cardiologists only and will match clinic, consult, or device-clinic scope—not pretend every late-career physician wants 24-hour STEMI.",
     bullets: [
-      "Selective schedules: seasonal, short blocks, or occasional weekends",
-      "Sites accustomed to experienced clinicians and efficient workflows",
-      "Support for compact licenses and streamlined renewals",
+      "Clinic-only, consult, nuclear/echo, or device-clinic options by subspecialty",
+      "Seasonal, 2-weeks/month, and 7-on/7-off blocks when they fit recovery",
+      "Licensing and privileging mapped before you commit unpaid onboarding time",
     ],
     relatedSlugs: ["part-time-physician-jobs", "physician-burnout-alternatives", "flexible-physician-careers"],
+    relatedLinks: [
+      { href: "/part-time-cardiologist-jobs", title: "Part-time cardiologist jobs" },
+      { href: "/locum-jobs/cardiology/general", title: "General cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
+      { href: "/locum-jobs/cardiology/electrophysiology", title: "Electrophysiology locum jobs" },
+      { href: "/featured-cardiology-jobs/north-carolina-outpatient-cardiology-locum", title: "North Carolina outpatient locum" },
+    ],
+    answer:
+      "Semi-retired cardiologists use locum tenens for selective clinic, consult, or procedural coverage with lighter call. Dropping STEMI, keeping diagnostic cath, or covering device clinic only are different jobs—write the scope before you shop rates.",
+    whoFor: [
+      "General cardiologists who want clinic or consults without nights",
+      "Interventional cardiologists ready to drop STEMI but keep diagnostic cath or clinic",
+      "Electrophysiologists who prefer device clinic to complex ablation weeks",
+      "Physicians returning after a pause who still hold boards and licenses",
+    ],
+    sections: [
+      {
+        h2: "Scale down by dropping the wrong work, not all work",
+        paragraphs: [
+          "Late-career locums fails when the assignment is “cardiology coverage” with unspecified call. Specify no-STEMI, clinic-only, no remote-monitor ownership, or weekday EP lab only.",
+          "Part-time does not automatically mean low intensity. A 2-weeks/month outpatient clinic and a 7-on/7-off inpatient consult block are both part-time on paper and very different weeks.",
+        ],
+      },
+      {
+        h2: "Licensing still matters in retirement",
+        paragraphs: [
+          "If licenses lapsed, restart them before you fall in love with a market. IMLC helps some physicians; New York and a few other states do not. Privileging still needs current case logs for interventional and EP work.",
+          "Fully retired physicians can sometimes return, but hospitals will still privilege you as an attending. Plan the paperwork, not just the lifestyle story.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a retired cardiologist do locums?",
+        a: "Sometimes, if licenses, boards, and privileges can be brought current. Clinic and consult roles are more common than high-acuity STEMI or complex ablation.",
+      },
+      {
+        q: "What part-time cardiology locum schedules are realistic?",
+        a: "Two weeks per month outpatient, weekends, one week per month, or 7-on/7-off inpatient blocks. Recurring sites make credentialing worth the unpaid setup.",
+      },
+    ],
   },
   {
     slug: "interventional-cardiologist-locum-jobs",

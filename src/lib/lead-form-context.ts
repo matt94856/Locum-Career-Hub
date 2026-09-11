@@ -2,6 +2,7 @@ import { JOB_SPECIALTY_DEFS } from "@/lib/cardiology-authority/jobs-seo";
 import { getStateNameBySlug } from "@/lib/us-state-slugs";
 import { PATH_TO_LEGACY_SLUG } from "@/lib/seo/cardiology-locum-jobs-config";
 import { getSpecialtyNameBySlug } from "@/lib/specialty-seo";
+import { DOOR_LANDING_SLUGS, type CareerStageId } from "@/lib/lead-lattice";
 
 /** Map job URL specialty slug → form select label */
 export function specialtyNameFromJobSlug(jobSpecialtySlug: string): string | undefined {
@@ -52,6 +53,22 @@ export const THANK_YOU_READING_BY_TOPIC: Record<string, { href: string; title: s
     { href: "/leaving-employed-cardiology", title: "Leaving employed cardiology" },
     { href: "/flexible-physician-careers", title: "Flexible cardiology careers" },
   ],
+  fellowship: [
+    { href: "/tools/credentialing-timeline", title: "Credentialing timeline estimator" },
+    { href: "/guides/start-cardiology-locums-after-fellowship", title: "Start locums after cardiology fellowship" },
+  ],
+  moonlighting: [
+    { href: "/cardiology-locum-jobs/cardiology-moonlighting-jobs", title: "Cardiology moonlighting jobs" },
+    { href: "/guides/moonlighting-vs-locums-cardiology", title: "Moonlighting vs locums for cardiologists" },
+  ],
+  retirement: [
+    { href: "/part-time-cardiologist-jobs", title: "Design a sustainable part-time cardiology schedule" },
+    { href: "/guides/semi-retired-cardiologist-locums", title: "Semi-retired cardiologist locums" },
+  ],
+  locumsPrimary: [
+    { href: "/locum-jobs/cardiology", title: "Cardiology locum jobs hub" },
+    { href: "/national-locum-tenens-jobs-guide", title: "Cardiologist locum tenens jobs" },
+  ],
 };
 
 /** Landing slug → form defaults for high-intent physician landings */
@@ -62,11 +79,19 @@ export function leadPrefillFromLandingSlug(slug: string) {
   else if (lower.includes("electrophysiology") || lower.includes("-ep-")) defaultSpecialty = "Electrophysiology";
   else if (lower.includes("heart-failure")) defaultSpecialty = "Heart Failure";
   else if (lower.includes("pediatric")) defaultSpecialty = "Pediatric Cardiology";
-  return { defaultSpecialty, defaultPreferredStates: [] as string[] };
+  else if (lower.includes("imaging")) defaultSpecialty = "Advanced Imaging";
+  const defaultCareerStage = DOOR_LANDING_SLUGS[slug];
+  return { defaultSpecialty, defaultPreferredStates: [] as string[], defaultCareerStage };
 }
 
-export function thankYouReadingLinks(pagePath?: string | null) {
-  if (!pagePath) return THANK_YOU_READING_BY_TOPIC.default;
+export function thankYouReadingLinks(pagePath?: string | null, careerStage?: CareerStageId | string | null) {
+  if (!pagePath) {
+    if (careerStage === "fellowship") return THANK_YOU_READING_BY_TOPIC.fellowship;
+    if (careerStage === "moonlighting") return THANK_YOU_READING_BY_TOPIC.moonlighting;
+    if (careerStage === "retirement") return THANK_YOU_READING_BY_TOPIC.retirement;
+    if (careerStage === "locums-primary") return THANK_YOU_READING_BY_TOPIC.locumsPrimary;
+    return THANK_YOU_READING_BY_TOPIC.default;
+  }
   if (
     pagePath.includes(
       "featured-cardiology-jobs/kansas-inpatient-non-invasive",
@@ -104,5 +129,15 @@ export function thankYouReadingLinks(pagePath?: string | null) {
   if (pagePath.includes("burnout") || pagePath.includes("leaving-employed")) {
     return THANK_YOU_READING_BY_TOPIC.burnout;
   }
+  if (careerStage === "fellowship" || pagePath.includes("fellowship") || pagePath.includes("new-graduates")) {
+    return THANK_YOU_READING_BY_TOPIC.fellowship;
+  }
+  if (careerStage === "moonlighting" || pagePath.includes("moonlight")) {
+    return THANK_YOU_READING_BY_TOPIC.moonlighting;
+  }
+  if (careerStage === "retirement" || pagePath.includes("retired") || pagePath.includes("part-time")) {
+    return THANK_YOU_READING_BY_TOPIC.retirement;
+  }
+  if (careerStage === "locums-primary") return THANK_YOU_READING_BY_TOPIC.locumsPrimary;
   return THANK_YOU_READING_BY_TOPIC.default;
 }

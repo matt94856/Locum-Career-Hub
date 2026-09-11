@@ -65,12 +65,20 @@ export default function LocumSalaryEstimatorPage() {
           </div>
           <p className="text-sm text-slate-600">
             Next: explore{" "}
-            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-tenens-jobs">
-              locum jobs by state
-            </Link>{" "}
-            or{" "}
-            <Link className="font-semibold text-brand-700 hover:underline" href="/specialties">
-              specialty hubs
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/general">
+              general cardiology locums
+            </Link>
+            ,{" "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/interventional">
+              interventional locums
+            </Link>
+            ,{" "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/electrophysiology">
+              EP locums
+            </Link>
+            , or{" "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/physician-opportunities#lead-form">
+              request matches
             </Link>
             .
           </p>

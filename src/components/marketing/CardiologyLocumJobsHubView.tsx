@@ -4,6 +4,7 @@ import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { LATTICE_DOORS } from "@/lib/lead-lattice";
 import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { RelatedCardiologyLinks } from "@/components/seo/RelatedCardiologyLinks";
 import {
@@ -90,6 +91,26 @@ export function CardiologyLocumJobsHubView() {
             </Link>{" "}
             ranges before you inquire.
           </p>
+
+          <div className="mt-12">
+            <h2 className="font-display text-2xl font-semibold text-slate-950">Start from how you want to work</h2>
+            <p className="mt-3 text-sm text-slate-600">
+              Nationwide assignments exist. The useful first question is life stage—not a 50-state job list.
+            </p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {LATTICE_DOORS.map((door) => (
+                <li key={door.id}>
+                  <Link
+                    href={door.href}
+                    className="flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-4 shadow-sm hover:border-brand-200"
+                  >
+                    <span className="font-semibold text-slate-950">{door.title}</span>
+                    <span className="mt-2 text-sm text-slate-600">{door.detail}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <h2 className="mt-12 font-display text-2xl font-semibold text-slate-950">Browse cardiology subspecialties</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600">

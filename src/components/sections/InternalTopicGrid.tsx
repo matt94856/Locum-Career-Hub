@@ -8,6 +8,8 @@ const TIER1_LANDING_SLUGS = new Set([
   "cardiologist-travel-locums",
   "interventional-cardiologist-locum-jobs",
   "moonlighting-physician-jobs",
+  "locum-jobs-for-new-graduates",
+  "retired-physician-opportunities",
   "leaving-employed-cardiology",
   "physician-burnout-alternatives",
   "flexible-physician-careers",

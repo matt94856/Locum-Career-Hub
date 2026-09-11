@@ -24,6 +24,7 @@ type Props = {
     states?: string;
     from?: string;
     opportunity?: string;
+    stage?: string;
   }>;
 };
 
@@ -32,16 +33,19 @@ export default async function ThankYouPage({ searchParams }: Props) {
   const specialty = params.specialty?.trim();
   const states = params.states?.split("|").filter(Boolean) ?? [];
   const fromPath = params.from?.trim();
+  const careerStage = params.stage?.trim();
   const opportunity = params.opportunity
     ? getFeaturedCardiologyOpportunity(params.opportunity)
     : undefined;
-  const reading = thankYouReadingLinks(fromPath ?? null);
+  const reading = thankYouReadingLinks(fromPath ?? null, careerStage);
 
   return (
     <main className="pb-24 sm:pb-0">
       <ThankYouConversionTracker
         opportunitySlug={opportunity?.slug}
         sourcePath={fromPath}
+        specialty={specialty}
+        careerStage={careerStage}
       />
       <section className="border-b border-emerald-100 bg-gradient-to-b from-emerald-50/80 to-white py-14 sm:py-20">
         <div className="container-site max-w-3xl">

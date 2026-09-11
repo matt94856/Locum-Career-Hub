@@ -13,9 +13,13 @@ declare global {
 export function ThankYouConversionTracker({
   opportunitySlug,
   sourcePath,
+  specialty,
+  careerStage,
 }: {
   opportunitySlug?: string;
   sourcePath?: string;
+  specialty?: string;
+  careerStage?: string;
 }) {
   useEffect(() => {
     if (window.sessionStorage.getItem("lch_lead_submitted") !== "1") return;
@@ -24,6 +28,8 @@ export function ThankYouConversionTracker({
       page_path: "/thank-you",
       ...(opportunitySlug ? { opportunity_slug: opportunitySlug } : {}),
       ...(sourcePath ? { source_path: sourcePath } : {}),
+      ...(specialty ? { specialty } : {}),
+      ...(careerStage ? { career_stage: careerStage } : {}),
     };
     trackEvent("lead_thank_you_view", params);
     window.fbq?.("track", "Lead", {
@@ -32,6 +38,6 @@ export function ThankYouConversionTracker({
         : "cardiology_inquiry",
       ...(opportunitySlug ? { content_name: opportunitySlug } : {}),
     });
-  }, [opportunitySlug, sourcePath]);
+  }, [opportunitySlug, sourcePath, specialty, careerStage]);
   return null;
 }

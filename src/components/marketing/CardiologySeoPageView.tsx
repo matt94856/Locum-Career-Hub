@@ -59,7 +59,12 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
     aboutTopics: ["Cardiology", "Locum tenens", "Cardiologist careers", SITE.name],
   });
 
-  const showSidebarForm = page.category === "state" || page.category === "city" || page.category === "money";
+  const showSidebarForm = page.category === "state" || page.category === "city" || page.category === "money" || page.category === "salary";
+  const defaultSpecialty = page.slug.includes("electrophysiolog")
+    ? "Electrophysiology"
+    : page.slug.includes("interventional")
+      ? "Interventional Cardiology"
+      : "General Cardiology";
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -132,7 +137,7 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
               <LeadCaptureForm
                 title={page.geoLabel ? `Inquiry: ${page.geoLabel}` : "Cardiologist inquiry"}
                 subtitle={`Select ${page.geoLabel ? `${page.geoLabel} and ` : ""}any other states you would consider. A recruiter will follow up if realistic cardiology locum opportunities exist—not a mass email blast.`}
-                defaultSpecialty="General Cardiology"
+                defaultSpecialty={defaultSpecialty}
                 layout="sidebar"
               />
               <LeadConversionBand

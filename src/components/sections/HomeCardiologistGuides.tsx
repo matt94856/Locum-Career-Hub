@@ -9,29 +9,21 @@ import { CTA } from "@/lib/site";
 export const HOME_CARDIOLOGIST_GUIDES_ID = "cardiologist-guides" as const;
 
 const PROBLEM_SLUGS = [
-  "physician-burnout-solutions",
-  "physician-burnout-alternatives",
-  "doctor-work-life-balance",
-  "flexible-physician-careers",
-  "physician-schedule-flexibility",
-  "part-time-physician-jobs",
-  "physician-side-income",
   "moonlighting-physician-jobs",
-  "careers-after-residency",
   "locum-jobs-for-new-graduates",
   "retired-physician-opportunities",
   "leaving-employed-cardiology",
-  "career-change-for-doctors",
-  "tired-of-being-a-doctor",
+  "physician-burnout-alternatives",
+  "flexible-physician-careers",
+  "part-time-physician-jobs",
+  "physician-side-income",
 ] as const;
 
 const HIGH_INTENT_SLUGS = [
   "national-locum-tenens-jobs-guide",
-  "locum-opportunities",
-  "locum-physician-jobs",
-  "cardiologist-travel-locums",
   "interventional-cardiologist-locum-jobs",
-  "physician-travel-jobs",
+  "cardiologist-travel-locums",
+  "locum-opportunities",
 ] as const;
 
 function bySlugs(slugs: readonly string[]): LandingPage[] {
@@ -82,7 +74,7 @@ export function HomeCardiologistGuides() {
               Guides for problem-aware searches
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              Skimmable pages for burnout, balance, side income, schedule design, and early-career cardiology exploration.
+              Fellowship, moonlighting, locums-primary, and scale-down doors—plus general, interventional, and EP hubs.
             </p>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
@@ -113,12 +105,20 @@ export function HomeCardiologistGuides() {
             ))}
           </div>
           <p className="mt-6 text-sm text-slate-600">
-            <Link className="font-semibold text-brand-700 hover:underline" href="/guides">
-              Browse the complete cardiology guide library →
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology">
+              Cardiology locum jobs hub →
             </Link>
             {" · "}
-            <Link className="font-semibold text-brand-700 hover:underline" href="/resources">
-              Cardiology career resources →
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/electrophysiology">
+              EP locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/cardiac-imaging">
+              Cardiac imaging locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/guides">
+              Guide library →
             </Link>
           </p>
         </div>

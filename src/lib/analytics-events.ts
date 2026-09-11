@@ -14,11 +14,15 @@ export function trackEvent(name: string, params?: Record<string, string | number
 }
 
 /** Successful inquiry form submission (mark as Key event in GA4). */
-export function trackGenerateLead(source = "inquiry_form") {
+export function trackGenerateLead(
+  source = "inquiry_form",
+  extra?: Record<string, string | number | boolean>,
+) {
   trackEvent("generate_lead", {
     method: "inquiry_form",
     source,
     page_path: window.location.pathname,
+    ...extra,
   });
 }
 

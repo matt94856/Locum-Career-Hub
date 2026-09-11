@@ -19,6 +19,7 @@ import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { getStateLocumPage } from "@/lib/state-locum-seo";
 import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 import { CTA, SITE } from "@/lib/site";
+import { LatticeUpLinks } from "@/components/marketing/LatticeUpLinks";
 
 export function generateStaticParams() {
   const out: { state: string; specialtySlug: string }[] = [];
@@ -129,6 +130,21 @@ export default async function SpecialtyStateLocumPage({
                 </Button>
               </>
             ) : null}
+            {specialtySlug === "interventional-cardiology" ? (
+              <>
+                <Button href="/interventional-cardiology-locums-pay" variant="secondary" className="justify-center">
+                  Interventional locums pay →
+                </Button>
+                <Button href="/locum-jobs/cardiology/interventional" variant="secondary" className="justify-center">
+                  Interventional specialty hub →
+                </Button>
+              </>
+            ) : null}
+            {specialtySlug === "general-cardiology" ? (
+              <Button href="/locum-jobs/cardiology/general" variant="secondary" className="justify-center">
+                General cardiology hub →
+              </Button>
+            ) : null}
             {specialtySlug === "advanced-imaging" || specialtyName.toLowerCase().includes("imaging") ? (
               <Button href="/locum-jobs/cardiology/cardiac-imaging" variant="secondary" className="justify-center">
                 Cardiac imaging hub →
@@ -176,6 +192,8 @@ export default async function SpecialtyStateLocumPage({
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
             <ContentSections sections={content.sections} />
+
+            <LatticeUpLinks specialtySlug={specialtySlug} specialtyName={specialtyName} />
 
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>

@@ -224,6 +224,10 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
         q: "Can imaging locums be remote?",
         a: "Some read pools are remote; on-site stress supervision may still require travel—confirm in the contract.",
       },
+      {
+        q: "Do hospitals hire imaging locums right after fellowship?",
+        a: "When Level II/III credentials and logs are current. Imaging is often a first-attending locums path because it is not STEMI-primary.",
+      },
     ],
   },
   {
