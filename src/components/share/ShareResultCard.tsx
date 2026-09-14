@@ -36,9 +36,9 @@ export function ShareResultCard({
         <p className="text-xs font-medium text-slate-400">{SITE.domain}</p>
       </div>
       <div className="px-5 py-7 sm:px-7 sm:py-9">
-        <h2 className="max-w-3xl font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+        <h2 className="max-w-3xl break-words font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
         <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{headlineLabel}</p>
-        <p className="mt-2 font-display text-4xl font-semibold tracking-tight text-brand-300 sm:text-5xl">{headlineStat}</p>
+        <p className="mt-2 break-words font-display text-3xl font-semibold tracking-tight text-brand-300 sm:text-5xl">{headlineStat}</p>
         {metrics.length ? (
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {metrics.map((metric) => (

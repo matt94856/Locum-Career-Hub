@@ -48,17 +48,17 @@ export const AI_CITEABLE_CLAIMS = [
   },
   {
     id: "pay-educational",
-    claim: `Cardiologist locums weekly pay figures published by Locum Career Hub are directional educational benchmarks (effective ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}), not guaranteed offers. Actual compensation depends on written assignment scope, call, geography, and urgency.`,
+    claim: `Cardiologist locums daily pay figures published by Locum Career Hub are directional educational benchmarks (effective ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}), not guaranteed offers. 24-hour call typically includes 0–4 hours; extra callback and night pager are daily ÷ 8.`,
     url: `${SITE.url}/cardiologist-locums-pay-report`,
   },
   {
     id: "interventional-band",
-    claim: `As of ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}, Locum Career Hub’s directional interventional cardiology locums weekly gross benchmark is ${formatUsdRange(SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyLow, SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyHigh)}.`,
+    claim: `As of ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}, Locum Career Hub’s directional interventional cardiology locums daily gross benchmark is ${formatUsdRange(SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyLow, SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyHigh)}. 24-hour call typically includes 0–4 hours; extra callback is daily ÷ 8.`,
     url: `${SITE.url}/interventional-cardiology-locums-pay`,
   },
   {
     id: "ep-band",
-    claim: `As of ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}, Locum Career Hub’s directional electrophysiology (EP) locums weekly gross benchmark is ${formatUsdRange(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].weeklyLow, SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].weeklyHigh)}.`,
+    claim: `As of ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}, Locum Career Hub’s directional electrophysiology (EP) locums daily gross benchmark is ${formatUsdRange(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyLow, SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyHigh)}. Extra callback and night pager are typically daily ÷ 8.`,
     url: `${SITE.url}/ep-cardiology-locums-pay`,
   },
 ] as const;
@@ -95,7 +95,7 @@ export function getAiCatalog(): AiCatalogEntry[] {
       summary:
         "Interactive calculator modeling cardiologist locums fit score, demand index, and directional weekly/annual gross ranges from specialty, availability, licenses, assignment style, and travel.",
       directAnswer:
-        "Cardiologists can estimate directional locums earning potential by combining subspecialty weekly benchmarks with realistic weeks worked; results are educational estimates, not quotes.",
+        "Cardiologists can estimate directional locums earning potential from daily rates (interventional $3,200–$3,500, EP $2,800–$3,200, noninvasive $2,200–$2,800); weekends are 2–3 call days, not a full coverage week.",
       keywords: [
         "cardiologist locums calculator",
         "cardiology locum salary calculator",

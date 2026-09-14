@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ASSIGNMENT_STYLES,
   AVAILABILITY_OPTIONS,
+  CALCULATOR_BENCHMARK_EFFECTIVE_DATE,
   calculateLocumsProfile,
   CAREER_GOALS,
   COMPENSATION_OPTIONS,
@@ -25,6 +26,9 @@ import { trackCalculatorEvent, trackGenerateLead } from "@/lib/analytics-events"
 import {
   buildResultShareLandingUrl,
   calculatorLinkedInPost,
+  formatBlockRate,
+  formatBlockRateCompact,
+  formatUsdCompactRange,
   formatUsdRange,
 } from "@/lib/share";
 import { SITE } from "@/lib/site";
@@ -205,20 +209,24 @@ export function CardiologistLocumsCalculator() {
   ];
 
   if (showResults && result && isComplete(answers)) {
-    const weeklyLabel = `${formatUsdRange(result.weeklyLow, result.weeklyHigh)}/wk`;
+    const blockLabel = formatBlockRate(result.blockLow, result.blockHigh, result.blockUnit);
+    const shareStat = formatBlockRateCompact(result.blockLow, result.blockHigh, result.blockUnit);
     const shareUrl = buildResultShareLandingUrl({
       kind: "calc",
-      title: `${answers.specialty} locums profile`,
-      stat: weeklyLabel,
-      subtitle: `Fit ${result.fitScore}/100 · ${formatUsdRange(result.annualLow, result.annualHigh)} annual directional`,
+      title: `${answers.specialty} locums`,
+      stat: shareStat,
+      subtitle: `${result.scheduleLabel} · ${formatUsdCompactRange(result.annualLow, result.annualHigh)}`,
       path: "/cardiologist-locums-calculator",
     });
     const linkedInPost = calculatorLinkedInPost({
       specialty: answers.specialty,
-      weeklyLow: result.weeklyLow,
-      weeklyHigh: result.weeklyHigh,
+      blockLow: result.blockLow,
+      blockHigh: result.blockHigh,
+      blockUnit: result.blockUnit,
+      annualLow: result.annualLow,
+      annualHigh: result.annualHigh,
+      scheduleLabel: result.scheduleLabel,
       fitScore: result.fitScore,
-      shareUrl,
     });
 
     return (
@@ -226,22 +234,22 @@ export function CardiologistLocumsCalculator() {
         <ShareResultCard
           eyebrow="Cardiologist locums earnings"
           title={`${answers.specialty} · ${answers.availability}`}
-          headlineStat={weeklyLabel}
-          headlineLabel="Directional weekly gross"
+          headlineStat={blockLabel}
+          headlineLabel={result.blockUnit === "weekend" ? "Directional weekend gross" : "Directional weekly gross"}
           metrics={[
+            { label: "Daily rate", value: formatUsdRange(result.dailyLow, result.dailyHigh) },
             { label: "Annual range", value: formatUsdRange(result.annualLow, result.annualHigh) },
-            { label: "Fit score", value: `${result.fitScore}/100` },
-            { label: "Demand index", value: `${result.demandScore}/100` },
+            { label: "Schedule", value: result.scheduleLabel },
           ]}
-          footerNote="Screenshot this card. Educational market-intelligence estimate — not a quote or guaranteed offer."
+          footerNote="Screenshot this card. Educational estimate — not a quote. 24-hour days typically include 0–4 hours; extra callback/pager is daily ÷ 8."
         />
 
         <ViralShareKit
           payload={{
             title: "My Cardiologist Locums Profile",
-            text: `My ${answers.specialty} locums profile: ${weeklyLabel} directional weekly range, ${result.fitScore}/100 fit.`,
+            text: `My ${answers.specialty} locums profile: ${blockLabel}, ${result.scheduleLabel}.`,
             url: shareUrl,
-            headlineStat: weeklyLabel,
+            headlineStat: blockLabel,
             toolId: "cardiologist_locums_calculator",
           }}
           linkedInPost={linkedInPost}
@@ -274,11 +282,15 @@ export function CardiologistLocumsCalculator() {
           </div>
 
           <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <h3 className="font-semibold text-slate-950">Compare current career vs locums</h3>
+            <h3 className="font-semibold text-slate-950">How this range was built</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{result.rateNote}</p>
+            <p className="mt-2 text-sm text-slate-600">
+              A 7-day 24-hour coverage week is {formatUsdRange(result.weeklyLow, result.weeklyHigh)} — that is not the weekend package.
+            </p>
             <div className="mt-4 grid gap-4 sm:grid-cols-3">
               <Metric label="Current compensation" value={result.currentCompMidpoint ? `~${formatCurrency(result.currentCompMidpoint)}` : "Not provided"} />
               <Metric label="Locums earning potential" value={formatUsdRange(result.annualLow, result.annualHigh)} />
-              <Metric label="Schedule modeled" value={`${result.annualWeeks} weeks/year`} />
+              <Metric label="Fit score" value={`${result.fitScore}/100`} />
             </div>
             <p className="mt-4 text-sm text-slate-600">
               {answers.careerGoal === "Increase income" && result.incomeIncreasePercent
@@ -310,7 +322,7 @@ export function CardiologistLocumsCalculator() {
           specialty={toLeadSpecialty(answers.specialty)}
           preferredStates={answers.licenses.length ? answers.licenses : ["Florida"]}
           availability={answers.availability}
-          profile={{ answers, result, benchmarkEffectiveDate: "2026-07-21" }}
+          profile={{ answers, result, benchmarkEffectiveDate: CALCULATOR_BENCHMARK_EFFECTIVE_DATE }}
           onUnlocked={() => {
             setPdfUnlocked(true);
             trackGenerateLead("cardiologist_locums_calculator_pdf");
@@ -320,7 +332,7 @@ export function CardiologistLocumsCalculator() {
 
         <DistributionStrip
           shareUrl={shareUrl}
-          hook={`this ${answers.specialty} locums earnings model (${weeklyLabel} directional weekly)`}
+          hook={`this ${answers.specialty} locums model (${blockLabel})`}
           toolId="cardiologist_locums_calculator"
           creatorPitch={`Hi — we built a free cardiologist locums earnings calculator with screenshot-ready weekly ranges and fit scores. Happy to walk your audience or fellowship cohort through a live demo (no job-board spam). Try it: ${SITE.url}/cardiologist-locums-calculator`}
         />

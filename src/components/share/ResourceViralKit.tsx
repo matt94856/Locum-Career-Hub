@@ -2,7 +2,6 @@
 
 import { DistributionStrip } from "@/components/share/DistributionStrip";
 import { ViralShareKit } from "@/components/share/ViralShareKit";
-import { buildResultShareLandingUrl } from "@/lib/share";
 import { SITE } from "@/lib/site";
 
 export function ResourceViralKit({
@@ -16,13 +15,7 @@ export function ResourceViralKit({
   hook: string;
   toolId: string;
 }) {
-  const shareUrl = buildResultShareLandingUrl({
-    kind: "guide",
-    title,
-    stat: "Cardiology guide",
-    subtitle: hook,
-    path,
-  });
+  const shareUrl = `${SITE.url}${path}`;
 
   return (
     <div className="space-y-6">
@@ -33,7 +26,7 @@ export function ResourceViralKit({
           url: shareUrl,
           toolId,
         }}
-        linkedInPost={[title, "", hook, "", `${SITE.url}${path}`].join("\n")}
+        linkedInPost={[title, "", hook].join("\n")}
       />
       <DistributionStrip
         shareUrl={shareUrl}

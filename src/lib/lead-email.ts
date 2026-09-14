@@ -124,13 +124,22 @@ function pFallbackSpecialty(profile: Record<string, unknown>): string {
   return typeof profile.specialty === "string" ? profile.specialty : "Cardiology";
 }
 
+function recruiterNotifyRecipients(): string[] {
+  const recipients = new Set<string>([SITE.email]);
+  const extra = process.env.LEAD_NOTIFY_EMAIL?.trim();
+  if (extra) recipients.add(extra);
+  return [...recipients];
+}
+
 /** Notify recruiter inbox when a new lead is saved. */
 export async function notifyRecruiterOfLead(p: LeadEmailPayload): Promise<void> {
-  const notifyTo = process.env.LEAD_NOTIFY_EMAIL?.trim() || SITE.email;
-  if (!resendConfigured()) return;
+  if (!resendConfigured()) {
+    console.error("[lead-email] recruiter notify skipped: RESEND_API_KEY is not set");
+    return;
+  }
 
   await sendResendEmail(
-    notifyTo,
+    recruiterNotifyRecipients(),
     p.opportunityTitle
       ? `[Featured job lead] ${p.opportunityTitle}`
       : `[New cardiologist inquiry] ${p.specialty} — ${p.preferredStates[0] ?? "multi-state"}`,
@@ -140,7 +149,10 @@ export async function notifyRecruiterOfLead(p: LeadEmailPayload): Promise<void> 
 
 /** Auto-acknowledgment to the cardiologist after form submit. */
 export async function sendLeadAcknowledgment(p: LeadEmailPayload): Promise<void> {
-  if (!resendConfigured()) return;
+  if (!resendConfigured()) {
+    console.error("[lead-email] candidate acknowledgment skipped: RESEND_API_KEY is not set");
+    return;
+  }
 
   const guideNote = p.leadMagnet
     ? `<p>We will send <strong>The Physician’s Guide to Locum Tenens</strong> to this inbox shortly. Check spam if you do not see it within a few minutes.</p>`

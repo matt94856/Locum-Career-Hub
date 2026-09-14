@@ -20,12 +20,12 @@ const PATH = "/cardiologist-locums-calculator";
 const DESCRIPTION =
   "Calculate cardiologist locums earning potential by subspecialty, availability, licenses, assignment style, and travel preference.";
 const DIRECT_ANSWER =
-  "Cardiologists can estimate directional locums earning potential by combining subspecialty weekly benchmarks with realistic weeks worked. Locum Career Hub’s calculator returns educational gross ranges—not quotes—and recruits MD/DO cardiologists only.";
+  "Cardiologists can estimate directional locums earning potential from recruiter daily rates: interventional $3,200–$3,500, EP $2,800–$3,200, noninvasive $2,200–$2,800. 24-hour call typically includes 0–4 hours; extra callback and night pager are daily ÷ 8. Weekends are 2–3 call days, not a full coverage week.";
 
 const FAQS = [
   {
     q: "How much can a cardiologist make doing locums?",
-    a: "Locum cardiology income varies materially by subspecialty, call burden, procedural scope, assignment length, geography, and urgency. This calculator models a directional gross range from weekly benchmarks and your realistic annual availability; it is not a quote or guaranteed offer.",
+    a: "Locum cardiology income varies by subspecialty, call, and days worked. This calculator starts from daily rates (interventional $3,200–$3,500, EP $2,800–$3,200, noninvasive $2,200–$2,800). A 24-hour day typically includes 0–4 hours; extra callback is daily ÷ 8. A weekend is 2–3 of those days—not a 7-day week.",
   },
   {
     q: "What factors determine cardiology locums pay?",
@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "How much can an interventional cardiologist make doing locums?",
-    a: "Interventional assignments often carry higher directional weekly ranges because cath lab privileges, PCI scope, STEMI call, backup, and post-call expectations add complexity. Actual compensation must be tied to a specific written assignment scope.",
+    a: "Interventional assignments are modeled at $3,200–$3,500 per day. Busy STEMI callback can add more (typically daily ÷ 8 per extra hour). Actual compensation must be tied to a specific written assignment scope.",
   },
   {
     q: "Does IMLC status mean I can practice in every compact state?",
@@ -72,7 +72,7 @@ export default function CardiologistLocumsCalculatorPage() {
           path: PATH,
           applicationCategory: "HealthApplication",
           featureList: [
-            "Specialty-specific weekly benchmarks",
+            "Specialty-specific daily rates",
             "Fit score and demand index",
             "Screenshot-ready share card",
             "Educational ranges only — not guaranteed offers",
@@ -117,9 +117,9 @@ export default function CardiologistLocumsCalculatorPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Methodology</p>
               <h2 className="mt-3 font-display text-3xl font-semibold text-slate-950">Transparent assumptions, not a black box</h2>
               <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                The calculator uses versioned weekly cardiology locums benchmarks, directional specialty demand,
-                assignment scope, experience, availability, licenses, IMLC pathway status, and geographic flexibility.
-                Multipliers are capped to prevent unrealistic compounding.
+                The calculator uses recruiter daily rates, then multiplies by the days in your selected block. 24-hour
+                call days typically include 0–4 hours; extra callback and night pager are daily ÷ 8. A weekend is 2–3
+                call days. A 7-day coverage week is 7 × the daily rate—not the weekend package.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-slate-600">
                 Effective {CALCULATOR_BENCHMARK_EFFECTIVE_DATE}. These are configurable educational benchmarks—not
@@ -136,8 +136,8 @@ export default function CardiologistLocumsCalculatorPage() {
                 <thead>
                   <tr className="text-xs uppercase tracking-wider text-slate-500">
                     <th className="border-b border-slate-200 px-3 py-3">Specialty</th>
-                    <th className="border-b border-slate-200 px-3 py-3">Weekly benchmark</th>
-                    <th className="border-b border-slate-200 px-3 py-3">Demand index</th>
+                    <th className="border-b border-slate-200 px-3 py-3">Daily rate</th>
+                    <th className="border-b border-slate-200 px-3 py-3">7-day week</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -145,9 +145,11 @@ export default function CardiologistLocumsCalculatorPage() {
                     <tr key={specialty}>
                       <td className="border-b border-slate-100 px-3 py-3 font-medium text-slate-900">{specialty}</td>
                       <td className="border-b border-slate-100 px-3 py-3 text-slate-600">
+                        ${benchmark.dailyLow.toLocaleString()}–${benchmark.dailyHigh.toLocaleString()}
+                      </td>
+                      <td className="border-b border-slate-100 px-3 py-3 text-slate-600">
                         ${benchmark.weeklyLow.toLocaleString()}–${benchmark.weeklyHigh.toLocaleString()}
                       </td>
-                      <td className="border-b border-slate-100 px-3 py-3 text-slate-600">{benchmark.demand}/100</td>
                     </tr>
                   ))}
                 </tbody>

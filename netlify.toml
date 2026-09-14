@@ -43,4 +43,9 @@
 #   RECAPTCHA_SECRET_KEY — server only; if set, submissions must pass verification
 #   Add your Netlify URL (e.g. https://yoursite.netlify.app) and production domain under reCAPTCHA allowed domains.
 #
+# Recruiter lead emails (Resend). Without RESEND_API_KEY the form still saves to Supabase but no email is sent.
+#   RESEND_API_KEY — create at https://resend.com/api-keys (required)
+#   RESEND_FROM_EMAIL — Locum Career Hub <onboarding@resend.dev> until locumcareerhub.com is verified in Resend
+#   LEAD_NOTIFY_EMAIL — mfuller@mplthealthcare.com
+#
 # Optional: NEXT_PUBLIC_SUPABASE_ANON_KEY (if you add client-side Supabase later), NEXT_PUBLIC_CALENDLY_URL (required for Calendly buttons—no default in repo)

@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics-events";
-import { colleagueForwardBlurb } from "@/lib/share";
+import { colleagueForwardBlurb, composeShareCopy } from "@/lib/share";
+import { ShareLinkChip } from "@/components/share/ShareLinkChip";
 
 type Props = {
   shareUrl: string;
   hook: string;
   toolId?: string;
-  /** Extra outreach / creator pitch */
   creatorPitch?: string;
 };
 
@@ -19,7 +19,8 @@ export function DistributionStrip({
   creatorPitch = "Happy to offer a free cardiology locums pay/fit walkthrough for your audience or fellowship cohort — no job-board spam.",
 }: Props) {
   const [copied, setCopied] = useState<"colleague" | "creator" | null>(null);
-  const colleague = colleagueForwardBlurb(shareUrl, hook);
+  const colleagueBody = colleagueForwardBlurb(shareUrl, hook);
+  const colleague = composeShareCopy(colleagueBody, shareUrl);
 
   async function copy(text: string, kind: "colleague" | "creator") {
     await navigator.clipboard.writeText(text);
@@ -40,23 +41,26 @@ export function DistributionStrip({
         Forward to a cardiology colleague, or paste a short creator / fellowship outreach note. One personal share beats a month of thin pages.
       </p>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4">
           <div className="flex items-center justify-between gap-2">
             <p className="text-sm font-semibold text-slate-900">Colleague forward</p>
             <button type="button" onClick={() => void copy(colleague, "colleague")} className="text-xs font-semibold text-brand-700 hover:underline">
               {copied === "colleague" ? "Copied" : "Copy"}
             </button>
           </div>
-          <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-600">{colleague}</pre>
+          <p className="mt-3 text-sm leading-6 text-slate-600">{colleagueBody}</p>
+          <div className="mt-3 max-w-full">
+            <ShareLinkChip url={shareUrl} />
+          </div>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+        <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4">
           <div className="flex items-center justify-between gap-2">
             <p className="text-sm font-semibold text-slate-900">Creator / ACC / fellowship DM</p>
             <button type="button" onClick={() => void copy(creatorPitch, "creator")} className="text-xs font-semibold text-brand-700 hover:underline">
               {copied === "creator" ? "Copied" : "Copy"}
             </button>
           </div>
-          <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-600">{creatorPitch}</pre>
+          <p className="mt-3 break-words text-sm leading-6 text-slate-600">{creatorPitch}</p>
         </div>
       </div>
     </section>

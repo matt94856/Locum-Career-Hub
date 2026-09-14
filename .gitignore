@@ -54,3 +54,6 @@ seo-memory/**/__pycache__/
 
 # vercel
 .vercel
+
+# Local Netlify folder
+.netlify

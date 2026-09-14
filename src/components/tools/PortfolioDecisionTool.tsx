@@ -108,7 +108,6 @@ function Results({
   const linkedInPost = toolLinkedInPost({
     toolName: definition.shortName,
     headline: result.headline,
-    shareUrl,
   });
 
   return (

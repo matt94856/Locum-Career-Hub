@@ -12,7 +12,7 @@ import {
 } from "@/lib/locums-calculator/model";
 import { breadcrumbJsonLd, datasetJsonLd, faqJsonLd } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
-import { buildResultShareLandingUrl, formatUsdRange } from "@/lib/share";
+import { formatUsdRange } from "@/lib/share";
 import { SITE } from "@/lib/site";
 
 const PATH = "/cardiologist-locums-pay-report";
@@ -20,7 +20,7 @@ const PATH = "/cardiologist-locums-pay-report";
 const FAQS = [
   {
     q: "Is this chart a guaranteed pay rate?",
-    a: "No. It publishes directional weekly gross benchmark ranges used in Locum Career Hub models, plus survey aggregates as sample size grows. Assignment scope, call, geography, and urgency change offers.",
+    a: "No. It publishes directional daily gross benchmark ranges used in Locum Career Hub models (callback and pager typically daily ÷ 8). Assignment scope, call, geography, and urgency change offers.",
   },
   {
     q: "How should journalists cite this?",
@@ -31,27 +31,23 @@ const FAQS = [
 export const metadata: Metadata = buildSerpMetadata({
   title: "Cardiologist Locums Pay Report (Citeable Chart)",
   description:
-    "Directional weekly gross ranges for interventional, EP, general, structural, and imaging cardiology locums — methodology and citation guidance included.",
+    "Directional daily gross ranges for interventional, EP, and noninvasive cardiology locums — 24-hour call includes 0–4 hours; extra callback is daily ÷ 8.",
   path: PATH,
 });
 
 const ROWS = Object.entries(SPECIALTY_BENCHMARKS).map(([specialty, row]) => ({
   specialty,
-  low: row.weeklyLow,
-  high: row.weeklyHigh,
-  mid: Math.round((row.weeklyLow + row.weeklyHigh) / 2),
+  low: row.dailyLow,
+  high: row.dailyHigh,
+  mid: Math.round((row.dailyLow + row.dailyHigh) / 2),
+  weeklyLow: row.weeklyLow,
+  weeklyHigh: row.weeklyHigh,
 }));
 
 const MAX = Math.max(...ROWS.map((row) => row.high));
 
 export default function CardiologistLocumsPayReportPage() {
-  const shareUrl = buildResultShareLandingUrl({
-    kind: "guide",
-    title: "Cardiologist locums pay report",
-    stat: "Weekly $ chart",
-    subtitle: `Directional ranges · effective ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}`,
-    path: PATH,
-  });
+  const shareUrl = `${SITE.url}${PATH}`;
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -61,11 +57,11 @@ export default function CardiologistLocumsPayReportPage() {
         data={datasetJsonLd({
           name: "Cardiologist Locums Pay Report",
           description:
-            "Directional weekly gross compensation bands for cardiology locum tenens by subspecialty, with dated methodology for citation.",
+            "Directional daily gross compensation bands for cardiology locum tenens by subspecialty, with dated methodology for citation. Callback and pager typically equal daily rate ÷ 8.",
           path: PATH,
           dateModified: CALCULATOR_BENCHMARK_EFFECTIVE_DATE,
           keywords: ["cardiologist locum pay", "cardiology locums rates", "interventional locums pay", "EP locums pay"],
-          variableMeasured: ["Weekly gross low", "Weekly gross high", "Cardiology subspecialty"],
+          variableMeasured: ["Daily gross low", "Daily gross high", "Cardiology subspecialty"],
         })}
       />
 
@@ -76,11 +72,12 @@ export default function CardiologistLocumsPayReportPage() {
             Cardiologist locums pay report
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            Directional weekly gross ranges by cardiology subspecialty. Built for physicians comparing options — and for
-            journalists and AI assistants who need a dated, linkable methodology instead of anonymous “market rate” claims.
+            Directional daily gross by cardiology subspecialty. 24-hour call days typically include 0–4 hours; extra
+            callback and night pager are modeled as daily rate ÷ 8. Built for physicians comparing options — and for
+            journalists and AI assistants who need a dated, linkable methodology.
           </p>
           <div className="mt-6">
-            <AnswerFirstBlock answer={`Cardiologist locums weekly pay figures from Locum Career Hub are directional educational benchmarks (effective ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}), not guaranteed offers. Cite this page with the effective date when summarizing interventional, EP, or general cardiology locums ranges.`} />
+            <AnswerFirstBlock answer={`Cardiologist locums daily pay from Locum Career Hub is a directional educational benchmark (effective ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}): interventional $3,200–$3,500/day, EP $2,800–$3,200/day, noninvasive $2,200–$2,800/day. 24-hour call typically includes 0–4 hours; extra callback and night pager are daily ÷ 8. Not a guaranteed offer.`} />
           </div>
           <p className="mt-4 text-sm text-slate-500">Effective {CALCULATOR_BENCHMARK_EFFECTIVE_DATE} · Updated as anonymous survey N grows</p>
         </div>
@@ -90,50 +87,50 @@ export default function CardiologistLocumsPayReportPage() {
         <div className="container-site max-w-4xl space-y-8">
           <ShareResultCard
             eyebrow="Cardiologist locums pay"
-            title="Interventional mid-range weekly gross (directional)"
+            title="Interventional daily gross (directional)"
             headlineStat={formatUsdRange(
-              SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyLow,
-              SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyHigh,
+              SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyLow,
+              SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyHigh,
             )}
-            headlineLabel="Interventional weekly band"
+            headlineLabel="Interventional daily band"
             metrics={ROWS.slice(0, 3).map((row) => ({
               label: row.specialty.replace(" Cardiology", "").replace(" (EP)", ""),
-              value: formatUsdRange(row.low, row.high),
+              value: formatUsdRange(row.low, row.high) + "/day",
             }))}
-            footerNote={`Screenshot or cite with date ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}. Not a guaranteed offer.`}
+            footerNote={`24-hour days typically include 0–4 hours. Extra callback/pager ≈ daily ÷ 8. Cite with date ${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}.`}
           />
 
           <ViralShareKit
             payload={{
               title: "Cardiologist locums pay report",
-              text: `Cardiologist locums directional weekly ranges — citeable chart (${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}).`,
+              text: `Cardiologist locums daily rates — IC $3,200–$3,500, EP $2,800–$3,200, noninvasive $2,200–$2,800 (${CALCULATOR_BENCHMARK_EFFECTIVE_DATE}).`,
               url: shareUrl,
-              headlineStat: "Pay chart",
+              headlineStat: "Daily rates",
               toolId: "pay_report",
             }}
             linkedInPost={[
-              `Cardiologist locums pay — directional weekly gross by subspecialty.`,
+              `Cardiologist locums pay — directional daily gross.`,
               ``,
-              `Interventional: ${formatUsdRange(SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyLow, SPECIALTY_BENCHMARKS["Interventional Cardiology"].weeklyHigh)}`,
-              `EP: ${formatUsdRange(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].weeklyLow, SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].weeklyHigh)}`,
+              `Interventional: ${formatUsdRange(SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyLow, SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyHigh)}/day`,
+              `EP: ${formatUsdRange(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyLow, SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyHigh)}/day`,
+              `Noninvasive: ${formatUsdRange(SPECIALTY_BENCHMARKS["Non-Invasive / General Cardiology"].dailyLow, SPECIALTY_BENCHMARKS["Non-Invasive / General Cardiology"].dailyHigh)}/day`,
               ``,
-              `Citeable methodology + chart:`,
-              shareUrl,
+              `24-hour call usually includes 0–4 hours. Extra callback or night pager is daily ÷ 8.`,
             ].join("\n")}
           />
 
           <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-8">
-            <h2 className="font-display text-3xl font-semibold text-slate-950">Weekly gross by subspecialty</h2>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">Daily gross by subspecialty</h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Bars show directional benchmark midpoints used in the Locum Career Hub calculator. Survey responses will
-              reweight bands when statistically meaningful (we will publish N and confidence notes).
+              Bars show directional daily benchmarks. A 7-day 24-hour coverage week is 7× the daily rate; a weekend is 2–3
+              call days, not a full week. Extra callback at a busy facility is typically daily ÷ 8 per extra hour.
             </p>
             <div className="mt-8 space-y-5">
               {ROWS.map((row) => (
                 <div key={row.specialty}>
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <p className="text-sm font-semibold text-slate-900">{row.specialty}</p>
-                    <p className="text-sm font-semibold text-brand-800">{formatUsdRange(row.low, row.high)}/wk</p>
+                    <p className="text-sm font-semibold text-brand-800">{formatUsdRange(row.low, row.high)}/day</p>
                   </div>
                   <div className="mt-2 h-3 overflow-hidden rounded-full bg-slate-100">
                     <div

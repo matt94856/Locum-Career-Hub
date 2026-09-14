@@ -6,7 +6,6 @@ import { ViralShareKit } from "@/components/share/ViralShareKit";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
-import { buildResultShareLandingUrl } from "@/lib/share";
 import { SITE } from "@/lib/site";
 
 const PATH = "/cardiologist-locums-pay-survey";
@@ -19,13 +18,7 @@ export const metadata: Metadata = buildSerpMetadata({
 });
 
 export default function CardiologistLocumsPaySurveyPage() {
-  const shareUrl = buildResultShareLandingUrl({
-    kind: "survey",
-    title: "Cardiologist locums pay survey",
-    stat: "90 seconds",
-    subtitle: "Anonymous weekly ranges → citeable public chart",
-    path: PATH,
-  });
+  const shareUrl = `${SITE.url}${PATH}`;
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -65,7 +58,6 @@ export default function CardiologistLocumsPaySurveyPage() {
               "Cardiologists: if you've done locums, this anonymous 90-second pay survey is worth it.",
               "",
               "Aggregates only — building a citeable cardiology locums pay chart.",
-              shareUrl,
             ].join("\n")}
           />
           <DistributionStrip

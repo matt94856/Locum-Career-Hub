@@ -1,4 +1,4 @@
-export const CALCULATOR_BENCHMARK_EFFECTIVE_DATE = "2026-07-21";
+export const CALCULATOR_BENCHMARK_EFFECTIVE_DATE = "2026-09-14";
 
 export const SPECIALTIES = [
   "Interventional Cardiology",
@@ -32,15 +32,30 @@ export type CalculatorAnswers = {
   careerGoal: (typeof CAREER_GOALS)[number];
 };
 
+export type CalculatorBlockUnit = "weekend" | "week";
+export type CallModel = "24h" | "pager" | "none";
+
 export type CalculatorResult = {
   demandScore: number;
   fitScore: number;
   opportunityAccessScore: number;
   annualLow: number;
   annualHigh: number;
+  dailyLow: number;
+  dailyHigh: number;
+  callbackHourlyLow: number;
+  callbackHourlyHigh: number;
+  /** 7-day 24-hour coverage week (daily × 7), for comparing full blocks — not a weekend. */
   weeklyLow: number;
   weeklyHigh: number;
+  blockLow: number;
+  blockHigh: number;
+  blockUnit: CalculatorBlockUnit;
+  blocksPerYear: number;
+  scheduleLabel: string;
   annualWeeks: number;
+  callModel: CallModel;
+  rateNote: string;
   confidence: "Foundational" | "Good" | "Strong";
   advantages: string[];
   matchedOpportunities: string[];
@@ -51,19 +66,33 @@ export type CalculatorResult = {
 
 type SpecialtyBenchmark = {
   demand: number;
+  dailyLow: number;
+  dailyHigh: number;
   weeklyLow: number;
   weeklyHigh: number;
   match: string;
 };
 
+function band(dailyLow: number, dailyHigh: number, demand: number, match: string): SpecialtyBenchmark {
+  return {
+    demand,
+    dailyLow,
+    dailyHigh,
+    weeklyLow: dailyLow * 7,
+    weeklyHigh: dailyHigh * 7,
+    match,
+  };
+}
+
+/** Recruiter-sourced daily gross. Callback and night pager are daily ÷ 8. */
 export const SPECIALTY_BENCHMARKS: Record<CalculatorAnswers["specialty"], SpecialtyBenchmark> = {
-  "Interventional Cardiology": { demand: 95, weeklyLow: 19000, weeklyHigh: 28000, match: "Cath lab and interventional coverage" },
-  "Electrophysiology (EP)": { demand: 91, weeklyLow: 18000, weeklyHigh: 26000, match: "EP lab, ablation, and device coverage" },
-  "Non-Invasive / General Cardiology": { demand: 85, weeklyLow: 12000, weeklyHigh: 18000, match: "Consult, clinic, rounding, and imaging coverage" },
-  "Structural Heart": { demand: 89, weeklyLow: 20000, weeklyHigh: 30000, match: "Structural heart and valve-program coverage" },
-  "Advanced Heart Failure": { demand: 87, weeklyLow: 14000, weeklyHigh: 21000, match: "Advanced heart failure consult coverage" },
-  "Nuclear Cardiology": { demand: 82, weeklyLow: 13000, weeklyHigh: 19000, match: "Nuclear cardiology and stress-lab coverage" },
-  "Cardiac Imaging": { demand: 86, weeklyLow: 14000, weeklyHigh: 22000, match: "Echo, CT, MRI, and read coverage" },
+  "Interventional Cardiology": band(3200, 3500, 95, "Cath lab and interventional coverage"),
+  "Electrophysiology (EP)": band(2800, 3200, 91, "EP lab, ablation, and device coverage"),
+  "Non-Invasive / General Cardiology": band(2200, 2800, 85, "Consult, clinic, rounding, and imaging coverage"),
+  "Structural Heart": band(3200, 3500, 89, "Structural heart and valve-program coverage"),
+  "Advanced Heart Failure": band(2200, 2800, 87, "Advanced heart failure consult coverage"),
+  "Nuclear Cardiology": band(2200, 2800, 82, "Nuclear cardiology and stress-lab coverage"),
+  "Cardiac Imaging": band(2200, 2800, 86, "Echo, CT, MRI, and read coverage"),
 };
 
 export function toLeadSpecialty(specialty: CalculatorAnswers["specialty"]): string {
@@ -79,36 +108,15 @@ export function toLeadSpecialty(specialty: CalculatorAnswers["specialty"]): stri
   return mapping[specialty];
 }
 
-const WEEKS_BY_AVAILABILITY: Record<CalculatorAnswers["availability"], number> = {
-  "1 weekend per month": 5.4,
-  "1 week per month": 12,
-  "2 weeks per month": 24,
-  "3+ weeks per month": 36,
-  "Full-time locums": 46,
-};
-
-const EXPERIENCE_MULTIPLIER: Record<CalculatorAnswers["experience"], number> = {
-  "Current Fellow": 0.78,
-  "0-5 years": 0.95,
-  "6-10 years": 1,
-  "11-20 years": 1.04,
-  "20+ years": 1,
-};
-
-const STYLE_MULTIPLIER: Record<CalculatorAnswers["assignmentStyle"], number> = {
-  "Weekend call coverage": 1.08,
-  "Weekday coverage": 1,
-  "Clinic only": 0.88,
-  "Inpatient rounding": 0.96,
-  "Cath lab / procedural coverage": 1.12,
-  Flexible: 1.03,
-};
-
-const TRAVEL_MULTIPLIER: Record<CalculatorAnswers["travelPreference"], number> = {
-  "Local assignments only": 0.96,
-  "Within my region": 1,
-  "Anywhere in the United States": 1.06,
-  "Internationally interested": 1,
+const AVAILABILITY_MODEL: Record<
+  CalculatorAnswers["availability"],
+  { blocksPerYear: number; unit: CalculatorBlockUnit; scheduleLabel: string }
+> = {
+  "1 weekend per month": { blocksPerYear: 12, unit: "weekend", scheduleLabel: "12 weekends/year" },
+  "1 week per month": { blocksPerYear: 12, unit: "week", scheduleLabel: "12 weeks/year" },
+  "2 weeks per month": { blocksPerYear: 24, unit: "week", scheduleLabel: "24 weeks/year" },
+  "3+ weeks per month": { blocksPerYear: 36, unit: "week", scheduleLabel: "36 weeks/year" },
+  "Full-time locums": { blocksPerYear: 46, unit: "week", scheduleLabel: "46 weeks/year" },
 };
 
 const COMP_MIDPOINT: Record<CalculatorAnswers["currentCompensation"], number | null> = {
@@ -123,12 +131,62 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function roundToThousand(value: number): number {
-  return Math.round(value / 1000) * 1000;
+function roundToHundred(value: number): number {
+  return Math.round(value / 100) * 100;
+}
+
+export function callbackFromDaily(daily: number): number {
+  return daily / 8;
+}
+
+function experienceFactor(experience: CalculatorAnswers["experience"]): number {
+  if (experience === "Current Fellow") return 0.95;
+  if (experience === "0-5 years") return 0.98;
+  return 1;
+}
+
+function callModelFor(answers: CalculatorAnswers): CallModel {
+  if (answers.availability === "1 weekend per month") return "24h";
+  if (answers.assignmentStyle === "Clinic only") return "none";
+  if (answers.assignmentStyle === "Weekday coverage") return "pager";
+  return "24h";
+}
+
+function coverageDays(answers: CalculatorAnswers, callModel: CallModel): { low: number; high: number } {
+  if (answers.availability === "1 weekend per month") return { low: 2, high: 3 };
+  if (callModel === "none" || callModel === "pager") return { low: 5, high: 5 };
+  return { low: 7, high: 7 };
+}
+
+function extraCallbackHours(answers: CalculatorAnswers, callModel: CallModel): number {
+  if (callModel !== "24h") return 0;
+  const busy =
+    answers.travelPreference === "Anywhere in the United States" ||
+    answers.assignmentStyle === "Cath lab / procedural coverage" ||
+    answers.assignmentStyle === "Weekend call coverage";
+  if (answers.availability === "1 weekend per month") return busy ? 4 : 2;
+  return busy ? 8 : 4;
+}
+
+function pagerNightsHigh(callModel: CallModel): number {
+  return callModel === "pager" ? 5 : 0;
+}
+
+function rateNoteFor(callModel: CallModel, dailyLow: number, dailyHigh: number): string {
+  const cb = `${roundToHundred(callbackFromDaily(dailyLow))}–${roundToHundred(callbackFromDaily(dailyHigh))}`;
+  if (callModel === "24h") {
+    return `24-hour call days are modeled at the daily rate (typically includes 0–4 hours). Extra callback is about ${cb}/hr (daily ÷ 8). Busy facilities can add more callback.`;
+  }
+  if (callModel === "pager") {
+    return `Weekdays use the daily rate. Night pager, when used, is a one-time add of about ${cb} (daily ÷ 8) on top of the day rate.`;
+  }
+  return "Clinic-only days use the daily rate with no 24-hour call or pager modeled.";
 }
 
 function fitNarrative(answers: CalculatorAnswers, benchmark: SpecialtyBenchmark): Pick<CalculatorResult, "advantages" | "matchedOpportunities" | "unlocks"> {
-  const advantages = [`${answers.specialty} has a ${benchmark.demand}/100 directional demand index`];
+  const advantages = [
+    `${answers.specialty} directional daily gross is $${benchmark.dailyLow.toLocaleString()}–$${benchmark.dailyHigh.toLocaleString()}`,
+  ];
   if (answers.licenses.length >= 3) advantages.push(`${answers.licenses.length} active licenses broaden your immediate assignment footprint`);
   if (answers.availability === "2 weeks per month" || answers.availability === "3+ weeks per month" || answers.availability === "Full-time locums") {
     advantages.push("Your availability supports common recurring coverage blocks");
@@ -137,7 +195,7 @@ function fitNarrative(answers: CalculatorAnswers, benchmark: SpecialtyBenchmark)
   if (answers.assignmentStyle === "Flexible") advantages.push("Flexible assignment scope creates more ways to match your schedule");
 
   const matchedOpportunities = [benchmark.match];
-  if (answers.availability === "1 weekend per month") matchedOpportunities.push("Recurring weekend coverage");
+  if (answers.availability === "1 weekend per month") matchedOpportunities.push("Recurring weekend 24-hour coverage");
   if (answers.travelPreference === "Local assignments only") matchedOpportunities.push("Local or drive-to coverage blocks");
   else matchedOpportunities.push("Travel-based temporary coverage");
   if (answers.practiceType === "Semi-retired" || answers.practiceType === "Retired but active") matchedOpportunities.push("Lower-frequency retirement-bridge assignments");
@@ -147,28 +205,36 @@ function fitNarrative(answers: CalculatorAnswers, benchmark: SpecialtyBenchmark)
   if (answers.imlcStatus === "No") unlocks.push("If eligible, the IMLC pathway may shorten the process of obtaining additional state licenses");
   if (answers.imlcStatus === "Unsure") unlocks.push("Confirming IMLC eligibility can make multi-state planning more predictable");
   if (answers.travelPreference === "Local assignments only") unlocks.push("Expanding to regional travel would increase the number of realistic coverage models");
-  if (answers.availability === "1 weekend per month") unlocks.push("Adding one weekday block per quarter can unlock clinic and procedural assignments");
+  if (answers.availability === "1 weekend per month") unlocks.push("Adding a weekday block uses the daily rate for clinic or rounding days — a different product than a 24-hour weekend");
 
   return { advantages: advantages.slice(0, 4), matchedOpportunities: matchedOpportunities.slice(0, 4), unlocks: unlocks.slice(0, 3) };
 }
 
 export function calculateLocumsProfile(answers: CalculatorAnswers): CalculatorResult {
   const benchmark = SPECIALTY_BENCHMARKS[answers.specialty];
-  const annualWeeks = WEEKS_BY_AVAILABILITY[answers.availability];
-  const combinedMultiplier = clamp(
-    EXPERIENCE_MULTIPLIER[answers.experience] *
-      STYLE_MULTIPLIER[answers.assignmentStyle] *
-      TRAVEL_MULTIPLIER[answers.travelPreference],
-    0.72,
-    1.24,
+  const availability = AVAILABILITY_MODEL[answers.availability];
+  const callModel = callModelFor(answers);
+  const factor = experienceFactor(answers.experience);
+  const dailyLow = roundToHundred(benchmark.dailyLow * factor);
+  const dailyHigh = roundToHundred(benchmark.dailyHigh * factor);
+  const callbackHourlyLow = callbackFromDaily(dailyLow);
+  const callbackHourlyHigh = callbackFromDaily(dailyHigh);
+  const days = coverageDays(answers, callModel);
+  const extraHours = extraCallbackHours(answers, callModel);
+  const pagerHigh = pagerNightsHigh(callModel);
+
+  const blockLow = roundToHundred(days.low * dailyLow);
+  const blockHigh = roundToHundred(
+    days.high * dailyHigh + extraHours * callbackHourlyHigh + pagerHigh * callbackHourlyHigh,
   );
+  const annualLow = roundToHundred(blockLow * availability.blocksPerYear);
+  const annualHigh = roundToHundred(blockHigh * availability.blocksPerYear);
+  const weeklyLow = roundToHundred(dailyLow * 7);
+  const weeklyHigh = roundToHundred(dailyHigh * 7);
+  const annualWeeks =
+    availability.unit === "weekend" ? Math.round(((days.low + days.high) / 2) * (12 / 7) * 10) / 10 : availability.blocksPerYear;
 
-  const weeklyLow = roundToThousand(benchmark.weeklyLow * combinedMultiplier);
-  const weeklyHigh = roundToThousand(benchmark.weeklyHigh * combinedMultiplier);
-  const annualLow = roundToThousand(weeklyLow * annualWeeks);
-  const annualHigh = roundToThousand(weeklyHigh * annualWeeks);
-
-  const availabilityScore = annualWeeks >= 24 ? 15 : annualWeeks >= 12 ? 11 : 7;
+  const availabilityScore = availability.blocksPerYear >= 24 && availability.unit === "week" ? 15 : availability.blocksPerYear >= 12 && availability.unit === "week" ? 11 : 7;
   const licenseScore = clamp(answers.licenses.length * 3, 0, 12);
   const travelScore = answers.travelPreference === "Anywhere in the United States" ? 10 : answers.travelPreference === "Within my region" ? 7 : 4;
   const imlcScore = answers.imlcStatus === "Yes" ? 8 : answers.imlcStatus === "Unsure" ? 4 : 2;
@@ -186,9 +252,20 @@ export function calculateLocumsProfile(answers: CalculatorAnswers): CalculatorRe
     opportunityAccessScore,
     annualLow,
     annualHigh,
+    dailyLow,
+    dailyHigh,
+    callbackHourlyLow: roundToHundred(callbackHourlyLow),
+    callbackHourlyHigh: roundToHundred(callbackHourlyHigh),
     weeklyLow,
     weeklyHigh,
+    blockLow,
+    blockHigh: Math.max(blockHigh, blockLow + 100),
+    blockUnit: availability.unit,
+    blocksPerYear: availability.blocksPerYear,
+    scheduleLabel: availability.scheduleLabel,
     annualWeeks,
+    callModel,
+    rateNote: rateNoteFor(callModel, dailyLow, dailyHigh),
     confidence: answers.licenses.length >= 2 && answers.imlcStatus !== "Unsure" ? "Strong" : answers.licenses.length >= 1 ? "Good" : "Foundational",
     currentCompMidpoint,
     incomeIncreasePercent,

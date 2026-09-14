@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateLocumsProfile, type CalculatorAnswers } from "./model";
+import { calculateLocumsProfile, callbackFromDaily, SPECIALTY_BENCHMARKS, type CalculatorAnswers } from "./model";
 
 const base: CalculatorAnswers = {
   specialty: "Non-Invasive / General Cardiology",
@@ -24,6 +24,17 @@ describe("calculateLocumsProfile", () => {
     expect(result.weeklyHigh).toBeGreaterThan(result.weeklyLow);
     expect(result.annualHigh).toBeGreaterThan(result.annualLow);
     expect(calculateLocumsProfile(base)).toEqual(result);
+  });
+
+  it("uses recruiter daily bands and daily ÷ 8 for callback", () => {
+    expect(SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyLow).toBe(3200);
+    expect(SPECIALTY_BENCHMARKS["Interventional Cardiology"].dailyHigh).toBe(3500);
+    expect(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyLow).toBe(2800);
+    expect(SPECIALTY_BENCHMARKS["Electrophysiology (EP)"].dailyHigh).toBe(3200);
+    expect(SPECIALTY_BENCHMARKS["Non-Invasive / General Cardiology"].dailyLow).toBe(2200);
+    expect(SPECIALTY_BENCHMARKS["Non-Invasive / General Cardiology"].dailyHigh).toBe(2800);
+    expect(callbackFromDaily(3200)).toBe(400);
+    expect(callbackFromDaily(3500)).toBe(437.5);
   });
 
   it("uses realistic annual availability instead of multiplying by 52", () => {
@@ -55,16 +66,41 @@ describe("calculateLocumsProfile", () => {
     expect(privateResult.incomeIncreasePercent).toBeNull();
   });
 
-  it("keeps aggressive procedural and travel multipliers capped", () => {
+  it("prices an IC weekend as 2–3 call days, not a 7-day coverage week", () => {
+    const weekend = calculateLocumsProfile({
+      ...base,
+      specialty: "Interventional Cardiology",
+      availability: "1 weekend per month",
+      assignmentStyle: "Weekend call coverage",
+    });
+    const week = calculateLocumsProfile({
+      ...base,
+      specialty: "Interventional Cardiology",
+      availability: "1 week per month",
+      assignmentStyle: "Cath lab / procedural coverage",
+    });
+    expect(weekend.blockUnit).toBe("weekend");
+    expect(weekend.callModel).toBe("24h");
+    expect(weekend.blockLow).toBe(6400);
+    expect(weekend.blockHigh).toBeLessThanOrEqual(13000);
+    expect(weekend.blockHigh).toBeLessThan(week.weeklyLow);
+    expect(week.weeklyLow).toBe(22400);
+    expect(week.weeklyHigh).toBe(24500);
+    expect(week.blockUnit).toBe("week");
+    expect(weekend.annualHigh).toBe(weekend.blockHigh * 12);
+  });
+
+  it("keeps a 7-day IC coverage week in a recruiter-realistic band", () => {
     const result = calculateLocumsProfile({
       ...base,
-      specialty: "Structural Heart",
+      specialty: "Interventional Cardiology",
       experience: "11-20 years",
       availability: "Full-time locums",
       assignmentStyle: "Cath lab / procedural coverage",
       travelPreference: "Anywhere in the United States",
     });
-    expect(result.weeklyHigh).toBeLessThanOrEqual(37200);
+    expect(result.weeklyHigh).toBeLessThanOrEqual(26000);
+    expect(result.blockHigh).toBeGreaterThan(result.weeklyHigh);
     expect(result.fitScore).toBeLessThanOrEqual(98);
   });
 });

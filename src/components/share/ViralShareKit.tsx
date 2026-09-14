@@ -2,21 +2,19 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics-events";
-import {
-  linkedInShareUrl,
-  xShareUrl,
-  type SharePayload,
-} from "@/lib/share";
+import { composeShareCopy, linkedInShareUrl, xShareUrl, type SharePayload } from "@/lib/share";
+import { ShareLinkChip } from "@/components/share/ShareLinkChip";
 
 type Props = {
   payload: SharePayload;
   linkedInPost?: string;
-  /** Extra class on the outer wrapper */
   className?: string;
 };
 
 export function ViralShareKit({ payload, linkedInPost, className = "" }: Props) {
   const [copied, setCopied] = useState<"link" | "post" | null>(null);
+  const postBody = linkedInPost?.trim() ?? payload.text;
+  const postWithLink = composeShareCopy(postBody, payload.url);
 
   async function copy(text: string, kind: "link" | "post") {
     try {
@@ -43,7 +41,7 @@ export function ViralShareKit({ payload, linkedInPost, className = "" }: Props) 
       await navigator.share({ title: payload.title, text: payload.text, url: payload.url }).catch(() => undefined);
       return;
     }
-    await copy(`${payload.text}\n${payload.url}`, "link");
+    await copy(postWithLink, "link");
   }
 
   function openLinkedIn() {
@@ -65,63 +63,68 @@ export function ViralShareKit({ payload, linkedInPost, className = "" }: Props) 
   }
 
   return (
-    <div className={`rounded-3xl border border-slate-200 bg-white p-5 sm:p-6 print:hidden ${className}`}>
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-700">Share this result</p>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
-            Numbers stay visible — screenshot the card above, or post with a LinkedIn preview that includes your range.
-          </p>
-        </div>
+    <div className={`overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm print:hidden ${className}`}>
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-brand-950 px-5 py-5 text-white sm:px-6">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-300">Ready to share</p>
+        <p className="mt-2 max-w-xl text-sm leading-6 text-slate-200">
+          A short preview for LinkedIn, texts, and DMs. The link wraps on a phone instead of running off the screen.
+        </p>
         {payload.headlineStat ? (
-          <span className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white">{payload.headlineStat}</span>
+          <p className="mt-3 inline-flex max-w-full break-words rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-brand-200">
+            {payload.headlineStat}
+          </p>
         ) : null}
       </div>
-      <div className="mt-5 flex flex-wrap gap-2">
-        <button
-          type="button"
-          onClick={openLinkedIn}
-          className="min-h-11 rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
-        >
-          Share on LinkedIn
-        </button>
-        <button
-          type="button"
-          onClick={() => void nativeShare()}
-          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-        >
-          Share / copy
-        </button>
-        <button
-          type="button"
-          onClick={openX}
-          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-        >
-          Post on X
-        </button>
-        <button
-          type="button"
-          onClick={() => void copy(payload.url, "link")}
-          className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-        >
-          {copied === "link" ? "Link copied" : "Copy share link"}
-        </button>
-      </div>
-      {linkedInPost ? (
+
+      <div className="p-5 sm:p-6">
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={openLinkedIn}
+            className="min-h-11 rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
+          >
+            Share on LinkedIn
+          </button>
+          <button
+            type="button"
+            onClick={() => void nativeShare()}
+            className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          >
+            Share / copy
+          </button>
+          <button
+            type="button"
+            onClick={openX}
+            className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          >
+            Post on X
+          </button>
+          <button
+            type="button"
+            onClick={() => void copy(payload.url, "link")}
+            className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
+          >
+            {copied === "link" ? "Link copied" : "Copy short link"}
+          </button>
+        </div>
+
         <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Ready-to-post LinkedIn copy</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Post preview</p>
             <button
               type="button"
-              onClick={() => void copy(linkedInPost, "post")}
-              className="text-xs font-semibold text-brand-700 hover:underline"
+              onClick={() => void copy(postWithLink, "post")}
+              className="shrink-0 text-xs font-semibold text-brand-700 hover:underline"
             >
               {copied === "post" ? "Copied" : "Copy post"}
             </button>
           </div>
-          <pre className="mt-3 whitespace-pre-wrap font-sans text-sm leading-6 text-slate-700">{linkedInPost}</pre>
+          <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-800">{postBody}</p>
+          <div className="mt-3 max-w-full">
+            <ShareLinkChip url={payload.url} />
+          </div>
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }
