@@ -120,18 +120,11 @@ export function CardiologyProgrammaticView({ page }: { page: CardiologyProgramma
         </section>
       ) : null}
 
-      <LeadConversionBand
-        headline="Cardiologist inquiry"
-        subline="We recruit cardiologists only—share subspecialty, states, and dates for realistic locum matches."
-      />
+      <LeadConversionBand />
 
       <section className="py-14 sm:py-16">
         <LeadFormStandaloneSection withTrustPanel={false}>
-          <LeadCaptureForm
-            title="Request cardiologist locum matches"
-            subtitle="MD/DO cardiologists only. We follow up with documented options—not a generic blast."
-            defaultSpecialty="General Cardiology"
-          />
+          <LeadCaptureForm defaultSpecialty="General Cardiology" />
         </LeadFormStandaloneSection>
       </section>
     </main>

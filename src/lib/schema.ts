@@ -252,6 +252,8 @@ export function jobPostingJsonLd(input: {
   datePosted: string;
   state: string;
   employmentType?: string;
+  /** Floor of the written daily guarantee, if the client shared terms. */
+  baseSalaryMinUsdPerDay?: number;
 }) {
   return {
     "@context": "https://schema.org",
@@ -275,6 +277,19 @@ export function jobPostingJsonLd(input: {
         addressCountry: "US",
       },
     },
+    ...(input.baseSalaryMinUsdPerDay
+      ? {
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: "USD",
+            value: {
+              "@type": "QuantitativeValue",
+              minValue: input.baseSalaryMinUsdPerDay,
+              unitText: "DAY",
+            },
+          },
+        }
+      : {}),
   };
 }
 

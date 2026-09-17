@@ -10,6 +10,19 @@ export type FeaturedCardiologyOpportunity = {
   setting: string;
   schedule: string;
   call: string;
+  /** Snapshot line for pay, if the client shared written terms. */
+  compensation?: string;
+  /** Shown on cards and specialty hubs. Defaults to travel/lodging/malpractice covered. */
+  supportLine?: string;
+  /** Eyebrow above the H1. */
+  eyebrow?: string;
+  /** Value posted to the inquiry API (must match recruiter specialty labels). */
+  formSpecialty?: string;
+  /** Specialty-state URL slug, e.g. interventional-cardiology. */
+  specialtySlug?: string;
+  /** Floor of the written daily guarantee, if the client shared terms. */
+  baseSalaryMinUsdPerDay?: number;
+  relatedLinks?: { href: string; label: string }[];
   requirements: string[];
   benefits: string[];
   directAnswer: string;
@@ -25,6 +38,18 @@ export type FeaturedCardiologyOpportunity = {
     options: string[];
   }[];
 };
+
+export function opportunitySupportLine(opportunity: FeaturedCardiologyOpportunity) {
+  return opportunity.supportLine ?? "Travel, lodging, and malpractice insurance covered.";
+}
+
+export function opportunityFormSpecialty(opportunity: FeaturedCardiologyOpportunity) {
+  return opportunity.formSpecialty ?? "Non-Invasive Cardiology";
+}
+
+export function opportunitySpecialtySlug(opportunity: FeaturedCardiologyOpportunity) {
+  return opportunity.specialtySlug ?? "general-cardiology";
+}
 
 export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
   {
@@ -308,6 +333,179 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
         id: "outpatientOnly",
         label: "Are you seeking outpatient-only cardiology work?",
         options: ["Yes", "Open to outpatient", "Still comparing settings"],
+      },
+    ],
+  },
+  {
+    slug: "ohio-interventional-cardiology-locum",
+    state: "Ohio",
+    stateSlug: "ohio",
+    title: "Ohio Interventional Cardiology Locum Opportunity",
+    metaTitle: "Ohio Interventional Cardiology Locum | 1–2 Wks/Mo",
+    metaDescription:
+      "Ohio interventional cardiology locum: ASAP coverage, 1–2 weeks/month, 24-hour call. $3,200 for 0–4 hours plus $400/hr callback—about $4,800 on an 8-hour day.",
+    h1: "Interventional Cardiology Locum Job in Ohio",
+    shortLabel: "Ohio interventional cardiology · 1–2 weeks/month",
+    setting: "Interventional cardiology with rounding, consults, procedures, and afternoon clinic",
+    schedule: "One to two weeks per month; days start at 7 a.m. with rounding, consults, and procedures, then afternoon clinic",
+    call: "24-hour call during scheduled coverage",
+    compensation:
+      "$3,200 guaranteed for 0–4 hours, then $400/hour callback. An 8-hour day is about $4,800.",
+    baseSalaryMinUsdPerDay: 3200,
+    supportLine: "Confirm travel, lodging, and malpractice terms in writing before you accept.",
+    eyebrow: "Featured interventional cardiology opportunity",
+    formSpecialty: "Interventional Cardiology",
+    specialtySlug: "interventional-cardiology",
+    relatedLinks: [
+      { href: "/locum-tenens-jobs/ohio/interventional-cardiology", label: "Ohio interventional locum jobs" },
+      { href: "/interventional-cardiology-locums-pay", label: "Interventional locums pay" },
+      { href: "/moonlighting-physician-jobs", label: "Cardiology moonlighting" },
+      { href: "/cardiologist-locums-calculator", label: "Estimate locum compensation" },
+    ],
+    requirements: [
+      "Interventional cardiology training and current cath-lab competency",
+      "Board certification in cardiovascular disease (interventional certification preferred)",
+      "Ohio license, or a realistic path to Ohio licensure (IMLC-eligible physicians often move faster)",
+      "Comfort with 24-hour interventional call during scheduled weeks",
+      "Availability for one to two weeks per month, including ASAP coverage if credentialing allows",
+    ],
+    benefits: [
+      "Written daily guarantee: $3,200 for 0–4 hours",
+      "Callback at $400/hour after four hours—about $4,800 on a typical 8-hour day",
+      "Recurring 1–2 week blocks instead of an always-on employed calendar",
+      "Mixed day: morning rounding, consults, and procedures; afternoon clinic",
+      "Useful for extra income, locums-primary work, or a change from a current employed schedule",
+    ],
+    directAnswer:
+      "Ohio needs an interventional cardiologist as soon as an eligible physician can start. Coverage is 1–2 weeks per month with 24-hour call. Days start at 7 a.m. with rounding, consults, and procedures, then afternoon clinic. Pay is $3,200 guaranteed for 0–4 hours and $400/hour callback after that—about $4,800 on an 8-hour day.",
+    idealFits: [
+      {
+        title: "Ohio-based interventional cardiologists",
+        detail:
+          "Physicians already practicing in Ohio who want defined blocks without a full-time employed calendar.",
+      },
+      {
+        title: "Ohio-licensed interventionalists elsewhere",
+        detail:
+          "If you already hold an Ohio license, credentialing is usually the remaining gate—not a new state application.",
+      },
+      {
+        title: "Out-of-state IC physicians who can license",
+        detail:
+          "Ohio is IMLC-eligible for many physicians. Licensing still has to finish before an ASAP start is real.",
+      },
+      {
+        title: "Employed interventionalists seeking extra income",
+        detail:
+          "One to two weeks a month can fit some moonlighting plans. Confirm employer approval, covenants, fatigue, and malpractice first.",
+      },
+      {
+        title: "Locums-primary interventional cardiologists",
+        detail:
+          "Recurring coverage with a written daily guarantee and callback rate, rather than an open-ended employed STEMI load.",
+      },
+      {
+        title: "Interventionalists ready for a change",
+        detail:
+          "Useful if the current job no longer fits—too much call, too little control, or a need to reset without leaving cath lab work.",
+      },
+    ],
+    sections: [
+      {
+        heading: "The week: 7 a.m. start, then clinic",
+        paragraphs: [
+          "Coverage is needed as soon as a qualified interventional cardiologist can start. The client wants one to two weeks per month—not a full-time employed slot.",
+          "Mornings begin at 7 a.m. with rounding, consults, and procedures. Afternoons are clinic. Confirm census, cath-lab staffing, STEMI backup, and clinic volume in writing before you accept.",
+        ],
+      },
+      {
+        heading: "24-hour call, with pay that is written down",
+        paragraphs: [
+          "Scheduled weeks include 24-hour call. The current pay terms are a $3,200 guarantee for 0–4 hours, then $400 per hour of callback after that.",
+          "If you work about eight hours, that is $3,200 for the first four hours plus $1,600 for four hours of callback—about $4,800 for the day. Callback volume can run lighter or heavier than eight hours. We confirm the current written terms before presenting you.",
+        ],
+        bullets: [
+          "$3,200 guaranteed for 0–4 hours",
+          "$400/hour callback after four hours",
+          "Typical 8-hour clinical day ≈ $4,800",
+          "Hours are not a personal guarantee—volume varies",
+        ],
+      },
+      {
+        heading: "Who this Ohio interventional job is for",
+        paragraphs: [
+          "This opening is for interventional cardiologists—not general, EP, or imaging-only coverage. It can work if you live in Ohio, already hold an Ohio license, or can add Ohio licensure on a timeline that still meets an ASAP start.",
+          "It also fits physicians who want additional income, locum weeks, approved moonlighting, or a change from a current employed or academic schedule. If you are still employed, review moonlighting rules, restrictive covenants, and fatigue policies before you inquire.",
+        ],
+      },
+      {
+        heading: "Ohio licensing and an ASAP start",
+        paragraphs: [
+          "An active Ohio license is the fastest path. Many out-of-state physicians can use the Interstate Medical Licensure Compact, but compact speed is not the same as hospital privileges.",
+          "ASAP means the facility needs coverage now. Your actual start date still depends on licensing, privileging, case logs, and the client’s credentialing calendar. Share your license status and earliest realistic week when you inquire.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "How soon does the Ohio interventional locum need coverage?",
+        a: "As soon as an eligible interventional cardiologist can start. Credentialing and privileging still have to finish; an Ohio license usually shortens that path.",
+      },
+      {
+        q: "How many weeks per month is the Ohio IC assignment?",
+        a: "One to two weeks per month during scheduled coverage.",
+      },
+      {
+        q: "What does a clinical day look like?",
+        a: "Days start at 7 a.m. with rounding, consults, and procedures. Afternoons include clinic. The block also carries 24-hour call.",
+      },
+      {
+        q: "How is pay structured?",
+        a: "The current terms are $3,200 guaranteed for 0–4 hours, then $400 per hour of callback. On an 8-hour day that is about $4,800. We confirm written terms before you accept.",
+      },
+      {
+        q: "Do I need an Ohio license already?",
+        a: "An Ohio license is the fastest path, but out-of-state interventional cardiologists may still be considered if licensing can finish in time. Ohio is IMLC-eligible for many physicians.",
+      },
+      {
+        q: "Can an employed interventional cardiologist moonlight this role?",
+        a: "Sometimes. You must review employer moonlighting approval, restrictive covenants, malpractice, fatigue, and schedule conflicts before accepting outside cath-lab work.",
+      },
+      {
+        q: "Is this for general cardiologists or EP as well?",
+        a: "No. This opening is for interventional cardiology coverage—rounding, consults, procedures, clinic, and 24-hour interventional call.",
+      },
+    ],
+    keywords: [
+      "interventional cardiologist jobs Ohio",
+      "interventional cardiology locum Ohio",
+      "Ohio interventional cardiologist moonlighting",
+      "locum tenens interventional cardiology Ohio",
+      "Ohio licensed interventional cardiologist",
+      "additional income interventional cardiologist",
+    ],
+    datePosted: "2026-09-17",
+    relatedSpecialtySlugs: ["interventional-cardiology"],
+    screeningQuestions: [
+      {
+        id: "ohioLicense",
+        label: "Do you currently hold an Ohio medical license?",
+        options: ["Yes", "No—IMLC or new license needed", "Not sure"],
+      },
+      {
+        id: "monthlyAvailability",
+        label: "Could you cover 1–2 weeks per month?",
+        options: ["Yes", "Possibly—depending on dates", "No"],
+      },
+      {
+        id: "callComfort",
+        label: "Are you comfortable with 24-hour interventional call on scheduled weeks?",
+        options: ["Yes", "Need written STEMI/backup details first", "No"],
+      },
+      {
+        id: "startTiming",
+        label: "How soon could you start if credentialing cleared?",
+        options: ["ASAP", "Within 30 days", "1–3 months", "Exploring only"],
       },
     ],
   },

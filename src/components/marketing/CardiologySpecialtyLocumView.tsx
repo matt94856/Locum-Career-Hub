@@ -256,8 +256,15 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 Compare rates on the{" "}
                 <Link href="/interventional-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
                   interventional cardiology locums pay guide
-                </Link>{" "}
-                and review{" "}
+                </Link>
+                , the{" "}
+                <Link
+                  href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  Ohio 1–2 weeks/month interventional locum
+                </Link>
+                , and review{" "}
                 <Link
                   href="/locum-tenens-jobs/new-jersey/interventional-cardiology"
                   className="font-semibold text-brand-700 hover:underline"
@@ -305,8 +312,6 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
 
           <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title="Talk with a cardiology recruiter"
-              subtitle="Share subspecialty, career stage, states, and boundaries. Cardiologist-only recruiter follow-up."
               defaultSpecialty={specialty.name}
               layout="sidebar"
             />

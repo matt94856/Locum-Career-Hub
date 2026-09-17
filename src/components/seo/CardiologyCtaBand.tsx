@@ -8,20 +8,20 @@ export type CtaVariant =
 
 const VARIANTS: Record<CtaVariant, { headline: string; subline: string }> = {
   recruiter: {
-    headline: "Talk with a cardiology recruiter",
-    subline: "Share subspecialty, states, and boundaries—cardiologist-only follow-up within one business day.",
+    headline: "Let’s find the right locum block",
+    subline: "Work that pays well, on a schedule you control. Cardiologists only.",
   },
   opportunities: {
-    headline: "Explore current cardiology opportunities",
-    subline: "We match documented locum blocks—not generic job-board blasts.",
+    headline: "See locum blocks that actually fit",
+    subline: "Documented coverage—not a job-board blast.",
   },
   salary: {
-    headline: "Request salary context for your subspecialty",
-    subline: "Directional pay drivers and stipends—never guaranteed rates on a webpage.",
+    headline: "Want pay context for your subspecialty?",
+    subline: "Directional drivers and stipends—not a guaranteed rate on a webpage.",
   },
   compare: {
-    headline: "Compare locum and permanent cardiology options",
-    subline: "Structured questions on call, cath lab scope, and credentialing before you decide.",
+    headline: "Compare locum vs employed",
+    subline: "Call, cath lab, and credentialing—before you decide.",
   },
 };
 

@@ -8,8 +8,8 @@ export function SpecialtiesSection() {
       <div className="container-site">
         <SectionHeading
           eyebrow="Cardiology subspecialties"
-          title="Locum coverage across the cardiology roles hospitals search most"
-          subtitle="General, interventional, EP, heart failure, imaging, structural, and preventive—matched with documented cath lab, consult, and call expectations."
+          title="Coverage hospitals search most"
+          subtitle="General, interventional, EP, heart failure, imaging, structural, and preventive—with documented call and lab expectations."
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
@@ -23,7 +23,7 @@ export function SpecialtiesSection() {
                 <div className="min-w-0">
                   <p className="text-sm font-semibold leading-snug text-slate-900 [overflow-wrap:anywhere]">{s.name}</p>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    Explore cardiologist locum openings, call norms, and privileging patterns.
+                    Explore openings, call norms, and privileging.
                   </p>
                 </div>
                 <span className="mt-0.5 shrink-0 text-brand-700 transition group-hover:translate-x-0.5" aria-hidden>

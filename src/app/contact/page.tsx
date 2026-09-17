@@ -4,7 +4,7 @@ import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandalone
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { socialShareMetadata } from "@/lib/social-metadata";
 import { Button } from "@/components/ui/Button";
-import { SITE } from "@/lib/site";
+import { SITE, CTA } from "@/lib/site";
 
 const CONTACT_DESC =
   "Talk with a Locum Career Hub physician recruiter about locum tenens jobs, credentialing timelines, and schedule planning—fast, physician-first responses.";
@@ -30,12 +30,11 @@ export default function ContactPage() {
             Talk with a recruiter who respects your time
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Share your goals, availability, and non-negotiables. We will respond with realistic pathways—not a generic
-            blast.
+            Tell us the schedule you want. We’ll look for work that pays well and still leaves you room.
           </p>
           <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
             <CalendlyBookButton source="contact_hero" className="w-full justify-center">
-              Book a 30-minute call
+              {CTA.bookCall}
             </CalendlyBookButton>
             <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center">
               Call {SITE.phoneDisplay}
@@ -52,11 +51,7 @@ export default function ContactPage() {
 
       <section className="py-14 sm:py-16">
         <LeadFormStandaloneSection>
-          <LeadCaptureForm
-            id="lead-form"
-            title="Physician inquiry"
-            subtitle="Complete the form and we will route you to the right recruiting pod for your specialty and states."
-          />
+          <LeadCaptureForm id="lead-form" />
         </LeadFormStandaloneSection>
       </section>
     </main>

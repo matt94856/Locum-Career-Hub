@@ -3,9 +3,9 @@ import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
 import { SITE } from "@/lib/site";
 
 const STANDALONE_POINTS = [
-  "Subspecialty-aware matching—not a generic physician job board",
-  "Call, cath lab scope, and privileging discussed before you commit",
-  "Response within one business day when mutual fit exists",
+  "Matched to your subspecialty—not a generic job board",
+  "Call, cath lab, and privileging discussed before you commit",
+  "A real reply within one business day when there’s a fit",
 ] as const;
 
 type Props = {

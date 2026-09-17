@@ -81,8 +81,8 @@ export function SiteHeader() {
             >
               {CTA.recruiter}
             </Button>
-            <Button href="/physician-opportunities" variant="primary" size="sm">
-              {CTA.explore}
+            <Button href="/physician-opportunities#lead-form" variant="primary" size="sm">
+              {CTA.requestMatches}
             </Button>
           </div>
 
@@ -136,8 +136,8 @@ export function SiteHeader() {
             </Link>
           ))}
           <div className="mt-3 grid grid-cols-1 gap-2">
-            <Button href="/physician-opportunities" className="w-full justify-center" size="md">
-              {CTA.explore}
+            <Button href="/physician-opportunities#lead-form" className="w-full justify-center" size="md">
+              {CTA.requestMatches}
             </Button>
             <Button href="/contact" variant="secondary" className="w-full justify-center" size="md">
               {CTA.recruiter}

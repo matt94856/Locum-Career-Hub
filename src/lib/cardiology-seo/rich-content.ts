@@ -12,7 +12,7 @@ export function pick<T>(items: T[], seed: number, offset = 0): T {
 
 /** Trust copy for inquiry forms — used on state, city, and conversion pages. */
 export const RECRUITER_FOLLOW_UP_PROMISE =
-  "After you submit an inquiry, a cardiology recruiter from Locum Career Hub will review your subspecialty, license states, and preferred locations. If there are realistic locum opportunities that match your criteria, we will reach out—typically within one business day. If nothing fits right now, we will tell you plainly rather than sending unrelated blast emails.";
+  "A cardiology recruiter reviews your inquiry and follows up—typically within one business day—with real options, or a plain no if nothing fits.";
 
 export function recruiterTrustSection(geoLabel?: string): ContentSection {
   const where = geoLabel ? ` in ${geoLabel}` : "";

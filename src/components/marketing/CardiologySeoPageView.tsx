@@ -11,6 +11,7 @@ import { stripBrandFromTitle } from "@/lib/seo-title";
 import { CTA, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
+import { formSubtitleForPlace } from "@/lib/marketing-copy";
 
 const CATEGORY_CRUMB: Record<CardiologySeoPage["category"], { label: string; path: string }> = {
   money: { label: "Cardiology locum jobs", path: "/cardiology-locum-jobs" },
@@ -135,14 +136,14 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
           {showSidebarForm ? (
             <div className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
               <LeadCaptureForm
-                title={page.geoLabel ? `Inquiry: ${page.geoLabel}` : "Cardiologist inquiry"}
-                subtitle={`Select ${page.geoLabel ? `${page.geoLabel} and ` : ""}any other states you would consider. A recruiter will follow up if realistic cardiology locum opportunities exist—not a mass email blast.`}
+                title={page.geoLabel ? `Let’s look in ${page.geoLabel}` : undefined}
+                subtitle={formSubtitleForPlace(page.geoLabel)}
                 defaultSpecialty={defaultSpecialty}
                 layout="sidebar"
               />
               <LeadConversionBand
-                headline="Questions before you apply?"
-                subline="Call or email—we are happy to clarify how cardiologist matching works."
+                headline="Questions before you inquire?"
+                subline="Call or email—we’ll explain how matching works, without the pitch."
               />
             </div>
           ) : (

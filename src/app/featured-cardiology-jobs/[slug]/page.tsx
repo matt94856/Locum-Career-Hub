@@ -55,9 +55,12 @@ export default async function FeaturedCardiologyOpportunityPage({
   const structuredDescription = [
     opportunity.directAnswer,
     `Schedule: ${opportunity.schedule}.`,
+    opportunity.compensation ? `Pay: ${opportunity.compensation}` : "",
     `Qualifications: ${opportunity.requirements.join("; ")}.`,
     `Assignment support: ${opportunity.benefits.join("; ")}.`,
-  ].join(" ");
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
@@ -68,6 +71,9 @@ export default async function FeaturedCardiologyOpportunityPage({
           path,
           datePosted: opportunity.datePosted,
           state: opportunity.state,
+          ...(opportunity.baseSalaryMinUsdPerDay
+            ? { baseSalaryMinUsdPerDay: opportunity.baseSalaryMinUsdPerDay }
+            : {}),
         })}
       />
       <JsonLd data={faqJsonLd(opportunity.faqs)} />

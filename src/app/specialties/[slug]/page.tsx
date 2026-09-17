@@ -253,8 +253,7 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
 
           <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`Request ${name} matches`}
-              subtitle="Share availability, states, and boundaries. We will respond with realistic options—not spam."
+              title={`Let’s find ${name} locums`}
               layout="sidebar"
             />
           </aside>

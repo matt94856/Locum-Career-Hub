@@ -332,6 +332,40 @@ function applyPrioritySpecialtyStateEnrichment(
     };
   }
 
+  if (input.stateSlug === "ohio" && input.specialtySlug === "interventional-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "ASAP 1–2 week blocks with 24-hour call and a written daily guarantee",
+      directAnswer:
+        "Interventional cardiology locum tenens jobs in Ohio include cath-lab coverage, consults, and clinic. A current featured assignment needs 1–2 weeks per month as soon as an eligible interventionalist can start, with 24-hour call, a $3,200 guarantee for 0–4 hours, and $400/hour callback after that.",
+      intro:
+        "Ohio IC locums can fit physicians who already live or hold a license in Ohio, plus out-of-state interventionalists who can license (often via IMLC). Confirm STEMI backup, census, and clinic volume in writing. Compact licensing is not the same as hospital privileges.",
+      sections: [
+        {
+          h2: "Current Ohio interventional coverage",
+          paragraphs: [
+            "One live assignment is recruiting for one to two weeks per month. Days start at 7 a.m. with rounding, consults, and procedures, then afternoon clinic, plus 24-hour call.",
+            "Current pay terms are $3,200 guaranteed for 0–4 hours and $400 per hour of callback. An 8-hour day is about $4,800. Hours vary; we confirm written terms before presentation.",
+          ],
+        },
+        {
+          h2: "Licensing for Ohio interventional locums",
+          paragraphs: [
+            "An Ohio license is the fastest path to an ASAP start. Many out-of-state physicians can use IMLC, but cath-lab privileging still needs current case logs.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is there a current Ohio interventional locum opening?",
+          a: "Yes. We are recruiting 1–2 weeks per month with 24-hour call and ASAP coverage. See the featured Ohio interventional locum page for schedule and pay terms.",
+        },
+        ...content.faqs.slice(0, 4),
+      ].slice(0, 7),
+    };
+  }
+
   if (input.stateSlug === "nevada" && input.specialtySlug === "interventional-cardiology") {
     return {
       ...content,

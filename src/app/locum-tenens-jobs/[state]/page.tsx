@@ -15,6 +15,11 @@ import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 import { CTA } from "@/lib/site";
+import {
+  featuredOpportunityPath,
+  getFeaturedOpportunitiesForState,
+} from "@/lib/featured-cardiology-opportunities";
+import { formSubtitleForPlace } from "@/lib/marketing-copy";
 import { LatticeUpLinks } from "@/components/marketing/LatticeUpLinks";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
@@ -65,6 +70,7 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
   const otherStates = STATE_LOCUM_PAGES.filter((s) => s.slug !== page.slug).slice(0, 5);
   const stateProfile = getStateProfile(page.slug);
   const profileSections = stateProfile ? getStateProfileSections(stateProfile) : [];
+  const featuredOpportunities = getFeaturedOpportunitiesForState(page.slug);
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -104,6 +110,39 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
           </div>
         </div>
       </section>
+
+      {featuredOpportunities.length ? (
+        <section className="border-b border-brand-100 bg-brand-50 py-10">
+          <div className="container-site">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
+              Currently recruiting
+            </p>
+            <div className="mt-4 grid gap-4">
+              {featuredOpportunities.map((opportunity) => (
+                <article
+                  key={opportunity.slug}
+                  className="rounded-3xl border border-brand-200 bg-white p-6 shadow-sm sm:flex sm:items-center sm:justify-between sm:gap-8"
+                >
+                  <div>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-slate-950">
+                      {opportunity.shortLabel}
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+                      {opportunity.setting}. {opportunity.schedule}.{" "}
+                      {opportunity.compensation ??
+                        opportunity.supportLine ??
+                        "Travel, lodging, and malpractice insurance covered."}
+                    </p>
+                  </div>
+                  <Button href={featuredOpportunityPath(opportunity.slug)} className="mt-5 shrink-0 sm:mt-0">
+                    View featured job
+                  </Button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-14 sm:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
@@ -251,8 +290,8 @@ export default async function StateLocumJobsPage({ params }: { params: Promise<{
 
           <div className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`Request ${page.stateName} cardiology matches`}
-              subtitle={`Select ${page.stateName} (and any other states) plus your subspecialty. A cardiology recruiter will contact you if realistic locum opportunities exist in those areas—usually within one business day. If nothing fits, we will tell you plainly.`}
+              title={`Let’s look in ${page.stateName}`}
+              subtitle={formSubtitleForPlace(page.stateName)}
               defaultSpecialty="General Cardiology"
               defaultPreferredStates={[page.stateName]}
               layout="sidebar"

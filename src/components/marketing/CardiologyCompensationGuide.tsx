@@ -38,6 +38,11 @@ export function CardiologyCompensationGuide({
             <Button href="/cardiologist-locums-calculator">Calculate my earning potential</Button>
             <Button href="/cardiologist-locums-pay-report" variant="secondary">Cite the pay chart</Button>
             <Button href="/physician-opportunities#lead-form" variant="secondary">Request cardiology matches</Button>
+            {path === "/interventional-cardiology-locums-pay" ? (
+              <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary">
+                Ohio IC locum (1–2 wks/mo)
+              </Button>
+            ) : null}
           </div>
         </div>
       </section>

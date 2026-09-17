@@ -7,7 +7,7 @@ import { GLOSSARY_SLUGS, getGlossaryItem, glossaryBodyParagraphs } from "@/lib/g
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
 import { buildGlossarySerpMetadata } from "@/lib/serp-ctr";
-import { SITE } from "@/lib/site";
+import { CTA, SITE } from "@/lib/site";
 
 export function generateStaticParams() {
   return GLOSSARY_SLUGS.map((slug) => ({ slug }));
@@ -63,7 +63,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
               href="/physician-opportunities#lead-form"
               className="inline-flex items-center justify-center rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-700"
             >
-              Request matches
+              {CTA.requestMatches}
             </Link>
             <Link
               href="/glossary"

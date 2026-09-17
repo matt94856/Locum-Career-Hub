@@ -2,7 +2,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { OpportunityInterestForm } from "@/components/forms/OpportunityInterestForm";
 import { FeaturedOpportunityApplyButton } from "@/components/cta/FeaturedOpportunityApplyButton";
-import type { FeaturedCardiologyOpportunity } from "@/lib/featured-cardiology-opportunities";
+import {
+  opportunitySpecialtySlug,
+  opportunitySupportLine,
+  type FeaturedCardiologyOpportunity,
+} from "@/lib/featured-cardiology-opportunities";
 import { SITE } from "@/lib/site";
 
 function DetailList({
@@ -37,6 +41,26 @@ export function FeaturedCardiologyOpportunityView({
 }: {
   opportunity: FeaturedCardiologyOpportunity;
 }) {
+  const specialtySlug = opportunitySpecialtySlug(opportunity);
+  const relatedLinks = opportunity.relatedLinks ?? [
+    {
+      href: "/guides/non-invasive-cardiology-locums",
+      label: "Non-invasive cardiology locums guide",
+    },
+    {
+      href: "/guides/inpatient-vs-outpatient-cardiology-locums",
+      label: "Inpatient vs outpatient locums",
+    },
+    {
+      href: "/part-time-cardiologist-jobs",
+      label: "Part-time cardiologist schedules",
+    },
+    {
+      href: "/cardiologist-locums-calculator",
+      label: "Estimate locum compensation",
+    },
+  ];
+
   return (
     <main>
       <section className="border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white">
@@ -60,7 +84,7 @@ export function FeaturedCardiologyOpportunityView({
           <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-700">
-                Featured non-invasive cardiology opportunity
+                {opportunity.eyebrow ?? "Featured non-invasive cardiology opportunity"}
               </p>
               <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
                 {opportunity.h1}
@@ -76,11 +100,11 @@ export function FeaturedCardiologyOpportunityView({
                   Check fit and availability
                 </FeaturedOpportunityApplyButton>
                 <Button
-                  href={`/locum-tenens-jobs/${opportunity.stateSlug}/general-cardiology`}
+                  href={`/locum-tenens-jobs/${opportunity.stateSlug}/${specialtySlug}`}
                   size="lg"
                   variant="secondary"
                 >
-                  Explore {opportunity.state} cardiology locums
+                  Explore {opportunity.state} locums
                 </Button>
               </div>
               <p className="mt-4 text-xs leading-5 text-slate-500">
@@ -106,10 +130,16 @@ export function FeaturedCardiologyOpportunityView({
                   <dt className="font-semibold text-slate-950">Call</dt>
                   <dd className="mt-1 leading-6 text-slate-700">{opportunity.call}</dd>
                 </div>
+                {opportunity.compensation ? (
+                  <div>
+                    <dt className="font-semibold text-slate-950">Pay</dt>
+                    <dd className="mt-1 leading-6 text-slate-700">{opportunity.compensation}</dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt className="font-semibold text-slate-950">Covered</dt>
                   <dd className="mt-1 leading-6 text-slate-700">
-                    Travel, lodging, and malpractice insurance
+                    {opportunitySupportLine(opportunity)}
                   </dd>
                 </div>
               </dl>
@@ -218,24 +248,7 @@ export function FeaturedCardiologyOpportunityView({
           Compare schedules and prepare
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              href: "/guides/non-invasive-cardiology-locums",
-              label: "Non-invasive cardiology locums guide",
-            },
-            {
-              href: "/guides/inpatient-vs-outpatient-cardiology-locums",
-              label: "Inpatient vs outpatient locums",
-            },
-            {
-              href: "/part-time-cardiologist-jobs",
-              label: "Part-time cardiologist schedules",
-            },
-            {
-              href: "/cardiologist-locums-calculator",
-              label: "Estimate locum compensation",
-            },
-          ].map((link) => (
+          {relatedLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}

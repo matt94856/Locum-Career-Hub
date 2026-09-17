@@ -7,7 +7,7 @@ export const SITE = {
   domain: "LocumCareerHub.com",
   url: "https://www.locumcareerhub.com",
   tagline:
-    "Cardiologist locum tenens recruiting—with transparent expectations, credentialing clarity, and calm next steps for MD/DO cardiologists exploring flexible cardiology work.",
+    "Cardiologist locums with clear expectations, pay that makes sense, and a schedule you control.",
   email: "mfuller@mplthealthcare.com",
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",
@@ -27,12 +27,13 @@ export const SITE_OPEN_GRAPH_IMAGE = `${SITE.url}/opengraph-image` as const;
 
 /** Lower-pressure CTAs used across the marketing site */
 export const CTA = {
-  explore: "Explore cardiology locums",
-  flexible: "See flexible cardiology blocks",
-  recruiter: "Talk with a cardiology recruiter",
-  learn: "Learn about cardiologist locums",
-  schedule: "Find your ideal block schedule",
-  bookCall: "Schedule a 30-minute intro call",
+  explore: "See cardiology locums",
+  flexible: "See flexible blocks",
+  recruiter: "Talk with a recruiter",
+  learn: "How locums works",
+  schedule: "Find a schedule that fits",
+  bookCall: "Book a 15-minute call",
+  requestMatches: "Find my match",
 } as const;
 
 export const NAV_LINKS = [

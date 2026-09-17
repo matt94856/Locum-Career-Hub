@@ -44,11 +44,7 @@ export default function FaqPage() {
             <FaqAccordion items={FAQ_PAGE} />
           </div>
           <div className="min-w-0 lg:col-span-5">
-            <LeadCaptureForm
-              title="Still have questions?"
-              subtitle="Submit a complete inquiry and a recruiter will respond with specifics for your specialty, states, and timeline."
-              layout="sidebar"
-            />
+            <LeadCaptureForm title="Still have questions?" layout="sidebar" />
           </div>
         </div>
       </section>

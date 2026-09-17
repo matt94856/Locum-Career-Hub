@@ -4,22 +4,22 @@ const steps = [
   {
     n: "01",
     title: "Tell us what “better” looks like",
-    body: "Specialty, states, availability, travel appetite, and what you will not compromise on.",
+    body: "Specialty, states, dates, and what you will not compromise on.",
   },
   {
     n: "02",
-    title: "Get curated matches—fast",
-    body: "We prioritize fit: staffing layers, documentation load, and culture—not just a rate card.",
+    title: "See curated matches",
+    body: "We prioritize fit: staffing, documentation load, and culture—not just a rate card.",
   },
   {
     n: "03",
     title: "Credential with confidence",
-    body: "Packets, licensing, and privileging handled with proactive timelines and clear owners.",
+    body: "Packets, licensing, and privileging with clear owners and timelines.",
   },
   {
     n: "04",
     title: "Start strong, iterate smarter",
-    body: "Debrief after your first shifts. Adjust. Repeat assignments when you find your favorite teams.",
+    body: "Debrief after the first shifts. Adjust. Repeat the teams you like.",
   },
 ];
 
@@ -29,8 +29,8 @@ export function Process() {
       <div className="container-site">
         <SectionHeading
           eyebrow="How it works"
-          title="A simple path—designed for overloaded calendars"
-          subtitle="No mystery sites, no spam cadence. Just clear steps from intent to contract, with modern communication throughout."
+          title="Four quiet steps"
+          subtitle="No mystery sites. No spam cadence. Just a clear path from intent to a block that fits."
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr sm:grid-cols-2 lg:grid-cols-4">

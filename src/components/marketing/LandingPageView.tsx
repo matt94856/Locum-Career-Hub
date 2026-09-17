@@ -175,11 +175,9 @@ export function LandingPageView({ page }: { page: LandingPage }) {
 
           <div className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title="Request matches for this intent"
-              subtitle="Tell us your specialty, career stage, and availability. We will respond with realistic options aligned to this page’s focus."
+              layout="sidebar"
               defaultSpecialty={prefill.defaultSpecialty}
               defaultCareerStage={prefill.defaultCareerStage}
-              layout="sidebar"
             />
           </div>
         </div>

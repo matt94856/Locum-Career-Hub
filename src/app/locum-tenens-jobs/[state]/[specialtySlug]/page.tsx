@@ -19,6 +19,7 @@ import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { getStateLocumPage } from "@/lib/state-locum-seo";
 import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 import { CTA, SITE } from "@/lib/site";
+import { formSubtitleForPlace } from "@/lib/marketing-copy";
 import { LatticeUpLinks } from "@/components/marketing/LatticeUpLinks";
 
 export function generateStaticParams() {
@@ -171,8 +172,9 @@ export default async function SpecialtyStateLocumPage({
                       {opportunity.shortLabel}
                     </h2>
                     <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-                      {opportunity.setting}. {opportunity.schedule}. Travel, lodging,
-                      and malpractice insurance covered.
+                      {opportunity.setting}. {opportunity.schedule}.{" "}
+                      {opportunity.supportLine ??
+                        "Travel, lodging, and malpractice insurance covered."}
                     </p>
                   </div>
                   <Button
@@ -237,8 +239,8 @@ export default async function SpecialtyStateLocumPage({
 
           <aside className="min-w-0 space-y-6 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`Request ${specialtyName} in ${statePage.stateName}`}
-              subtitle="Share dates, license footprint, and boundaries. We respond with realistic options—not spam."
+              title={`Let’s look in ${statePage.stateName}`}
+              subtitle={formSubtitleForPlace(statePage.stateName)}
               defaultSpecialty={specialtyName}
               defaultPreferredStates={[statePage.stateName]}
               layout="sidebar"

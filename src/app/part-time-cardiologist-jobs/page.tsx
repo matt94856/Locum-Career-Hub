@@ -47,8 +47,7 @@ export default function PartTimeCardiologistJobsPage() {
           </div>
           <div className="lg:col-span-5">
             <LeadCaptureForm
-              title="Request a part-time cardiology match"
-              subtitle="Tell us whether you are scaling down, moonlighting, or designing locums as the job."
+              title="Let’s find a part-time block"
               defaultSpecialty="General Cardiology"
               defaultCareerStage="retirement"
               layout="sidebar"

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
-import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
@@ -22,19 +21,19 @@ const PAGE_DESCRIPTION =
 const LOCUM_BENEFITS = [
   {
     title: "Defined blocks",
-    body: "Many roles run in clear shifts or weeks—easier to protect recovery time than an always-on employed schedule.",
+    body: "Clear weeks or weekends—easier to protect recovery than an always-on employed schedule.",
   },
   {
     title: "Geographic optionality",
-    body: "Work closer to home for extra income, or stack travel blocks when you want a change of scenery.",
+    body: "Stay close to home, or stack travel when you want a change of scenery.",
   },
   {
     title: "Demand where it clusters",
-    body: "Large systems and seasonal communities often need reliable coverage; that can mean more choice in how you work.",
+    body: "Hospitals need coverage. That can mean more choice in how—and when—you work.",
   },
   {
     title: "Advocacy through credentialing",
-    body: "The paperwork is real. A good process keeps expectations transparent so you are not guessing alone at 11 p.m.",
+    body: "Paperwork is real. We keep owners and timelines visible so you are not guessing at 11 p.m.",
   },
 ] as const;
 
@@ -77,11 +76,10 @@ export default function OpportunitiesPage() {
         <div className="container-site max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Opportunities</p>
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Why physicians choose locums—then tell us what you need
+            Find locum work that pays well and fits your life
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            Locum tenens is not the only answer, but when it fits it can restore margin: clearer boundaries, competitive
-            weekly structure, and a recruiter who explains the tradeoffs instead of pushing a quota.
+            Lucrative coverage, on a schedule you control. Tell us what you want from a block.
           </p>
         </div>
       </section>
@@ -92,9 +90,9 @@ export default function OpportunitiesPage() {
             Featured cardiology jobs
           </p>
           <h2 className="mt-3 text-center font-display text-3xl font-semibold tracking-tight text-slate-950">
-            Current non-invasive cardiology opportunities
+            Current cardiology opportunities
           </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {FEATURED_CARDIOLOGY_OPPORTUNITIES.map((opportunity) => (
               <article
                 key={opportunity.slug}
@@ -107,8 +105,7 @@ export default function OpportunitiesPage() {
                   {opportunity.setting}
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-slate-700">
-                  {opportunity.schedule}. Travel, lodging, and malpractice insurance
-                  covered.
+                  {opportunity.schedule}. {opportunity.supportLine ?? "Travel, lodging, and malpractice insurance covered."}
                 </p>
                 <Link
                   href={featuredOpportunityPath(opportunity.slug)}
@@ -126,8 +123,7 @@ export default function OpportunitiesPage() {
         <div className="container-site max-w-3xl">
           <h2 className="text-center font-display text-2xl font-semibold text-slate-950">What draws clinicians in</h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-slate-600">
-            Everyone’s situation is different. These are the themes we hear most when a traditional schedule stops
-            feeling sustainable.
+            The themes we hear most when a traditional schedule stops feeling sustainable.
           </p>
           <ul className="mt-8 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2">
             {LOCUM_BENEFITS.map((b) => (
@@ -147,8 +143,7 @@ export default function OpportunitiesPage() {
         <div className="container-site max-w-3xl">
           <h2 className="text-center font-display text-2xl font-semibold text-slate-950">Hotspot markets we watch</h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-slate-600">
-            Demand shifts with season, payer mix, and staffing—but these states tend to surface often when hospitals
-            need dependable coverage.
+            Demand shifts—but these states surface often when hospitals need dependable coverage.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {FEATURED_STATES.map((s) => (
@@ -171,33 +166,21 @@ export default function OpportunitiesPage() {
       </section>
 
       <section className="py-4 sm:py-6">
-        <div className="container-site max-w-2xl text-center text-sm leading-relaxed text-slate-600">
-          Want more depth first? Browse our{" "}
+        <div className="container-site max-w-2xl text-center text-sm text-slate-600">
+          Prefer to read first?{" "}
           <Link className="font-semibold text-brand-700 hover:underline" href="/guides">
-            full topic guides
-          </Link>
-          , the{" "}
-          <Link className="font-semibold text-brand-700 hover:underline" href="/#cardiologist-guides">
-            Cardiologist guides on the homepage
+            Guides
           </Link>{" "}
-          hub, or{" "}
+          ·{" "}
           <Link className="font-semibold text-brand-700 hover:underline" href="/blog">
             Insights
-          </Link>{" "}
-          on the blog.
+          </Link>
         </div>
       </section>
 
       <section className="border-t border-slate-100 bg-slate-50/40 py-12 sm:py-16">
-        <div className="container-site mb-8 flex justify-center">
-          <LeadFormAltActions source="opportunities" />
-        </div>
         <LeadFormStandaloneSection withTrustPanel={false}>
-          <LeadCaptureForm
-            id="lead-form"
-            title="Request matches"
-            subtitle="Two-step form: essentials first, then experience and preferences. Or quick-submit from step 1—we will confirm details on our first call."
-          />
+          <LeadCaptureForm id="lead-form" />
         </LeadFormStandaloneSection>
       </section>
 

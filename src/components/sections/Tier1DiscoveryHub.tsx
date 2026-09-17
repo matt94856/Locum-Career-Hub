@@ -88,11 +88,10 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
                 id="tier1-discovery-heading"
                 className="mt-3 font-display text-2xl font-semibold tracking-tight sm:text-3xl"
               >
-                Get locum matches, not a generic blast
+                Let’s find work that pays well and fits your life
               </h3>
               <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-200">
-                Most physicians who convert tell us specialty, states, and hard boundaries first. We respond with
-                realistic options and credentialing timelines from {SITE.name}.
+                Tell us the schedule you want. We’ll look for lucrative coverage that still leaves you room.
               </p>
               <ul className="mt-6 space-y-3 text-sm text-slate-300">
                 <li className="flex gap-3">
@@ -116,7 +115,7 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
               </ul>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button href={leadHref} className="w-full justify-center sm:flex-1">
-                  {CTA.explore}
+                  {CTA.requestMatches}
                 </Button>
                 <Button
                   href={`tel:${SITE.phoneTel}`}
@@ -159,12 +158,12 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
 
         {variant === "full" ? (
           <div className="mt-14 rounded-2xl border border-dashed border-brand-200 bg-brand-50/40 p-6 text-center sm:p-8">
-            <p className="font-display text-lg font-semibold text-slate-950">Done reading? Tell us what you need.</p>
+            <p className="font-display text-lg font-semibold text-slate-950">Ready when you are.</p>
             <p className="mx-auto mt-2 max-w-xl text-sm text-slate-600">
-              We will not spam you. Share dates, license footprint, and boundaries for a realistic follow-up.
+              Share dates and boundaries. We’ll follow up with real options—or a plain no.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Button href={leadHref}>{CTA.explore}</Button>
+              <Button href={leadHref}>{CTA.requestMatches}</Button>
               <Button href="/contact" variant="secondary">
                 {CTA.recruiter}
               </Button>

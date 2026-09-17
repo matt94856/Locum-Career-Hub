@@ -11,8 +11,8 @@ type Props = {
 
 /** Compact conversion strip for long-form SEO pages. */
 export function LeadConversionBand({
-  headline = "Ready for realistic cardiology locum matches?",
-  subline = "Share subspecialty, states, and boundaries—we respond with options, not spam.",
+  headline = "Ready for a locum block that actually fits?",
+  subline = "Lucrative work, on a schedule you control. Cardiologists only.",
   className = "",
 }: Props) {
   return (
@@ -24,7 +24,7 @@ export function LeadConversionBand({
       <p className="mt-3 text-sm leading-relaxed text-slate-600">{subline}</p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Button href={LEAD_FORM_HREF} className="w-full justify-center sm:w-auto">
-          {CTA.explore}
+          {CTA.requestMatches}
         </Button>
         <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center sm:w-auto">
           Call {SITE.phoneDisplay}

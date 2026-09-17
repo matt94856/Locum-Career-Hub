@@ -15,8 +15,7 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
             ✓
           </span>
           <span>
-            <strong className="font-semibold text-slate-900">No spam lists:</strong> we do not sell your inquiry as a
-            generic lead blast.
+            <strong className="font-semibold text-slate-900">No spam lists.</strong>
           </span>
         </li>
         <li className="flex gap-2">
@@ -24,8 +23,7 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
             ✓
           </span>
           <span>
-            <strong className="font-semibold text-slate-900">Cardiologists only:</strong> MD/DO cardiology
-            subspecialties we actually recruit.
+            <strong className="font-semibold text-slate-900">Cardiologists only.</strong>
           </span>
         </li>
         <li className="flex gap-2">
@@ -33,18 +31,14 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
             ✓
           </span>
           <span>
-            <strong className="font-semibold text-slate-900">Plain answers:</strong> if nothing matches your selected
-            states, we will say so.
+            <strong className="font-semibold text-slate-900">A plain no</strong> if nothing fits.
           </span>
         </li>
       </ul>
-      <p className="mt-4 text-sm text-slate-600">
-        Ready to start?{" "}
-        <Link href="/physician-opportunities#lead-form" className="font-semibold text-brand-700 hover:underline">
-          Submit the cardiologist inquiry form
-        </Link>
-        —most cardiologists complete step 1 in under a minute.
-      </p>
+      <p className="mt-4 text-sm text-slate-600">Most cardiologists finish step 1 in under a minute.</p>
+      <Link href="/physician-opportunities#lead-form" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">
+        Find a match →
+      </Link>
     </aside>
   );
 }

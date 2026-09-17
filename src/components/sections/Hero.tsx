@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { HOME_H1 } from "@/lib/seo/cardiology-locum-jobs-config";
 import { HOME_LEAD_ANCHOR } from "@/lib/seo/tier1-discovery";
+import { CTA } from "@/lib/site";
 
 export function Hero() {
   return (
@@ -14,7 +15,7 @@ export function Hero() {
           <div className="min-w-0 lg:col-span-7">
             <p className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              The cardiology locum tenens resource built for cardiologists
+              Cardiologists only · locum tenens
             </p>
 
             <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
@@ -22,13 +23,12 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-              You spent years building your career. Your schedule should work for you. Explore carefully selected
-              cardiology locum opportunities around your specialty, availability, and lifestyle goals.
+              Let’s find locum work that pays well and fits around your life—not the other way around.
             </p>
 
             <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
               <Button href={HOME_LEAD_ANCHOR} className="w-full justify-center">
-                Request matches
+                {CTA.requestMatches}
               </Button>
               <Button href="/cardiologist-locums-calculator" variant="secondary" className="w-full justify-center">
                 Estimate pay
@@ -66,19 +66,11 @@ export function Hero() {
                 </Link>
               </li>
             </ul>
-            <div className="mt-3 max-w-xl">
+            <div className="mt-4 max-w-xl">
               <CalendlyBookButton source="hero" variant="ghost" className="w-full justify-center sm:w-auto">
-                Talk with a cardiology specialist
+                {CTA.bookCall}
               </CalendlyBookButton>
             </div>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600">
-              Request cardiologist-only matches, or estimate pay in about two minutes—specialty, schedule, licenses,
-              and travel. No spam. Prefer to browse first?{" "}
-              <Link href="/locum-jobs/cardiology" className="font-semibold text-brand-700 hover:underline">
-                See cardiology locum jobs
-              </Link>
-              .
-            </p>
           </div>
 
           <div className="min-w-0 lg:col-span-5">
@@ -86,17 +78,16 @@ export function Hero() {
               <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-200/40 blur-3xl" />
               <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-sky-200/40 blur-3xl" />
 
-              <p className="text-sm font-semibold text-slate-900">Built for cardiology practice</p>
+              <p className="text-sm font-semibold text-slate-900">What you keep</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                From new attendings to semi-retired interventionalists, we help you protect autonomy—and reduce the
-                background hum of unsustainable call.
+                Pay that makes sense. Call you agreed to. Time that’s actually yours.
               </p>
 
               <ul className="mt-6 space-y-3 text-sm text-slate-700">
                 {[
-                  "Document STEMI, consult census, and clinic panel before you fly",
-                  "Explore locum blocks only when they match your subspecialty",
-                  "Keep malpractice, travel stipends, and rates transparent from the start",
+                  "Documented STEMI, census, and clinic load before you fly",
+                  "Blocks matched to your subspecialty—not a generic board",
+                  "Rates, malpractice, and travel in writing from the start",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
                     <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-full bg-brand-50 text-brand-700">
@@ -118,14 +109,13 @@ export function Hero() {
               <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-300">Low-pressure next step</p>
                 <p className="mt-2 text-sm text-slate-200">
-                  Share your subspecialty and what “better” would feel like—we respond with realistic cardiology locum
-                  options, not spam.
+                  Tell us the schedule you want. We’ll look for work that pays well and still leaves you room.
                 </p>
                 <Link
                   href={HOME_LEAD_ANCHOR}
                   className="mt-4 inline-flex text-sm font-semibold text-brand-200 hover:text-white"
                 >
-                  Jump to the inquiry form →
+                  {CTA.requestMatches} →
                 </Link>
               </div>
             </div>

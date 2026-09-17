@@ -11,7 +11,10 @@ import {
 } from "@/components/forms/RecaptchaField";
 import { trackEvent, trackGenerateLead } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
-import type { FeaturedCardiologyOpportunity } from "@/lib/featured-cardiology-opportunities";
+import {
+  opportunityFormSpecialty,
+  type FeaturedCardiologyOpportunity,
+} from "@/lib/featured-cardiology-opportunities";
 import { SITE } from "@/lib/site";
 
 const recaptchaSiteConfigured = Boolean(
@@ -71,6 +74,7 @@ export function OpportunityInterestForm({ opportunity }: Props) {
         ])
         .filter(([, value]) => Boolean(value)),
     );
+    const formSpecialty = opportunityFormSpecialty(opportunity);
     const source = `featured_opportunity_${opportunity.slug}`.slice(0, 100);
     const pagePath =
       typeof window !== "undefined" ? window.location.pathname : "";
@@ -87,7 +91,7 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           lastName: String(data.get("lastName") ?? "").trim(),
           email: String(data.get("email") ?? "").trim(),
           phone: String(data.get("phone") ?? "").trim(),
-          specialty: "Non-Invasive Cardiology",
+          specialty: formSpecialty,
           preferredStates: [opportunity.state],
           yearsExperience: "Not collected on featured opportunity form",
           availability:
@@ -138,7 +142,7 @@ export function OpportunityInterestForm({ opportunity }: Props) {
       window.sessionStorage.setItem("lch_lead_submitted", "1");
 
       const params = new URLSearchParams({
-        specialty: "Non-Invasive Cardiology",
+        specialty: formSpecialty,
         states: opportunity.state,
         from: pagePath,
         opportunity: opportunity.slug,

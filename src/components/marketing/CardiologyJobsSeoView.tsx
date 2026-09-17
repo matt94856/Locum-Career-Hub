@@ -13,6 +13,7 @@ import {
   type JobSpecialtyDef,
 } from "@/lib/cardiology-authority/jobs-seo";
 import { leadPrefillFromJobPage } from "@/lib/lead-form-context";
+import { formSubtitleForPlace } from "@/lib/marketing-copy";
 import type { JobSeoPageContent } from "@/lib/cardiology-authority/types";
 import { CARDIOLOGY_HUB_PATH, cardiologySpecialtyPath } from "@/lib/seo/cardiology-locum-jobs-config";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -122,8 +123,8 @@ export function CardiologyJobsSeoView({ page, specialty }: Props) {
           </div>
           <aside className="min-w-0 lg:col-span-5 lg:sticky lg:top-24 lg:self-start">
             <LeadCaptureForm
-              title={`${page.stateName} cardiology matches`}
-              subtitle="Share subspecialty and availability—cardiologists only."
+              title={`Let’s look in ${page.stateName}`}
+              subtitle={formSubtitleForPlace(page.stateName)}
               defaultSpecialty={prefill.defaultSpecialty}
               defaultPreferredStates={prefill.defaultPreferredStates}
               layout="sidebar"

@@ -1,8 +1,8 @@
 const items = [
-  { title: "Hospital-grade rigor", detail: "Credentialing and expectations handled with care" },
-  { title: "Malpractice clarity", detail: "Coverage confirmed in writing before you sign" },
-  { title: "Physician-first tone", detail: "Supportive guidance—not corporate recruiting theater" },
-  { title: "Nationwide footprint", detail: "Metro, community, academic, and rural access" },
+  { title: "Hospital-grade rigor", detail: "Credentialing handled with care" },
+  { title: "Malpractice clarity", detail: "Coverage in writing before you sign" },
+  { title: "Physician-first tone", detail: "Guidance—not recruiting theater" },
+  { title: "Nationwide footprint", detail: "Metro, community, academic, and rural" },
 ];
 
 export function TrustBar() {

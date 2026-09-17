@@ -13,7 +13,7 @@ const segments = [
   },
   {
     title: "Moonlighting doctors",
-    copy: "Add shifts with malpractice clarity and schedules that respect your primary role.",
+    copy: "Add shifts with malpractice clarity—and a schedule that respects your primary role.",
     tag: "Add-on",
   },
   {
@@ -29,8 +29,8 @@ export function Segments() {
       <div className="container-site">
         <SectionHeading
           eyebrow="Who we serve"
-          title="Four moments physicians quietly describe to us"
-          subtitle="You may not be searching for locums yet. You might simply want your weeks to feel survivable again. We start there—then explore what actually fits."
+          title="Four moments physicians quietly describe"
+          subtitle="You might not be “searching for locums.” You might just want your weeks to feel survivable again."
         />
 
         <div className="mt-10 grid grid-cols-1 gap-4 auto-rows-fr md:grid-cols-2">

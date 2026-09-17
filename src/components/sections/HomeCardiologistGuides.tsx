@@ -41,23 +41,21 @@ export function HomeCardiologistGuides() {
       <section className="border-b border-slate-100 py-14 sm:py-16">
         <div className="container-site max-w-3xl space-y-4 text-sm leading-relaxed text-slate-700">
           <h2 className="font-display text-2xl font-semibold text-slate-950 sm:text-3xl">
-            If cath lab call and clinic load feel unsustainable, you are not alone
+            If call and clinic load feel unsustainable, you are not alone
           </h2>
           <ul className="list-disc space-y-2 pl-5 marker:text-brand-600">
-            <li>Relentless cath lab or consult call and difficulty switching off</li>
-            <li>Hospital politics and admin load crowding out patient care</li>
-            <li>Loss of autonomy—or uncertainty about what comes next in cardiology</li>
-            <li>A pull toward flexibility, moonlighting, semi-retirement, or relocation</li>
-            <li>A wish for income that does not require sacrificing your health</li>
+            <li>Relentless cath lab or consult call</li>
+            <li>Admin load crowding out patient care</li>
+            <li>A pull toward flexibility, moonlighting, or scale-down</li>
+            <li>Income that does not require sacrificing your health</li>
           </ul>
           <p>
-            Cardiology locum tenens is one path among many. When it fits, it can offer defined blocks, clearer call and
-            cath lab boundaries, and a calmer way to stay clinical while you redesign life. When it does not fit, you
-            still deserve a thoughtful conversation with a cardiology recruiter—not a generic job blast.
+            Locums is one path. When it fits, you get defined blocks and clearer boundaries. When it doesn’t, you still
+            deserve a real conversation—not a job blast.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button href={HOME_LEAD_ANCHOR} className="justify-center">
-              {CTA.explore}
+              {CTA.requestMatches}
             </Button>
             <Button href="/locum-jobs/cardiology" variant="secondary" className="justify-center">
               Browse cardiology locum jobs →

@@ -13,6 +13,7 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Tier1DiscoveryHub } from "@/components/sections/Tier1DiscoveryHub";
+import { CTA } from "@/lib/site";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { HOME_FAQ } from "@/lib/faq";
@@ -38,12 +39,7 @@ export default function HomePage() {
 
       <section id="get-matched" className="scroll-mt-24 border-y border-slate-100 bg-slate-50/40 py-16 sm:py-20">
         <LeadFormStandaloneSection>
-          <LeadCaptureForm
-            id="lead-form"
-            title="Request cardiologist locum matches"
-            subtitle="Cardiologists only—share subspecialty, states, and timeline. We respond with realistic options, not a generic blast."
-            defaultSpecialty="General Cardiology"
-          />
+          <LeadCaptureForm id="lead-form" defaultSpecialty="General Cardiology" />
         </LeadFormStandaloneSection>
       </section>
 
@@ -59,14 +55,14 @@ export default function HomePage() {
               align="left"
               eyebrow="FAQ"
               title="Questions cardiologists ask about locum tenens"
-              subtitle="Still exploring? Start here—then submit an inquiry when you want specifics for your subspecialty and timeline."
+              subtitle="Skim the answers, then tell us what a good week would look like."
             />
             <div className="mt-8 space-y-4">
               <Button href="/cardiologist-locums-calculator" className="w-full justify-center sm:w-auto sm:min-w-0">
-                Calculate earning potential
+                Estimate pay
               </Button>
               <Button href={HOME_LEAD_ANCHOR} variant="secondary" className="w-full justify-center sm:w-auto sm:min-w-0">
-                Request matches
+                {CTA.requestMatches}
               </Button>
               <Button href="/faq" variant="secondary" className="w-full justify-center sm:w-auto sm:min-w-0">
                 View all FAQs

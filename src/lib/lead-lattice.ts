@@ -166,11 +166,19 @@ export const FEATURED_PROOF = {
     title: "North Carolina outpatient locum",
     detail: "Two weeks per month outpatient cardiology for part-time and scale-down schedules.",
   },
+  ohio: {
+    href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum",
+    title: "Ohio interventional locum",
+    detail: "ASAP 1–2 weeks/month IC coverage with 24-hour call and a written daily guarantee.",
+  },
 } as const;
 
 export function featuredProofForSpecialty(pathSlug: string) {
   if (pathSlug === "general" || pathSlug === "cardiac-imaging") {
     return [FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
+  }
+  if (pathSlug === "interventional") {
+    return [FEATURED_PROOF.ohio];
   }
   return [];
 }
@@ -206,6 +214,11 @@ export function geoProofForSpecialty(pathSlug: string) {
         href: "/locum-tenens-jobs/nevada/interventional-cardiology",
         title: "Nevada interventional locum jobs",
         detail: "Western shortage STEMI coverage and IMLC licensing paths.",
+      },
+      {
+        href: "/locum-tenens-jobs/ohio/interventional-cardiology",
+        title: "Ohio interventional locum jobs",
+        detail: "ASAP 1–2 week IC blocks with 24-hour call and a written daily guarantee.",
       },
     ];
   }

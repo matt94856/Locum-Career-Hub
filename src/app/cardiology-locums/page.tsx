@@ -3,7 +3,6 @@ import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { getCardiologyProgrammaticPageCount } from "@/lib/cardiology-programmatic";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { specialtyToSlug } from "@/lib/specialty-seo";
 import { US_STATE_SLUGS, getStateNameBySlug } from "@/lib/us-state-slugs";
@@ -20,8 +19,6 @@ export const metadata: Metadata = buildSerpMetadata({
 });
 
 export default function CardiologyLocumsHubPage() {
-  const pageCount = getCardiologyProgrammaticPageCount();
-
   return (
     <main className="pb-24 sm:pb-0">
       <section className="border-b border-slate-100 bg-gradient-to-b from-white to-slate-50 py-14 sm:py-16">
@@ -31,12 +28,11 @@ export default function CardiologyLocumsHubPage() {
             Cardiology locum jobs & guides
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Locum Career Hub recruits <strong className="font-semibold text-slate-800">cardiologists only</strong>—general,
-            interventional, EP, heart failure, imaging, structural, and preventive. Explore {pageCount}+ localized pages for
-            metros, settings, and career intent—then submit preferences for recruiter-led matching.
+            Cardiologists only—general, interventional, EP, and more. Browse by subspecialty or state, then tell us the
+            schedule you want.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/physician-opportunities#lead-form">{CTA.explore}</Button>
+            <Button href="/physician-opportunities#lead-form">{CTA.requestMatches}</Button>
             <Button href="/locum-tenens-jobs" variant="secondary">
               Browse by state
             </Button>
@@ -87,11 +83,7 @@ export default function CardiologyLocumsHubPage() {
 
       <section className="border-t border-slate-100 bg-slate-50/50 py-14 sm:py-16">
         <LeadFormStandaloneSection withTrustPanel={false}>
-          <LeadCaptureForm
-            title="Cardiologist inquiry"
-            subtitle="We recruit cardiologists only. Share subspecialty, states, and availability."
-            defaultSpecialty="General Cardiology"
-          />
+          <LeadCaptureForm defaultSpecialty="General Cardiology" />
         </LeadFormStandaloneSection>
       </section>
     </main>

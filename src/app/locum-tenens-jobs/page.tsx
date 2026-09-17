@@ -8,6 +8,7 @@ import { GuideCardLink } from "@/components/ui/GuideCardLink";
 import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { TIER1_STATE_LINKS } from "@/lib/seo/tier1-discovery";
 import { buildLocumJobsHubSerpMetadata } from "@/lib/serp-ctr";
+import { CTA } from "@/lib/site";
 import { specialtyStatePath } from "@/lib/specialty-state-seo";
 
 export const metadata: Metadata = buildLocumJobsHubSerpMetadata();
@@ -22,13 +23,11 @@ export default function LocumTenensJobsHubPage() {
             Cardiologist locum jobs—by state and subspecialty
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Locum Career Hub recruits cardiologists only (MD/DO). Pick a state hub, then open a subspecialty page for
-            localized intent—for example, interventional cardiology in Texas or general cardiology consult blocks in
-            Florida.
+            Cardiologists only. Pick a state, then a subspecialty—or skip ahead and tell us the schedule you want.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form" className="justify-center">
-              Request matches
+              {CTA.requestMatches}
             </Button>
             <Button href="/specialties" variant="secondary" className="justify-center">
               Browse specialties →

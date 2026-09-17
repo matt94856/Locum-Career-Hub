@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { trackBookingClick, trackCtaClick } from "@/lib/analytics-events";
-import { SITE } from "@/lib/site";
+import { CTA, SITE } from "@/lib/site";
 
 export function StickyMobileCta() {
   const pathname = usePathname();
@@ -58,7 +58,7 @@ export function StickyMobileCta() {
             )
           }
         >
-          {isFeaturedOpportunity ? "Ask about job" : "Request matches"}
+          {isFeaturedOpportunity ? "Ask about job" : CTA.requestMatches}
         </Button>
         <Button
           href={`tel:${SITE.phoneTel}`}

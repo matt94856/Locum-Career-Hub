@@ -16,7 +16,8 @@ import {
   screensForSpecialty,
   type CareerStageId,
 } from "@/lib/lead-lattice";
-import { SITE } from "@/lib/site";
+import { CTA, SITE } from "@/lib/site";
+import { FORM_CHIPS, FORM_EYEBROW, FORM_SUBTITLE, FORM_TITLE } from "@/lib/marketing-copy";
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
 
@@ -55,7 +56,7 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <fieldset className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5 sm:p-6">
+    <fieldset className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm sm:p-6">
       <legend className="px-1 font-display text-sm font-semibold tracking-tight text-slate-950">{title}</legend>
       {description ? <p className="mb-4 mt-1 max-w-2xl text-xs leading-relaxed text-slate-600">{description}</p> : null}
       <div className="grid gap-4 lg:grid-cols-2">{children}</div>
@@ -77,8 +78,8 @@ export type LeadCaptureFormProps = {
 
 export function LeadCaptureForm({
   id = "lead-form",
-  title = "Cardiologist inquiry",
-  subtitle = "Share a few details and we will follow up with realistic cardiology locum options—not a generic blast.",
+  title = FORM_TITLE,
+  subtitle = FORM_SUBTITLE,
   defaultSpecialty = "General Cardiology",
   defaultPreferredStates = [],
   defaultCareerStage,
@@ -303,41 +304,54 @@ export function LeadCaptureForm({
   return (
     <div
       id={id}
-      className={`scroll-mt-24 rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:rounded-3xl sm:p-8 lg:p-10 ${isSidebar ? "" : "w-full"} ${className}`.trim()}
+      className={`scroll-mt-24 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-card sm:rounded-3xl ${isSidebar ? "" : "w-full"} ${className}`.trim()}
     >
-      <div className={`border-b border-slate-100 pb-6 ${isSidebar ? "max-w-2xl" : ""}`}>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Cardiologist inquiry (MD/DO)</p>
-        <h2 className="mt-3 font-display text-2xl font-normal tracking-tight text-slate-950 sm:text-3xl">{title}</h2>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{subtitle}</p>
-        <div className="mt-5">
-          <LeadFormAltActions source={isSidebar ? "sidebar" : "full"} compact={isSidebar} />
-        </div>
-        <div className="mt-5 flex items-center gap-3 text-xs text-slate-500" aria-label="Form progress">
-          <span
-            aria-current={step === 1 ? "step" : undefined}
-            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 1 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
-          >
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">1</span>
-            Contact
-          </span>
-          <span className="text-slate-300" aria-hidden>
-            →
-          </span>
-          <span
-            aria-current={step === 2 ? "step" : undefined}
-            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 2 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
-          >
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">2</span>
-            Preferences
-          </span>
-        </div>
+      <div className={`relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-brand-900 px-6 py-7 text-white sm:px-8 sm:py-8 ${isSidebar ? "max-w-2xl" : ""}`}>
+        <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-brand-400/25 blur-3xl" />
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-200">{FORM_EYEBROW}</p>
+        <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200 sm:text-[15px]">{subtitle}</p>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {FORM_CHIPS.map((chip) => (
+            <li
+              key={chip}
+              className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold text-brand-100"
+            >
+              {chip}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <form
-        ref={formRef}
-        className="relative mt-8 flex flex-col gap-8 lg:gap-10"
-        onSubmit={step === 1 ? onContinueToStep2 : onFullSubmit}
-      >
+      <div className="p-6 sm:p-8 lg:p-10">
+        <div className={isSidebar ? "max-w-2xl" : ""}>
+          <LeadFormAltActions source={isSidebar ? "sidebar" : "full"} compact={isSidebar} />
+          <div className="mt-5 flex items-center gap-3 text-xs text-slate-500" aria-label="Form progress">
+            <span
+              aria-current={step === 1 ? "step" : undefined}
+              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 1 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
+            >
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">1</span>
+              Contact
+            </span>
+            <span className="text-slate-300" aria-hidden>
+              →
+            </span>
+            <span
+              aria-current={step === 2 ? "step" : undefined}
+              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 2 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
+            >
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">2</span>
+              Preferences
+            </span>
+          </div>
+        </div>
+
+        <form
+          ref={formRef}
+          className="relative mt-8 flex flex-col gap-8 lg:gap-10"
+          onSubmit={step === 1 ? onContinueToStep2 : onFullSubmit}
+        >
         <input
           type="text"
           name="companyWebsite"
@@ -347,7 +361,7 @@ export function LeadCaptureForm({
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
         <div className={step === 1 ? "" : "hidden"}>
-          <FormSection title="Step 1 — Contact" description="Name, email, phone, subspecialty, and how you want to work. Preferences come next.">
+          <FormSection title="Step 1 — Contact" description="How to reach you, and how you like to work.">
             <label className="lg:col-span-1">
               <FieldLabel required>First name</FieldLabel>
               <input
@@ -445,7 +459,7 @@ export function LeadCaptureForm({
             {screeningQuestions.length > 0 ? (
               <FormSection
                 title="Assignment fit"
-                description="Optional—two questions that keep us from sending the wrong cath lab, clinic, or EP lab."
+                description="Optional—keeps the wrong cath lab or clinic off your list."
               >
                 {screeningQuestions.map((question) => (
                   <label key={question.id} className="lg:col-span-1">
@@ -639,7 +653,7 @@ export function LeadCaptureForm({
                   ← Back
                 </Button>
                 <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
-                  {status === "submitting" ? "Submitting…" : "Submit inquiry"}
+                  {status === "submitting" ? "Submitting…" : CTA.requestMatches}
                 </Button>
                 <Button
                   type="button"
@@ -653,8 +667,7 @@ export function LeadCaptureForm({
                 </Button>
               </div>
               <p className="text-xs text-slate-500">
-                Full submit includes experience and travel for faster matching. Lighter submit still requires states,
-                timeline, and security verification.
+                Full submit includes experience and travel. Lighter submit still needs states, timeline, and verification.
               </p>
             </>
           )}
@@ -671,6 +684,7 @@ export function LeadCaptureForm({
           </p>
         </div>
       </form>
+      </div>
     </div>
   );
 }

@@ -15,11 +15,10 @@ export function RecruiterCta() {
             <div className="min-w-0 lg:col-span-7">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-100">Physician desk</p>
               <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                A conversation that starts with your life—not a quota
+                Let’s find work that pays well—and still leaves you room
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
-                If you want schedule relief, travel optionality, or a quieter path through a hard season, we map
-                realistic options and timelines. No spam. No bait-and-switch rates.
+                Lucrative locum blocks, on a schedule you control. No spam. No bait-and-switch rates.
               </p>
               <div className="mt-6 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
                 <CalendlyBookButton source="recruiter_cta" className="w-full justify-center" />

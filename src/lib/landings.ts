@@ -274,6 +274,7 @@ export const LANDING_PAGES: LandingPage[] = [
       { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
       { href: "/locum-jobs/cardiology/electrophysiology", title: "Electrophysiology locum jobs" },
       { href: "/cardiology-locum-jobs/cardiology-moonlighting-jobs", title: "Cardiology moonlighting guide" },
+      { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
     ],
     answer:
       "Cardiologist moonlighting is extra clinical work around a primary employed role—weekend cath lab, consults, clinic, reads, or device coverage—only after employer policy, malpractice, and fatigue limits are clear.",
@@ -389,6 +390,12 @@ export const LANDING_PAGES: LandingPage[] = [
       "Travel stipends and malpractice structure reviewed before you fly",
     ],
     relatedSlugs: ["national-locum-tenens-jobs-guide", "cardiologist-travel-locums", "part-time-physician-jobs"],
+    relatedLinks: [
+      { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
+      { href: "/interventional-cardiology-locums-pay", title: "Interventional locums pay" },
+      { href: "/locum-tenens-jobs/ohio/interventional-cardiology", title: "Ohio interventional locum jobs" },
+      { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
+    ],
   },
   {
     slug: "cardiologist-travel-locums",
