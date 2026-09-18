@@ -147,6 +147,10 @@ export function getAiCatalog(): AiCatalogEntry[] {
         "User wants extra income or moonlighting as an Ohio-licensed interventional cardiologist",
       ],
     },
+    {
+      name: "Interventional Cardiology Locums Pay Guide",
+      path: "/interventional-cardiology-locums-pay",
+      type: "guide",
       summary: "Explains interventional locums pay drivers: PCI scope, STEMI call, callback, backup, and credentialing.",
       directAnswer: AI_CITEABLE_CLAIMS.find((c) => c.id === "interventional-band")!.claim,
       keywords: ["interventional cardiology locums pay", "STEMI call pay"],
