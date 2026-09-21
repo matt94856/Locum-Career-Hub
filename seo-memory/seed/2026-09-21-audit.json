@@ -1,0 +1,95 @@
+{
+  "date": "2026-09-21",
+  "period_start": "2026-06-23",
+  "period_end": "2026-09-20",
+  "pages_analyzed": 25,
+  "priority_level": "high",
+  "expected_traffic_impact": "high — close inquiry form leak; then CTR on EP salary, homepage, cardiac imaging",
+  "source": "gsc-csv-jul21 + ga4-csv-sep21",
+  "traffic_clicks": 42,
+  "traffic_impressions": 14309,
+  "traffic_ctr": 0.00294,
+  "traffic_position": 42.77,
+  "clicks_pct_change": null,
+  "impressions_pct_change": null,
+  "summary": "GA4 Jun 23–Sep 20: 100 organic sessions (60% engaged) but 0 generate_lead. 70 users viewed the inquiry form and 5 started it. GSC export is stale (May 11–Jul 19): 42 clicks / 14.3k impressions / 0.29% CTR. Highest ROI is form completion plus concentrating crawl on NY/TN/OH specialty pages, calculator, and EP salary CTR — not more thin URLs.",
+  "problems_found": [
+    {
+      "issue": "Inquiry form views do not become leads",
+      "target": "https://www.locumcareerhub.com/",
+      "why": "118 lead_form_view / 70 users, 12 form_start / 5 users, 0 generate_lead in 90d"
+    },
+    {
+      "issue": "generate_lead not marked as GA4 key event",
+      "target": "GA4 key events",
+      "why": "All landing and acquisition reports show 0 key events"
+    },
+    {
+      "issue": "Homepage impression sink with short sessions",
+      "target": "https://www.locumcareerhub.com/",
+      "why": "GSC 736 impr / 2 clicks / 0.27% CTR @ #45; GA4 197 sessions, 12s (90d)"
+    },
+    {
+      "issue": "EP salary near-win with zero CTR",
+      "target": "https://www.locumcareerhub.com/salary/electrophysiologist-salary",
+      "why": "Query 84 impr @ #10.5, 0 clicks; page 201 impr @ #14.6, 0 clicks"
+    },
+    {
+      "issue": "Index bloat and leftover non-cardiology URLs",
+      "target": "sitewide programmatic leftovers",
+      "why": "463 discovered-not-indexed + 98 crawled-not-indexed (Jul); FM/psych/CRNA/hospitalist still ranking"
+    },
+    {
+      "issue": "Duplicate NY EP URL family",
+      "target": "https://www.locumcareerhub.com/jobs/new-york/electrophysiology",
+      "why": "3 clicks @ #13 vs canonical locum-tenens-jobs URL 7 clicks @ #10"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "p0",
+      "type": "conversion",
+      "target": "https://www.locumcareerhub.com/",
+      "recommendation": "Collapse public inquiry to one step; production-test recaptcha and /api/lead; mark generate_lead as a GA4 key event"
+    },
+    {
+      "priority": "p0",
+      "type": "title_rewrite",
+      "target": "https://www.locumcareerhub.com/salary/electrophysiologist-salary",
+      "recommendation": "Match electrophysiologist salary query; CTA to calculator and EP locum jobs"
+    },
+    {
+      "priority": "p0",
+      "type": "internal_linking",
+      "target": "https://www.locumcareerhub.com/locum-tenens-jobs/new-york/electrophysiology",
+      "recommendation": "Keep unique NY EP page; 301 /jobs/ duplicate; add form + calculator links"
+    },
+    {
+      "priority": "p1",
+      "type": "rank_push",
+      "target": "https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging",
+      "recommendation": "CTR title/snippet at position 9.2; deepen echo/MRI/CT/TEE proof"
+    },
+    {
+      "priority": "p1",
+      "type": "content",
+      "target": "https://www.locumcareerhub.com/locum-tenens-jobs/tennessee/electrophysiology",
+      "recommendation": "NY-EP-level unique copy; 4 GA4 sessions with 312s engagement"
+    },
+    {
+      "priority": "p1",
+      "type": "internal_linking",
+      "target": "https://www.locumcareerhub.com/featured-cardiology-jobs/ohio-interventional-cardiology-locum",
+      "recommendation": "Link Ohio IC/EP/state pages to the featured job so it can index"
+    },
+    {
+      "priority": "p2",
+      "type": "footprint",
+      "target": "off-niche URLs",
+      "recommendation": "Noindex remaining non-cardiology programmatic; stop new city shells until hubs rank"
+    }
+  ],
+  "completed_actions": [],
+  "gsc_note": "Search Console CSVs last written 2026-07-21; chart ends 2026-07-19. Do not treat as current rankings.",
+  "ga4_note": "Landing page exports are All Users, not Organic Search. Organic quality comes from Traffic acquisition."
+}

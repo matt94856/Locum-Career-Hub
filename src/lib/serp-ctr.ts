@@ -197,7 +197,7 @@ export function buildCardiologySpecialtySerpMetadata(spec: {
   titleKeyword: string;
 }): Metadata {
   const titleOverride: Record<string, string> = {
-    "cardiac-imaging": "Cardiac Imaging Locum Jobs | Echo, MRI & CT",
+    "cardiac-imaging": "Cardiac Imaging Locum Jobs | Attending Echo/CT",
     electrophysiology: "EP Locum Jobs | Ablation, Devices & Call",
     general: "General Cardiology Locum Jobs | Consult & Clinic",
     interventional: "Interventional Cardiology Locum Jobs | STEMI",
@@ -241,6 +241,11 @@ const PRIORITY_STATE_SERP: Record<string, { title: string; hook: string; proof: 
     hook: "Texas cardiologist locum jobs across Houston, Dallas, Austin, and San Antonio markets.",
     proof: "IMLC pathway plus call and stipend norms by metro.",
   },
+  ohio: {
+    title: "Ohio Cardiology Locum Jobs | IC, EP & IMLC",
+    hook: "Ohio cardiologist locum jobs—including a current 1–2 weeks/month interventional opening with written daily pay.",
+    proof: "IMLC-eligible licensing notes plus STEMI, consult, and EP context.",
+  },
   tennessee: {
     title: "Tennessee Cardiology Locum Jobs | Rates & Licensing",
     hook: "Tennessee cardiology locum coverage for community and regional systems.",
@@ -278,6 +283,16 @@ const PRIORITY_SPECIALTY_STATE_SERP: Record<string, { title: string; hook: strin
     title: "NY Electrophysiology Locum Jobs | Ablation",
     hook: "New York EP locum jobs with ablation, devices, and arrhythmia call documented before you start.",
     proof: "NYC, Buffalo, Rochester, and Albany privileging paths—not a generic board blast.",
+  },
+  "tennessee/electrophysiology": {
+    title: "Tennessee EP Locum Jobs | Ablation",
+    hook: "Tennessee EP locum jobs with ablation, devices, and arrhythmia call documented before you start.",
+    proof: "Nashville, Memphis, Knoxville, and Chattanooga privileging—not a generic board blast.",
+  },
+  "ohio/interventional-cardiology": {
+    title: "Ohio Interventional Locum Jobs | STEMI",
+    hook: "Ohio IC locums including 1–2 weeks/month blocks with a written daily guarantee and callback pay.",
+    proof: "Currently recruiting an Ohio interventional locum—review the featured opening, then request a match.",
   },
 };
 

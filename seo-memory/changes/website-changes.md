@@ -2,6 +2,86 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-09-21 — `https://www.locumcareerhub.com/locum-tenens-jobs/tennessee/electrophysiology`
+
+- Type: `content`
+- Status: shipped
+- Before: Template specialty-state copy
+- After: Tennessee EP unique copy; cluster links from EP hub, pay guide, and salary page
+- Reason: TN EP already had 100% CTR on tiny volume plus 312s GA4 engagement; deepen instead of chasing new URLs.
+- Expected: More qualified EP sessions on NY/TN pages and EP pay.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/locum-tenens-jobs/ohio/interventional-cardiology`
+
+- Type: `content`
+- Status: shipped
+- Before: Template specialty-state copy
+- After: Ohio IC unique copy plus featured 1-2 weeks/month job with written / callback
+- Reason: Live IC opening should rank and convert from Ohio IC searches, not sit as an orphan featured URL.
+- Expected: Clicks from Ohio IC queries into the featured job inquiry form.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/jobs`
+
+- Type: `redirect`
+- Status: shipped
+- Before: No hub redirect for /jobs
+- After: Permanent redirect /jobs -> /locum-tenens-jobs; /jobs/:state/:specialty already 301s
+- Reason: GSC still listed duplicate /jobs/ NY EP URLs after path 301s.
+- Expected: Duplicate /jobs URLs consolidate; crawl budget on canonical locum-tenens-jobs URLs.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/ep-cardiology-locums-pay`
+
+- Type: `title`
+- Status: shipped
+- Before: EP Cardiology Locums Pay and Opportunity Guide
+- After: EP Cardiology Locums Pay | ,800-,200/Day
+- Reason: EP pay and NY/TN EP pages already convert relative to size; titles and internal links deepen the cluster.
+- Expected: More clicks from EP pay queries into NY and TN EP locum pages.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `title`
+- Status: shipped
+- Before: Interventional Cardiology Locums Pay and Rate Drivers
+- After: Interventional Cardiology Locums Pay | ,200/Day
+- Reason: Pay page had impressions at ~#10 with weak CTR; number in title plus Ohio featured job link.
+- Expected: Higher CTR and more clicks through to the Ohio IC featured job.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/#get-matched`
+
+- Type: `conversion`
+- Status: shipped
+- Before: Two-step inquiry; recaptcha and submit only on step 2; states/availability required.
+- After: One-step Find my match; recaptcha on first screen; states/timeline optional; API accepts quick leads without states.
+- Reason: GA4 showed ~70 form viewers / 5 starts / 0 generate_lead; step 2 was the bottleneck.
+- Expected: More form_submit and generate_lead from the same organic sessions.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging`
+
+- Type: `title`
+- Status: shipped
+- Before: Cardiac Imaging Locum Jobs | Echo, MRI & CT
+- After: Cardiac Imaging Locum Jobs | Attending Echo/CT
+- Reason: Page ranks ~#9 for locum cardiac imaging fellowship jobs with 0 clicks; SERP and on-page now disambiguate attending locums vs fellowship.
+- Expected: CTR up from attending imagers; fewer wasted fellowship-intent impressions.
+- Actual: pending
+
+## 2026-09-21 — `https://www.locumcareerhub.com/`
+
+- Type: `title`
+- Status: shipped
+- Before: Cardiologist Locum Jobs | General, IC & EP
+- After: Cardiologist Locum Jobs | IC, EP & Recruiter
+- Reason: Homepage CTR is 1.09% at ~#23; title now names recruiter match vs a generic job board.
+- Expected: Higher homepage CTR from recruiter-intent queries without changing HOME_H1.
+- Actual: pending
+
 ## 2026-09-11 — `https://www.locumcareerhub.com/moonlighting-physician-jobs`
 
 - Type: `content`

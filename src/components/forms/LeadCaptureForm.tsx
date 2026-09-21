@@ -21,6 +21,18 @@ import { FORM_CHIPS, FORM_EYEBROW, FORM_SUBTITLE, FORM_TITLE } from "@/lib/marke
 
 const recaptchaSiteConfigured = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
 
+function normalizeFormSpecialty(value: string): string {
+  if ((CARDIOLOGY_SUBSPECIALTIES as readonly string[]).includes(value)) return value;
+  if (/imaging/i.test(value)) return "Advanced Imaging";
+  if (/interventional/i.test(value)) return "Interventional Cardiology";
+  if (/electro/i.test(value)) return "Electrophysiology";
+  if (/heart failure|hf/i.test(value)) return "Heart Failure";
+  if (/pediatric/i.test(value)) return "Pediatric Cardiology";
+  if (/preventive/i.test(value)) return "Preventive Cardiology";
+  if (/structural/i.test(value)) return "Structural Heart";
+  return "General Cardiology";
+}
+
 const experienceOptions = [
   "Still in training",
   "0–2 years",
@@ -87,7 +99,6 @@ export function LeadCaptureForm({
   className = "",
 }: LeadCaptureFormProps) {
   const router = useRouter();
-  const [step, setStep] = useState<1 | 2>(1);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const validDefaultStates = useMemo(
@@ -100,7 +111,8 @@ export function LeadCaptureForm({
   const [captchaLoadError, setCaptchaLoadError] = useState(false);
   const recaptchaRef = useRef<RecaptchaFieldHandle>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [specialty, setSpecialty] = useState(defaultSpecialty);
+  const startedRef = useRef(false);
+  const [specialty, setSpecialty] = useState(() => normalizeFormSpecialty(defaultSpecialty));
   const [careerStage, setCareerStage] = useState(defaultCareerStage ?? "");
 
   useEffect(() => {
@@ -126,6 +138,12 @@ export function LeadCaptureForm({
     });
   };
 
+  function markFormStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent("form_start", { form_layout: layout, page_path: window.location.pathname });
+  }
+
   function readPayload(form: HTMLFormElement, formMode: "quick" | "full") {
     const fd = new FormData(form);
     const preferredStates = [...selectedStates].sort((a, b) => a.localeCompare(b));
@@ -146,7 +164,7 @@ export function LeadCaptureForm({
       yearsExperience:
         String(fd.get("yearsExperience") ?? "").trim() ||
         (formMode === "quick" ? "Not provided (quick submit)" : ""),
-      availability: String(fd.get("availability") ?? "").trim(),
+      availability: String(fd.get("availability") ?? "").trim() || "Exploring / no firm date",
       travel: String(fd.get("travel") ?? "").trim() || (formMode === "quick" ? "maybe" : ""),
       clinicalNotes: String(fd.get("clinicalNotes") ?? "").trim() || null,
       smsOptIn: fd.get("smsOptIn") === "on",
@@ -159,11 +177,7 @@ export function LeadCaptureForm({
     };
   }
 
-  function validatePayload(
-    payload: ReturnType<typeof readPayload>,
-    formMode: "quick" | "full",
-    stage: "step1" | "submit" = "submit",
-  ): string | null {
+  function validatePayload(payload: ReturnType<typeof readPayload>): string | null {
     if (!payload.firstName || !payload.lastName || !payload.email || !payload.phone) {
       return "Please complete your name, email, and phone so we can respond.";
     }
@@ -172,18 +186,6 @@ export function LeadCaptureForm({
     }
     if (!payload.careerStage || !isCareerStageId(payload.careerStage)) {
       return "Select the career stage that best matches how you want to work.";
-    }
-    if (stage === "step1") return null;
-    if (!payload.availability) {
-      return "Select your availability timeline.";
-    }
-    if (payload.preferredStates.length === 0) {
-      return "Select at least one state where you would consider working.";
-    }
-    if (formMode === "full") {
-      if (!payload.yearsExperience || !payload.travel) {
-        return "Complete experience and travel preference before submitting.";
-      }
     }
     return null;
   }
@@ -201,15 +203,20 @@ export function LeadCaptureForm({
     return null;
   }
 
-  async function submitForm(formMode: "quick" | "full") {
+  async function submitForm() {
     const form = formRef.current;
     if (!form) return;
 
     setStatus("submitting");
     setError(null);
 
+    const fd = new FormData(form);
+    const hasExperience = Boolean(String(fd.get("yearsExperience") ?? "").trim());
+    const hasTravel = Boolean(String(fd.get("travel") ?? "").trim());
+    const formMode: "quick" | "full" = hasExperience && hasTravel ? "full" : "quick";
+
     const payload = readPayload(form, formMode);
-    const validationError = validatePayload(payload, formMode, "submit");
+    const validationError = validatePayload(payload);
     if (validationError) {
       setStatus("error");
       setError(validationError);
@@ -220,7 +227,6 @@ export function LeadCaptureForm({
     if (captchaError) {
       setStatus("error");
       setError(captchaError);
-      if (step === 1) setStep(2);
       return;
     }
 
@@ -236,6 +242,7 @@ export function LeadCaptureForm({
         code?: string;
       } | null;
       if (!res.ok) {
+        recaptchaRef.current?.reset();
         setStatus("error");
         if (data?.code === "SUPABASE_NOT_CONFIGURED") {
           setError(
@@ -253,7 +260,7 @@ export function LeadCaptureForm({
       });
       trackEvent("form_submit", {
         form_mode: formMode,
-        form_step: formMode === "quick" ? 1 : 2,
+        form_step: 1,
         specialty: payload.specialty,
         career_stage: payload.careerStage,
       });
@@ -267,36 +274,15 @@ export function LeadCaptureForm({
 
       router.push(`/thank-you?${params.toString()}`);
     } catch {
+      recaptchaRef.current?.reset();
       setStatus("error");
       setError("Something went wrong. Please call us or try again in a moment.");
     }
   }
 
-  function onContinueToStep2(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const form = formRef.current;
-    if (!form) return;
-    const payload = readPayload(form, "quick");
-    const validationError = validatePayload(payload, "quick", "step1");
-    if (validationError) {
-      setStatus("error");
-      setError(validationError);
-      return;
-    }
-    setError(null);
-    setStatus("idle");
-    setStep(2);
-    trackEvent("form_step", { step: 2, action: "continue" });
-  }
-
-  function onQuickSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    void submitForm("quick");
-  }
-
-  function onFullSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    void submitForm("full");
+    void submitForm();
   }
 
   const isSidebar = layout === "sidebar";
@@ -326,31 +312,13 @@ export function LeadCaptureForm({
       <div className="p-6 sm:p-8 lg:p-10">
         <div className={isSidebar ? "max-w-2xl" : ""}>
           <LeadFormAltActions source={isSidebar ? "sidebar" : "full"} compact={isSidebar} />
-          <div className="mt-5 flex items-center gap-3 text-xs text-slate-500" aria-label="Form progress">
-            <span
-              aria-current={step === 1 ? "step" : undefined}
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 1 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
-            >
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">1</span>
-              Contact
-            </span>
-            <span className="text-slate-300" aria-hidden>
-              →
-            </span>
-            <span
-              aria-current={step === 2 ? "step" : undefined}
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold ${step === 2 ? "bg-brand-100 text-brand-800" : "bg-slate-100 text-slate-600"}`}
-            >
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-white text-[10px]">2</span>
-              Preferences
-            </span>
-          </div>
         </div>
 
         <form
           ref={formRef}
           className="relative mt-8 flex flex-col gap-8 lg:gap-10"
-          onSubmit={step === 1 ? onContinueToStep2 : onFullSubmit}
+          onSubmit={onSubmit}
+          onFocusCapture={markFormStart}
         >
         <input
           type="text"
@@ -360,8 +328,7 @@ export function LeadCaptureForm({
           aria-hidden="true"
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
-        <div className={step === 1 ? "" : "hidden"}>
-          <FormSection title="Step 1 — Contact" description="How to reach you, and how you like to work.">
+        <FormSection title="How to reach you" description="Name, contact, and how you like to work. States and dates can wait.">
             <label className="lg:col-span-1">
               <FieldLabel required>First name</FieldLabel>
               <input
@@ -452,10 +419,16 @@ export function LeadCaptureForm({
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
               />
             </label>
-          </FormSection>
-        </div>
-        {step === 2 ? (
-          <>
+        </FormSection>
+
+        <details className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-5 sm:p-6">
+          <summary className="cursor-pointer font-display text-sm font-semibold text-slate-950">
+            Add preferred states and timeline (optional)
+          </summary>
+          <p className="mt-2 text-xs leading-relaxed text-slate-600">
+            Skip this if you are exploring. We can still follow up from contact details alone.
+          </p>
+          <div className="mt-6 flex flex-col gap-8">
             {screeningQuestions.length > 0 ? (
               <FormSection
                 title="Assignment fit"
@@ -541,18 +514,14 @@ export function LeadCaptureForm({
               </div>
             </FormSection>
 
-            <FormSection title="Step 2 — Timeline and preferences">
+            <FormSection title="Timeline and preferences">
               <label className="lg:col-span-1">
-                <FieldLabel required>When could you start?</FieldLabel>
+                <FieldLabel>When could you start?</FieldLabel>
                 <select
                   name="availability"
                   className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                  defaultValue=""
-                  required
+                  defaultValue="Exploring / no firm date"
                 >
-                  <option value="" disabled>
-                    Select timeline
-                  </option>
                   {availabilityOptions.map((x) => (
                     <option key={x} value={x}>
                       {x}
@@ -561,16 +530,13 @@ export function LeadCaptureForm({
                 </select>
               </label>
               <label className="lg:col-span-1">
-                <FieldLabel required>Years of experience</FieldLabel>
+                <FieldLabel>Years of experience</FieldLabel>
                 <select
                   name="yearsExperience"
                   className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
                   defaultValue=""
-                  required
                 >
-                  <option value="" disabled>
-                    Select
-                  </option>
+                  <option value="">Skip for now</option>
                   {experienceOptions.map((x) => (
                     <option key={x} value={x}>
                       {x}
@@ -579,7 +545,7 @@ export function LeadCaptureForm({
                 </select>
               </label>
               <div className="lg:col-span-2">
-                <FieldLabel required>Travel interest</FieldLabel>
+                <FieldLabel>Travel interest</FieldLabel>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {(
                     [
@@ -592,43 +558,44 @@ export function LeadCaptureForm({
                       key={o.v}
                       className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50"
                     >
-                      <input type="radio" name="travel" value={o.v} required className="accent-brand-600" />
+                      <input type="radio" name="travel" value={o.v} className="accent-brand-600" />
                       {o.label}
                     </label>
                   ))}
                 </div>
               </div>
-              <label className="lg:col-span-2 flex cursor-pointer items-start gap-3 rounded-xl border border-brand-200 bg-brand-50/40 p-4 text-sm text-slate-700 shadow-sm">
-                <input name="smsOptIn" type="checkbox" className="mt-1 size-4 accent-brand-600" />
-                <span>
-                  <span className="font-semibold text-slate-900">Text me about time-sensitive cardiology openings</span>
-                  <span className="mt-1 block text-xs text-slate-600">
-                    Message/data rates may apply. Reply STOP to opt out.
-                  </span>
-                </span>
-              </label>
-              <label className="lg:col-span-2 flex cursor-pointer items-start gap-3 rounded-xl border border-brand-100 bg-brand-50/50 p-4 text-sm text-slate-700 shadow-sm">
-                <input name="leadMagnet" type="checkbox" className="mt-1 size-4 accent-brand-600" defaultChecked />
-                <span>
-                  <span className="font-semibold text-slate-900">Email me “The Physician’s Guide to Locum Tenens”</span>
-                  <span className="mt-1 block text-xs text-slate-600">Sent to the email from step 1.</span>
-                </span>
-              </label>
             </FormSection>
+          </div>
+        </details>
 
-            <RecaptchaField
-              ref={recaptchaRef}
-              onReady={() => {
-                setCaptchaReady(true);
-                setCaptchaLoadError(false);
-              }}
-              onLoadError={() => {
-                setCaptchaLoadError(true);
-                setCaptchaReady(false);
-              }}
-            />
-          </>
-        ) : null}
+        <RecaptchaField
+          ref={recaptchaRef}
+          onReady={() => {
+            setCaptchaReady(true);
+            setCaptchaLoadError(false);
+          }}
+          onLoadError={() => {
+            setCaptchaLoadError(true);
+            setCaptchaReady(false);
+          }}
+        />
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-brand-200 bg-brand-50/40 p-4 text-sm text-slate-700 shadow-sm">
+          <input name="smsOptIn" type="checkbox" className="mt-1 size-4 accent-brand-600" />
+          <span>
+            <span className="font-semibold text-slate-900">Text me about time-sensitive cardiology openings</span>
+            <span className="mt-1 block text-xs text-slate-600">
+              Message/data rates may apply. Reply STOP to opt out.
+            </span>
+          </span>
+        </label>
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-brand-100 bg-brand-50/50 p-4 text-sm text-slate-700 shadow-sm">
+          <input name="leadMagnet" type="checkbox" className="mt-1 size-4 accent-brand-600" defaultChecked />
+          <span>
+            <span className="font-semibold text-slate-900">Email me “The Physician’s Guide to Locum Tenens”</span>
+            <span className="mt-1 block text-xs text-slate-600">Sent to the email above.</span>
+          </span>
+        </label>
 
         {status === "error" && error ? (
           <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">
@@ -637,40 +604,12 @@ export function LeadCaptureForm({
         ) : null}
 
         <div className="flex flex-col gap-3 border-t border-slate-100 pt-6">
-          {step === 1 ? (
-            <>
-              <Button type="submit" size="md" className="w-full sm:w-auto">
-                Continue to preferences
-              </Button>
-              <p className="text-xs text-slate-500">
-                Next: preferred states, timeline, and a short security check—then submit.
-              </p>
-            </>
-          ) : (
-            <>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <Button type="button" variant="ghost" size="md" className="w-full sm:w-auto" onClick={() => setStep(1)}>
-                  ← Back
-                </Button>
-                <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
-                  {status === "submitting" ? "Submitting…" : CTA.requestMatches}
-                </Button>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="md"
-                  className="w-full sm:w-auto"
-                  disabled={status === "submitting"}
-                  onClick={onQuickSubmit}
-                >
-                  {status === "submitting" ? "Submitting…" : "Submit without experience details"}
-                </Button>
-              </div>
-              <p className="text-xs text-slate-500">
-                Full submit includes experience and travel. Lighter submit still needs states, timeline, and verification.
-              </p>
-            </>
-          )}
+          <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
+            {status === "submitting" ? "Submitting…" : CTA.requestMatches}
+          </Button>
+          <p className="text-xs text-slate-500">
+            One form. We reply with realistic matches—or a plain no if nothing fits.
+          </p>
           <p className="text-xs leading-relaxed text-slate-500">
             By submitting, you agree we may contact you about opportunities. This is not an employment offer. See our{" "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/privacy">

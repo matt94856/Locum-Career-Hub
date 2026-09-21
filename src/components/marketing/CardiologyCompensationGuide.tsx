@@ -43,6 +43,16 @@ export function CardiologyCompensationGuide({
                 Ohio IC locum (1–2 wks/mo)
               </Button>
             ) : null}
+            {path === "/ep-cardiology-locums-pay" ? (
+              <>
+                <Button href="/locum-tenens-jobs/new-york/electrophysiology" variant="secondary">
+                  New York EP locums
+                </Button>
+                <Button href="/locum-tenens-jobs/tennessee/electrophysiology" variant="secondary">
+                  Tennessee EP locums
+                </Button>
+              </>
+            ) : null}
           </div>
         </div>
       </section>
@@ -111,6 +121,7 @@ export function CardiologyCompensationGuide({
           <Link href="/tools/cardiology-locum-offer-comparison" className="font-semibold text-brand-700 hover:underline">Compare locum offers</Link>
           <Link href="/tools/cardiology-call-burden-calculator" className="font-semibold text-brand-700 hover:underline">Calculate call burden</Link>
           <Link href="/tools/w2-vs-1099-physician" className="font-semibold text-brand-700 hover:underline">W-2 vs 1099</Link>
+          <Link href="/cardiologist-locums-calculator" className="font-semibold text-brand-700 hover:underline">Cardiologist locums calculator</Link>
           <Link href="/content-review-policy" className="font-semibold text-brand-700 hover:underline">Content review policy</Link>
         </div>
       </section>

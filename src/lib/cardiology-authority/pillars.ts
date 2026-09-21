@@ -208,25 +208,29 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
   {
     pathSlug: "cardiac-imaging",
     directAnswer:
-      "Advanced cardiac imaging locums include echocardiography, nuclear cardiology, cardiac MRI, and CT interpretation with defined turnaround SLAs. On-site vs remote read rules depend on state licensure and facility policy.",
+      "Advanced cardiac imaging locums are attending assignments—echo, nuclear, cardiac MRI, and CT interpretation with defined turnaround SLAs—not fellowship training. On-site vs remote read rules depend on state licensure and facility policy.",
     eeat: defaultEeatMeta(),
     entityNotes: ["Echocardiography", "Nuclear Cardiology", "Cardiac MRI", "ACC"],
     sections: [
       {
         h2: "Multimodality imaging locums",
         paragraphs: [
-          "Imaging locums may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access, study volume, and Level II/III echo or nuclear credentials required for privileging.",
+          "These are attending locum tenens blocks, not imaging fellowship jobs. Assignments may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access, study volume, and Level II/III echo or nuclear credentials required for privileging.",
         ],
       },
     ],
     faqs: [
       {
+        q: "Are these cardiac imaging fellowship jobs?",
+        a: "No. These are locum tenens blocks for attending cardiologists. We do not place imaging fellows into training programs.",
+      },
+      {
         q: "Can imaging locums be remote?",
         a: "Some read pools are remote; on-site stress supervision may still require travel—confirm in the contract.",
       },
       {
-        q: "Do hospitals hire imaging locums right after fellowship?",
-        a: "When Level II/III credentials and logs are current. Imaging is often a first-attending locums path because it is not STEMI-primary.",
+        q: "Can a new imaging attending take locums?",
+        a: "Yes, when Level II/III credentials and logs are current. Imaging is often a first-attending locums path because it is not STEMI-primary.",
       },
     ],
   },

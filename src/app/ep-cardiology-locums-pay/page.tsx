@@ -13,8 +13,8 @@ const FAQS = [
 ];
 
 export const metadata: Metadata = buildSerpMetadata({
-  title: "EP Cardiology Locums Pay and Opportunity Guide",
-  description: DESCRIPTION,
+  title: "EP Cardiology Locums Pay | $2,800–$3,200/Day",
+  description: "EP locums typically $2,800–$3,200/day. Ablation vs device clinic, NY and Tennessee markets, then calculate your range—not a job-board rate card.",
   path: PATH,
   keywords: ["EP cardiology locums pay", "electrophysiology locum tenens", "EP locum jobs"],
 });

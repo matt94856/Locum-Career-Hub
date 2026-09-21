@@ -43,15 +43,15 @@ export const PATH_TO_LEGACY_SLUG = Object.fromEntries(
   Object.entries(LEGACY_TO_PATH_SLUG).map(([legacy, path]) => [path, legacy]),
 ) as Record<string, string>;
 
-export const CARDIOLOGY_HUB_TITLE = "Cardiology Locum Tenens Jobs & Cardiologist Recruiting";
+export const CARDIOLOGY_HUB_TITLE = "Cardiology Locum Jobs | IC, EP, Imaging & HF";
 export const CARDIOLOGY_HUB_H1 = "Locum Cardiologist Jobs & Recruitment";
 export const CARDIOLOGY_HUB_DESCRIPTION =
-  "Find top locum cardiologist positions and locum tenens job opportunities. Nationwide cardiology placements in interventional, EP, heart failure, imaging, and pediatric. Connect with expert recruiters at Locum Career Hub.";
+  "Cardiologist locum jobs in interventional, EP, imaging, heart failure, and general. Written call and recruiter matching—not a generic job board.";
 
-export const HOME_TITLE = "Cardiologist Locum Jobs | General, IC & EP";
+export const HOME_TITLE = "Cardiologist Locum Jobs | IC, EP & Recruiter";
 export const HOME_H1 = "Cardiology Locum Tenens for General, Interventional, and EP Physicians";
 export const HOME_DESCRIPTION =
-  "Cardiologist-only locum recruiting for fellowship finishers, moonlighting, locums-primary, and semi-retirement. General, interventional, and EP blocks with written call—request matches.";
+  "Cardiologist-only locum recruiting for IC, EP, imaging, and general blocks with written call. Moonlighting, locums-primary, or scale-down—request matches, not a job-board blast.";
 
 export const CARDIOLOGY_HUB_FAQS: { q: string; a: string }[] = [
   {
@@ -218,9 +218,9 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       suffix: "consult and clinic coverage.",
     },
     {
-      prefix: "Fellows searching imaging locums after training should start with",
+      prefix: "New imaging attendings comparing first locum blocks can review",
       href: "/locum-jobs-for-new-graduates",
-      anchor: "cardiology locums after fellowship",
+      anchor: "locums for new cardiology attendings",
       suffix: ".",
     },
     {
@@ -408,15 +408,15 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     h1: "Cardiac Imaging Locum Jobs for Cardiologists",
     titleKeyword: "cardiac imaging locum jobs",
     metaDescription:
-      "Cardiac imaging locum jobs: echo, nuclear, MRI, and CT read blocks with written volume and turnaround. Cardiologist-only matching—estimate pay, then request fits.",
+      "Attending cardiologist locum jobs—echo, nuclear, CT/MRI reads. Not fellowship training. Written volume, PACS, and turnaround—then request matches.",
     intro:
-      "Cardiac imaging locum jobs cover echo, nuclear, cardiac MRI/CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, PACS access, and on-site vs remote rules must be written before you accept a block.",
+      "These are locum tenens assignments for attending cardiologists, not cardiac imaging fellowship programs. Blocks cover echo, nuclear, cardiac MRI/CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, PACS access, and on-site vs remote rules must be written before you accept.",
     relatedPathSlugs: ["general", "preventive-cardiology", "heart-failure"],
     sections: [
       {
         h2: "About Cardiac Imaging Locum Jobs",
         paragraphs: [
-          "Imaging-heavy locums may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access, modality mix, and licensure for tele-reads before day one.",
+          "These are attending locum tenens blocks, not cardiac imaging fellowship jobs. Imaging-heavy coverage may combine inpatient echo reads, outpatient stress/nuclear supervision, and structured reporting windows. Confirm PACS access, modality mix, and licensure for tele-reads before day one.",
           "Programs hire imagers for backlog clearance, leave coverage, and weekend read pools. Fit depends on Level II/III credentials and whether stress supervision or procedural oversight is on-site.",
         ],
       },
@@ -441,6 +441,10 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     ],
     faqs: [
       {
+        q: "Are these cardiac imaging fellowship jobs?",
+        a: "No. These are locum tenens blocks for board-eligible or board-certified attending cardiologists. We do not place imaging fellows into training programs.",
+      },
+      {
         q: "Can cardiac imaging locums be remote?",
         a: "Some read pools are remote; on-site stress supervision and procedural oversight may still require travel—confirm in the contract.",
       },
@@ -449,8 +453,8 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
         a: "Modality mix, daily volume, after-hours reads, turnaround SLAs, and whether stress supervision is included. Headline weekly rates without those variables are hard to compare.",
       },
       {
-        q: "Can a new imaging attending do locums after fellowship?",
-        a: "Yes if privileging matches documented Level II/III credentials. Start licensing 4–5 months before graduation so July is not an unpaid gap.",
+        q: "Can a new imaging attending take locums?",
+        a: "Yes—as an attending with current Level II/III credentials, not as a fellow. Start licensing 4–5 months before independence so July is not an unpaid gap.",
       },
     ],
   },

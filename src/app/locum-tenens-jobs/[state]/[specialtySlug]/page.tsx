@@ -129,6 +129,16 @@ export default async function SpecialtyStateLocumPage({
                 <Button href="/locum-jobs/cardiology/electrophysiology" variant="secondary" className="justify-center">
                   EP specialty hub →
                 </Button>
+                {state !== "new-york" ? (
+                  <Button href="/locum-tenens-jobs/new-york/electrophysiology" variant="secondary" className="justify-center">
+                    New York EP locums →
+                  </Button>
+                ) : null}
+                {state !== "tennessee" ? (
+                  <Button href="/locum-tenens-jobs/tennessee/electrophysiology" variant="secondary" className="justify-center">
+                    Tennessee EP locums →
+                  </Button>
+                ) : null}
               </>
             ) : null}
             {specialtySlug === "interventional-cardiology" ? (
@@ -139,6 +149,11 @@ export default async function SpecialtyStateLocumPage({
                 <Button href="/locum-jobs/cardiology/interventional" variant="secondary" className="justify-center">
                   Interventional specialty hub →
                 </Button>
+                {state !== "ohio" ? (
+                  <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary" className="justify-center">
+                    Featured Ohio IC locum →
+                  </Button>
+                ) : null}
               </>
             ) : null}
             {specialtySlug === "general-cardiology" ? (
@@ -147,9 +162,14 @@ export default async function SpecialtyStateLocumPage({
               </Button>
             ) : null}
             {specialtySlug === "advanced-imaging" || specialtyName.toLowerCase().includes("imaging") ? (
-              <Button href="/locum-jobs/cardiology/cardiac-imaging" variant="secondary" className="justify-center">
-                Cardiac imaging hub →
-              </Button>
+              <>
+                <Button href="/locum-jobs/cardiology/cardiac-imaging" variant="secondary" className="justify-center">
+                  Cardiac imaging hub →
+                </Button>
+                <Button href="/cardiologist-locums-calculator" variant="secondary" className="justify-center">
+                  Estimate imaging locum pay →
+                </Button>
+              </>
             ) : null}
           </div>
         </div>

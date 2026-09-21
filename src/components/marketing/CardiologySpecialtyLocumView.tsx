@@ -241,12 +241,19 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 <Link href="/salary/electrophysiologist-salary" className="font-semibold text-brand-700 hover:underline">
                   electrophysiologist salary guide
                 </Link>
-                , and{" "}
+                ,{" "}
                 <Link
                   href="/locum-tenens-jobs/new-york/electrophysiology"
                   className="font-semibold text-brand-700 hover:underline"
                 >
                   New York EP locum jobs
+                </Link>
+                , and{" "}
+                <Link
+                  href="/locum-tenens-jobs/tennessee/electrophysiology"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  Tennessee EP locum jobs
                 </Link>
                 .
               </p>
@@ -299,11 +306,15 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
             ) : null}
             {specialty.pathSlug === "cardiac-imaging" ? (
               <p className="text-sm text-slate-600">
-                Estimate imaging-block economics with the{" "}
+                These pages are for attending imaging locums, not fellowship programs. Estimate imaging-block economics with the{" "}
                 <Link href="/cardiologist-locums-calculator" className="font-semibold text-brand-700 hover:underline">
                   cardiologist locums calculator
                 </Link>
-                .
+                , then review{" "}
+                <Link href="/locum-jobs/cardiology/general" className="font-semibold text-brand-700 hover:underline">
+                  general cardiology locums
+                </Link>
+                {" "}if your mix includes consults plus reads.
               </p>
             ) : null}
 

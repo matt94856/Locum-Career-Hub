@@ -111,6 +111,18 @@ export function HomeCardiologistGuides() {
               EP locums →
             </Link>
             {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-tenens-jobs/new-york/electrophysiology">
+              New York EP locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-tenens-jobs/tennessee/electrophysiology">
+              Tennessee EP locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum">
+              Ohio IC locum →
+            </Link>
+            {" · "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/cardiac-imaging">
               Cardiac imaging locums →
             </Link>

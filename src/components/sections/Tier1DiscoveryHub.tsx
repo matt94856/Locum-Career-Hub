@@ -96,7 +96,7 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
               <ul className="mt-6 space-y-3 text-sm text-slate-300">
                 <li className="flex gap-3">
                   <ListCheck />
-                  <span>2-minute inquiry, no obligation</span>
+                  <span>One short form, no obligation</span>
                 </li>
                 <li className="flex gap-3">
                   <ListCheck />
@@ -167,8 +167,8 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
               <Button href="/contact" variant="secondary">
                 {CTA.recruiter}
               </Button>
-              <Button href="/tools" variant="secondary">
-                Free calculators
+              <Button href="/cardiologist-locums-calculator" variant="secondary">
+                Estimate locum pay
               </Button>
             </div>
           </div>

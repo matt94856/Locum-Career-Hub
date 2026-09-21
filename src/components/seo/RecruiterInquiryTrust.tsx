@@ -35,7 +35,7 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
           </span>
         </li>
       </ul>
-      <p className="mt-4 text-sm text-slate-600">Most cardiologists finish step 1 in under a minute.</p>
+      <p className="mt-4 text-sm text-slate-600">Most cardiologists finish the form in under a minute.</p>
       <Link href="/physician-opportunities#lead-form" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">
         Find a match →
       </Link>

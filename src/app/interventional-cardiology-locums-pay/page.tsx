@@ -12,8 +12,8 @@ const FAQS = [
 ];
 
 export const metadata: Metadata = buildSerpMetadata({
-  title: "Interventional Cardiology Locums Pay and Rate Drivers",
-  description: "Understand interventional cardiology locums pay, STEMI call, cath lab scope, and assignment economics. Calculate your personalized earning potential.",
+  title: "Interventional Cardiology Locums Pay | $3,200/Day",
+  description: "IC locums typically $3,200–$3,500/day plus callback. STEMI, cath lab scope, and an Ohio 1–2 weeks/month example—then calculate your range.",
   path: PATH,
   keywords: ["interventional cardiology locums pay", "interventional cardiologist locum rates", "STEMI call pay"],
 });

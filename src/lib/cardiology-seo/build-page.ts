@@ -62,12 +62,14 @@ function defaultRelatedLinks(def: PageDef): { href: string; title: string }[] {
       { href: "/locum-jobs/cardiology/electrophysiology", title: "EP locum jobs hub" },
       { href: "/ep-cardiology-locums-pay", title: "EP cardiology locums pay" },
       { href: "/locum-tenens-jobs/new-york/electrophysiology", title: "New York EP locum jobs" },
+      { href: "/locum-tenens-jobs/tennessee/electrophysiology", title: "Tennessee EP locum jobs" },
     );
   }
   if (def.slug === "interventional-cardiologist-salary") {
     links.unshift(
       { href: "/locum-jobs/cardiology/interventional", title: "Interventional locum jobs hub" },
       { href: "/interventional-cardiology-locums-pay", title: "Interventional locums pay" },
+      { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
     );
   }
   return links.slice(0, 7);

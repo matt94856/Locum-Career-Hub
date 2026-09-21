@@ -100,6 +100,118 @@ function applyPrioritySpecialtyStateEnrichment(
     };
   }
 
+  if (input.stateSlug === "tennessee" && input.specialtySlug === "electrophysiology") {
+    return {
+      ...content,
+      heroSubhead: "Ablation, devices, and arrhythmia call across a high-intent EP market",
+      directAnswer:
+        "Electrophysiology locum tenens jobs in Tennessee are contract-based EP lab and device-clinic blocks. A Tennessee license, facility privileging, and written ablation versus device scope should be clear before you start. Demand sits in Nashville, Memphis, Knoxville, Chattanooga, and regional systems in between.",
+      intro:
+        "Tennessee EP locums often move faster than dense Northeast privileging, but lab capabilities still decide fit. Whether you want ablation-heavy weeks, device clinic coverage, or hybrid travel blocks, insist on mapping systems, anesthesia support, and after-hours arrhythmia call in writing.",
+      sections: [
+        {
+          h2: "What Tennessee electrophysiology locum assignments look like",
+          paragraphs: [
+            "Typical Tennessee EP blocks mix ablation days, device implants or revisions, and device clinic or remote monitoring. Confirm inpatient arrhythmia consults, weekend interrogations, and whether you share cath resources with interventional coverage.",
+            "Nashville and Memphis programs can be higher volume; Knoxville, Chattanooga, and community labs often need leave coverage with a clearer start once logs are current.",
+          ],
+        },
+        {
+          h2: "Licensing and privileging for EP in Tennessee",
+          paragraphs: [
+            "Tennessee is IMLC-eligible for many physicians, which can shorten the license path compared with New York. EP privileges are still separate: labs usually want recent ablation and device volume.",
+            "Sequence license → hospital credentialing → EP lab privileges. Share target dates so temporary privilege options are mapped before you book travel.",
+          ],
+        },
+        {
+          h2: "Pay drivers specific to Tennessee EP locums",
+          paragraphs: [
+            "Rates move with ablation complexity, device mix, after-hours arrhythmia call, remote monitoring burden, and solo versus backed-up lab days. Compare offers using the same variables.",
+            "Use the EP cardiology locums pay guide and the cardiologist locums calculator before you negotiate stipends and call differentials.",
+          ],
+        },
+        {
+          h2: "Who this market fits",
+          paragraphs: [
+            "Employed electrophysiologists adding income, locums-primary EP physicians, and new attendings with independent logs. Semi-retired EP physicians can sometimes drop ablation and keep devices—only if the lab agrees in writing.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Do I need a Tennessee license before applying for EP locums?",
+          a: "For on-site Tennessee EP work, yes—or a realistic IMLC path with a documented start. Privileging and payer enrollment are separate. Share licenses and dates so we can map timing.",
+        },
+        {
+          q: "What should Tennessee electrophysiology contracts specify?",
+          a: "Ablation vs device scope, EP lab systems, device clinic or remote monitoring load, arrhythmia call frequency, backup coverage, malpractice, stipends, and cancellation terms—in writing.",
+        },
+        {
+          q: "Where are EP locum jobs concentrated in Tennessee?",
+          a: "Nashville and Memphis see steady EP lab demand; Knoxville, Chattanooga, and regional systems often need leave coverage and device clinic support.",
+        },
+        ...content.faqs.slice(0, 3),
+      ].slice(0, 7),
+    };
+  }
+
+  if (input.stateSlug === "ohio" && input.specialtySlug === "interventional-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "STEMI, cath lab, and 1–2 weeks/month blocks with written pay",
+      directAnswer:
+        "Interventional cardiology locum tenens jobs in Ohio are cath-lab and STEMI-coverage blocks that require an Ohio license or a realistic IMLC path, current PCI logs, and written activation, backup, and call rules. We are currently recruiting a 1–2 weeks/month Ohio interventional locum with a $3,200 daily guarantee plus $400/hour callback.",
+      intro:
+        "Ohio interventional locums range from recurring part-month coverage to full STEMI call. Whether you want extra income around an employed job, locums-primary work, or a schedule change, insist on activation windows, surgical backup, and callback math in writing—not a verbal weekly headline.",
+      sections: [
+        {
+          h2: "What Ohio interventional locum assignments look like",
+          paragraphs: [
+            "Typical blocks mix elective PCI, STEMI call, rounding, consults, and sometimes afternoon clinic. Confirm whether you are the primary STEMI operator, backup, or diagnostic-only coverage.",
+            "One current opening is ASAP coverage, 1–2 weeks per month, 24-hour call, 7 a.m. rounding and procedures, then afternoon clinic. Pay is $3,200 guaranteed for 0–4 hours and $400/hour callback after—about $4,800 on an 8-hour day.",
+          ],
+        },
+        {
+          h2: "Licensing and privileging for interventional work in Ohio",
+          paragraphs: [
+            "Ohio is IMLC-eligible for many physicians. An existing Ohio license is still the fastest start. Cath-lab privileges need recent PCI volume; general cardiology privileges are not interchangeable.",
+            "Sequence license → hospital credentialing → cath-lab privileges. Share target dates so temporary privilege options are mapped before you travel.",
+          ],
+        },
+        {
+          h2: "Pay drivers specific to Ohio interventional locums",
+          paragraphs: [
+            "Compare guaranteed coverage pay, callback or procedure pay, expected activations, and post-call relief. A $3,200/0–4 hour guarantee plus $400/hour callback is not the same as an all-in weekly number.",
+            "See the interventional cardiology locums pay guide and the featured Ohio interventional locum for a live example, then run the cardiologist locums calculator.",
+          ],
+        },
+        {
+          h2: "Who this market fits",
+          paragraphs: [
+            "Ohio-licensed interventionalists, IMLC-eligible IC physicians, moonlighters with employer approval, and locums-primary operators who want 1–2 weeks/month instead of an always-on employed calendar.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is there a current Ohio interventional locum opening?",
+          a: "Yes—a 1–2 weeks/month interventional block with 24-hour call and a written daily guarantee. Open the featured Ohio interventional locum page to review schedule and pay, then inquire.",
+        },
+        {
+          q: "Do Ohio interventional locums always include STEMI call?",
+          a: "Not always. Some labs need elective PCI or diagnostic coverage without primary STEMI. Require call scope in writing before you accept.",
+        },
+        {
+          q: "Can I moonlight interventional locums in Ohio while employed?",
+          a: "Sometimes, with employer moonlighting approval, malpractice that covers PCI, and recovery rules so you are not stacking two STEMI schedules.",
+        },
+        ...content.faqs.slice(0, 3),
+      ].slice(0, 7),
+    };
+  }
+
   if (input.stateSlug === "new-jersey" && input.specialtySlug === "interventional-cardiology") {
     return {
       ...content,

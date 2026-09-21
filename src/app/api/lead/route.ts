@@ -79,11 +79,14 @@ function normalizeLead(body: LeadBody) {
     !isNonEmptyString(body.firstName) ||
     !isNonEmptyString(body.lastName) ||
     !isNonEmptyString(body.email) ||
-    !isNonEmptyString(body.specialty) ||
-    !isNonEmptyString(body.availability)
+    !isNonEmptyString(body.specialty)
   ) {
     return { ok: false as const, error: "Missing required fields." };
   }
+
+  const availability = isNonEmptyString(body.availability)
+    ? body.availability.trim()
+    : "Exploring / no firm date";
 
   if (!toolOrPdf && !isNonEmptyString(body.phone)) {
     return { ok: false as const, error: "Missing required fields." };
@@ -93,7 +96,7 @@ function normalizeLead(body: LeadBody) {
     ? body.preferredStates.map((s) => String(s).trim()).filter(Boolean)
     : [];
 
-  if (preferredStates.length === 0) {
+  if (preferredStates.length === 0 && formMode !== "quick") {
     return { ok: false as const, error: "Select at least one preferred state." };
   }
   if (preferredStates.some((state) => !ALLOWED_STATES.has(state))) {
@@ -211,7 +214,7 @@ function normalizeLead(body: LeadBody) {
       specialty,
       preferred_states: preferredStates,
       years_experience: yearsExperience,
-      availability: body.availability.trim(),
+      availability,
       travel,
       sms_opt_in: smsOptIn,
       lead_magnet: leadMagnet,
@@ -226,7 +229,7 @@ function normalizeLead(body: LeadBody) {
       specialty,
       preferredStates,
       yearsExperience,
-      availability: body.availability.trim(),
+      availability,
       travel,
       clinicalNotes,
       formMode,

@@ -90,6 +90,7 @@ const stateSeoConsolidationRedirects = US_STATE_SLUGS.map((state) => ({
 }));
 
 const auditConsolidationRedirects = [
+  { source: "/jobs", destination: "/locum-tenens-jobs", permanent: true as const },
   { source: "/jobs/:state/:specialty", destination: "/locum-tenens-jobs/:state/:specialty", permanent: true as const },
   { source: "/jobs/:state", destination: "/locum-tenens-jobs/:state", permanent: true as const },
   { source: "/cardiology-locums", destination: "/locum-jobs/cardiology", permanent: true as const },
