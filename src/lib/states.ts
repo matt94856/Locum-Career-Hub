@@ -61,3 +61,69 @@ export const US_STATES = [
   "Wisconsin",
   "Wyoming",
 ] as const;
+
+export const US_STATE_CODE_TO_NAME: Record<string, string> = {
+  AL: "Alabama",
+  AK: "Alaska",
+  AZ: "Arizona",
+  AR: "Arkansas",
+  CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  DC: "District of Columbia",
+  FL: "Florida",
+  GA: "Georgia",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PA: "Pennsylvania",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  VA: "Virginia",
+  VT: "Vermont",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming",
+};
+
+const US_STATE_BY_LOWER = new Map(US_STATES.map((state) => [state.toLowerCase(), state]));
+
+/** Accepts full names, any casing, or USPS codes. Invalid values return null. */
+export function normalizeUsState(value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const byName = US_STATE_BY_LOWER.get(trimmed.toLowerCase());
+  if (byName) return byName;
+  const code = trimmed.toUpperCase().replace(/[^A-Z]/g, "");
+  return US_STATE_CODE_TO_NAME[code] ?? null;
+}

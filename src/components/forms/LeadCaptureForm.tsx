@@ -213,7 +213,8 @@ export function LeadCaptureForm({
     const fd = new FormData(form);
     const hasExperience = Boolean(String(fd.get("yearsExperience") ?? "").trim());
     const hasTravel = Boolean(String(fd.get("travel") ?? "").trim());
-    const formMode: "quick" | "full" = hasExperience && hasTravel ? "full" : "quick";
+    const hasStates = selectedStates.size > 0;
+    const formMode: "quick" | "full" = hasExperience && hasTravel && hasStates ? "full" : "quick";
 
     const payload = readPayload(form, formMode);
     const validationError = validatePayload(payload);
