@@ -109,7 +109,7 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           qualificationResponses,
           attribution: readLeadAttribution(),
           recaptchaToken,
-          companyWebsite: String(data.get("companyWebsite") ?? "").trim(),
+          faxLine: String(data.get("faxLine") ?? "").trim(),
         }),
       });
       const result = (await response.json().catch(() => null)) as {
@@ -195,10 +195,17 @@ export function OpportunityInterestForm({ opportunity }: Props) {
       >
         <input
           type="text"
-          name="companyWebsite"
+          name="faxLine"
           tabIndex={-1}
           autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
           aria-hidden="true"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          data-bwignore="true"
+          data-form-type="other"
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
 

@@ -173,7 +173,7 @@ export function LeadCaptureForm({
       pagePath: typeof window !== "undefined" ? window.location.pathname : "",
       attribution: readLeadAttribution(),
       recaptchaToken: recaptchaSiteConfigured ? (recaptchaRef.current?.getToken() ?? "") : "",
-      companyWebsite: String(fd.get("companyWebsite") ?? "").trim(),
+      faxLine: String(fd.get("faxLine") ?? "").trim(),
     };
   }
 
@@ -322,10 +322,17 @@ export function LeadCaptureForm({
         >
         <input
           type="text"
-          name="companyWebsite"
+          name="faxLine"
           tabIndex={-1}
           autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
           aria-hidden="true"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          data-bwignore="true"
+          data-form-type="other"
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
         <FormSection title="How to reach you" description="Name, contact, and how you like to work. States and dates can wait.">

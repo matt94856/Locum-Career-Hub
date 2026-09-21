@@ -39,7 +39,26 @@ type LeadBody = {
   careerStage?: unknown;
   recaptchaToken?: unknown;
   companyWebsite?: unknown;
+  faxLine?: unknown;
 };
+
+function honeypotFilled(body: LeadBody): boolean {
+  return isNonEmptyString(body.companyWebsite) || isNonEmptyString(body.faxLine);
+}
+
+function looksLikeHumanLead(body: LeadBody): boolean {
+  if (
+    !isNonEmptyString(body.firstName) ||
+    !isNonEmptyString(body.lastName) ||
+    !isNonEmptyString(body.email) ||
+    !isNonEmptyString(body.phone)
+  ) {
+    return false;
+  }
+  const email = body.email.trim().toLowerCase();
+  const digits = body.phone.replace(/\D/g, "");
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && digits.length >= 10;
+}
 
 function isToolOrPdfSource(source: string): boolean {
   return /pdf|calculator|tool|gate|estimator|portfolio/i.test(source);
@@ -203,6 +222,7 @@ function normalizeLead(body: LeadBody) {
     metadata.opportunity_title = opportunity.title;
   }
   if (isNonEmptyString(body.homeState)) metadata.home_state = body.homeState.trim().slice(0, 100);
+  if (honeypotFilled(body)) metadata.honeypot_autofill = true;
 
   return {
     ok: true as const,
@@ -254,8 +274,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Honeypot: bots often fill hidden fields
-  if (isNonEmptyString(json.companyWebsite)) {
+  // Honeypot: bots fill hidden fields. Password managers also autofill
+  // "companyWebsite", which previously returned success without saving a real physician.
+  if (honeypotFilled(json) && !looksLikeHumanLead(json)) {
     return NextResponse.json({ ok: true });
   }
 
