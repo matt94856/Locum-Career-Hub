@@ -9,7 +9,7 @@ import {
   RecaptchaField,
   type RecaptchaFieldHandle,
 } from "@/components/forms/RecaptchaField";
-import { trackEvent, trackGenerateLead } from "@/lib/analytics-events";
+import { persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 import {
   opportunityFormSpecialty,
@@ -129,7 +129,10 @@ export function OpportunityInterestForm({ opportunity }: Props) {
         return;
       }
 
-      trackGenerateLead(source);
+      persistGenerateLead(source, {
+        specialty: formSpecialty,
+        opportunity_slug: opportunity.slug,
+      });
       trackEvent("featured_opportunity_lead", {
         opportunity_slug: opportunity.slug,
         state: opportunity.state,

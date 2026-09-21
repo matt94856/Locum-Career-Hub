@@ -8,7 +8,7 @@ import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
-import { trackGenerateLead, trackEvent } from "@/lib/analytics-events";
+import { persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 import {
   CAREER_STAGES,
@@ -255,7 +255,7 @@ export function LeadCaptureForm({
         return;
       }
 
-      trackGenerateLead(payload.pagePath || "inquiry_form", {
+      persistGenerateLead(payload.pagePath || "inquiry_form", {
         specialty: payload.specialty,
         career_stage: payload.careerStage,
       });
