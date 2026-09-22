@@ -153,6 +153,10 @@ export async function sendLeadAcknowledgment(p: LeadEmailPayload): Promise<void>
     console.error("[lead-email] candidate acknowledgment skipped: RESEND_API_KEY is not set");
     return;
   }
+  const candidateEmail = p.email.trim().toLowerCase();
+  if (!candidateEmail.includes("@") || candidateEmail === "not-provided") {
+    return;
+  }
 
   const guideNote = p.leadMagnet
     ? `<p>We will send <strong>The Physician’s Guide to Locum Tenens</strong> to this inbox shortly. Check spam if you do not see it within a few minutes.</p>`

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import {
   evaluateLeadRequest,
   isNonEmptyString,
-  isToolOrPdfSource,
+  skipLeadCaptcha,
   type LeadBody,
 } from "@/lib/lead-intake";
 import { notifyRecruiterOfLead, sendLeadAcknowledgment } from "@/lib/lead-email";
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
   const source = isNonEmptyString(json.source) ? json.source.trim() : "lead_form";
   const secret = process.env.RECAPTCHA_SECRET_KEY;
-  const skipCaptcha = isToolOrPdfSource(source);
+  const skipCaptcha = skipLeadCaptcha(source);
 
   if (secret && !skipCaptcha) {
     const token = typeof json.recaptchaToken === "string" ? json.recaptchaToken : "";

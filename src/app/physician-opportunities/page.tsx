@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
+import { OpportunityInterestForm } from "@/components/forms/OpportunityInterestForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   FEATURED_CARDIOLOGY_OPPORTUNITIES,
@@ -107,11 +108,15 @@ export default function OpportunitiesPage() {
                 <p className="mt-3 text-sm leading-6 text-slate-700">
                   {opportunity.schedule}. {opportunity.supportLine ?? "Travel, lodging, and malpractice insurance covered."}
                 </p>
+                <OpportunityInterestForm
+                  opportunity={opportunity}
+                  variant="card"
+                />
                 <Link
                   href={featuredOpportunityPath(opportunity.slug)}
-                  className="mt-5 inline-flex min-h-11 items-center rounded-full bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
+                  className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 hover:underline"
                 >
-                  View assignment details
+                  Read the full assignment →
                 </Link>
               </article>
             ))}

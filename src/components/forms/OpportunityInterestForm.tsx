@@ -4,11 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
-import {
-  RecaptchaField,
-  type RecaptchaFieldHandle,
-} from "@/components/forms/RecaptchaField";
 import { persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 import {
@@ -17,22 +12,24 @@ import {
 } from "@/lib/featured-cardiology-opportunities";
 import { SITE } from "@/lib/site";
 
-const recaptchaSiteConfigured = Boolean(
-  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-);
+type Variant = "aside" | "page" | "card";
 
 type Props = {
   opportunity: FeaturedCardiologyOpportunity;
+  variant?: Variant;
+  /** Keep a single #lead-form / #apply target per page. */
+  showAnchor?: boolean;
 };
 
-export function OpportunityInterestForm({ opportunity }: Props) {
+export function OpportunityInterestForm({
+  opportunity,
+  variant = "page",
+  showAnchor = false,
+}: Props) {
   const router = useRouter();
-  const recaptchaRef = useRef<RecaptchaFieldHandle>(null);
   const startedRef = useRef(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
-  const [captchaReady, setCaptchaReady] = useState(!recaptchaSiteConfigured);
-  const [captchaLoadError, setCaptchaLoadError] = useState(false);
 
   useEffect(() => {
     readLeadAttribution();
@@ -40,40 +37,22 @@ export function OpportunityInterestForm({ opportunity }: Props) {
       opportunity_slug: opportunity.slug,
       state: opportunity.state,
       page_path: window.location.pathname,
+      variant,
     });
-  }, [opportunity.slug, opportunity.state]);
+  }, [opportunity.slug, opportunity.state, variant]);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    const recaptchaToken = recaptchaSiteConfigured
-      ? (recaptchaRef.current?.getToken() ?? "")
-      : "";
-
-    if (recaptchaSiteConfigured && (!captchaReady || captchaLoadError)) {
+    const email = String(data.get("email") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    if (!email && !phone) {
       setStatus("error");
-      setError(
-        captchaLoadError
-          ? "Security verification could not load. Please refresh or contact us directly."
-          : "Security verification is still loading. Please try again in a moment.",
-      );
-      return;
-    }
-    if (recaptchaSiteConfigured && !recaptchaToken) {
-      setStatus("error");
-      setError("Please complete the security verification before submitting.");
+      setError("Leave an email or a mobile number so we can send more details.");
       return;
     }
 
-    const qualificationResponses = Object.fromEntries(
-      opportunity.screeningQuestions
-        .map((question) => [
-          question.id,
-          String(data.get(`screening_${question.id}`) ?? "").trim(),
-        ])
-        .filter(([, value]) => Boolean(value)),
-    );
     const formSpecialty = opportunityFormSpecialty(opportunity);
     const source = `featured_opportunity_${opportunity.slug}`.slice(0, 100);
     const pagePath =
@@ -88,15 +67,13 @@ export function OpportunityInterestForm({ opportunity }: Props) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           firstName: String(data.get("firstName") ?? "").trim(),
-          lastName: String(data.get("lastName") ?? "").trim(),
-          email: String(data.get("email") ?? "").trim(),
-          phone: String(data.get("phone") ?? "").trim(),
+          lastName: "Not provided",
+          email,
+          phone,
           specialty: formSpecialty,
           preferredStates: [opportunity.state],
           yearsExperience: "Not collected on featured opportunity form",
-          availability:
-            String(data.get("availability") ?? "").trim() ||
-            "Interested—confirm assignment dates",
+          availability: "Interested—send more details on this assignment",
           travel: "Not collected—assignment-specific interest",
           clinicalNotes:
             String(data.get("clinicalNotes") ?? "").trim() || null,
@@ -106,9 +83,9 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           pagePath,
           source,
           opportunitySlug: opportunity.slug,
-          qualificationResponses,
+          qualificationResponses: {},
           attribution: readLeadAttribution(),
-          recaptchaToken,
+          recaptchaToken: "",
           faxLine: String(data.get("faxLine") ?? "").trim(),
         }),
       });
@@ -118,13 +95,12 @@ export function OpportunityInterestForm({ opportunity }: Props) {
       } | null;
 
       if (!response.ok) {
-        recaptchaRef.current?.reset();
         setStatus("error");
         setError(
           result?.code === "SUPABASE_NOT_CONFIGURED"
             ? `The form is temporarily unavailable. Call ${SITE.phoneDisplay} or email ${SITE.email} and mention the ${opportunity.state} opportunity.`
             : result?.error ||
-                "We could not submit your interest. Please try again or contact us directly.",
+                "We could not send that. Please try again or contact us directly.",
         );
         return;
       }
@@ -137,9 +113,13 @@ export function OpportunityInterestForm({ opportunity }: Props) {
         opportunity_slug: opportunity.slug,
         state: opportunity.state,
         page_path: pagePath,
+        variant,
+        contact_via: [email ? "email" : "", phone ? "phone" : ""]
+          .filter(Boolean)
+          .join("+"),
       });
       trackEvent("form_submit", {
-        form_mode: "featured_opportunity",
+        form_mode: "featured_opportunity_details",
         opportunity_slug: opportunity.slug,
       });
       window.sessionStorage.setItem("lch_lead_submitted", "1");
@@ -152,40 +132,63 @@ export function OpportunityInterestForm({ opportunity }: Props) {
       });
       router.push(`/thank-you?${params.toString()}`);
     } catch {
-      recaptchaRef.current?.reset();
       setStatus("error");
       setError(
-        `We could not submit your interest. Call ${SITE.phoneDisplay} or try again in a moment.`,
+        `We could not send that. Call ${SITE.phoneDisplay} or try again in a moment.`,
       );
     }
   }
 
+  const isCard = variant === "card";
+  const isAside = variant === "aside";
+
   return (
     <div
-      id="lead-form"
-      className="scroll-mt-24 rounded-3xl border border-brand-200 bg-white p-6 shadow-lg shadow-brand-900/5 sm:p-8"
+      id={showAnchor ? "lead-form" : undefined}
+      className={
+        isCard
+          ? "mt-5 border-t border-slate-100 pt-5"
+          : isAside
+            ? "mt-6 border-t border-brand-100 pt-6"
+            : "scroll-mt-24 rounded-3xl border border-brand-200 bg-white p-6 shadow-lg shadow-brand-900/5 sm:p-8"
+      }
     >
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
-        Private physician inquiry
+      {showAnchor ? <div id="apply" className="scroll-mt-24" /> : null}
+      <p
+        className={
+          isCard
+            ? "text-xs font-bold uppercase tracking-[0.16em] text-brand-700"
+            : "text-xs font-bold uppercase tracking-[0.18em] text-brand-700"
+        }
+      >
+        Get more details
       </p>
-      <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-slate-950">
-        Ask about the {opportunity.state} opportunity
+      <h2
+        className={
+          isCard
+            ? "mt-2 font-display text-lg font-bold tracking-tight text-slate-950"
+            : isAside
+              ? "mt-2 font-display text-xl font-bold tracking-tight text-slate-950"
+              : "mt-3 font-display text-3xl font-bold tracking-tight text-slate-950"
+        }
+      >
+        {isCard
+          ? `Contact me about ${opportunity.state}`
+          : `Send me details on the ${opportunity.state} job`}
       </h2>
-      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700">
-        Send the four contact fields below. The fit questions are optional and
-        help us answer you faster. A cardiology recruiter typically responds
-        within one business day.
+      <p
+        className={
+          isCard
+            ? "mt-2 text-sm leading-6 text-slate-600"
+            : "mt-3 text-sm leading-6 text-slate-700"
+        }
+      >
+        Leave your email or mobile. A cardiology recruiter will follow up with
+        current dates, facility details, and next steps for this assignment.
       </p>
-
-      <div className="mt-5 max-w-xl">
-        <LeadFormAltActions
-          source={`featured_${opportunity.stateSlug}`}
-          compact
-        />
-      </div>
 
       <form
-        className="relative mt-8 space-y-7"
+        className={isCard || isAside ? "relative mt-4 space-y-3" : "relative mt-8 space-y-5"}
         onSubmit={onSubmit}
         onFocusCapture={() => {
           if (startedRef.current) return;
@@ -193,6 +196,7 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           trackEvent("featured_opportunity_form_start", {
             opportunity_slug: opportunity.slug,
             state: opportunity.state,
+            variant,
           });
         }}
       >
@@ -212,117 +216,55 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           className="absolute left-[-9999px] h-0 w-0 opacity-0"
         />
 
-        <fieldset>
-          <legend className="font-display text-lg font-bold text-slate-950">
-            Contact information
-          </legend>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <label>
-              <span className="text-xs font-semibold text-slate-800">
-                First name
-              </span>
-              <input
-                name="firstName"
-                required
-                autoComplete="given-name"
-                className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              />
-            </label>
-            <label>
-              <span className="text-xs font-semibold text-slate-800">
-                Last name
-              </span>
-              <input
-                name="lastName"
-                required
-                autoComplete="family-name"
-                className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              />
-            </label>
-            <label>
-              <span className="text-xs font-semibold text-slate-800">Email</span>
-              <input
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              />
-            </label>
-            <label>
-              <span className="text-xs font-semibold text-slate-800">Phone</span>
-              <input
-                name="phone"
-                type="tel"
-                required
-                autoComplete="tel"
-                placeholder="Best number for follow-up"
-                className="mt-2 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              />
-            </label>
-          </div>
-        </fieldset>
+        <label>
+          <span className="text-xs font-semibold text-slate-800">First name</span>
+          <input
+            name="firstName"
+            required
+            autoComplete="given-name"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+          />
+        </label>
+        <label>
+          <span className="text-xs font-semibold text-slate-800">
+            Email <span className="font-normal text-slate-500">(or phone)</span>
+          </span>
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@email.com"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+          />
+        </label>
+        <label>
+          <span className="text-xs font-semibold text-slate-800">
+            Mobile <span className="font-normal text-slate-500">(or email)</span>
+          </span>
+          <input
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="Best number"
+            className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+          />
+        </label>
 
-        <fieldset className="rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
-          <legend className="px-1 font-display text-lg font-bold text-slate-950">
-            Help us respond faster{" "}
-            <span className="font-sans text-xs font-normal text-slate-500">
-              (optional)
+        {variant !== "card" ? (
+          <label>
+            <span className="text-xs font-semibold text-slate-800">
+              Anything we should know{" "}
+              <span className="font-normal text-slate-500">(optional)</span>
             </span>
-          </legend>
-          <div className="mt-3 grid gap-4 sm:grid-cols-2">
-            <label>
-              <span className="text-xs font-semibold text-slate-800">
-                When could you start?
-              </span>
-              <select
-                name="availability"
-                defaultValue=""
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              >
-                <option value="">Confirm dates with me</option>
-                <option value="ASAP">ASAP</option>
-                <option value="Within 30 days">Within 30 days</option>
-                <option value="1–3 months">1–3 months</option>
-                <option value="3–6 months">3–6 months</option>
-                <option value="Exploring / no firm date">
-                  Exploring / no firm date
-                </option>
-              </select>
-            </label>
-            {opportunity.screeningQuestions.map((question) => (
-              <label key={question.id}>
-                <span className="text-xs font-semibold leading-5 text-slate-800">
-                  {question.label}
-                </span>
-                <select
-                  name={`screening_${question.id}`}
-                  defaultValue=""
-                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                >
-                  <option value="">Prefer to discuss</option>
-                  {question.options.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ))}
-            <label className="sm:col-span-2">
-              <span className="text-xs font-semibold text-slate-800">
-                Question or scheduling note
-              </span>
-              <textarea
-                name="clinicalNotes"
-                rows={3}
-                maxLength={2000}
-                placeholder="Optional—share dates, call questions, or the best time to reach you."
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-              />
-            </label>
-          </div>
-        </fieldset>
+            <textarea
+              name="clinicalNotes"
+              rows={2}
+              maxLength={2000}
+              placeholder="Dates, licenses, or a question about this job."
+              className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+            />
+          </label>
+        ) : null}
 
         <label className="flex cursor-pointer items-start gap-3 text-sm text-slate-700">
           <input
@@ -336,51 +278,31 @@ export function OpportunityInterestForm({ opportunity }: Props) {
           </span>
         </label>
 
-        <RecaptchaField
-          ref={recaptchaRef}
-          onReady={() => {
-            setCaptchaReady(true);
-            setCaptchaLoadError(false);
-          }}
-          onLoadError={() => {
-            setCaptchaLoadError(true);
-            setCaptchaReady(false);
-          }}
-        />
-
         {status === "error" && error ? (
           <div
             role="alert"
-            className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-900"
+            className="rounded-2xl border border-red-200 bg-red-50 p-3 text-sm text-red-900"
           >
             {error}
           </div>
         ) : null}
 
-        <div className="border-t border-slate-100 pt-6">
-          <Button
-            type="submit"
-            size="lg"
-            disabled={status === "submitting"}
-            className="w-full sm:w-auto"
-          >
-            {status === "submitting"
-              ? "Sending interest…"
-              : "Send my private inquiry"}
-          </Button>
-          <p className="mt-3 text-xs leading-5 text-slate-500">
-            No mass blast. By submitting, you agree that we may contact you
-            about this opportunity and related cardiology roles. This is not an
-            employment offer. See our{" "}
-            <Link
-              href="/privacy"
-              className="font-semibold text-brand-700 hover:underline"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </p>
-        </div>
+        <Button
+          type="submit"
+          size={isCard ? "md" : "lg"}
+          disabled={status === "submitting"}
+          className="w-full"
+        >
+          {status === "submitting" ? "Sending…" : "Send me more details"}
+        </Button>
+        <p className="text-xs leading-5 text-slate-500">
+          A recruiter contacts you about this {opportunity.state} role—not a
+          mass list.{" "}
+          <Link href="/privacy" className="font-semibold text-brand-700 hover:underline">
+            Privacy
+          </Link>
+          .
+        </p>
       </form>
     </div>
   );

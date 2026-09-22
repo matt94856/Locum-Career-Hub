@@ -45,18 +45,28 @@ export function honeypotFilled(body: LeadBody): boolean {
   return isNonEmptyString(body.companyWebsite) || isNonEmptyString(body.faxLine);
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validLeadEmail(value: unknown): string | null {
+  if (!isNonEmptyString(value)) return null;
+  const email = value.trim().toLowerCase();
+  return EMAIL_RE.test(email) ? email : null;
+}
+
+function validLeadPhone(value: unknown): string | null {
+  if (!isNonEmptyString(value)) return null;
+  const phone = value.trim();
+  return phone.replace(/\D/g, "").length >= 10 ? phone : null;
+}
+
 export function looksLikeHumanLead(body: LeadBody): boolean {
-  if (
-    !isNonEmptyString(body.firstName) ||
-    !isNonEmptyString(body.lastName) ||
-    !isNonEmptyString(body.email) ||
-    !isNonEmptyString(body.phone)
-  ) {
-    return false;
+  if (!isNonEmptyString(body.firstName)) return false;
+  const email = validLeadEmail(body.email);
+  const phone = validLeadPhone(body.phone);
+  if (isNonEmptyString(body.opportunitySlug)) {
+    return Boolean(email || phone);
   }
-  const email = body.email.trim().toLowerCase();
-  const digits = body.phone.replace(/\D/g, "");
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && digits.length >= 10;
+  return Boolean(isNonEmptyString(body.lastName) && email && phone);
 }
 
 /**
@@ -69,6 +79,15 @@ export function shouldDropAsHoneypotBot(body: LeadBody): boolean {
 
 export function isToolOrPdfSource(source: string): boolean {
   return /pdf|calculator|tool|gate|estimator|portfolio/i.test(source);
+}
+
+export function isFeaturedOpportunitySource(source: string): boolean {
+  return source.startsWith("featured_opportunity_");
+}
+
+/** Featured job details requests stay short; captcha is a conversion killer there. */
+export function skipLeadCaptcha(source: string): boolean {
+  return isToolOrPdfSource(source) || isFeaturedOpportunitySource(source);
 }
 
 function safeJsonObject(value: unknown, maxLength = 50000): Record<string, unknown> | null {
@@ -106,38 +125,47 @@ export function normalizeLead(body: LeadBody) {
       ? body.source.trim().slice(0, 100)
       : "lead_form";
   const toolOrPdf = isToolOrPdfSource(source);
+  const featuredInquiry = Boolean(opportunity);
+  const firstName = isNonEmptyString(body.firstName) ? body.firstName.trim() : "";
+  const lastName = isNonEmptyString(body.lastName)
+    ? body.lastName.trim()
+    : featuredInquiry
+      ? "Not provided"
+      : "";
 
-  if (
-    !isNonEmptyString(body.firstName) ||
-    !isNonEmptyString(body.lastName) ||
-    !isNonEmptyString(body.email) ||
-    !isNonEmptyString(body.specialty)
-  ) {
+  if (!firstName || !isNonEmptyString(body.specialty) || (!featuredInquiry && !lastName)) {
     return { ok: false as const, error: "Missing required fields." };
   }
 
   const availability = isNonEmptyString(body.availability)
     ? body.availability.trim()
-    : "Exploring / no firm date";
-
-  if (!toolOrPdf && !isNonEmptyString(body.phone)) {
-    return { ok: false as const, error: "Missing required fields." };
-  }
+    : featuredInquiry
+      ? "Interested—send more details on this assignment"
+      : "Exploring / no firm date";
 
   const preferredStates = normalizePreferredStates(body.preferredStates);
   const homeState = isNonEmptyString(body.homeState)
     ? normalizeUsState(body.homeState)
     : null;
 
-  const email = body.email.trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  const email = validLeadEmail(body.email);
+  const phone = validLeadPhone(body.phone);
+  if (isNonEmptyString(body.email) && !email) {
     return { ok: false as const, error: "Enter a valid email address." };
   }
-  const phone = isNonEmptyString(body.phone) ? body.phone.trim() : "";
-  if (phone && phone.replace(/\D/g, "").length < 10) {
+  if (isNonEmptyString(body.phone) && !phone) {
     return { ok: false as const, error: "Enter a valid phone number." };
   }
-  if (!toolOrPdf && phone.replace(/\D/g, "").length < 10) {
+  if (featuredInquiry) {
+    if (!email && !phone) {
+      return {
+        ok: false as const,
+        error: "Enter an email or a phone number so we can send more details.",
+      };
+    }
+  } else if (!email) {
+    return { ok: false as const, error: "Enter a valid email address." };
+  } else if (!toolOrPdf && !phone) {
     return { ok: false as const, error: "Enter a valid phone number." };
   }
 
@@ -221,6 +249,10 @@ export function normalizeLead(body: LeadBody) {
   if (opportunity) {
     metadata.opportunity_slug = opportunity.slug;
     metadata.opportunity_title = opportunity.title;
+    metadata.request_type = "opportunity_details";
+    metadata.contact_via = [email ? "email" : null, phone ? "phone" : null]
+      .filter(Boolean)
+      .join("+");
   }
   if (homeState) metadata.home_state = homeState.slice(0, 100);
   if (honeypotFilled(body)) metadata.honeypot_autofill = true;
@@ -228,9 +260,9 @@ export function normalizeLead(body: LeadBody) {
   return {
     ok: true as const,
     value: {
-      first_name: body.firstName.trim(),
-      last_name: body.lastName.trim(),
-      email,
+      first_name: firstName,
+      last_name: lastName,
+      email: email ?? "not-provided",
       phone: phone || "not-provided",
       specialty,
       preferred_states: preferredStates,
@@ -243,9 +275,9 @@ export function normalizeLead(body: LeadBody) {
       metadata,
     },
     emailPayload: {
-      firstName: body.firstName.trim(),
-      lastName: body.lastName.trim(),
-      email,
+      firstName,
+      lastName,
+      email: email ?? "not-provided",
       phone: phone || "not provided",
       specialty,
       preferredStates,

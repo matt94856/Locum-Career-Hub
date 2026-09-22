@@ -58,7 +58,7 @@ export function StickyMobileCta() {
             )
           }
         >
-          {isFeaturedOpportunity ? "Ask about job" : CTA.requestMatches}
+          {isFeaturedOpportunity ? "Get details" : CTA.requestMatches}
         </Button>
         <Button
           href={`tel:${SITE.phoneTel}`}

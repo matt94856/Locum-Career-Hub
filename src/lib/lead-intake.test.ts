@@ -15,6 +15,7 @@ import { PORTFOLIO_TOOLS } from "./tools/portfolio-tools";
 import {
   evaluateLeadRequest,
   isToolOrPdfSource,
+  skipLeadCaptcha,
   looksLikeHumanLead,
   shouldDropAsHoneypotBot,
 } from "./lead-intake";
@@ -303,6 +304,34 @@ describe("OpportunityInterestForm — every featured job", () => {
         },
       );
     }
+  });
+
+  it("saves email-only or phone-only contact for a featured job", () => {
+    const opportunity = FEATURED_CARDIOLOGY_OPPORTUNITIES[0];
+    expectSave(
+      featuredPayload(opportunity, { lastName: "", phone: "" }),
+      (value) => {
+        expect(value.email).toBe("test.physician@example.com");
+        expect(value.phone).toBe("not-provided");
+        expect(value.last_name).toBe("Not provided");
+        expect(value.metadata).toMatchObject({
+          request_type: "opportunity_details",
+          contact_via: "email",
+        });
+      },
+    );
+    expectSave(
+      featuredPayload(opportunity, { lastName: "", email: "" }),
+      (value) => {
+        expect(value.email).toBe("not-provided");
+        expect(value.phone).toBe("555-123-4567");
+        expect(value.metadata).toMatchObject({ contact_via: "phone" });
+      },
+    );
+    expect(evaluateLeadRequest(featuredPayload(opportunity, { email: "", phone: "" })).outcome).toBe(
+      "reject",
+    );
+    expect(skipLeadCaptcha(`featured_opportunity_${opportunity.slug}`)).toBe(true);
   });
 });
 

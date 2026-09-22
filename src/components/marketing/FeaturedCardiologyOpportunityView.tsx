@@ -97,7 +97,7 @@ export function FeaturedCardiologyOpportunityView({
                   opportunitySlug={opportunity.slug}
                   placement="hero"
                 >
-                  Check fit and availability
+                  Request more details
                 </FeaturedOpportunityApplyButton>
                 <Button
                   href={`/locum-tenens-jobs/${opportunity.stateSlug}/${specialtySlug}`}
@@ -143,6 +143,11 @@ export function FeaturedCardiologyOpportunityView({
                   </dd>
                 </div>
               </dl>
+              <OpportunityInterestForm
+                opportunity={opportunity}
+                variant="aside"
+                showAnchor
+              />
             </aside>
           </div>
         </div>
@@ -156,11 +161,11 @@ export function FeaturedCardiologyOpportunityView({
         <div className="mt-8 rounded-3xl bg-brand-700 p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight">
-              Interested, but need one detail confirmed?
+              Want the current dates and facility details?
             </h2>
             <p className="mt-2 text-sm leading-6 text-brand-50">
-              Send a private inquiry or call a cardiology recruiter before
-              investing time in licensing and credentialing.
+              Leave an email or mobile number. We contact you about this
+              assignment—not a general mailing list.
             </p>
           </div>
           <div className="mt-5 flex shrink-0 flex-wrap gap-3 sm:mt-0">
@@ -168,7 +173,7 @@ export function FeaturedCardiologyOpportunityView({
               opportunitySlug={opportunity.slug}
               placement="mid_page"
             >
-              Ask about this job
+              Send me details
             </FeaturedOpportunityApplyButton>
             <Button
               href={`tel:${SITE.phoneTel}`}
@@ -262,7 +267,7 @@ export function FeaturedCardiologyOpportunityView({
 
       <section id="apply" className="scroll-mt-24 bg-brand-50 py-14">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <OpportunityInterestForm opportunity={opportunity} />
+          <OpportunityInterestForm opportunity={opportunity} variant="page" />
         </div>
       </section>
     </main>

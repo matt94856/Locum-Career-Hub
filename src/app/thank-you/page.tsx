@@ -54,16 +54,18 @@ export default async function ThankYouPage({ searchParams }: Props) {
             Thank you—we are on it
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            A cardiology recruiter will review your profile
+            A cardiology recruiter will follow up
             {opportunity ? (
               <>
                 {" "}
-                for{" "}
+                with more details on{" "}
                 <strong className="font-semibold text-slate-800">
                   {opportunity.shortLabel}
                 </strong>
               </>
-            ) : null}
+            ) : (
+              <> with your profile</>
+            )}
             {specialty ? (
               <>
                 {" "}
