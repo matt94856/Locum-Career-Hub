@@ -109,7 +109,7 @@ Also add the same `ga4-analytics` block to user config if project MCP does not a
 
 **Restart Cursor fully** (File → Exit), reopen this folder, then check **Customize → MCPs** for `ga4-analytics` (green/connected).
 
-Windows note: `command` must be `cmd` (not a Python path with spaces in `MPLT Health`).
+Windows note: `command` must be `cmd`, and the `/c` string should `cd /d` into `google-analytics-mcp` before `server.py`. Cursor can ignore `cwd`, which then looks for `C:\Users\matt9\server.py` and fails.
 
 ### 7) Verify in chat
 
@@ -149,4 +149,5 @@ Do not recommend optimizing a page only because it ranks — weigh traffic, enga
 | `GA4_PROPERTY_ID` error | Set numeric ID in `.env` (no `properties/` prefix) |
 | Empty conversions | Mark events as Key events in GA4; wait 24–48h |
 | MCP not in Cursor | Confirm `type: stdio` + `cmd /c` paths; restart; check Customize → MCPs |
+| `can't open file '...\\server.py'` | Cursor spawned Python without the MCP folder as cwd. Use `cd /d "...\google-analytics-mcp" && .venv\Scripts\python.exe -u server.py` in `mcp.json`, then restart Cursor |
 | 403 from API | Your Google user needs Viewer+ on the GA4 property |

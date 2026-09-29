@@ -20,8 +20,7 @@
       "command": "cmd",
       "args": [
         "/c",
-        "C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp\\.venv\\Scripts\\python.exe",
-        "server.py"
+        "cd /d \"C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp\" && \".venv\\Scripts\\python.exe\" -u server.py"
       ],
       "cwd": "C:\\Users\\matt9\\Desktop\\MPLT Health\\google-analytics-mcp",
       "env": {

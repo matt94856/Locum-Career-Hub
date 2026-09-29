@@ -2,6 +2,26 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-09-29 — `https://www.locumcareerhub.com/physician-opportunities`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: 3 featured cardiology jobs with inline forms
+- After: 50 unique cardiology job URLs (direct + VMS), posted dates, availability inquiry CTA, specialty-hub internal links
+- Reason: Board open jobs needed indexable unique pages that convert; GA4 28d showed 32 organic sessions and 3 generate_lead events with almost no featured-job organic landings
+- Expected: Index unique high-intent job URLs and route inquiries through the existing lead form
+- Actual: pending
+
+## 2026-09-29 — `https://www.locumcareerhub.com/featured-cardiology-jobs/north-carolina-outpatient-cardiology-locum`
+
+- Type: `content`
+- Status: shipped
+- Before: Generic NC outpatient 2 weeks/month; posted 2026-09-09
+- After: Western NC Monday-Friday clinic, posted 2026-08-11, availability CTA
+- Reason: Board D3 matched the existing NC page; unique region and posted date for SEO and honesty
+- Expected: Stronger query match for western NC outpatient locum without a duplicate URL
+- Actual: pending
+
 ## 2026-09-21 — `https://www.locumcareerhub.com/locum-tenens-jobs/tennessee/electrophysiology`
 
 - Type: `content`
