@@ -1,3 +1,5 @@
+import { OPEN_JOB_OPPORTUNITIES } from "@/lib/open-jobs";
+
 export type FeaturedCardiologyOpportunity = {
   slug: string;
   state: string;
@@ -32,6 +34,10 @@ export type FeaturedCardiologyOpportunity = {
   keywords: string[];
   datePosted: string;
   relatedSpecialtySlugs: string[];
+  /** Direct client job vs limited-detail vendor posting. */
+  listingKind?: "direct" | "vms";
+  /** General region in the state (never a city name on the page). */
+  region?: string;
   screeningQuestions: {
     id: string;
     label: string;
@@ -51,7 +57,25 @@ export function opportunitySpecialtySlug(opportunity: FeaturedCardiologyOpportun
   return opportunity.specialtySlug ?? "general-cardiology";
 }
 
-export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
+export function opportunityListingKind(opportunity: FeaturedCardiologyOpportunity) {
+  return opportunity.listingKind ?? "direct";
+}
+
+export function formatOpportunityPostedDate(isoDate: string) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  if (!year || !month || !day) return isoDate;
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+export const AVAILABILITY_INQUIRY_CTA =
+  "Contact Locum Career Hub to see if this is still available";
+
+const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
   {
     slug: "kansas-inpatient-non-invasive-cardiology-locum",
     state: "Kansas",
@@ -62,6 +86,8 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
       "Kansas inpatient non-invasive cardiology locum: 7-on/7-off, licensing support, nuclear required and travel, lodging, and malpractice covered.",
     h1: "Inpatient Non-Invasive Cardiology Locum Job in Kansas",
     shortLabel: "Kansas inpatient cardiology · 7 on/7 off",
+    listingKind: "direct",
+    region: "Kansas",
     setting: "Inpatient non-invasive cardiology",
     schedule: "Seven days on / seven days off; approximately 8–9 working hours per day",
     call:
@@ -202,14 +228,16 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
     slug: "north-carolina-outpatient-cardiology-locum",
     state: "North Carolina",
     stateSlug: "north-carolina",
-    title: "North Carolina Outpatient Cardiology Locum Opportunity",
-    metaTitle: "NC Outpatient Cardiology Locum | 2 Weeks/Month",
+    title: "Western North Carolina Outpatient Cardiology Locum Opportunity",
+    metaTitle: "Western NC Outpatient Cardiology Locum | 2 Wks/Mo",
     metaDescription:
-      "North Carolina outpatient cardiology locum: 4–5 clinic days per week for 2 weeks monthly. Travel, lodging, and malpractice covered.",
-    h1: "Outpatient Cardiology Locum Job in North Carolina",
-    shortLabel: "North Carolina outpatient cardiology · 2 weeks/month",
-    setting: "Outpatient-only general/non-invasive cardiology",
-    schedule: "Four to five clinic days per week for two weeks per month",
+      "Western NC Monday–Friday outpatient cardiology locum, 2 weeks/month. Posted Aug 11, 2026. Contact Locum Career Hub if still available.",
+    h1: "Outpatient Cardiology Locum Job in Western North Carolina",
+    shortLabel: "Western North Carolina outpatient · 2 weeks/month",
+    listingKind: "direct",
+    region: "Western North Carolina",
+    setting: "Monday–Friday outpatient clinic, general/non-invasive cardiology",
+    schedule: "Monday–Friday clinic for two weeks per month",
     call: "No inpatient responsibilities; confirm any after-hours phone responsibilities before accepting",
     requirements: [
       "Cardiology board certification required",
@@ -225,7 +253,7 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
       "Predictable blocks for a portfolio, part-time, or later-career schedule",
     ],
     directAnswer:
-      "This North Carolina opportunity is for a board-certified cardiologist seeking outpatient-only locum work on a recurring schedule. The physician will work four to five clinic days per week for two weeks each month. Travel, lodging, and malpractice insurance are covered, making the role especially relevant to physicians seeking predictable part-time blocks without inpatient responsibilities.",
+      "This western North Carolina opportunity is for a board-certified cardiologist seeking outpatient-only locum work on a recurring Monday–Friday clinic schedule. The physician covers two weeks each month. Posted August 11, 2026. Contact Locum Career Hub to see if this is still available. Travel, lodging, and malpractice insurance are covered for an eligible physician.",
     idealFits: [
       {
         title: "Outpatient-focused general cardiologists",
@@ -262,7 +290,7 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
       {
         heading: "A recurring outpatient cardiology schedule",
         paragraphs: [
-          "The client is seeking two weeks of coverage each month. During each scheduled week, the physician will work four to five outpatient clinic days.",
+          "The client is seeking two weeks of coverage each month in western North Carolina. During each scheduled week, the physician works Monday–Friday outpatient clinic.",
           "That cadence can appeal to cardiologists who want dependable recurring work rather than isolated weekend shifts or an open-ended full-time assignment.",
         ],
       },
@@ -289,8 +317,8 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
     ],
     faqs: [
       {
-        q: "How many weeks per month does the North Carolina cardiologist work?",
-        a: "The client is seeking two weeks per month, with four to five outpatient clinic days during each scheduled week.",
+        q: "How many weeks per month does the western North Carolina cardiologist work?",
+        a: "The client is seeking two weeks per month of Monday–Friday outpatient clinic. Posted August 11, 2026—contact Locum Career Hub to see if this is still available.",
       },
       {
         q: "Is this North Carolina cardiology job outpatient only?",
@@ -314,14 +342,20 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
       },
     ],
     keywords: [
+      "western North Carolina outpatient cardiology locum",
       "North Carolina outpatient cardiology locum",
-      "outpatient cardiology jobs North Carolina",
-      "part-time cardiologist jobs NC",
+      "Monday Friday cardiology clinic locum NC",
       "cardiology locum two weeks per month",
       "non-invasive cardiology locum jobs",
       "semi-retired cardiologist jobs",
     ],
-    datePosted: "2026-09-09",
+    datePosted: "2026-08-11",
+    relatedLinks: [
+      { href: "/locum-tenens-jobs/north-carolina/general-cardiology", label: "North Carolina cardiology locum jobs" },
+      { href: "/part-time-cardiologist-jobs", label: "Part-time cardiologist schedules" },
+      { href: "/physician-opportunities", label: "All current cardiology opportunities" },
+      { href: "/cardiologist-locums-calculator", label: "Estimate locum compensation" },
+    ],
     relatedSpecialtySlugs: ["general-cardiology"],
     screeningQuestions: [
       {
@@ -356,6 +390,8 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
     eyebrow: "Featured interventional cardiology opportunity",
     formSpecialty: "Interventional Cardiology",
     specialtySlug: "interventional-cardiology",
+    listingKind: "direct",
+    region: "Ohio",
     relatedLinks: [
       { href: "/locum-tenens-jobs/ohio/interventional-cardiology", label: "Ohio interventional locum jobs" },
       { href: "/interventional-cardiology-locums-pay", label: "Interventional locums pay" },
@@ -511,6 +547,11 @@ export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] 
   },
 ];
 
+export const FEATURED_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
+  ...HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES,
+  ...OPEN_JOB_OPPORTUNITIES,
+];
+
 export function featuredOpportunityPath(slug: string): string {
   return `/featured-cardiology-jobs/${slug}`;
 }
@@ -529,5 +570,11 @@ export function getFeaturedOpportunitiesForState(
     (opportunity) =>
       opportunity.stateSlug === stateSlug &&
       (!specialtySlug || opportunity.relatedSpecialtySlugs.includes(specialtySlug)),
+  );
+}
+
+export function getFeaturedOpportunitiesForSpecialtySlug(specialtySlug: string) {
+  return FEATURED_CARDIOLOGY_OPPORTUNITIES.filter((opportunity) =>
+    opportunity.relatedSpecialtySlugs.includes(specialtySlug),
   );
 }

@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
-import { OpportunityInterestForm } from "@/components/forms/OpportunityInterestForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   FEATURED_CARDIOLOGY_OPPORTUNITIES,
   featuredOpportunityPath,
+  formatOpportunityPostedDate,
+  opportunityListingKind,
+  opportunitySupportLine,
 } from "@/lib/featured-cardiology-opportunities";
 import { OPPORTUNITIES_FAQ } from "@/lib/opportunities-seo";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -37,6 +39,43 @@ const LOCUM_BENEFITS = [
     body: "Paperwork is real. We keep owners and timelines visible so you are not guessing at 11 p.m.",
   },
 ] as const;
+
+function OpportunityIndex({
+  title,
+  jobs,
+}: {
+  title: string;
+  jobs: typeof FEATURED_CARDIOLOGY_OPPORTUNITIES;
+}) {
+  if (!jobs.length) return null;
+  return (
+    <div className="mt-10">
+      <h3 className="font-display text-xl font-semibold tracking-tight text-slate-950">{title}</h3>
+      <ul className="mt-4 divide-y divide-brand-100 overflow-hidden rounded-3xl border border-brand-200 bg-white">
+        {jobs.map((job) => (
+          <li key={job.slug}>
+            <Link
+              href={featuredOpportunityPath(job.slug)}
+              className="block px-5 py-4 transition hover:bg-brand-50"
+            >
+              <p className="text-xs font-bold uppercase tracking-wider text-brand-700">
+                {job.state}
+                {job.region ? ` · ${job.region}` : ""}
+              </p>
+              <p className="mt-1 font-display text-lg font-bold tracking-tight text-slate-950">
+                {job.shortLabel}
+              </p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">
+                Posted {formatOpportunityPostedDate(job.datePosted)}. {job.schedule}.{" "}
+                {opportunitySupportLine(job)}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function OpportunitiesPage() {
   const path = "/physician-opportunities";
@@ -93,34 +132,24 @@ export default function OpportunitiesPage() {
           <h2 className="mt-3 text-center font-display text-3xl font-semibold tracking-tight text-slate-950">
             Current cardiology opportunities
           </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {FEATURED_CARDIOLOGY_OPPORTUNITIES.map((opportunity) => (
-              <article
-                key={opportunity.slug}
-                className="rounded-3xl border border-brand-200 bg-white p-6 shadow-sm"
-              >
-                <p className="text-xs font-bold uppercase tracking-wider text-brand-700">
-                  {opportunity.state}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-bold tracking-tight text-slate-950">
-                  {opportunity.setting}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-700">
-                  {opportunity.schedule}. {opportunity.supportLine ?? "Travel, lodging, and malpractice insurance covered."}
-                </p>
-                <OpportunityInterestForm
-                  opportunity={opportunity}
-                  variant="card"
-                />
-                <Link
-                  href={featuredOpportunityPath(opportunity.slug)}
-                  className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 hover:underline"
-                >
-                  Read the full assignment →
-                </Link>
-              </article>
-            ))}
-          </div>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-6 text-slate-600">
+            Each job page shows the posted date and a private form to contact Locum
+            Career Hub if the assignment is still available. Direct jobs include the
+            posted need line. Vendor (VMS) jobs stay limited until a consultant confirms
+            details.
+          </p>
+          <OpportunityIndex
+            title="Direct cardiology jobs"
+            jobs={FEATURED_CARDIOLOGY_OPPORTUNITIES.filter(
+              (job) => opportunityListingKind(job) !== "vms",
+            )}
+          />
+          <OpportunityIndex
+            title="Vendor (VMS) cardiology jobs"
+            jobs={FEATURED_CARDIOLOGY_OPPORTUNITIES.filter(
+              (job) => opportunityListingKind(job) === "vms",
+            )}
+          />
         </div>
       </section>
 

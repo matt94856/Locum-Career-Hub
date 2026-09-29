@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/Button";
 import { OpportunityInterestForm } from "@/components/forms/OpportunityInterestForm";
 import { FeaturedOpportunityApplyButton } from "@/components/cta/FeaturedOpportunityApplyButton";
 import {
+  AVAILABILITY_INQUIRY_CTA,
+  formatOpportunityPostedDate,
+  opportunityListingKind,
   opportunitySpecialtySlug,
   opportunitySupportLine,
   type FeaturedCardiologyOpportunity,
@@ -86,6 +89,11 @@ export function FeaturedCardiologyOpportunityView({
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-700">
                 {opportunity.eyebrow ?? "Featured non-invasive cardiology opportunity"}
               </p>
+              <p className="mt-3 text-sm font-semibold text-slate-700">
+                Posted {formatOpportunityPostedDate(opportunity.datePosted)}
+                {opportunityListingKind(opportunity) === "vms" ? " · Limited public details" : ""}
+                {opportunity.region ? ` · ${opportunity.region}` : ""}
+              </p>
               <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
                 {opportunity.h1}
               </h1>
@@ -97,7 +105,7 @@ export function FeaturedCardiologyOpportunityView({
                   opportunitySlug={opportunity.slug}
                   placement="hero"
                 >
-                  Request more details
+                  {AVAILABILITY_INQUIRY_CTA}
                 </FeaturedOpportunityApplyButton>
                 <Button
                   href={`/locum-tenens-jobs/${opportunity.stateSlug}/${specialtySlug}`}
@@ -118,6 +126,12 @@ export function FeaturedCardiologyOpportunityView({
                 Assignment snapshot
               </p>
               <dl className="mt-5 space-y-5 text-sm">
+                <div>
+                  <dt className="font-semibold text-slate-950">Posted</dt>
+                  <dd className="mt-1 leading-6 text-slate-700">
+                    {formatOpportunityPostedDate(opportunity.datePosted)}
+                  </dd>
+                </div>
                 <div>
                   <dt className="font-semibold text-slate-950">Setting</dt>
                   <dd className="mt-1 leading-6 text-slate-700">{opportunity.setting}</dd>
@@ -161,11 +175,12 @@ export function FeaturedCardiologyOpportunityView({
         <div className="mt-8 rounded-3xl bg-brand-700 p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight">
-              Want the current dates and facility details?
+              {AVAILABILITY_INQUIRY_CTA}
             </h2>
             <p className="mt-2 text-sm leading-6 text-brand-50">
-              Leave an email or mobile number. We contact you about this
-              assignment—not a general mailing list.
+              Posted {formatOpportunityPostedDate(opportunity.datePosted)}. Leave an
+              email or mobile number. We contact you about this assignment—not a
+              general mailing list.
             </p>
           </div>
           <div className="mt-5 flex shrink-0 flex-wrap gap-3 sm:mt-0">
@@ -173,7 +188,7 @@ export function FeaturedCardiologyOpportunityView({
               opportunitySlug={opportunity.slug}
               placement="mid_page"
             >
-              Send me details
+              {AVAILABILITY_INQUIRY_CTA}
             </FeaturedOpportunityApplyButton>
             <Button
               href={`tel:${SITE.phoneTel}`}

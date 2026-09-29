@@ -21,6 +21,10 @@ import { getSpecialtyProfile } from "@/lib/seo/specialty-profiles";
 import { authorityArticleJsonLd, breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { CTA } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
+import {
+  featuredOpportunityPath,
+  getFeaturedOpportunitiesForSpecialtySlug,
+} from "@/lib/featured-cardiology-opportunities";
 
 export function CardiologySpecialtyLocumView({ specialty }: { specialty: CardiologyLocumSpecialty }) {
   const path = cardiologySpecialtyPath(specialty.pathSlug);
@@ -50,6 +54,15 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
   const related = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => specialty.relatedPathSlugs.includes(s.pathSlug));
   const otherSpecialties = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => s.pathSlug !== specialty.pathSlug);
   const contextualLinks = SPECIALTY_CONTEXTUAL_LINKS[specialty.pathSlug] ?? [];
+  const featuredSpecialtySlug =
+    specialty.pathSlug === "interventional"
+      ? "interventional-cardiology"
+      : specialty.pathSlug === "electrophysiology"
+        ? "electrophysiology"
+        : specialty.pathSlug === "cardiac-imaging"
+          ? "advanced-imaging"
+          : "general-cardiology";
+  const currentJobs = getFeaturedOpportunitiesForSpecialtySlug(featuredSpecialtySlug).slice(0, 8);
 
   const crumbs = breadcrumbJsonLd([
     { name: "Home", path: "/" },
@@ -231,6 +244,30 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               articleSlugs={["how-much-do-locum-cardiologists-make", "credentialing-for-locum-cardiologists"]}
               stateSlug={specialty.pathSlug === "electrophysiology" ? "new-york" : undefined}
             />
+            {currentJobs.length ? (
+              <div>
+                <h2 className="font-display text-lg font-semibold text-slate-950">
+                  Current {specialty.name.toLowerCase()} openings
+                </h2>
+                <ul className="mt-3 space-y-2">
+                  {currentJobs.map((job) => (
+                    <li key={job.slug} className="text-sm">
+                      <Link
+                        href={featuredOpportunityPath(job.slug)}
+                        className="font-semibold text-brand-700 hover:underline"
+                      >
+                        {job.shortLabel}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm">
+                  <Link href="/physician-opportunities" className="font-semibold text-brand-700 hover:underline">
+                    All current cardiology opportunities →
+                  </Link>
+                </p>
+              </div>
+            ) : null}
             {specialty.pathSlug === "electrophysiology" ? (
               <p className="text-sm text-slate-600">
                 Also see the{" "}

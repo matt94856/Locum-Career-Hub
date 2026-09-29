@@ -22,7 +22,6 @@ PAGE_METRICS = [
     "engagementRate",
     "bounceRate",
     "averageSessionDuration",
-    "conversions",
     "keyEvents",
     "sessionKeyEventRate",
     "ecommercePurchases",
@@ -147,7 +146,7 @@ def _event_breakdown_for_landing(
     try:
         report = run_report(
             dimensions=["eventName", "landingPagePlusQueryString"],
-            metrics=["eventCount", "conversions"],
+            metrics=["eventCount"],
             start_date=start,
             end_date=end,
             dimension_filter=dim_filter,

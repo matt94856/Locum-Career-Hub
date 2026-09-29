@@ -18,7 +18,6 @@ from tools.traffic import CORE_METRICS, get_traffic_overview, normalize_rate
 
 
 COMPARE_METRICS = CORE_METRICS + [
-    "conversions",
     "keyEvents",
     "sessionKeyEventRate",
 ]
@@ -57,14 +56,14 @@ def compare_periods(
 
     landing_cur = run_report(
         dimensions=["landingPagePlusQueryString"],
-        metrics=["sessions", "totalUsers", "keyEvents", "conversions", "engagementRate"],
+        metrics=["sessions", "totalUsers", "keyEvents", "engagementRate"],
         start_date=start,
         end_date=end,
         limit=200,
     )
     landing_prev = run_report(
         dimensions=["landingPagePlusQueryString"],
-        metrics=["sessions", "totalUsers", "keyEvents", "conversions", "engagementRate"],
+        metrics=["sessions", "totalUsers", "keyEvents", "engagementRate"],
         start_date=prev_start,
         end_date=prev_end,
         limit=200,
@@ -164,7 +163,6 @@ def get_organic_search_performance(
             "engagementRate",
             "bounceRate",
             "keyEvents",
-            "conversions",
             "sessionKeyEventRate",
         ],
         start_date=start,
@@ -181,7 +179,6 @@ def get_organic_search_performance(
             "engagedSessions",
             "engagementRate",
             "keyEvents",
-            "conversions",
             "sessionKeyEventRate",
         ],
         start_date=start,

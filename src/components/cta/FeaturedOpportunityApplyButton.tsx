@@ -20,6 +20,7 @@ export function FeaturedOpportunityApplyButton({
       href="#apply"
       size={placement === "hero" ? "lg" : "md"}
       variant={placement === "hero" ? "primary" : "secondary"}
+      className="h-auto min-h-12 max-w-full whitespace-normal px-5 text-center leading-snug"
       onClick={() =>
         trackCtaClick(
           `featured_job_apply_${placement}_${opportunitySlug}`,

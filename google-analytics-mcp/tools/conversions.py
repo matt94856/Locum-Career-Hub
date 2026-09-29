@@ -23,7 +23,6 @@ def get_conversion_data(
         metrics=[
             "sessions",
             "totalUsers",
-            "conversions",
             "keyEvents",
             "sessionKeyEventRate",
             "totalRevenue",
@@ -39,7 +38,7 @@ def get_conversion_data(
 
     top_pages = run_report(
         dimensions=["landingPagePlusQueryString"],
-        metrics=["sessions", "keyEvents", "conversions", "sessionKeyEventRate", "totalUsers"],
+        metrics=["sessions", "keyEvents", "sessionKeyEventRate", "totalUsers"],
         start_date=start,
         end_date=end,
         order_bys=[
@@ -50,7 +49,7 @@ def get_conversion_data(
 
     by_source = run_report(
         dimensions=["sessionDefaultChannelGroup"],
-        metrics=["sessions", "keyEvents", "conversions", "sessionKeyEventRate", "totalUsers"],
+        metrics=["sessions", "keyEvents", "sessionKeyEventRate", "totalUsers"],
         start_date=start,
         end_date=end,
         order_bys=[
@@ -61,7 +60,7 @@ def get_conversion_data(
 
     organic = run_report(
         dimensions=["landingPagePlusQueryString"],
-        metrics=["sessions", "keyEvents", "conversions", "sessionKeyEventRate", "totalUsers"],
+        metrics=["sessions", "keyEvents", "sessionKeyEventRate", "totalUsers"],
         start_date=start,
         end_date=end,
         dimension_filter=organic_filter(),
@@ -73,7 +72,7 @@ def get_conversion_data(
 
     event_rows = run_report(
         dimensions=["eventName"],
-        metrics=["eventCount", "conversions"],
+        metrics=["eventCount"],
         start_date=start,
         end_date=end,
         order_bys=[
