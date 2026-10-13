@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import {
   GA4_READY_EVENT,
+  GENERATE_LEAD_SENT_KEY,
   persistGenerateLead,
   sendPersistedGenerateLead,
   trackEvent,
@@ -30,6 +31,11 @@ export function ThankYouConversionTracker({
     const submitted = window.sessionStorage.getItem("lch_lead_submitted") === "1";
     const pending = window.sessionStorage.getItem("lch_pending_generate_lead");
     if (!submitted && !pending) return;
+    if (window.sessionStorage.getItem(GENERATE_LEAD_SENT_KEY) === "1") {
+      window.sessionStorage.removeItem("lch_lead_submitted");
+      window.sessionStorage.removeItem("lch_pending_generate_lead");
+      return;
+    }
 
     persistGenerateLead(sourcePath || opportunitySlug || "inquiry_form", {
       ...(opportunitySlug ? { opportunity_slug: opportunitySlug } : {}),

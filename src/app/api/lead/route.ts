@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   // "companyWebsite" / "faxLine". Complete human contact still saves.
   const evaluated = evaluateLeadRequest(json);
   if (evaluated.outcome === "drop_honeypot") {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, stored: false });
   }
 
   const source = isNonEmptyString(json.source) ? json.source.trim() : "lead_form";
@@ -85,5 +85,5 @@ export async function POST(req: Request) {
     }
   });
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, stored: true });
 }

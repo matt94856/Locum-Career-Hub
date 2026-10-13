@@ -197,7 +197,7 @@ export function buildCardiologySpecialtySerpMetadata(spec: {
   titleKeyword: string;
 }): Metadata {
   const titleOverride: Record<string, string> = {
-    "cardiac-imaging": "Cardiac Imaging Locum Jobs | Attending Echo/CT",
+    "cardiac-imaging": "Locum Cardiac Imaging Fellowship Jobs | Attendings",
     electrophysiology: "EP Locum Jobs | Ablation, Devices & Call",
     general: "General Cardiology Locum Jobs | Consult & Clinic",
     interventional: "Interventional Cardiology Locum Jobs | STEMI",

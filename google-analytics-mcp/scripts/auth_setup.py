@@ -9,12 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from auth import describe_auth_state, get_credentials, property_id  # noqa: E402
+from auth import describe_auth_state, get_credentials, property_id, token_path  # noqa: E402
 
 
 def main() -> int:
     print("GA4 MCP — OAuth setup (analytics.readonly)")
+    previous = token_path()
+    if previous.exists():
+        previous.unlink()
+        print("Removed the saved login so Google will ask which account to use.")
     print("Opening browser for Google consent…")
+    print("In the account picker, choose the Google user that can open this GA4 property.")
     get_credentials(interactive=True)
     try:
         prop = property_id()

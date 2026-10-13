@@ -56,9 +56,11 @@ describe("GA4 generate_lead queue", () => {
         transport_type: "beacon",
         specialty: "General Cardiology",
         career_stage: "moonlighting",
+        lead_confirmed: "stored",
       }),
     );
     expect(window.sessionStorage.getItem(PENDING_GENERATE_LEAD_KEY)).toBeNull();
+    expect(sendPersistedGenerateLead()).toBe(false);
   });
 
   it("queues form_submit until GA4 is configured", async () => {

@@ -2,6 +2,56 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-10-12 — `https://www.locumcareerhub.com/`
+
+- Type: `conversion`
+- Status: shipped
+- Before: generate_lead fired on form page and thank-you; honeypot returned ok without a stored lead
+- After: generate_lead fires once and only when the API returns stored true
+- Reason: Last 28 days: generate_lead 2 on / and 2 on /thank-you, lead_thank_you_view 4, key events 0. Business reports no new submissions.
+- Expected: Next 28 days: generate_lead count matches rows in physician_leads. Mark generate_lead as a GA4 key event in Admin so landing reports stop showing 0.
+- Actual: pending
+
+## 2026-10-12 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: Daily band without a public-post comparison
+- After: One paragraph: AMN posts near ,993/day are single openings, not the ,200-,500 band
+- Reason: Title with ,200/Day already shipped Sep 21. 28d page is 12 impressions, 0 clicks, position 9.3, which is too small to retitle again.
+- Expected: No title change. Next GSC pull should keep the ,200 title and show whether the snippet picks up the comparison.
+- Actual: pending
+
+## 2026-10-12 — `https://www.locumcareerhub.com/cardiologist-locums-pay-report`
+
+- Type: `content`
+- Status: shipped
+- Before: Citeable daily bands only
+- After: October 2026 public-post comparison: AMN day rates, Aya Canton and Kingsport, Locumstory hourly range, calculator CTA
+- Reason: 28d: 23 impressions, 1 click, 4.3% CTR, position 10.3. Page already shares. Comparison gives physicians a reason to forward it.
+- Expected: More calculator clicks and viral_share events from this URL. Do not judge by title CTR; title was left unchanged.
+- Actual: pending
+
+## 2026-10-12 — `https://www.locumcareerhub.com/salary/electrophysiologist-salary`
+
+- Type: `title`
+- Status: shipped
+- Before: Electrophysiologist Salary | Locums vs Employed Pay
+- After: Electrophysiologist Salary | ,800-,200/Day
+- Reason: 90d GSC: 210 impressions, 0 clicks, position 20.9. Title had no rate. This is not the Sep 21 EP pay-page title test.
+- Expected: First clicks from electrophysiologist salary queries. 28-day check: impressions still present and CTR above 0.
+- Actual: pending
+
+## 2026-10-12 — `https://www.locumcareerhub.com/locum-jobs/cardiology/cardiac-imaging`
+
+- Type: `title`
+- Status: shipped
+- Before: Cardiac Imaging Locum Jobs | Attending Echo/CT
+- After: Locum Cardiac Imaging Fellowship Jobs | Attendings
+- Reason: 28d GSC: 259 impressions, 2 clicks, 0.77% CTR, position 8.3. 231 of those impressions are locum cardiac imaging fellowship jobs at position 8.6 with 0 clicks. The Sep 21 attending title did not earn a click.
+- Expected: Snippet matches the query and states these are attending blocks. Success in 28 days is a click on that query or a form_start from this URL.
+- Actual: pending
+
 ## 2026-09-29 — `https://www.locumcareerhub.com/physician-opportunities`
 
 - Type: `new-landing-page`

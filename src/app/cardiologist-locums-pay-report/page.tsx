@@ -143,6 +143,30 @@ export default function CardiologistLocumsPayReportPage() {
             </div>
           </div>
 
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-8">
+            <h2 className="font-display text-2xl font-semibold text-slate-950">How public posts compare</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700">
+              These bands are directional daily gross, not a scrape of job boards. In October 2026, public openings were
+              single assignments: AMN listed some interventional locums near $2,993 per day, with posted interventional
+              jobs averaging about $629,000 per year, and some EP posts near $2,765–$2,993 per day. Aya listed Canton,
+              Ohio EP coverage at $3,200–$3,500 per day and a Kingsport, Tennessee EP post at about $550 per weekday hour.
+              Locumstory’s 2026 report put general cardiology locums at $275–$375 per hour, up from $250–$350. An hourly
+              clinic rate is not the same contract as a 24-hour day that includes 0–4 hours. Use the calculator before
+              you treat any of those headlines as your offer.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/cardiologist-locums-calculator" className="rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+                Compare a block in the calculator
+              </Link>
+              <Link href="/interventional-cardiology-locums-pay" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:border-brand-300">
+                Interventional day-rate rules
+              </Link>
+              <Link href="/salary/electrophysiologist-salary" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:border-brand-300">
+                Electrophysiologist salary
+              </Link>
+            </div>
+          </div>
+
           <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-8">
             <h2 className="font-display text-2xl font-semibold text-slate-950">How to cite</h2>
             <p className="mt-3 text-sm leading-7 text-slate-700">

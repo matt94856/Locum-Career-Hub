@@ -227,8 +227,8 @@ function ReportGate({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const body = (await response.json().catch(() => ({}))) as { error?: string };
-      if (!response.ok) throw new Error(body.error || "Could not save your request.");
+      const body = (await response.json().catch(() => ({}))) as { error?: string; stored?: boolean };
+      if (!response.ok || body.stored !== true) throw new Error(body.error || "Could not save your request.");
       setStatus("success");
       trackDecisionToolEvent(definition.id, "lead_success", { source_version: definition.sourceIds.join(",") });
       trackGenerateLead(`decision_tool_${definition.id}`);

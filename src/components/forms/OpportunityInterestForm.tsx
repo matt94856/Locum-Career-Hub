@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { persistGenerateLead, trackEvent } from "@/lib/analytics-events";
+import { GENERATE_LEAD_SENT_KEY, persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 import {
   opportunityFormSpecialty,
@@ -90,6 +90,7 @@ export function OpportunityInterestForm({
         }),
       });
       const result = (await response.json().catch(() => null)) as {
+        stored?: boolean;
         error?: string;
         code?: string;
       } | null;
@@ -105,6 +106,13 @@ export function OpportunityInterestForm({
         return;
       }
 
+      if (result?.stored !== true) {
+        setStatus("error");
+        setError(`We could not save that inquiry. Call ${SITE.phoneDisplay} or email ${SITE.email} and mention the ${opportunity.state} opportunity.`);
+        return;
+      }
+
+      window.sessionStorage.removeItem(GENERATE_LEAD_SENT_KEY);
       persistGenerateLead(source, {
         specialty: formSpecialty,
         opportunity_slug: opportunity.slug,

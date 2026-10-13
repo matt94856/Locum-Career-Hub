@@ -62,6 +62,7 @@ export default function ToolsIndexPage() {
             <div className="mt-5 flex shrink-0 flex-col gap-2 sm:mt-0">
               <Link href="/cardiologist-locums-calculator" className="inline-flex rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600">Calculate & share</Link>
               <Link href="/cardiologist-locums-pay-report" className="inline-flex rounded-xl border border-slate-600 px-5 py-3 text-center text-sm font-semibold text-white hover:border-brand-400">Cite pay chart</Link>
+              <Link href="/tools/cardiology-call-pay" className="inline-flex rounded-xl border border-slate-600 px-5 py-3 text-center text-sm font-semibold text-white hover:border-brand-400">Call pay tool</Link>
             </div>
           </div>
         </div>

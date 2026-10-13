@@ -42,6 +42,7 @@ const staticRoutes = [
   "/glossary",
   "/tools",
       "/cardiologist-locums-calculator",
+      "/tools/cardiology-call-pay",
       "/cardiologist-locums-pay-survey",
       "/cardiologist-locums-pay-report",
       "/interventional-cardiology-locums-pay",

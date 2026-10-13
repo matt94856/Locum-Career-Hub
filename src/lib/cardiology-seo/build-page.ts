@@ -135,7 +135,9 @@ export function buildPageFromDef(def: PageDef): CardiologySeoPage {
       ? `${def.h1} are contract-based cardiology assignments in ${geo ?? "selected regions"} where licensing, privileging, and call should be documented before you start. Locum Career Hub is a cardiologist-only recruiting service—we are not the hospital employer.`
       : def.category === "salary" && def.slug.startsWith("cardiologist-salary-")
         ? `${def.h1} depends on subspecialty, call burden, acuity, and whether the role is locum or employed. This page explains market drivers in ${geo ?? "the state"}—not a guaranteed compensation offer.`
-        : `${def.h1}—educational context for cardiologists exploring locum tenens. Locum Career Hub recruits MD/DO cardiologists and connects you with hospitals and groups when mutual fit exists.`;
+        : def.slug === "electrophysiologist-salary"
+          ? "Electrophysiologist locum pay on this page is a directional $2,800–$3,200 per day. Public October 2026 posts are single openings, including Aya at $3,200–$3,500/day in Canton, Ohio and about $550/hour weekdays in Kingsport, Tennessee. Those listings are not this benchmark. 24-hour call usually includes 0–4 hours; extra callback is daily ÷ 8."
+          : `${def.h1}—educational context for cardiologists exploring locum tenens. Locum Career Hub recruits MD/DO cardiologists and connects you with hospitals and groups when mutual fit exists.`;
 
   const intro =
     def.category === "state" || def.category === "city"

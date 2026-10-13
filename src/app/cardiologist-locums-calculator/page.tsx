@@ -95,6 +95,13 @@ export default function CardiologistLocumsCalculatorPage() {
           <div className="mx-auto mt-6 max-w-3xl text-left">
             <AnswerFirstBlock answer={DIRECT_ANSWER} />
           </div>
+          <p className="mx-auto mt-6 max-w-3xl text-sm leading-6 text-slate-600">
+            Comparing a 24-hour call quote? Use the{" "}
+            <Link href="/tools/cardiology-call-pay" className="font-semibold text-brand-700 hover:underline">
+              beginner call-pay tool
+            </Link>{" "}
+            for general and interventional assignments.
+          </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs font-semibold text-slate-600">
             <span className="rounded-full border border-slate-200 bg-white px-3 py-2">About 2 minutes</span>
             <span className="rounded-full border border-slate-200 bg-white px-3 py-2">Numbers visible before any form</span>

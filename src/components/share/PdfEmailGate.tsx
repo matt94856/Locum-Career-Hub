@@ -61,8 +61,8 @@ export function PdfEmailGate({
           clinicalNotes: "Requested email/PDF of tool result (light gate).",
         }),
       });
-      const body = (await response.json().catch(() => ({}))) as { error?: string };
-      if (!response.ok) throw new Error(body.error || "Could not send your PDF request.");
+      const body = (await response.json().catch(() => ({}))) as { error?: string; stored?: boolean };
+      if (!response.ok || body.stored !== true) throw new Error(body.error || "Could not send your PDF request.");
       setStatus("success");
       onUnlocked?.();
       trackEvent("viral_share", {

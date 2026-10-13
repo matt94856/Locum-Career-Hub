@@ -18,7 +18,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from gsc_mcp.auth import describe_auth_state, get_credentials  # noqa: E402
+from gsc_mcp.auth import describe_auth_state, get_credentials, token_path  # noqa: E402
 from gsc_mcp.client import list_sites, normalize_site_url  # noqa: E402
 from gsc_mcp.auth import default_site_url  # noqa: E402
 
@@ -39,7 +39,12 @@ def main() -> int:
         print("See mcp-gsc/README.md for full steps.")
         return 1
 
+    previous = token_path()
+    if previous.exists():
+        previous.unlink()
+        print("Removed the saved login so Google will ask which account to use.")
     print("Opening browser for Google consent (webmasters.readonly only)...")
+    print("Choose the Google account that can open locumcareerhub.com in Search Console.")
     get_credentials(interactive=True)
     after = describe_auth_state()
     print("\nToken saved successfully (token values are never printed).")

@@ -8,7 +8,7 @@ import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
-import { persistGenerateLead, trackEvent } from "@/lib/analytics-events";
+import { GENERATE_LEAD_SENT_KEY, persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 import {
   CAREER_STAGES,
@@ -239,6 +239,7 @@ export function LeadCaptureForm({
       });
       const data = (await res.json().catch(() => null)) as {
         ok?: boolean;
+        stored?: boolean;
         error?: string;
         code?: string;
       } | null;
@@ -255,6 +256,13 @@ export function LeadCaptureForm({
         return;
       }
 
+      if (data?.stored !== true) {
+        setStatus("error");
+        setError(`We could not save your inquiry. Please email ${SITE.email} or call ${SITE.phoneDisplay}.`);
+        return;
+      }
+
+      window.sessionStorage.removeItem(GENERATE_LEAD_SENT_KEY);
       persistGenerateLead(payload.pagePath || "inquiry_form", {
         specialty: payload.specialty,
         career_stage: payload.careerStage,

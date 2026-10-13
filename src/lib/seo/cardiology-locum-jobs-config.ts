@@ -147,6 +147,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       anchor: "interventional cardiology locums pay guide",
       suffix: ".",
     },
+    {
+      prefix: "See whether a 0–4 hour included call rate beats a higher guarantee in the",
+      href: "/tools/cardiology-call-pay",
+      anchor: "beginner cardiology call-pay tool",
+      suffix: ".",
+    },
   ],
   "structural-heart": [
     {
@@ -200,6 +206,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       href: "/retired-physician-opportunities",
       anchor: "semi-retired cardiologist locum jobs",
       suffix: ".",
+    },
+    {
+      prefix: "Compare a 0–4 hour included call rate with a higher guarantee in the",
+      href: "/tools/cardiology-call-pay",
+      anchor: "beginner cardiology call-pay tool",
+      suffix: ". General cardiology uses the $2,200–$2,800 band, not interventional rates.",
     },
   ],
   "heart-failure": [
@@ -408,9 +420,9 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     h1: "Cardiac Imaging Locum Jobs for Cardiologists",
     titleKeyword: "cardiac imaging locum jobs",
     metaDescription:
-      "Attending cardiologist locum jobs—echo, nuclear, CT/MRI reads. Not fellowship training. Written volume, PACS, and turnaround—then request matches.",
+      "Not a cardiac imaging fellowship. Attending echo, nuclear, and CT/MRI locum blocks with written volume and turnaround—then request a match.",
     intro:
-      "These are locum tenens assignments for attending cardiologists, not cardiac imaging fellowship programs. Blocks cover echo, nuclear, cardiac MRI/CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, PACS access, and on-site vs remote rules must be written before you accept.",
+      "Searching for locum cardiac imaging fellowship jobs? These are attending locum blocks, not fellowship training. Coverage includes echo, nuclear, cardiac MRI/CT interpretation, and multimodality read pools. Turnaround SLAs, study volume, PACS access, and on-site vs remote rules must be written before you accept.",
     relatedPathSlugs: ["general", "preventive-cardiology", "heart-failure"],
     sections: [
       {
@@ -441,8 +453,8 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
     ],
     faqs: [
       {
-        q: "Are these cardiac imaging fellowship jobs?",
-        a: "No. These are locum tenens blocks for board-eligible or board-certified attending cardiologists. We do not place imaging fellows into training programs.",
+        q: "Are these locum cardiac imaging fellowship jobs?",
+        a: "No. The search is common, and this page is the attending alternative: locum echo, nuclear, and CT/MRI coverage for board-eligible or board-certified cardiologists. We do not place fellows into training programs. Fellows planning locums after training should read the new-graduate locum jobs page.",
       },
       {
         q: "Can cardiac imaging locums be remote?",

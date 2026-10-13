@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from google.auth.exceptions import RefreshError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -63,10 +64,14 @@ def get_credentials(*, interactive: bool = False) -> Credentials:
         return creds
 
     if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        token_file.parent.mkdir(parents=True, exist_ok=True)
-        token_file.write_text(creds.to_json(), encoding="utf-8")
-        return creds
+        try:
+            creds.refresh(Request())
+        except RefreshError:
+            creds = None
+        else:
+            token_file.parent.mkdir(parents=True, exist_ok=True)
+            token_file.write_text(creds.to_json(), encoding="utf-8")
+            return creds
 
     if not interactive:
         raise RuntimeError(
@@ -86,7 +91,7 @@ def get_credentials(*, interactive: bool = False) -> Credentials:
 
     flow = InstalledAppFlow.from_client_secrets_file(str(cred_file), SCOPES)
     # Localhost loopback — required for Desktop OAuth clients.
-    creds = flow.run_local_server(port=0, prompt="consent", access_type="offline")
+    creds = flow.run_local_server(port=0, prompt="select_account consent", access_type="offline")
     token_file.parent.mkdir(parents=True, exist_ok=True)
     token_file.write_text(creds.to_json(), encoding="utf-8")
     return creds

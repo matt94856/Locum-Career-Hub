@@ -12,6 +12,7 @@ declare global {
 
 export const GA4_QUEUE_KEY = "lch_ga4_queue";
 export const PENDING_GENERATE_LEAD_KEY = "lch_pending_generate_lead";
+export const GENERATE_LEAD_SENT_KEY = "lch_generate_lead_sent";
 export const GA4_READY_EVENT = "lch-ga4-ready";
 
 type EventParams = Record<string, string | number | boolean>;
@@ -86,6 +87,7 @@ export function persistGenerateLead(
   const params: EventParams = {
     method: "inquiry_form",
     source,
+    lead_confirmed: "stored",
     page_path: window.location.pathname,
     ...extra,
   };
@@ -94,13 +96,16 @@ export function persistGenerateLead(
 
 export function sendPersistedGenerateLead() {
   if (typeof window === "undefined" || !canUseStorage() || !isGa4Ready()) return false;
+  if (window.sessionStorage.getItem(GENERATE_LEAD_SENT_KEY) === "1") return false;
   const raw = window.sessionStorage.getItem(PENDING_GENERATE_LEAD_KEY);
   if (!raw) return false;
+  window.sessionStorage.setItem(GENERATE_LEAD_SENT_KEY, "1");
   let params: EventParams = {};
   try {
     params = JSON.parse(raw) as EventParams;
   } catch {
     window.sessionStorage.removeItem(PENDING_GENERATE_LEAD_KEY);
+    window.sessionStorage.removeItem(GENERATE_LEAD_SENT_KEY);
     return false;
   }
   sendToGa4("generate_lead", {
@@ -120,6 +125,7 @@ export function trackGenerateLead(
   trackEvent("generate_lead", {
     method: "inquiry_form",
     source,
+    lead_confirmed: "stored",
     page_path: typeof window !== "undefined" ? window.location.pathname : "/",
     ...extra,
   });
