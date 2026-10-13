@@ -38,6 +38,11 @@ export function CardiologyCompensationGuide({
             <Button href="/cardiologist-locums-calculator">Calculate my earning potential</Button>
             <Button href="/cardiologist-locums-pay-report" variant="secondary">Cite the pay chart</Button>
             <Button href="/physician-opportunities#lead-form" variant="secondary">Request cardiology matches</Button>
+            {path === "/part-time-cardiologist-jobs" ? (
+              <Button href="/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum" variant="secondary">
+                Baton Rouge part-time locum
+              </Button>
+            ) : null}
             {path === "/interventional-cardiology-locums-pay" ? (
               <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary">
                 Ohio IC locum (1–2 wks/mo)

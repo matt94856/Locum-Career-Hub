@@ -71,6 +71,8 @@ export default async function FeaturedCardiologyOpportunityPage({
           path,
           datePosted: opportunity.datePosted,
           state: opportunity.state,
+          ...(opportunity.city ? { addressLocality: opportunity.city } : {}),
+          ...(opportunity.employmentTypes ? { employmentType: opportunity.employmentTypes } : {}),
           ...(opportunity.baseSalaryMinUsdPerDay
             ? { baseSalaryMinUsdPerDay: opportunity.baseSalaryMinUsdPerDay }
             : {}),
@@ -87,6 +89,7 @@ export default async function FeaturedCardiologyOpportunityPage({
             "Cardiology locum tenens",
             opportunity.setting,
             `${opportunity.state} physician jobs`,
+            ...(opportunity.city ? [opportunity.city] : []),
           ],
         })}
       />

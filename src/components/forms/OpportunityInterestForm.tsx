@@ -77,13 +77,18 @@ export function OpportunityInterestForm({
           travel: "Not collected—assignment-specific interest",
           clinicalNotes:
             String(data.get("clinicalNotes") ?? "").trim() || null,
+          qualificationResponses: Object.fromEntries(
+            opportunity.screeningQuestions.flatMap((question) => {
+              const value = String(data.get(question.id) ?? "").trim();
+              return value ? [[question.id, value]] : [];
+            }),
+          ),
           formMode: "quick",
           smsOptIn: data.get("smsOptIn") === "on",
           leadMagnet: false,
           pagePath,
           source,
           opportunitySlug: opportunity.slug,
-          qualificationResponses: {},
           attribution: readLeadAttribution(),
           recaptchaToken: "",
           faxLine: String(data.get("faxLine") ?? "").trim(),
@@ -181,8 +186,8 @@ export function OpportunityInterestForm({
         }
       >
         {isCard
-          ? `Contact me about ${opportunity.state}`
-          : `Send me details on the ${opportunity.state} job`}
+          ? `Contact me about ${opportunity.city ?? opportunity.state}`
+          : `Send me details on the ${opportunity.city ?? opportunity.state} job`}
       </h2>
       <p
         className={
@@ -257,6 +262,26 @@ export function OpportunityInterestForm({
             className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
           />
         </label>
+
+        {variant !== "card"
+          ? opportunity.screeningQuestions.map((question) => (
+              <label key={question.id}>
+                <span className="text-xs font-semibold text-slate-800">{question.label}</span>
+                <select
+                  name={question.id}
+                  defaultValue=""
+                  className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
+                >
+                  <option value="">Prefer to discuss</option>
+                  {question.options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ))
+          : null}
 
         {variant !== "card" ? (
           <label>

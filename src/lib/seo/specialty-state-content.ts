@@ -411,6 +411,44 @@ function applyPrioritySpecialtyStateEnrichment(
     };
   }
 
+  if (input.stateSlug === "louisiana" && input.specialtySlug === "general-cardiology") {
+    return {
+      ...content,
+      heroSubhead: "Baton Rouge part-time and locum non-invasive coverage",
+      directAnswer:
+        "General cardiology locum tenens jobs in Louisiana include a current Baton Rouge non-invasive opening for physicians considering part-time or locum work. Pay is described as very competitive. You can take a completely outpatient Monday–Friday schedule, or outpatient work plus some inpatient coverage with 24-hour weekend call and night call only if you prefer it. This is not interventional, EP, or hospitalist work, and it is not a New Orleans or Shreveport listing.",
+      intro:
+        "Cardiologists searching Louisiana locum jobs usually need a city, a specialty, and a schedule they can compare with employed work. The live priority assignment is non-invasive cardiology in Baton Rouge. Read that job page before you treat a generic Louisiana result as the same opening.",
+      sections: [
+        {
+          h2: "The Baton Rouge non-invasive locum",
+          paragraphs: [
+            "One structure is completely outpatient, Monday through Friday. The other keeps clinic and adds some inpatient work, including optional 24-hour weekend call and night call. Call is not required.",
+            "Pay is described as very competitive for non-invasive cardiology. The written rate is confirmed before a physician is presented. The public page does not invent a daily dollar figure.",
+          ],
+        },
+        {
+          h2: "Part-time and locums, with a Louisiana license",
+          paragraphs: [
+            "This fits cardiologists considering part-time work or locum tenens, including employed physicians who still need moonlighting approval. Louisiana is in the Interstate Medical Licensure Compact for many physicians. An existing Louisiana license is faster, and Baton Rouge privileges are separate from the license.",
+          ],
+        },
+        ...content.sections.filter((s) => /timing|seasonality/i.test(s.h2)),
+      ],
+      faqs: [
+        {
+          q: "Is there a part-time cardiology locum in Baton Rouge?",
+          a: "Yes. The featured Baton Rouge non-invasive job offers Monday–Friday outpatient work, or outpatient plus some inpatient coverage with optional 24-hour weekend and night call. Pay is described as very competitive.",
+        },
+        {
+          q: "Is the Louisiana general cardiology locum in New Orleans?",
+          a: "The current priority opening is in Baton Rouge, not New Orleans or Shreveport.",
+        },
+        ...content.faqs.slice(0, 3),
+      ].slice(0, 7),
+    };
+  }
+
   if (input.stateSlug === "alaska" && input.specialtySlug === "electrophysiology") {
     return {
       ...content,

@@ -110,7 +110,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...FEATURED_CARDIOLOGY_OPPORTUNITIES.map((opportunity) => ({
       url: `${SITE.url}${featuredOpportunityPath(opportunity.slug)}`,
-      lastModified: new Date(opportunity.datePosted),
+      lastModified: new Date(opportunity.dateModified ?? opportunity.datePosted),
       changeFrequency: "daily" as const,
       priority: 0.9,
     })),

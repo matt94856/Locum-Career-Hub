@@ -2,6 +2,16 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-10-13 — `https://www.locumcareerhub.com/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum`
+
+- Type: `content`
+- Status: shipped
+- Before: Southeastern Louisiana non-invasive page: call plus inpatient call, no city name, slug louisiana-southeastern-non-invasive-cardiology-locum
+- After: Baton Rouge part-time non-invasive locum: outpatient M-F or outpatient plus optional 24-hour weekend and night call, competitive pay, 301 from the old slug
+- Reason: Priority job. GSC 90d showed 0 impressions on the old URL and no Baton Rouge URL. Physicians search the city plus part-time or locums.
+- Expected: Impressions for Baton Rouge part-time and non-invasive locum queries, then inquiries that name the outpatient or optional-call structure
+- Actual: pending
+
 ## 2026-10-12 — `https://www.locumcareerhub.com/`
 
 - Type: `conversion`

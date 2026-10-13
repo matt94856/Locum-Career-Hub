@@ -165,6 +165,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/featured-cardiology-jobs/louisiana-southeastern-non-invasive-cardiology-locum",
+        destination: "/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum",
+        permanent: true,
+      },
       { source: "/locum-tenens-florida", destination: "/locum-tenens-jobs/florida", permanent: true },
       { source: "/locum-tenens-texas", destination: "/locum-tenens-jobs/texas", permanent: true },
       { source: "/locum-tenens-california", destination: "/locum-tenens-jobs/california", permanent: true },

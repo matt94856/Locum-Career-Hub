@@ -21,6 +21,22 @@ describe("open cardiology job pages", () => {
     }
   });
 
+  it("publishes a deep Baton Rouge page and retires the region-only Louisiana slug", () => {
+    expect(
+      OPEN_JOB_DRAFTS.some((job) => job.slug === "louisiana-southeastern-non-invasive-cardiology-locum"),
+    ).toBe(false);
+    const job = FEATURED_CARDIOLOGY_OPPORTUNITIES.find(
+      (item) => item.slug === "baton-rouge-non-invasive-cardiology-locum",
+    );
+    expect(job?.city).toBe("Baton Rouge");
+    expect(job?.h1).toContain("Baton Rouge");
+    expect(job?.metaTitle.length).toBeLessThanOrEqual(52);
+    expect(job?.directAnswer.toLowerCase()).toContain("outpatient");
+    expect(job?.directAnswer.toLowerCase()).toContain("part-time");
+    expect(job?.sections.length).toBeGreaterThanOrEqual(6);
+    expect(job?.faqs.some((faq) => /weekend call required/i.test(faq.q))).toBe(true);
+  });
+
   it("does not invent a Montana VMS page or duplicate the western NC outpatient URL", () => {
     expect(OPEN_JOB_DRAFTS.some((job) => job.slug.includes("montana"))).toBe(false);
     expect(

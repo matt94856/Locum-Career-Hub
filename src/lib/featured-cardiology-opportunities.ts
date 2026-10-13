@@ -1,4 +1,5 @@
 import { OPEN_JOB_OPPORTUNITIES } from "@/lib/open-jobs";
+import { BATON_ROUGE_NONINVASIVE_LOCUM } from "@/lib/open-jobs/baton-rouge";
 
 export type FeaturedCardiologyOpportunity = {
   slug: string;
@@ -33,10 +34,16 @@ export type FeaturedCardiologyOpportunity = {
   faqs: { q: string; a: string }[];
   keywords: string[];
   datePosted: string;
+  /** Sitemap lastmod when the page was rewritten after the original post date. */
+  dateModified?: string;
   relatedSpecialtySlugs: string[];
   /** Direct client job vs limited-detail vendor posting. */
   listingKind?: "direct" | "vms";
-  /** General region in the state (never a city name on the page). */
+  /** City when the assignment is genuinely in one market. Most jobs stay regional. */
+  city?: string;
+  /** Schema.org employment types. Defaults to CONTRACTOR. */
+  employmentTypes?: string[];
+  /** Region label shown under the posted date. */
   region?: string;
   screeningQuestions: {
     id: string;
@@ -76,6 +83,7 @@ export const AVAILABILITY_INQUIRY_CTA =
   "Contact Locum Career Hub to see if this is still available";
 
 const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
+  BATON_ROUGE_NONINVASIVE_LOCUM,
   {
     slug: "kansas-inpatient-non-invasive-cardiology-locum",
     state: "Kansas",

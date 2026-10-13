@@ -156,6 +156,11 @@ export const DOOR_LANDING_SLUGS: Record<string, CareerStageId> = {
 };
 
 export const FEATURED_PROOF = {
+  batonRouge: {
+    href: "/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum",
+    title: "Baton Rouge non-invasive locum",
+    detail: "Part-time or locum non-invasive work: Monday–Friday outpatient, or clinic plus optional weekend and night call.",
+  },
   kansas: {
     href: "/featured-cardiology-jobs/kansas-inpatient-non-invasive-cardiology-locum",
     title: "Kansas inpatient non-invasive locum",
@@ -174,7 +179,10 @@ export const FEATURED_PROOF = {
 } as const;
 
 export function featuredProofForSpecialty(pathSlug: string) {
-  if (pathSlug === "general" || pathSlug === "cardiac-imaging") {
+  if (pathSlug === "general") {
+    return [FEATURED_PROOF.batonRouge, FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
+  }
+  if (pathSlug === "cardiac-imaging") {
     return [FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
   }
   if (pathSlug === "interventional") {

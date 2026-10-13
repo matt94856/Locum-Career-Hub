@@ -321,6 +321,13 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
             {specialty.pathSlug === "general" ? (
               <p className="text-sm text-slate-600">
                 See the{" "}
+                <Link
+                  href="/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  Baton Rouge part-time non-invasive locum
+                </Link>
+                , the{" "}
                 <Link href="/cardiologist-locums-pay-report" className="font-semibold text-brand-700 hover:underline">
                   cardiologist locums pay report
                 </Link>

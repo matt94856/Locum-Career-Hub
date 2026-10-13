@@ -181,22 +181,6 @@ export const OPEN_JOB_DRAFTS: OpenJobDraft[] = [
       "Northeastern Alabama needs interventional call on an ongoing but sporadic calendar—different from the northwestern Alabama medical-leave call row. Share the weeks you can actually take so we do not present you for dates you cannot hold.",
   },
   {
-    slug: "louisiana-southeastern-non-invasive-cardiology-locum",
-    state: "Louisiana",
-    stateSlug: "louisiana",
-    region: "Southeastern Louisiana",
-    track: "non-invasive",
-    kind: "direct",
-    datePosted: "2026-07-16",
-    need: "Call plus inpatient call, ongoing with sporadic dates.",
-    setting: "Non-invasive cardiology with call and inpatient call",
-    schedule: "Ongoing coverage on sporadic dates",
-    call: "Call plus inpatient call",
-    metaTitle: "SE Louisiana Non-Invasive Cardiology Locum | Call",
-    angle:
-      "Southeastern Louisiana is not clinic-only. The board specified call plus inpatient call on sporadic dates, so candidates should be ready for hospital-side non-invasive work rather than a weekday office panel alone.",
-  },
-  {
     slug: "pennsylvania-southwestern-non-invasive-cardiology-locum",
     state: "Pennsylvania",
     stateSlug: "pennsylvania",

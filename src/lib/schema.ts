@@ -251,7 +251,8 @@ export function jobPostingJsonLd(input: {
   path: string;
   datePosted: string;
   state: string;
-  employmentType?: string;
+  addressLocality?: string;
+  employmentType?: string | readonly string[];
   /** Floor of the written daily guarantee, if the client shared terms. */
   baseSalaryMinUsdPerDay?: number;
 }) {
@@ -273,6 +274,7 @@ export function jobPostingJsonLd(input: {
       "@type": "Place",
       address: {
         "@type": "PostalAddress",
+        ...(input.addressLocality ? { addressLocality: input.addressLocality } : {}),
         addressRegion: input.state,
         addressCountry: "US",
       },
