@@ -268,11 +268,37 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 </p>
               </div>
             ) : null}
+            {specialty.pathSlug === "interventional" ||
+            specialty.pathSlug === "electrophysiology" ||
+            specialty.pathSlug === "general" ? (
+              <div className="rounded-2xl border border-brand-100 bg-brand-50 p-5">
+                <h2 className="font-display text-lg font-semibold text-slate-950">
+                  {specialty.pathSlug === "interventional"
+                    ? "Exclusive IC jobs not listed here"
+                    : specialty.pathSlug === "electrophysiology"
+                      ? "Exclusive EP jobs not listed here"
+                      : "Exclusive non-invasive jobs not listed here"}
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700">
+                  The openings on this page are the ones we can list publicly. Hospitals also send exclusive{" "}
+                  {specialty.pathSlug === "interventional"
+                    ? "interventional"
+                    : specialty.pathSlug === "electrophysiology"
+                      ? "electrophysiology"
+                      : "non-invasive"}{" "}
+                  coverage that never appears here. Request a match with your licenses, skills, and dates, and we send
+                  the blocks that fit.
+                </p>
+                <Button href="/physician-opportunities#lead-form" className="mt-4">
+                  Request a match
+                </Button>
+              </div>
+            ) : null}
             {specialty.pathSlug === "electrophysiology" ? (
               <p className="text-sm text-slate-600">
                 Also see the{" "}
                 <Link href="/ep-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
-                  EP cardiology locums pay guide
+                  EP locums pay arcade
                 </Link>
                 , the{" "}
                 <Link href="/salary/electrophysiologist-salary" className="font-semibold text-brand-700 hover:underline">
@@ -299,7 +325,7 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               <p className="text-sm text-slate-600">
                 Compare rates on the{" "}
                 <Link href="/interventional-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
-                  interventional cardiology locums pay guide
+                  interventional locums pay arcade
                 </Link>
                 , the{" "}
                 <Link
@@ -328,8 +354,8 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                   Baton Rouge part-time non-invasive locum
                 </Link>
                 , the{" "}
-                <Link href="/cardiologist-locums-pay-report" className="font-semibold text-brand-700 hover:underline">
-                  cardiologist locums pay report
+                <Link href="/non-invasive-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
+                  non-invasive locums pay arcade
                 </Link>
                 , the{" "}
                 <Link

@@ -36,6 +36,9 @@ const SHARE_PATH_CODES: Record<string, string> = {
   c: "/cardiologist-locums-calculator",
   r: "/cardiologist-locums-pay-report",
   u: "/cardiologist-locums-pay-survey",
+  i: "/interventional-cardiology-locums-pay",
+  e: "/ep-cardiology-locums-pay",
+  n: "/non-invasive-cardiology-locums-pay",
 };
 
 const PATH_TO_CODE = Object.fromEntries(
@@ -66,6 +69,11 @@ export function formatBlockRateCompact(low: number, high: number, unit: "weekend
 
 export function linkedInShareUrl(url: string) {
   return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+}
+
+/** Works on iOS and Android Messages. */
+export function smsShareUrl(text: string) {
+  return `sms:?&body=${encodeURIComponent(text)}`;
 }
 
 export function xShareUrl(text: string, url: string) {

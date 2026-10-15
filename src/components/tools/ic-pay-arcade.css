@@ -1,0 +1,161 @@
+.ic-arcade {
+  --arcade-wood: #5a3418;
+  --arcade-wood-dark: #2b160b;
+  --arcade-gold: #e0b44b;
+  --arcade-gold-deep: #b8860b;
+  --arcade-cream: #fff4d6;
+  --arcade-ink: #2b160b;
+  --arcade-screen: #3a2412;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.4rem;
+  border: 4px solid #c9a227;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #6b3d1c 0 10px,
+      #7a4620 10px 14px,
+      #5a3418 14px 22px
+    );
+  box-shadow:
+    inset 0 0 0 3px #3d220f,
+    0 16px 40px rgba(61, 34, 15, 0.35);
+  color: var(--arcade-cream);
+}
+
+.ic-arcade__lights {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.6rem 0.2rem;
+}
+
+.ic-arcade__lights span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #fff1b0, #e0b44b 55%, #8a5a12);
+  box-shadow: 0 0 8px #e0b44b;
+}
+
+.ic-arcade__bezel {
+  margin: 0.55rem 0.7rem 0.85rem;
+  border-radius: 1rem;
+  border: 6px solid #d4af37;
+  background: #1c1008;
+  box-shadow:
+    inset 0 0 0 3px #7a5416,
+    inset 0 0 30px rgba(0, 0, 0, 0.45);
+}
+
+.ic-arcade__screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.55rem;
+  background:
+    radial-gradient(90% 80% at 50% 10%, rgba(255, 214, 120, 0.18), transparent 50%),
+    linear-gradient(180deg, #4a2d14 0%, #2a180c 100%);
+}
+
+.ic-arcade__screen::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 236, 180, 0.045) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+.ic-arcade__option {
+  min-height: 4.25rem;
+  width: 100%;
+  border-radius: 0.85rem;
+  border: 2px solid rgba(224, 180, 75, 0.45);
+  background: rgba(255, 244, 214, 0.08);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  color: var(--arcade-cream);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.ic-arcade__option:hover {
+  border-color: var(--arcade-gold);
+  background: rgba(224, 180, 75, 0.18);
+}
+
+.ic-arcade__option:focus-visible {
+  outline: 2px solid #fff4d6;
+  outline-offset: 3px;
+}
+
+.ic-arcade__option.is-on {
+  border-color: #fff1b0;
+  background: rgba(224, 180, 75, 0.28);
+}
+
+.ic-arcade__cta {
+  min-height: 3rem;
+  border-radius: 999px;
+  border: 2px solid #7a5416;
+  background: linear-gradient(180deg, #ffe08a 0%, #d4af37 58%, #b8860b 100%);
+  color: #2b160b;
+  font-weight: 800;
+  padding: 0.7rem 1.25rem;
+}
+
+.ic-arcade__cta:hover {
+  filter: brightness(1.06);
+}
+
+.ic-arcade__ghost {
+  min-height: 3rem;
+  border-radius: 999px;
+  border: 2px solid rgba(224, 180, 75, 0.55);
+  background: rgba(255, 244, 214, 0.06);
+  color: var(--arcade-cream);
+  font-weight: 700;
+  padding: 0.7rem 1.15rem;
+}
+
+.ic-arcade__ghost:hover {
+  border-color: var(--arcade-gold);
+}
+
+.ic-arcade__ticket {
+  border-radius: 0.4rem;
+  border: 3px dashed #9a3412;
+  background:
+    repeating-linear-gradient(
+      -8deg,
+      #fff7e4 0 14px,
+      #f7e6c1 14px 28px
+    );
+  color: #3b1d0b;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.ic-arcade__enter {
+  animation: ic-arcade-enter 380ms ease both;
+}
+
+@keyframes ic-arcade-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ic-arcade__enter,
+  .ic-arcade__option {
+    animation: none;
+    transition: none;
+  }
+}

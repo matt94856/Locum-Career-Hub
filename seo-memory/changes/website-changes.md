@@ -2,6 +2,46 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-10-15 — `https://www.locumcareerhub.com/non-invasive-cardiology-locums-pay`
+
+- Type: `new_page`
+- Status: shipped
+- Before: General cardiology pay href pointed at generic compensation guide
+- After: Dedicated NIC Pay Arcade: TEE, nukes, call, inpatient/outpatient/both; share ticket; Request matches; Non-invasive jobs
+- Reason: Give non-invasive cardiologists the same shareable pay game with imaging and setting questions that actually move NIC rates
+- Expected: New NIC pay URL starts collecting impressions and match requests from TEE/nuclear/call mix
+- Actual: pending
+
+## 2026-10-15 — `https://www.locumcareerhub.com/ep-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: Generic EP compensation guide with formula theater
+- After: EP Pay Arcade: ablation/devices/call/access rounds, shareable score ticket, Request EP matches, EP jobs
+- Reason: Same arcade as IC so electrophysiologists can share specialty + pay expectation and convert to matches/jobs
+- Expected: More EP pay engagement and generate_lead from arcade CTAs
+- Actual: pending
+
+## 2026-10-15 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: Static skill chips and range card
+- After: Vintage 5-round pay arcade with specialty ticket and LinkedIn/Messages share
+- Reason: Physicians bounced off a form-like range tool. Game + shareable score card should raise engagement and referral without retitling.
+- Expected: More decision_tool_start/result and viral_share events; same SERP title.
+- Actual: pending
+
+## 2026-10-15 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: Generic CompensationGuide plus truncated hook and daily-divided-by-8 weekly math
+- After: Skill-based range tool plus complete sentences. 3200-3500 is a starting band, not a posted salary. SERP title unchanged.
+- Reason: Live page cut sentences and treated 3200-3500 as a formula. GSC last 28d: 12 impressions, 0 clicks, position 9.3. Title already shipped Sep 21.
+- Expected: Longer engaged sessions and more form starts from IC pay visitors. No title change.
+- Actual: pending
+
 ## 2026-10-13 — `https://www.locumcareerhub.com/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum`
 
 - Type: `content`

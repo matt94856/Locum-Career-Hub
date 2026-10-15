@@ -383,11 +383,21 @@ export const LANDING_PAGES: LandingPage[] = [
     h2: "STEMI activation, cath lab scope, and backup documented upfront",
     keywords: ["interventional cardiologist locum", "cardiology locum jobs", "cath lab locums"],
     intro:
-      "Interventional cardiology locums hinge on STEMI pathways, case mix, and complication backup—not headline rates. Locum Career Hub recruits cardiologists only and aligns introductions with sites that document activation windows and call.",
+      "Interventional cardiology locums hinge on STEMI pathways, case mix, and complication backup—not headline rates. Locum Career Hub recruits cardiologists only and aligns introductions with sites that document activation windows and call. Public listings are only part of the book. Exclusive IC blocks often never appear on this page — request a match to hear about those.",
     bullets: [
       "STEMI and cath lab expectations in writing",
       "Case logs and privileging timelines discussed early",
       "Travel stipends and malpractice structure reviewed before you fly",
+      "Exclusive interventional openings that are not posted on this page",
+    ],
+    sections: [
+      {
+        h2: "Public listings and exclusive IC blocks",
+        paragraphs: [
+          "The interventional jobs you can browse here are the ones we can list publicly. Hospitals also send exclusive coverage — urgent STEMI weeks, backup gaps, and recurring blocks — that never go on this page.",
+          "Request a match with your licenses, STEMI comfort, and dates. We come back with the exclusive openings that fit, not a public job-board blast.",
+        ],
+      },
     ],
     relatedSlugs: ["national-locum-tenens-jobs-guide", "cardiologist-travel-locums", "part-time-physician-jobs"],
     relatedLinks: [

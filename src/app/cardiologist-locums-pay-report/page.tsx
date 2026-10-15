@@ -187,6 +187,9 @@ export default function CardiologistLocumsPayReportPage() {
               <Link href="/ep-cardiology-locums-pay" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:border-brand-300">
                 EP pay guide
               </Link>
+              <Link href="/non-invasive-cardiology-locums-pay" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:border-brand-300">
+                Non-invasive pay guide
+              </Link>
             </div>
           </div>
 

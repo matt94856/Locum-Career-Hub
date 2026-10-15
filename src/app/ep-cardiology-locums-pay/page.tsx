@@ -1,43 +1,146 @@
 import type { Metadata } from "next";
-import { CardiologyCompensationGuide } from "@/components/marketing/CardiologyCompensationGuide";
+import Link from "next/link";
+import { EpLocumsPayRangeTool } from "@/components/tools/EpLocumsPayRangeTool";
+import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
+import { EP_PAY_EFFECTIVE_DATE } from "@/lib/ep-pay/model";
+import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
 
 const PATH = "/ep-cardiology-locums-pay";
-const DESCRIPTION = "EP cardiology locums pay, ablation and device scope, lab readiness, call, credentialing, and assignment economics for electrophysiologists.";
+
 const FAQS = [
-  { q: "What drives electrophysiology locums pay?", a: "Ablation scope, device procedures, EP call, lab staffing and systems, device-clinic volume, assignment urgency, travel, and credentialing complexity all affect compensation." },
-  { q: "Do EP locums always cover ablations and devices?", a: "No. Scope varies. Some assignments emphasize consults or device clinic, while others require ablation, implants, extraction support, or call. Every requested privilege should be documented." },
-  { q: "What should an electrophysiologist ask about the EP lab?", a: "Confirm mapping systems, anesthesia support, lab staffing, device vendors, extraction pathway, surgical backup, case mix, turnaround expectations, and who handles remote-monitoring alerts." },
+  {
+    q: "Is $2,800–$3,200 the EP locums rate?",
+    a: "No. That is a starting range we see for many attending electrophysiologists, not a posted salary. Ablation vs devices, complex work, call you will take, and how fast a hospital can privilege you all move a written daily guarantee.",
+  },
+  {
+    q: "Do EP locums always cover ablations and devices?",
+    a: "No. Some blocks are device clinic and implants. Others need AF ablation, VT, or extraction. Read the privilege list before you treat two jobs with the same daily number as the same work.",
+  },
+  {
+    q: "Does callback mean I get paid twice?",
+    a: "No. The daily guarantee usually already covers a block of hours. After that, extra time is billed hourly. Quiet nights often stay near the daily number. Busy nights add more.",
+  },
 ];
 
 export const metadata: Metadata = buildSerpMetadata({
   title: "EP Cardiology Locums Pay | $2,800–$3,200/Day",
-  description: "EP locums typically $2,800–$3,200/day. Ablation vs device clinic, NY and Tennessee markets, then calculate your range—not a job-board rate card.",
+  description:
+    "EP locums pay is a range, not a posted salary. $2,800–$3,200 is a common starting band. Ablation, devices, call, and privileging move a written daily guarantee.",
   path: PATH,
   keywords: ["EP cardiology locums pay", "electrophysiology locum tenens", "EP locum jobs"],
 });
 
 export default function EpCardiologyLocumsPayPage() {
   return (
-    <>
-      <JsonLd data={medicalWebPageJsonLd({ name: "EP Cardiology Locums Pay", description: DESCRIPTION, path: PATH, keywords: ["EP cardiology locums pay", "electrophysiology locums"], aboutTopics: ["Electrophysiology", "Locum tenens compensation", "EP lab coverage"] })} />
+    <main className="pb-24 sm:pb-0">
+      <JsonLd
+        data={medicalWebPageJsonLd({
+          name: "EP Cardiology Locums Pay",
+          description: String(metadata.description),
+          path: PATH,
+          keywords: ["EP cardiology locums pay", "electrophysiology locums"],
+          aboutTopics: ["Electrophysiology", "Locum tenens compensation", "EP lab coverage"],
+        })}
+      />
       <JsonLd data={faqJsonLd(FAQS)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "EP cardiology locums pay", path: PATH }])} />
-      <CardiologyCompensationGuide
-        eyebrow="Electrophysiology market intelligence"
-        title="EP Cardiology Locums Pay"
-        directAnswer="Electrophysiology locums economics depend on whether the assignment covers consults, ablation, device procedures, device clinic, remote alerts, or call. Lab readiness and credentialing can matter as much as the headline rate."
-        sections={[
-          { heading: "Directional daily benchmark", paragraphs: ["EP locums are modeled at $2,800–$3,200 per day. 24-hour call typically includes 0–4 hours; extra callback is daily ÷ 8. Non-24-hour days use the same daily rate plus a one-time pager of daily ÷ 8 if night call is on. A weekend is 2–3 call days, not a full coverage week."], bullets: ["Separate consult, ablation, device, and call scope", "Confirm mapping systems and anesthesia support", "Document remote-monitoring responsibility", "Compare guaranteed time with procedure-dependent pay"] },
-          { heading: "Why EP assignment economics differ", paragraphs: ["An EP consult block, a high-volume ablation service, and combined device-call coverage are different jobs. Effective compensation should account for case volume, procedure mix, after-hours responsibility, staff capability, and whether the physician is expected to troubleshoot systems or workflows.", "Request a privilege list and realistic case schedule before agreeing to an annualized figure."] },
-          { heading: "Credentialing and lab readiness", paragraphs: ["Recent procedural logs, board status, vendor familiarity, facility proctoring, and malpractice review influence start timing. Confirm that the site can support the procedures it expects rather than treating every EP physician and lab as interchangeable."] },
-          { heading: "Lifestyle filter for EP locums", paragraphs: ["Remote monitoring and device clinic burden can erase the benefit of 'no STEMI.' Bound after-hours expectations in writing the same way you would bound call.", "See the electrophysiology locums hub for workflow and career-design context, the electrophysiologist salary guide for employed vs locum comparison, and New York EP locum jobs for a high-intent market example."] },
-        ]}
-        faqs={FAQS}
-        path={PATH}
+      <JsonLd
+        data={webApplicationJsonLd({
+          name: "EP locums pay range",
+          description: "Educational daily-guarantee range for electrophysiology locums based on ablation, devices, call, and privileging speed.",
+          path: PATH,
+          featureList: ["Skill-based daily range instead of a single posted rate", "Ablation vs devices", "Call and license access"],
+        })}
       />
-    </>
+
+      <section className="border-b border-slate-100 bg-slate-50 py-14 sm:py-16">
+        <div className="container-site max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Electrophysiology</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
+            EP locums pay is a range
+          </h1>
+          <p className="mt-6 text-lg leading-8 text-slate-600">
+            Most attending electrophysiologists we recruit start around $2,800–$3,200 a day. That is a market band, not
+            your number. Ablation vs devices, complex work, and the call you will actually take move a written guarantee
+            up or down.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="#ep-pay-range">Play the pay arcade</Button>
+            <Button href="/locum-jobs/cardiology/electrophysiology" variant="secondary">
+              EP jobs
+            </Button>
+            <Button href="/physician-opportunities#lead-form" variant="secondary">
+              Request matches
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section id="ep-pay-range" className="container-site max-w-4xl py-12 sm:py-16">
+        <EpLocumsPayRangeTool />
+      </section>
+
+      <div className="container-site grid max-w-6xl gap-12 pb-16 lg:grid-cols-12">
+        <article className="space-y-12 lg:col-span-8">
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">What the $2,800–$3,200 band actually is</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              It is a starting range for many independent attending electrophysiologists, effective {EP_PAY_EFFECTIVE_DATE}.
+              Fellows, device-clinic-only work, or weekday lab-only days often start lower. Complex ablation, VT, or
+              extraction can sit higher. We do not treat a single daily number as the rate.
+            </p>
+          </section>
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">What actually moves the number</h2>
+            <ul className="mt-5 space-y-3 text-base leading-7 text-slate-700">
+              <li>Independent ablation logs, not just device clinic.</li>
+              <li>Whether you will take nights and weekends, or weekday lab only.</li>
+              <li>Watchman, LAA, or extraction when the hospital needs that mix.</li>
+              <li>How fast privileging can happen: licenses, IMLC, and a clean file.</li>
+            </ul>
+          </section>
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">Frequently asked questions</h2>
+            <div className="mt-6 divide-y divide-slate-200">
+              {FAQS.map((faq) => (
+                <div key={faq.q} className="py-5">
+                  <h3 className="font-semibold text-slate-950">{faq.q}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </article>
+        <aside className="lg:col-span-4">
+          <div className="sticky top-24 space-y-4">
+            <div className="rounded-3xl border border-brand-100 bg-brand-50 p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">Next step</p>
+              <h2 className="mt-3 font-display text-2xl font-semibold text-slate-950">Want a written EP range?</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                Tell us your licenses, ablation mix, and how many weeks you can work. We come back with openings that
+                match the work, including exclusive blocks not listed on the jobs page.
+              </p>
+              <Button href="/physician-opportunities#lead-form" className="mt-5 w-full justify-center">
+                Request cardiology matches
+              </Button>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">More pay context</p>
+              <Link href="/locum-jobs/cardiology/electrophysiology" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                Electrophysiology locum jobs
+              </Link>
+              <Link href="/non-invasive-cardiology-locums-pay" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                Non-invasive locums pay
+              </Link>
+              <Link href="/interventional-cardiology-locums-pay" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                Interventional locums pay
+              </Link>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
   );
 }

@@ -15,5 +15,8 @@ describe("share URLs", () => {
     expect(url.length).toBeLessThan(180);
     expect(displayShareUrl(url).startsWith("locumcareerhub.com/s?")).toBe(true);
     expect(expandSharePath("c")).toBe("/cardiologist-locums-calculator");
+    expect(expandSharePath("i")).toBe("/interventional-cardiology-locums-pay");
+    expect(expandSharePath("e")).toBe("/ep-cardiology-locums-pay");
+    expect(expandSharePath("n")).toBe("/non-invasive-cardiology-locums-pay");
   });
 });

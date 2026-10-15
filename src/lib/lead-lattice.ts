@@ -92,8 +92,8 @@ export const LATTICE_SPECIALTIES = [
     name: "General Cardiology",
     href: "/locum-jobs/cardiology/general",
     fit: "Inpatient consults, clinic blocks, nuclear/TEE, 7-on/7-off or 2-weeks/month outpatient.",
-    payHref: "/cardiologist-locums-pay-report",
-    payLabel: "Cardiologist locums pay report",
+    payHref: "/non-invasive-cardiology-locums-pay",
+    payLabel: "Non-invasive locums pay",
   },
   {
     pathSlug: "interventional",

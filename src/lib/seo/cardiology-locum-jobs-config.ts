@@ -187,6 +187,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       anchor: "electrophysiologist salary guide",
       suffix: ".",
     },
+    {
+      prefix: "See where ablation, devices, and call sit on the",
+      href: "/ep-cardiology-locums-pay",
+      anchor: "EP locums pay arcade",
+      suffix: ".",
+    },
   ],
   general: [
     {
@@ -212,6 +218,12 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       href: "/tools/cardiology-call-pay",
       anchor: "beginner cardiology call-pay tool",
       suffix: ". General cardiology uses the $2,200–$2,800 band, not interventional rates.",
+    },
+    {
+      prefix: "See where TEE, nuclear, and call sit on the",
+      href: "/non-invasive-cardiology-locums-pay",
+      anchor: "non-invasive locums pay arcade",
+      suffix: ".",
     },
   ],
   "heart-failure": [
