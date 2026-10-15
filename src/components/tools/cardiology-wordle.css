@@ -1,0 +1,160 @@
+body[data-heartle="1"] #sticky-mobile-cta {
+  display: none;
+}
+
+.heartle-board {
+  --heartle-green: #6aaa64;
+  --heartle-yellow: #c9b458;
+  --heartle-gray: #787c7e;
+}
+
+.heartle-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--heartle-tile, 3.25rem);
+  height: var(--heartle-tile, 3.25rem);
+  border: 2px solid #d0d5dd;
+  background: #fff;
+  color: #0f172a;
+  font-size: calc(var(--heartle-tile, 3.25rem) * 0.42);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  transform-origin: center;
+}
+
+.heartle-tile.is-filled {
+  border-color: #667085;
+  animation: heartle-pop 0.12s ease-out;
+}
+
+.heartle-tile.is-green,
+.heartle-tile.is-yellow,
+.heartle-tile.is-gray {
+  border-color: transparent;
+  color: #fff;
+}
+
+.heartle-tile.is-green {
+  background: var(--heartle-green);
+}
+
+.heartle-tile.is-yellow {
+  background: var(--heartle-yellow);
+}
+
+.heartle-tile.is-gray {
+  background: var(--heartle-gray);
+}
+
+.heartle-tile.is-flip {
+  animation: heartle-flip 0.45s ease-in-out;
+}
+
+.heartle-row.is-shake {
+  animation: heartle-shake 0.45s ease-in-out;
+}
+
+.heartle-key {
+  min-height: 2.75rem;
+  min-width: 1.6rem;
+  padding: 0 0.4rem;
+  border-radius: 0.4rem;
+  border: 0;
+  background: #e4e7ec;
+  color: #101828;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.heartle-key.is-wide {
+  min-width: 3.2rem;
+  font-size: 0.68rem;
+}
+
+.heartle-key.is-green {
+  background: var(--heartle-green);
+  color: #fff;
+}
+
+.heartle-key.is-yellow {
+  background: var(--heartle-yellow);
+  color: #fff;
+}
+
+.heartle-key.is-gray {
+  background: var(--heartle-gray);
+  color: #fff;
+}
+
+.heartle-key:disabled {
+  opacity: 0.55;
+}
+
+@media (min-width: 480px) {
+  .heartle-tile {
+    --heartle-tile: 3.5rem;
+  }
+
+  .heartle-key {
+    min-height: 3.15rem;
+    min-width: 2rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heartle-tile.is-filled,
+  .heartle-tile.is-flip,
+  .heartle-row.is-shake {
+    animation: none;
+  }
+}
+
+@keyframes heartle-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes heartle-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes heartle-flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  49% {
+    transform: rotateX(90deg);
+  }
+  51% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}

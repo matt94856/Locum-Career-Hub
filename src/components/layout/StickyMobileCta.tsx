@@ -26,7 +26,7 @@ export function StickyMobileCta() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  if (pathname === "/thank-you" || formInView) return null;
+  if (pathname === "/thank-you" || pathname === "/cardiology-wordle" || formInView) return null;
 
   const bookHref =
     SITE.calendlyUrl ||
@@ -41,6 +41,7 @@ export function StickyMobileCta() {
 
   return (
     <div
+      id="sticky-mobile-cta"
       className="pointer-events-none fixed inset-x-0 bottom-0 z-50 p-3 sm:hidden"
       style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
     >

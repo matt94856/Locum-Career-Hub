@@ -48,6 +48,7 @@ const staticRoutes = [
       "/interventional-cardiology-locums-pay",
       "/ep-cardiology-locums-pay",
       "/non-invasive-cardiology-locums-pay",
+      "/cardiology-wordle",
       "/how-much-do-cardiologists-make-doing-locums",
       "/best-states-for-cardiology-locums",
       "/part-time-cardiologist-jobs",
