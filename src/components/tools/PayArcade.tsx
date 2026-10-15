@@ -1,6 +1,7 @@
 "use client";
 
 import { Press_Start_2P } from "next/font/google";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { trackDecisionToolEvent, trackViralShare } from "@/lib/analytics-events";
 import { payArcadeRangeLabel, payArcadeSharePayload } from "@/lib/pay-arcade/share";
@@ -259,12 +260,12 @@ export function PayArcade({
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                <a href="/physician-opportunities#lead-form" className="ic-arcade__cta inline-flex items-center text-sm">
+                <Link href="/physician-opportunities#lead-form" className="ic-arcade__cta inline-flex items-center text-sm">
                   {matchLabel}
-                </a>
-                <a href={jobsHref} className="ic-arcade__ghost inline-flex items-center text-sm">
+                </Link>
+                <Link href={jobsHref} className="ic-arcade__ghost inline-flex items-center text-sm">
                   {jobsLabel}
-                </a>
+                </Link>
                 <button type="button" className="ic-arcade__ghost text-sm" onClick={startGame}>
                   Play again
                 </button>
