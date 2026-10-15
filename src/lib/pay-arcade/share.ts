@@ -1,4 +1,4 @@
-import { buildResultShareLandingUrl, composeShareCopy, formatUsdRange } from "@/lib/share";
+import { buildOgImagePath, buildResultShareLandingUrl, composeShareCopy, formatUsdRange } from "@/lib/share";
 import type { PayArcadeEstimate } from "./types";
 
 export function payArcadeRangeLabel(estimate: Pick<PayArcadeEstimate, "dailyLow" | "dailyHigh">) {
@@ -33,6 +33,13 @@ export function payArcadeSharePayload(input: {
     stat,
     text,
     url,
+    imagePath: buildOgImagePath({
+      title: input.specialty,
+      stat,
+      subtitle: input.estimate.rankLabel,
+      eyebrow: "Pay Arcade",
+      style: "arcade",
+    }),
     post: composeShareCopy(text, url),
   };
 }

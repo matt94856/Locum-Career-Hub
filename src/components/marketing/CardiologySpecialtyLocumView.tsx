@@ -3,19 +3,17 @@ import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LatticePersonaCards } from "@/components/marketing/LatticePersonaCards";
 import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import { CardiologyCtaBand } from "@/components/seo/CardiologyCtaBand";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { EeatArticleFooter } from "@/components/seo/EeatArticleFooter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { RelatedCardiologyLinks } from "@/components/seo/RelatedCardiologyLinks";
 import { getPillarExtension } from "@/lib/cardiology-authority/pillars";
+import { careerFitSections, uniqueFaqs } from "@/lib/seo/unique-page-copy";
 import {
   CARDIOLOGY_HUB_PATH,
-  CARDIOLOGY_LOCUM_SPECIALTIES,
   SPECIALTY_CONTEXTUAL_LINKS,
   type CardiologyLocumSpecialty,
   cardiologySpecialtyPath,
-  specialtyLinkLabels,
 } from "@/lib/seo/cardiology-locum-jobs-config";
 import { getSpecialtyProfile } from "@/lib/seo/specialty-profiles";
 import { authorityArticleJsonLd, breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -31,28 +29,10 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
   const profile = getSpecialtyProfile(specialty.legacySlug);
   const pillar = getPillarExtension(specialty.pathSlug);
 
-  const profileSections = profile
-    ? [
-        {
-          h2: `${specialty.name}: assignment snapshot`,
-          paragraphs: [profile.assignmentSnapshot, profile.workflowNotes],
-        },
-        {
-          h2: "Credentialing and documentation",
-          paragraphs: [
-            profile.documentationFocus,
-            `Checklist: ${profile.credentialingChecklist.join(" · ")}`,
-          ],
-        },
-      ]
-    : [];
-
-  const pillarSections = pillar?.sections ?? [];
+  const pillarSections = careerFitSections(pillar?.sections ?? []);
   const directAnswer = pillar?.directAnswer ?? specialty.intro;
-  const allFaqs = [...specialty.faqs, ...(pillar?.faqs ?? []), ...(profile?.faqs ?? [])];
+  const allFaqs = uniqueFaqs([...specialty.faqs, ...(pillar?.faqs ?? []), ...(profile?.faqs ?? [])]);
   const eeat = pillar?.eeat;
-  const related = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => specialty.relatedPathSlugs.includes(s.pathSlug));
-  const otherSpecialties = CARDIOLOGY_LOCUM_SPECIALTIES.filter((s) => s.pathSlug !== specialty.pathSlug);
   const contextualLinks = SPECIALTY_CONTEXTUAL_LINKS[specialty.pathSlug] ?? [];
   const featuredSpecialtySlug =
     specialty.pathSlug === "interventional"
@@ -114,21 +94,10 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
           <div className="mt-6">
             <AnswerFirstBlock answer={directAnswer} />
           </div>
-          <p className="mt-4 text-sm text-slate-600">
-            {specialty.intro}{" "}
-            <Link href={CARDIOLOGY_HUB_PATH} className="font-semibold text-brand-700 hover:underline">
-              locum cardiologist jobs
-            </Link>{" "}
-            across all subspecialties—or{" "}
-            <Link href="/physician-opportunities#lead-form" className="font-semibold text-brand-700 hover:underline">
-              talk with a cardiology recruiter
-            </Link>
-            .
-          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/physician-opportunities#lead-form">{CTA.recruiter}</Button>
-            <Button href="/resources" variant="secondary">
-              Cardiology guides →
+            <Button href={CARDIOLOGY_HUB_PATH} variant="secondary">
+              All cardiology jobs
             </Button>
           </div>
         </div>
@@ -139,7 +108,7 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
           <div className="min-w-0 space-y-10 lg:col-span-7">
             <LatticePersonaCards pathSlug={specialty.pathSlug} />
 
-            <ContentSections sections={[...specialty.sections, ...pillarSections, ...profileSections]} />
+            <ContentSections sections={[...specialty.sections, ...pillarSections]} />
 
             {contextualLinks.length > 0 ? (
               <p className="text-sm leading-relaxed text-slate-700">
@@ -158,29 +127,6 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               </p>
             ) : null}
 
-            <CardiologyCtaBand variant="opportunities" />
-
-            {profile ? (
-              <section>
-                <h2 className="font-display text-2xl font-semibold text-slate-950">Pay drivers and fit signals</h2>
-                <p className="mt-4 text-sm leading-relaxed text-slate-700">
-                  Rate drivers include {profile.payDrivers.join(", ")}. {profile.fitSignals.join(" ")}
-                </p>
-              </section>
-            ) : null}
-
-            {pillar?.entityNotes?.length ? (
-              <section>
-                <h2 className="font-display text-2xl font-semibold text-slate-950">Key cardiology entities</h2>
-                <p className="mt-4 text-sm leading-relaxed text-slate-700">
-                  This subspecialty intersects with {pillar.entityNotes.join(", ")} standards and workflows referenced by
-                  ACC, AHA, and ABIM credentialing committees.
-                </p>
-              </section>
-            ) : null}
-
-            <CardiologyCtaBand variant="salary" />
-
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>
               <dl className="mt-6 space-y-6">
@@ -193,57 +139,6 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               </dl>
             </div>
 
-            <CardiologyCtaBand variant="recruiter" />
-
-            <div>
-              <h2 className="font-display text-xl font-semibold text-slate-950">Explore more cardiology jobs</h2>
-              <p className="mt-2 text-sm text-slate-600">
-                <Link href={CARDIOLOGY_HUB_PATH} className="font-semibold text-brand-700 hover:underline">
-                  locum cardiologist jobs
-                </Link>{" "}
-                hub · related subspecialties below
-              </p>
-              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                {otherSpecialties.map((s) => {
-                  const labels = specialtyLinkLabels(s.name);
-                  return (
-                    <li key={s.pathSlug} className="text-sm">
-                      <Link href={cardiologySpecialtyPath(s.pathSlug)} className="font-semibold text-brand-700 hover:underline">
-                        {labels.jobs}
-                      </Link>
-                      <span className="text-slate-400"> · </span>
-                      <Link href={cardiologySpecialtyPath(s.pathSlug)} className="text-brand-600 hover:underline">
-                        {labels.tenens}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            {related.length > 0 ? (
-              <div>
-                <h2 className="font-display text-lg font-semibold text-slate-950">Related specialties</h2>
-                <ul className="mt-3 space-y-2">
-                  {related.map((s) => {
-                    const labels = specialtyLinkLabels(s.name);
-                    return (
-                      <li key={s.pathSlug} className="text-sm">
-                        <Link href={cardiologySpecialtyPath(s.pathSlug)} className="font-semibold text-brand-700 hover:underline">
-                          {labels.jobs}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null}
-
-            <RelatedCardiologyLinks
-              specialtyPathSlugs={specialty.relatedPathSlugs}
-              articleSlugs={["how-much-do-locum-cardiologists-make", "credentialing-for-locum-cardiologists"]}
-              stateSlug={specialty.pathSlug === "electrophysiology" ? "new-york" : undefined}
-            />
             {currentJobs.length ? (
               <div>
                 <h2 className="font-display text-lg font-semibold text-slate-950">
@@ -387,6 +282,12 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 {" "}if your mix includes consults plus reads.
               </p>
             ) : null}
+
+            <RelatedCardiologyLinks
+              specialtyPathSlugs={specialty.relatedPathSlugs}
+              articleSlugs={["how-much-do-locum-cardiologists-make", "credentialing-for-locum-cardiologists"]}
+              stateSlug={specialty.pathSlug === "electrophysiology" ? "new-york" : undefined}
+            />
 
             {eeat ? <EeatArticleFooter eeat={eeat} /> : null}
           </div>

@@ -67,7 +67,6 @@ export function CardiologyAuthorityPageView({ article }: { article: CardiologyAr
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
             <ContentSections sections={article.sections} />
-            <CardiologyCtaBand variant="salary" />
             <ContentSections
               sections={[
                 {
@@ -79,7 +78,6 @@ export function CardiologyAuthorityPageView({ article }: { article: CardiologyAr
                 },
               ]}
             />
-            <CardiologyCtaBand variant="compare" />
             <div>
               <h2 className="font-display text-2xl font-semibold text-slate-950">FAQs</h2>
               <dl className="mt-6 space-y-6">

@@ -130,14 +130,41 @@ export function buildResultShareLandingUrl(input: {
   return `${SITE.url}/s?${params.toString()}`;
 }
 
-export function buildOgImageUrl(input: { title: string; stat: string; subtitle?: string; eyebrow?: string }) {
+const ARCADE_SHARE_PATHS = new Set([
+  "/interventional-cardiology-locums-pay",
+  "/ep-cardiology-locums-pay",
+  "/non-invasive-cardiology-locums-pay",
+]);
+
+export function isArcadeSharePath(path: string | undefined) {
+  return Boolean(path && ARCADE_SHARE_PATHS.has(expandSharePath(path)));
+}
+
+export function buildOgImagePath(input: {
+  title: string;
+  stat: string;
+  subtitle?: string;
+  eyebrow?: string;
+  style?: "arcade" | "default";
+}) {
   const params = new URLSearchParams({
     title: input.title.slice(0, 90),
     stat: input.stat.slice(0, 60),
   });
   if (input.subtitle) params.set("subtitle", input.subtitle.slice(0, 120));
   if (input.eyebrow) params.set("eyebrow", input.eyebrow.slice(0, 40));
-  return `${SITE.url}/api/og?${params.toString()}`;
+  if (input.style === "arcade") params.set("style", "arcade");
+  return `/api/og?${params.toString()}`;
+}
+
+export function buildOgImageUrl(input: {
+  title: string;
+  stat: string;
+  subtitle?: string;
+  eyebrow?: string;
+  style?: "arcade" | "default";
+}) {
+  return `${SITE.url}${buildOgImagePath(input)}`;
 }
 
 export function calculatorLinkedInPost(input: {

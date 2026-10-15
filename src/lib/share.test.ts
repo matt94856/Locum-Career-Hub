@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildResultShareLandingUrl, displayShareUrl, expandSharePath } from "./share";
+import { buildOgImagePath, buildResultShareLandingUrl, displayShareUrl, expandSharePath, isArcadeSharePath } from "./share";
 
 describe("share URLs", () => {
   it("builds a short /s link that wraps better than the old query landing", () => {
@@ -18,5 +18,10 @@ describe("share URLs", () => {
     expect(expandSharePath("i")).toBe("/interventional-cardiology-locums-pay");
     expect(expandSharePath("e")).toBe("/ep-cardiology-locums-pay");
     expect(expandSharePath("n")).toBe("/non-invasive-cardiology-locums-pay");
+    expect(isArcadeSharePath("i")).toBe(true);
+    expect(isArcadeSharePath("/cardiologist-locums-calculator")).toBe(false);
+    expect(buildOgImagePath({ title: "Interventional Cardiology", stat: "$3,200–$3,900/day", style: "arcade" })).toContain(
+      "style=arcade",
+    );
   });
 });

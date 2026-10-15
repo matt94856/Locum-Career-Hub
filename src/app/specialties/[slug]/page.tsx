@@ -78,24 +78,6 @@ export default async function SpecialtyDetailPage({ params }: { params: Promise<
   const profileSections = profile
     ? [
         {
-          h2: `${name}: assignment snapshot`,
-          paragraphs: [profile.assignmentSnapshot, profile.workflowNotes],
-        },
-        {
-          h2: "Credentialing and documentation",
-          paragraphs: [
-            profile.documentationFocus,
-            `Checklist: ${profile.credentialingChecklist.join(" · ")}`,
-          ],
-        },
-        {
-          h2: "Pay drivers and fit signals",
-          paragraphs: [
-            `Rate drivers include ${profile.payDrivers.join(", ")}.`,
-            profile.fitSignals.join(" "),
-          ],
-        },
-        {
           h2: "Pitfalls to avoid",
           paragraphs: profile.pitfalls,
         },

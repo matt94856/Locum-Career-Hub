@@ -76,7 +76,6 @@ export function CardiologyJobsSeoView({ page, specialty }: Props) {
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
             <ContentSections sections={page.sections} />
-            <CardiologyCtaBand variant="opportunities" />
 
             {!specialty ? (
               <div>

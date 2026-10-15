@@ -141,10 +141,6 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
                 defaultSpecialty={defaultSpecialty}
                 layout="sidebar"
               />
-              <LeadConversionBand
-                headline="Questions before you inquire?"
-                subline="Call or email—we’ll explain how matching works, without the pitch."
-              />
             </div>
           ) : (
             <div className="lg:col-span-5">

@@ -96,9 +96,26 @@ export function PayArcade({
     }, wait);
   }
 
+  async function ticketFile() {
+    if (!share?.imagePath) return null;
+    try {
+      const response = await fetch(share.imagePath);
+      if (!response.ok) return null;
+      const blob = await response.blob();
+      return new File([blob], "pay-arcade-ticket.png", { type: blob.type || "image/png" });
+    } catch {
+      return null;
+    }
+  }
+
   async function nativeShare() {
     if (!share) return;
     trackViralShare("native_share", toolId);
+    const file = await ticketFile();
+    if (file && navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ title: share.title, text: share.text, url: share.url, files: [file] }).catch(() => undefined);
+      return;
+    }
     if (navigator.share) {
       await navigator.share({ title: share.title, text: share.text, url: share.url }).catch(() => undefined);
       return;
@@ -115,7 +132,7 @@ export function PayArcade({
   function openMessages() {
     if (!share) return;
     trackViralShare("messages", toolId);
-    window.location.href = smsShareUrl(share.post);
+    void nativeShare();
   }
 
   async function copy() {
@@ -128,6 +145,18 @@ export function PayArcade({
     } catch {
       setCopied(null);
     }
+  }
+
+  async function saveTicket() {
+    const file = await ticketFile();
+    if (!file) return;
+    const href = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = file.name;
+    link.click();
+    URL.revokeObjectURL(href);
+    trackViralShare("download_ticket", toolId);
   }
 
   return (
@@ -242,6 +271,9 @@ export function PayArcade({
                 </button>
                 <button type="button" className="ic-arcade__ghost text-sm" onClick={() => void copy()}>
                   {copied === "post" ? "Post copied" : "Copy post"}
+                </button>
+                <button type="button" className="ic-arcade__ghost text-sm" onClick={() => void saveTicket()}>
+                  Save card
                 </button>
               </div>
 
