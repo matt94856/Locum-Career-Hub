@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 
 export default function CardiologyWordlePage() {
   return (
-    <main className="pb-24 sm:pb-0">
+    <main className="heartle-page">
       <JsonLd data={faqJsonLd(FAQS)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Cardiology Wordle", path: PATH }])} />
       <JsonLd
@@ -79,81 +79,68 @@ export default function CardiologyWordlePage() {
         })}
       />
 
-      <section className="border-b border-slate-100 bg-rose-50/70 py-12 sm:py-16">
-        <div className="container-site max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-700">Daily heart puzzle</p>
-          <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-            Cardiology Wordle
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            A Wordle-style puzzle for heart people. Six guesses. Green, yellow, and gray tiles. The answer is always a
-            real cardiology term — not a random dictionary word.
-          </p>
-          <p className="mt-4 text-base leading-7 text-slate-600">
-            The board name is Heartle. A category chip shows before you guess so a 4-letter day like TAVR and a 6-letter
-            day like NSTEMI still feel fair. A new word lands every midnight Eastern.
-          </p>
-        </div>
+      <article className="sr-only">
+        <p>Daily heart puzzle</p>
+        <h1>Cardiology Wordle</h1>
+        <p>
+          A Wordle-style puzzle for heart people. Six guesses. Green, yellow, and gray tiles. The answer is always a
+          real cardiology term — not a random dictionary word.
+        </p>
+        <p>
+          The board name is Heartle. A category chip shows before you guess so a 4-letter day like TAVR and a 6-letter
+          day like NSTEMI still feel fair. A new word lands every midnight Eastern.
+        </p>
+      </article>
+
+      <section className="heartle-stage">
+        <CardiologyWordle />
       </section>
 
-      <section className="container-site grid max-w-6xl gap-12 py-12 sm:py-16 lg:grid-cols-12">
-        <div className="lg:col-span-8">
-          <CardiologyWordle />
-        </div>
-        <aside className="space-y-6 lg:col-span-4">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="font-display text-2xl font-semibold text-slate-950">How to play</h2>
-            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-              <li>Guess a cardiology term in six tries. Length matches today&apos;s word.</li>
-              <li>Stuck? Open Need a hint, search the word bank, and tap a word to fill the board.</li>
-              <li>Green is the right letter in the right spot. Yellow is right letter, wrong spot.</li>
-              <li>Gray is not in the word. Duplicate letters score the Wordle way.</li>
-              <li>Share the emoji grid when you finish. Come back tomorrow for the next Heartle.</li>
-            </ul>
+      <section className="heartle-seo">
+        <div className="container-site grid max-w-6xl gap-12 py-12 sm:py-16 lg:grid-cols-12">
+          <div className="space-y-6 lg:col-span-8">
+            <h2 className="font-display text-3xl font-semibold text-slate-950">Cardiology Wordle FAQ</h2>
+            <dl className="space-y-6">
+              {FAQS.map((item) => (
+                <div key={item.q}>
+                  <dt className="text-base font-semibold text-slate-950">{item.q}</dt>
+                  <dd className="mt-2 text-sm leading-6 text-slate-600">{item.a}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="font-display text-2xl font-semibold text-slate-950">Why locums?</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              If you like the language on this board, you already know the work. Locum Career Hub is a cardiologist-only
-              recruiting desk — written call, privileging, and a pay range that depends on skill and volume.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm font-semibold">
-              <li>
-                <Link className="text-brand-700 hover:underline" href="/">
-                  Locum Career Hub home
-                </Link>
-              </li>
-              <li>
-                <Link className="text-brand-700 hover:underline" href="/interventional-cardiology-locums-pay">
-                  Interventional pay arcade
-                </Link>
-              </li>
-              <li>
-                <Link className="text-brand-700 hover:underline" href="/ep-cardiology-locums-pay">
-                  EP pay arcade
-                </Link>
-              </li>
-              <li>
-                <Link className="text-brand-700 hover:underline" href="/non-invasive-cardiology-locums-pay">
-                  Non-invasive pay arcade
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </aside>
-      </section>
-
-      <section className="border-t border-slate-100 bg-white py-12 sm:py-16">
-        <div className="container-site max-w-3xl">
-          <h2 className="font-display text-3xl font-semibold text-slate-950">Cardiology Wordle FAQ</h2>
-          <dl className="mt-8 space-y-6">
-            {FAQS.map((item) => (
-              <div key={item.q}>
-                <dt className="text-base font-semibold text-slate-950">{item.q}</dt>
-                <dd className="mt-2 text-sm leading-6 text-slate-600">{item.a}</dd>
-              </div>
-            ))}
-          </dl>
+          <aside className="space-y-6 lg:col-span-4">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <h2 className="font-display text-2xl font-semibold text-slate-950">Why locums?</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                If you like the language on this board, you already know the work. Locum Career Hub is a
+                cardiologist-only recruiting desk — written call, privileging, and a pay range that depends on skill and
+                volume.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm font-semibold">
+                <li>
+                  <Link className="text-brand-700 hover:underline" href="/">
+                    Locum Career Hub home
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-brand-700 hover:underline" href="/interventional-cardiology-locums-pay">
+                    Interventional pay arcade
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-brand-700 hover:underline" href="/ep-cardiology-locums-pay">
+                    EP pay arcade
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-brand-700 hover:underline" href="/non-invasive-cardiology-locums-pay">
+                    Non-invasive pay arcade
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </aside>
         </div>
       </section>
     </main>

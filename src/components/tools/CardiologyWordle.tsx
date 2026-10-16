@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { trackCtaClick, trackDecisionToolEvent, trackViralShare } from "@/lib/analytics-events";
 import {
@@ -16,10 +15,19 @@ import {
   shareResult,
   type TileColor,
 } from "@/lib/cardiology-wordle/engine";
+import {
+  EMPTY_HEARTLE_STATS,
+  HEARTLE_WIN_TITLES,
+  heartleWinTitle,
+  loadHeartleStats,
+  recordHeartleResult,
+} from "@/lib/cardiology-wordle/stats";
 import { isAllowedGuess } from "@/lib/cardiology-wordle/words";
 import { linkedInShareUrl, smsShareUrl } from "@/lib/share";
 import { SITE } from "@/lib/site";
+import { HeartleHelpSheet } from "./HeartleHelpSheet";
 import { HeartleHintSheet } from "./HeartleHintSheet";
+import { HeartleResultModal } from "./HeartleResultModal";
 import "./cardiology-wordle.css";
 
 const STORAGE_KEY = "lch-cardiology-wordle";
@@ -27,13 +35,6 @@ const KEYBOARD = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
   ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACK"],
-] as const;
-
-const ARCADE_LINKS = [
-  { href: "/", label: "Locum Career Hub" },
-  { href: "/interventional-cardiology-locums-pay", label: "IC pay arcade" },
-  { href: "/ep-cardiology-locums-pay", label: "EP pay arcade" },
-  { href: "/non-invasive-cardiology-locums-pay", label: "Non-invasive pay arcade" },
 ] as const;
 
 type Status = "playing" | "won" | "lost";
@@ -91,11 +92,16 @@ export function CardiologyWordle() {
   const [revealCount, setRevealCount] = useState(0);
   const [copied, setCopied] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [resultOpen, setResultOpen] = useState(false);
+  const [stats, setStats] = useState(EMPTY_HEARTLE_STATS);
   const started = useRef(false);
   const finished = useRef(false);
+  const openedResultFor = useRef<string | null>(null);
   const currentRef = useRef("");
   const statusRef = useRef<Status>("playing");
   const revealTimer = useRef<number | undefined>(undefined);
+  const flashTimer = useRef<number | undefined>(undefined);
 
   currentRef.current = current;
   statusRef.current = status;
@@ -121,8 +127,9 @@ export function CardiologyWordle() {
   const showResult = status !== "playing" && revealCount >= (puzzle?.length ?? 0);
 
   const flash = useCallback((text: string) => {
+    if (flashTimer.current) window.clearTimeout(flashTimer.current);
     setMessage(text);
-    window.setTimeout(() => setMessage(""), 1600);
+    flashTimer.current = window.setTimeout(() => setMessage(""), 1600);
   }, []);
 
   const finishIfNeeded = useCallback((nextGuesses: string[], answer: string, length: number) => {
@@ -154,8 +161,30 @@ export function CardiologyWordle() {
     const nextStatus = statusFromGuesses(saved, daily.word);
     setStatus(nextStatus);
     setRevealCount(daily.length);
+    setStats(loadHeartleStats());
     if (nextStatus !== "playing") finished.current = true;
   }, []);
+
+  useEffect(() => {
+    if (!puzzle || !showResult) return;
+    setStats(
+      recordHeartleResult({
+        dateKey: puzzle.dateKey,
+        won: status === "won",
+        guesses: guesses.length,
+      }),
+    );
+    if (openedResultFor.current === puzzle.dateKey) return;
+    openedResultFor.current = puzzle.dateKey;
+    if (flashTimer.current) window.clearTimeout(flashTimer.current);
+    setMessage(status === "won" ? heartleWinTitle(guesses.length) : puzzle.word);
+    const wait = prefersReducedMotion() ? 80 : 1100;
+    const timer = window.setTimeout(() => {
+      setResultOpen(true);
+      setMessage("");
+    }, wait);
+    return () => window.clearTimeout(timer);
+  }, [guesses.length, puzzle, showResult, status]);
 
   useEffect(() => {
     return () => {
@@ -228,7 +257,7 @@ export function CardiologyWordle() {
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       if (event.metaKey || event.ctrlKey || event.altKey) return;
-      if (hintOpen) return;
+      if (hintOpen || helpOpen || resultOpen) return;
       const target = event.target as HTMLElement | null;
       if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
         return;
@@ -250,7 +279,7 @@ export function CardiologyWordle() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [addLetter, backspace, hintOpen, submit]);
+  }, [addLetter, backspace, helpOpen, hintOpen, resultOpen, submit]);
 
   async function copyShare() {
     if (!shareText) return false;
@@ -281,7 +310,11 @@ export function CardiologyWordle() {
   }
 
   async function shareNative() {
-    if (typeof navigator.share === "function") {
+    const preferNative =
+      typeof navigator.share === "function" &&
+      (/\b(Mobile|Android|iPhone|iPad)\b/i.test(navigator.userAgent) ||
+        window.matchMedia("(pointer: coarse)").matches);
+    if (preferNative) {
       trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "native_share" });
       trackViralShare("native_share", CARDIOLOGY_WORDLE_TOOL_ID);
       try {
@@ -296,8 +329,8 @@ export function CardiologyWordle() {
 
   if (!puzzle) {
     return (
-      <div className="heartle-board rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <p className="text-sm text-slate-500">Loading today&apos;s Heartle…</p>
+      <div className="heartle-board">
+        <p className="p-6 text-sm text-slate-500">Loading today&apos;s Heartle…</p>
       </div>
     );
   }
@@ -307,52 +340,87 @@ export function CardiologyWordle() {
   const revealing = currentRowActive && guesses.length > 0 && revealCount < puzzle.length;
 
   return (
-    <div className="heartle-board overflow-hidden rounded-3xl border border-rose-100 bg-white shadow-sm">
-      <div className="border-b border-rose-100 bg-gradient-to-br from-rose-50 via-white to-slate-50 px-5 py-5 sm:px-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rose-700">Heartle</p>
-            <p className="mt-1 text-sm font-semibold text-slate-900">
-              Cardiology Wordle #{puzzle.puzzleNumber}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-800">
-              {puzzle.category}
-            </span>
-            <button
-              type="button"
-              onClick={() => {
-                setHintOpen(true);
-                trackCtaClick("wordle_hint", `${CARDIOLOGY_WORDLE_PATH}#word-bank`);
-              }}
-              className="min-h-11 rounded-full border border-rose-200 bg-white px-4 text-sm font-semibold text-rose-800 hover:border-rose-300 hover:bg-rose-50"
-            >
-              Need a hint
-            </button>
-          </div>
+    <div className="heartle-board">
+      <div className="heartle-topbar">
+        <div className="heartle-topbar-side">
+          <button type="button" className="heartle-icon-btn" onClick={() => setHelpOpen(true)} aria-label="How to play">
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6">
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 21h6M10 17h4M12 3a6 6 0 0 0-3.4 10.9c.7.6 1.1 1.4 1.2 2.3h4.4c.1-.9.5-1.7 1.2-2.3A6 6 0 0 0 12 3Z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="heartle-icon-btn"
+            aria-label="Need a hint"
+            onClick={() => {
+              setHintOpen(true);
+              trackCtaClick("wordle_hint", `${CARDIOLOGY_WORDLE_PATH}#word-bank`);
+            }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
+              <path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l3.7 3.8-1.4 1.4-3.8-3.7A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z" />
+            </svg>
+          </button>
         </div>
-        <p className="mt-3 text-sm leading-6 text-slate-600">
-          {puzzle.length} letters · six guesses · new word at midnight Eastern
-        </p>
+        <div className="heartle-topbar-title">
+          <p className="heartle-brand">Heartle</p>
+          <p className="heartle-sub">
+            {puzzle.category} · #{puzzle.puzzleNumber}
+          </p>
+        </div>
+        <div className="heartle-topbar-side is-end">
+          <button
+            type="button"
+            className="heartle-icon-btn"
+            aria-label="Statistics"
+            onClick={() => {
+              setStats(loadHeartleStats());
+              setResultOpen(true);
+            }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
+              <rect x="4" y="13" width="3.2" height="7" rx="0.6" />
+              <rect x="10.4" y="8" width="3.2" height="12" rx="0.6" />
+              <rect x="16.8" y="4" width="3.2" height="16" rx="0.6" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div className="px-4 py-6 sm:px-6">
-        <p className="mb-4 min-h-6 text-center text-sm font-semibold text-slate-800" role="status" aria-live="polite">
-          {message}
+      <div className="heartle-play">
+        <p className="heartle-status" role="status" aria-live="polite">
+          {message ? (
+            <span
+              className={
+                HEARTLE_WIN_TITLES.includes(message as (typeof HEARTLE_WIN_TITLES)[number]) || message === puzzle.word
+                  ? "heartle-toast"
+                  : "text-sm font-semibold text-slate-800"
+              }
+            >
+              {message}
+            </span>
+          ) : null}
         </p>
 
+        <div className="heartle-grid-wrap">
         <div
-          className="mx-auto grid justify-items-center gap-1.5"
+          className="heartle-grid"
           role="grid"
-          aria-label="Cardiology Wordle board"
-          style={{ ["--heartle-tile" as string]: puzzle.length === 6 ? "2.7rem" : "3.25rem" }}
+          aria-label="Heartle board"
+          style={{ ["--heartle-cols" as string]: String(puzzle.length) }}
         >
           {rows.map((row, rowIndex) => {
             const isLast = rowIndex === rows.length - 1;
             const shown = !isLast || revealCount >= puzzle.length ? puzzle.length : revealCount;
             return (
-              <div key={`${row.guess}-${rowIndex}`} className="flex gap-1.5" role="row">
+              <div key={`${row.guess}-${rowIndex}`} className="heartle-row" role="row">
                 {row.guess.split("").map((letter, index) => (
                   <span
                     key={`${row.guess}-${index}`}
@@ -371,7 +439,7 @@ export function CardiologyWordle() {
           })}
 
           {currentRowActive ? (
-            <div className={`flex gap-1.5 ${shake ? "heartle-row is-shake" : ""}`} role="row">
+            <div className={`heartle-row ${shake ? "is-shake" : ""}`} role="row">
               {Array.from({ length: puzzle.length }, (_, index) => (
                 <span
                   key={`current-${index}`}
@@ -385,71 +453,26 @@ export function CardiologyWordle() {
           ) : null}
 
           {Array.from({ length: emptyRows }, (_, rowIndex) => (
-            <div key={`empty-${rowIndex}`} className="flex gap-1.5" role="row">
+            <div key={`empty-${rowIndex}`} className="heartle-row" role="row">
               {Array.from({ length: puzzle.length }, (_, index) => (
                 <span key={`empty-${rowIndex}-${index}`} role="gridcell" className="heartle-tile" />
               ))}
             </div>
           ))}
         </div>
+        </div>
 
-        {showResult ? (
-          <div className="mx-auto mt-6 max-w-md rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">
-              {status === "won" ? "Solved" : "Out of guesses"}
-            </p>
-            <p className="mt-2 font-display text-3xl text-slate-950">{puzzle.word}</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">{puzzle.gloss}</p>
-            <pre className="mt-4 overflow-x-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-sm leading-7 text-slate-900">
-              {shareText}
-            </pre>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => void shareNative()}
-                className="min-h-11 rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
-              >
-                {copied ? "Copied" : "Share"}
-              </button>
-              <button
-                type="button"
-                onClick={() => void shareLinkedIn()}
-                className="min-h-11 rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
-              >
-                LinkedIn
-              </button>
-              <button
-                type="button"
-                onClick={shareSms}
-                className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-              >
-                Messages
-              </button>
-            </div>
-            <p className="mt-5 text-sm font-semibold text-slate-900">See what locums actually pay</p>
-            <div className="mt-3 flex flex-col gap-2">
-              {ARCADE_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => {
-                    trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "related_tool_click", {
-                      link_url: link.href,
-                    });
-                    trackCtaClick(`wordle_${link.label}`, link.href);
-                  }}
-                  className="min-h-11 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+        {showResult && !resultOpen ? (
+          <div className="heartle-inline-share mx-auto w-full max-w-md px-4">
+            <button type="button" className="heartle-share-btn" onClick={() => setResultOpen(true)}>
+              {copied ? "Copied results to clipboard" : "Share"}
+            </button>
           </div>
         ) : null}
 
-        <div className="mx-auto mt-6 flex max-w-lg flex-col gap-1.5 pb-20 sm:pb-0" aria-label="Keyboard">
+        <div className="heartle-keyboard" aria-label="Keyboard">
           {KEYBOARD.map((row) => (
-            <div key={row.join("")} className="flex justify-center gap-1">
+            <div key={row.join("")} className="heartle-key-row">
               {row.map((key) => {
                 const color = key.length === 1 ? letterColors[key] : undefined;
                 const wide = key === "ENTER" || key === "BACK";
@@ -473,6 +496,7 @@ export function CardiologyWordle() {
           ))}
         </div>
       </div>
+      <HeartleHelpSheet open={helpOpen} onClose={() => setHelpOpen(false)} />
       <HeartleHintSheet
         open={hintOpen}
         length={puzzle.length}
@@ -487,6 +511,24 @@ export function CardiologyWordle() {
           setCurrent(word);
           setHintOpen(false);
           flash("Press Enter to guess");
+        }}
+      />
+      <HeartleResultModal
+        open={resultOpen}
+        status={status}
+        guesses={guesses.length}
+        answer={puzzle.word}
+        gloss={puzzle.gloss}
+        shareText={shareText}
+        copied={copied}
+        stats={stats}
+        onClose={() => setResultOpen(false)}
+        onShare={() => void shareNative()}
+        onShareLinkedIn={() => void shareLinkedIn()}
+        onShareSms={shareSms}
+        onArcadeClick={(href, label) => {
+          trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "related_tool_click", { link_url: href });
+          trackCtaClick(`wordle_${label}`, href);
         }}
       />
     </div>
