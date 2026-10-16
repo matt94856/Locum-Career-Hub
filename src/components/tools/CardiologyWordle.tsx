@@ -23,8 +23,9 @@ import {
   recordHeartleResult,
 } from "@/lib/cardiology-wordle/stats";
 import { isAllowedGuess } from "@/lib/cardiology-wordle/words";
-import { linkedInShareUrl, smsShareUrl } from "@/lib/share";
+import { linkedInComposeUrl } from "@/lib/share";
 import { SITE } from "@/lib/site";
+import { HeartleArcadeBanner } from "./HeartleArcadeBanner";
 import { HeartleHelpSheet } from "./HeartleHelpSheet";
 import { HeartleHintSheet } from "./HeartleHintSheet";
 import { HeartleResultModal } from "./HeartleResultModal";
@@ -46,6 +47,17 @@ type Persisted = {
 
 function prefersReducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function isPhoneShareDevice() {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent;
+  const coarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+  return /iPhone|iPad|iPod|Android/i.test(ua) || (coarse && /Mobile/i.test(ua));
+}
+
+function canOpenNativeShareSheet() {
+  return typeof navigator !== "undefined" && typeof navigator.share === "function" && isPhoneShareDevice();
 }
 
 function loadGuesses(dateKey: string) {
@@ -95,6 +107,7 @@ export function CardiologyWordle() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [resultOpen, setResultOpen] = useState(false);
   const [stats, setStats] = useState(EMPTY_HEARTLE_STATS);
+  const [showLinkedInShare, setShowLinkedInShare] = useState(false);
   const started = useRef(false);
   const finished = useRef(false);
   const openedResultFor = useRef<string | null>(null);
@@ -148,6 +161,7 @@ export function CardiologyWordle() {
 
   useEffect(() => {
     document.body.dataset.heartle = "1";
+    setShowLinkedInShare(!isPhoneShareDevice());
     return () => {
       delete document.body.dataset.heartle;
     };
@@ -296,32 +310,23 @@ export function CardiologyWordle() {
     }
   }
 
-  async function shareLinkedIn() {
-    await copyShare();
+  function shareLinkedIn() {
+    if (!shareText) return;
     trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "linkedin" });
     trackViralShare("linkedin", CARDIOLOGY_WORDLE_TOOL_ID);
-    window.open(linkedInShareUrl(pageUrl), "_blank", "noopener,noreferrer");
-  }
-
-  function shareSms() {
-    trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "sms" });
-    trackViralShare("sms", CARDIOLOGY_WORDLE_TOOL_ID);
-    window.location.href = smsShareUrl(shareText);
+    window.open(linkedInComposeUrl(shareText), "_blank", "noopener,noreferrer");
   }
 
   async function shareNative() {
-    const preferNative =
-      typeof navigator.share === "function" &&
-      (/\b(Mobile|Android|iPhone|iPad)\b/i.test(navigator.userAgent) ||
-        window.matchMedia("(pointer: coarse)").matches);
-    if (preferNative) {
-      trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "native_share" });
-      trackViralShare("native_share", CARDIOLOGY_WORDLE_TOOL_ID);
+    if (!shareText) return;
+    if (canOpenNativeShareSheet()) {
       try {
-        await navigator.share({ title: "Heartle", text: shareText });
+        trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "native_share" });
+        trackViralShare("native_share", CARDIOLOGY_WORDLE_TOOL_ID);
+        await navigator.share({ text: shareText });
         return;
-      } catch {
-        // User cancelled the sheet; fall through to copy.
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
       }
     }
     await copyShare();
@@ -330,6 +335,7 @@ export function CardiologyWordle() {
   if (!puzzle) {
     return (
       <div className="heartle-board">
+        <HeartleArcadeBanner />
         <p className="p-6 text-sm text-slate-500">Loading today&apos;s Heartle…</p>
       </div>
     );
@@ -341,6 +347,7 @@ export function CardiologyWordle() {
 
   return (
     <div className="heartle-board">
+      <HeartleArcadeBanner />
       <div className="heartle-topbar">
         <div className="heartle-topbar-side">
           <button type="button" className="heartle-icon-btn" onClick={() => setHelpOpen(true)} aria-label="How to play">
@@ -371,9 +378,6 @@ export function CardiologyWordle() {
         </div>
         <div className="heartle-topbar-title">
           <p className="heartle-brand">Heartle</p>
-          <p className="heartle-sub">
-            {puzzle.category} · #{puzzle.puzzleNumber}
-          </p>
         </div>
         <div className="heartle-topbar-side is-end">
           <button
@@ -413,7 +417,7 @@ export function CardiologyWordle() {
         <div
           className="heartle-grid"
           role="grid"
-          aria-label="Heartle board"
+          aria-label={`Heartle ${puzzle.category} puzzle ${puzzle.puzzleNumber}`}
           style={{ ["--heartle-cols" as string]: String(puzzle.length) }}
         >
           {rows.map((row, rowIndex) => {
@@ -471,29 +475,34 @@ export function CardiologyWordle() {
         ) : null}
 
         <div className="heartle-keyboard" aria-label="Keyboard">
-          {KEYBOARD.map((row) => (
-            <div key={row.join("")} className="heartle-key-row">
-              {row.map((key) => {
-                const color = key.length === 1 ? letterColors[key] : undefined;
-                const wide = key === "ENTER" || key === "BACK";
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    className={`heartle-key ${wide ? "is-wide" : ""} ${color ? `is-${color}` : ""}`}
-                    disabled={status !== "playing" || revealing}
-                    onClick={() => {
-                      if (key === "ENTER") submit();
-                      else if (key === "BACK") backspace();
-                      else addLetter(key);
-                    }}
-                  >
-                    {key === "BACK" ? "⌫" : key}
-                  </button>
-                );
-              })}
-            </div>
-          ))}
+          {KEYBOARD.map((row) => {
+            const inset = row[0] === "A";
+            return (
+              <div key={row.join("")} className="heartle-key-row">
+                {inset ? <div className="heartle-key-spacer" /> : null}
+                {row.map((key) => {
+                  const color = key.length === 1 ? letterColors[key] : undefined;
+                  const wide = key === "ENTER" || key === "BACK";
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      className={`heartle-key ${wide ? "is-wide" : ""} ${color ? `is-${color}` : ""}`}
+                      disabled={status !== "playing" || revealing}
+                      onClick={() => {
+                        if (key === "ENTER") submit();
+                        else if (key === "BACK") backspace();
+                        else addLetter(key);
+                      }}
+                    >
+                      {key === "BACK" ? "⌫" : key}
+                    </button>
+                  );
+                })}
+                {inset ? <div className="heartle-key-spacer" /> : null}
+              </div>
+            );
+          })}
         </div>
       </div>
       <HeartleHelpSheet open={helpOpen} onClose={() => setHelpOpen(false)} />
@@ -519,13 +528,12 @@ export function CardiologyWordle() {
         guesses={guesses.length}
         answer={puzzle.word}
         gloss={puzzle.gloss}
-        shareText={shareText}
         copied={copied}
         stats={stats}
         onClose={() => setResultOpen(false)}
         onShare={() => void shareNative()}
-        onShareLinkedIn={() => void shareLinkedIn()}
-        onShareSms={shareSms}
+        onShareLinkedIn={shareLinkedIn}
+        showLinkedIn={showLinkedInShare}
         onArcadeClick={(href, label) => {
           trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "related_tool_click", { link_url: href });
           trackCtaClick(`wordle_${label}`, href);

@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { buildOgImagePath, buildResultShareLandingUrl, displayShareUrl, expandSharePath, isArcadeSharePath } from "./share";
+import {
+  buildOgImagePath,
+  buildResultShareLandingUrl,
+  displayShareUrl,
+  expandSharePath,
+  isArcadeSharePath,
+  linkedInComposeUrl,
+} from "./share";
 
 describe("share URLs", () => {
   it("builds a short /s link that wraps better than the old query landing", () => {
@@ -23,5 +30,21 @@ describe("share URLs", () => {
     expect(buildOgImagePath({ title: "Interventional Cardiology", stat: "$3,200–$3,900/day", style: "arcade" })).toContain(
       "style=arcade",
     );
+  });
+
+  it("prefills a LinkedIn post with the Heartle grid and link", () => {
+    const body = [
+      "Heartle 2 1/6",
+      "",
+      "🟩🟩🟩🟩🟩",
+      "",
+      "I did the Heartle today. Can you beat this score?",
+      "https://www.locumcareerhub.com/cardiology-wordle",
+    ].join("\n");
+    const url = linkedInComposeUrl(body);
+    expect(url.startsWith("https://www.linkedin.com/feed/?shareActive=true&text=")).toBe(true);
+    expect(decodeURIComponent(url)).toContain("Heartle 2 1/6");
+    expect(decodeURIComponent(url)).toContain("🟩🟩🟩🟩🟩");
+    expect(decodeURIComponent(url)).toContain("https://www.locumcareerhub.com/cardiology-wordle");
   });
 });

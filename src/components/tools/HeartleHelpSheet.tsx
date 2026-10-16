@@ -60,9 +60,8 @@ export function HeartleHelpSheet({ open, onClose }: Props) {
         <div className="heartle-hint-handle" aria-hidden="true" />
         <div className="flex items-start justify-between gap-3 px-5 pt-2 sm:px-6 sm:pt-1">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rose-700">Daily heart puzzle</p>
-            <p id={titleId} className="mt-2 font-display text-2xl font-semibold tracking-tight text-slate-950">
-              How to play Heartle
+            <p id={titleId} className="text-xl font-bold uppercase tracking-wide text-slate-950">
+              How to play
             </p>
           </div>
           <button

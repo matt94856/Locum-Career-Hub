@@ -71,6 +71,11 @@ export function linkedInShareUrl(url: string) {
   return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 }
 
+/** Opens LinkedIn's composer with the post body prefilled (squares, blurb, and URL). */
+export function linkedInComposeUrl(text: string) {
+  return `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
+}
+
 /** Works on iOS and Android Messages. */
 export function smsShareUrl(text: string) {
   return `sms:?&body=${encodeURIComponent(text)}`;

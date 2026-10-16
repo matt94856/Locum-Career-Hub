@@ -25,13 +25,12 @@ type Props = {
   guesses: number;
   answer: string;
   gloss: string;
-  shareText: string;
   copied: boolean;
   stats: HeartleStats;
   onClose: () => void;
   onShare: () => void;
   onShareLinkedIn: () => void;
-  onShareSms: () => void;
+  showLinkedIn: boolean;
   onArcadeClick: (href: string, label: string) => void;
 };
 
@@ -41,13 +40,12 @@ export function HeartleResultModal({
   guesses,
   answer,
   gloss,
-  shareText,
   copied,
   stats,
   onClose,
   onShare,
   onShareLinkedIn,
-  onShareSms,
+  showLinkedIn,
   onArcadeClick,
 }: Props) {
   const titleId = useId();
@@ -111,8 +109,8 @@ export function HeartleResultModal({
         <div className="heartle-hint-handle" aria-hidden="true" />
         <div className="flex items-start justify-between gap-3 px-5 pt-2 sm:px-6 sm:pt-1">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rose-700">{title}</p>
-            <p id={titleId} className="mt-2 font-display text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-900">{title}</p>
+            <p id={titleId} className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-[28px]">
               {headline}
             </p>
             <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -138,9 +136,6 @@ export function HeartleResultModal({
             <>
               <p className="mt-1 font-mono text-lg font-extrabold tracking-[0.18em] text-slate-950">{answer}</p>
               <p className="mt-1 text-sm leading-6 text-slate-600">{gloss}</p>
-              <pre className="mt-4 overflow-x-auto whitespace-pre-wrap rounded-2xl bg-slate-50 p-4 text-center font-mono text-sm leading-7 text-slate-900">
-                {shareText}
-              </pre>
               <button type="button" className="heartle-share-btn" onClick={onShare}>
                 {copied ? (
                   "Copied results to clipboard"
@@ -153,22 +148,11 @@ export function HeartleResultModal({
                   </>
                 )}
               </button>
-              <div className="mt-2 flex flex-wrap justify-center gap-2">
-                <button
-                  type="button"
-                  className="min-h-10 rounded-xl px-3 text-sm font-semibold text-slate-600 hover:text-slate-950"
-                  onClick={onShareLinkedIn}
-                >
-                  LinkedIn
+              {showLinkedIn ? (
+                <button type="button" className="heartle-linkedin-btn" onClick={onShareLinkedIn}>
+                  Share to LinkedIn
                 </button>
-                <button
-                  type="button"
-                  className="min-h-10 rounded-xl px-3 text-sm font-semibold text-slate-600 hover:text-slate-950"
-                  onClick={onShareSms}
-                >
-                  Messages
-                </button>
-              </div>
+              ) : null}
             </>
           ) : null}
 
@@ -184,7 +168,7 @@ export function HeartleResultModal({
             ].map((item) => (
               <div key={item.label}>
                 <dt className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{item.label}</dt>
-                <dd className="mt-1 font-display text-2xl font-semibold text-slate-950">{item.value}</dd>
+                <dd className="mt-1 text-[36px] font-bold leading-none text-slate-950">{item.value}</dd>
               </div>
             ))}
           </dl>
