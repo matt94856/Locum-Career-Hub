@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { guessBankForLength, searchGuessBank } from "@/lib/cardiology-wordle/words";
 
@@ -50,7 +50,7 @@ export function HeartleHintSheet({ open, length, guessed, canFill, onClose, onPi
 
   useEffect(() => {
     if (!open) return;
-    function onKey(event: KeyboardEvent) {
+    function onKey(event: globalThis.KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
         onClose();
@@ -70,7 +70,7 @@ export function HeartleHintSheet({ open, length, guessed, canFill, onClose, onPi
     onPick(word);
   }
 
-  function onSearchKey(event: KeyboardEvent<HTMLInputElement>) {
+  function onSearchKey(event: ReactKeyboardEvent<HTMLInputElement>) {
     if (event.key !== "Enter") return;
     event.preventDefault();
     const first = results.find((entry) => !guessedSet.has(entry.word));
