@@ -241,3 +241,38 @@ export function findAnswer(word: string) {
   const needle = word.toUpperCase();
   return CARDIOLOGY_WORDLE_ANSWERS.find((item) => item.word === needle);
 }
+
+export type WordleGuessEntry = {
+  word: string;
+  gloss?: string;
+  category?: WordleCategory;
+};
+
+const ANSWER_BY_WORD = new Map(CARDIOLOGY_WORDLE_ANSWERS.map((item) => [item.word, item]));
+
+/** Allowed guesses for a given length, sorted A–Z, with gloss when the word can also be an answer. */
+export function guessBankForLength(length: number): WordleGuessEntry[] {
+  return [...CARDIOLOGY_WORDLE_ALLOWED]
+    .filter((word) => word.length === length)
+    .sort((a, b) => a.localeCompare(b))
+    .map((word) => {
+      const answer = ANSWER_BY_WORD.get(word);
+      return answer ? { word, gloss: answer.gloss, category: answer.category } : { word };
+    });
+}
+
+export function searchGuessBank(entries: WordleGuessEntry[], query: string) {
+  const needle = query.trim().toUpperCase();
+  if (!needle) return entries;
+  return entries
+    .filter((entry) => {
+      if (entry.word.includes(needle)) return true;
+      return Boolean(entry.gloss && entry.gloss.toUpperCase().includes(needle));
+    })
+    .sort((a, b) => {
+      const aStart = a.word.startsWith(needle) ? 0 : 1;
+      const bStart = b.word.startsWith(needle) ? 0 : 1;
+      if (aStart !== bStart) return aStart - bStart;
+      return a.word.localeCompare(b.word);
+    });
+}

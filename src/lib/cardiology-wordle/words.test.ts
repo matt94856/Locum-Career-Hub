@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { CARDIOLOGY_WORDLE_ALLOWED, CARDIOLOGY_WORDLE_ANSWERS } from "./words";
+import {
+  CARDIOLOGY_WORDLE_ALLOWED,
+  CARDIOLOGY_WORDLE_ANSWERS,
+  guessBankForLength,
+  searchGuessBank,
+} from "./words";
 
 describe("cardiology wordle bank", () => {
   it("keeps unique 4–6 letter answers and a 5-letter majority", () => {
@@ -15,5 +20,17 @@ describe("cardiology wordle bank", () => {
   it("allows HEART and BLOOD as misses", () => {
     expect(CARDIOLOGY_WORDLE_ALLOWED.has("HEART")).toBe(true);
     expect(CARDIOLOGY_WORDLE_ALLOWED.has("BLOOD")).toBe(true);
+  });
+
+  it("lists only matching-length guesses and prefers starts-with search", () => {
+    const fives = guessBankForLength(5);
+    expect(fives.every((entry) => entry.word.length === 5)).toBe(true);
+    expect(fives.some((entry) => entry.word === "HEART" && entry.gloss)).toBe(true);
+    expect(fives.some((entry) => entry.word === "BLOOD")).toBe(true);
+    const hits = searchGuessBank(fives, "ste");
+    expect(hits[0]?.word.startsWith("STE")).toBe(true);
+    expect(hits.every((entry) => entry.word.includes("STE") || entry.gloss?.toUpperCase().includes("STE"))).toBe(
+      true,
+    );
   });
 });

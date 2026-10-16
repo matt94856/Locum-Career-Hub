@@ -86,6 +86,7 @@ export default function CardiologyWordlePage() {
             <h2 className="font-display text-2xl font-semibold text-slate-950">How to play</h2>
             <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
               <li>Guess a cardiology term in six tries. Length matches today&apos;s word.</li>
+              <li>Stuck? Open Need a hint, search the word bank, and tap a word to fill the board.</li>
               <li>Green is the right letter in the right spot. Yellow is right letter, wrong spot.</li>
               <li>Gray is not in the word. Duplicate letters score the Wordle way.</li>
               <li>Share the emoji grid when you finish. Come back tomorrow for the next Heartle.</li>

@@ -105,11 +105,156 @@ body[data-heartle="1"] #sticky-mobile-cta {
   }
 }
 
+.heartle-hint-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgb(15 23 42 / 0);
+  padding: 0;
+  opacity: 0;
+  transition: background 0.22s ease, opacity 0.22s ease;
+}
+
+.heartle-hint-overlay.is-open {
+  background: rgb(15 23 42 / 0.46);
+  opacity: 1;
+}
+
+.heartle-hint-sheet {
+  display: flex;
+  width: 100%;
+  max-width: 34rem;
+  max-height: min(88dvh, 42rem);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.5rem 1.5rem 0 0;
+  background: #fff;
+  box-shadow: 0 24px 64px rgb(15 23 42 / 0.22);
+  transform: translateY(18px);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.heartle-hint-overlay.is-open .heartle-hint-sheet {
+  transform: translateY(0);
+}
+
+.heartle-hint-handle {
+  display: block;
+  width: 2.75rem;
+  height: 0.28rem;
+  margin: 0.7rem auto 0.35rem;
+  border-radius: 999px;
+  background: #d0d5dd;
+}
+
+.heartle-hint-list {
+  margin: 0;
+  padding: 0.25rem 0 1.25rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  list-style: none;
+}
+
+.heartle-hint-word {
+  display: grid;
+  width: 100%;
+  min-height: 3rem;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  column-gap: 0.75rem;
+  row-gap: 0.2rem;
+  padding: 0.7rem 1.25rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.heartle-hint-word:hover,
+.heartle-hint-word:focus-visible {
+  background: #fff1f2;
+  outline: none;
+}
+
+.heartle-hint-word.is-used {
+  opacity: 0.55;
+}
+
+.heartle-hint-term {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #0f172a;
+}
+
+.heartle-hint-gloss {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  color: #667085;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.heartle-hint-used {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #98a2b3;
+}
+
+@media (min-width: 640px) {
+  .heartle-hint-overlay {
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .heartle-hint-sheet {
+    border-radius: 1.5rem;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  .heartle-hint-overlay.is-open .heartle-hint-sheet {
+    transform: translateY(0) scale(1);
+  }
+
+  .heartle-hint-handle {
+    display: none;
+  }
+
+  .heartle-hint-word {
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .heartle-hint-gloss {
+    grid-column: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .heartle-tile.is-filled,
   .heartle-tile.is-flip,
-  .heartle-row.is-shake {
+  .heartle-row.is-shake,
+  .heartle-hint-overlay,
+  .heartle-hint-sheet {
     animation: none;
+    transition: none;
+  }
+
+  .heartle-hint-sheet,
+  .heartle-hint-overlay.is-open .heartle-hint-sheet {
+    transform: none;
   }
 }
 

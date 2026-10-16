@@ -19,6 +19,7 @@ import {
 import { isAllowedGuess } from "@/lib/cardiology-wordle/words";
 import { linkedInShareUrl, smsShareUrl } from "@/lib/share";
 import { SITE } from "@/lib/site";
+import { HeartleHintSheet } from "./HeartleHintSheet";
 import "./cardiology-wordle.css";
 
 const STORAGE_KEY = "lch-cardiology-wordle";
@@ -89,6 +90,7 @@ export function CardiologyWordle() {
   const [shake, setShake] = useState(false);
   const [revealCount, setRevealCount] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
   const started = useRef(false);
   const finished = useRef(false);
   const currentRef = useRef("");
@@ -226,6 +228,7 @@ export function CardiologyWordle() {
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       if (event.metaKey || event.ctrlKey || event.altKey) return;
+      if (hintOpen) return;
       const target = event.target as HTMLElement | null;
       if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
         return;
@@ -247,7 +250,7 @@ export function CardiologyWordle() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [addLetter, backspace, submit]);
+  }, [addLetter, backspace, hintOpen, submit]);
 
   async function copyShare() {
     if (!shareText) return;
@@ -306,9 +309,21 @@ export function CardiologyWordle() {
               Cardiology Wordle #{puzzle.puzzleNumber}
             </p>
           </div>
-          <span className="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-800">
-            {puzzle.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rose-800">
+              {puzzle.category}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setHintOpen(true);
+                trackCtaClick("wordle_hint", `${CARDIOLOGY_WORDLE_PATH}#word-bank`);
+              }}
+              className="min-h-11 rounded-full border border-rose-200 bg-white px-4 text-sm font-semibold text-rose-800 hover:border-rose-300 hover:bg-rose-50"
+            >
+              Need a hint
+            </button>
+          </div>
         </div>
         <p className="mt-3 text-sm leading-6 text-slate-600">
           {puzzle.length} letters · six guesses · new word at midnight Eastern
@@ -455,6 +470,22 @@ export function CardiologyWordle() {
           ))}
         </div>
       </div>
+      <HeartleHintSheet
+        open={hintOpen}
+        length={puzzle.length}
+        guessed={guesses}
+        canFill={status === "playing"}
+        onClose={() => setHintOpen(false)}
+        onPick={(word) => {
+          if (guesses.includes(word)) {
+            flash("Already guessed");
+            return;
+          }
+          setCurrent(word);
+          setHintOpen(false);
+          flash("Press Enter to guess");
+        }}
+      />
     </div>
   );
 }
