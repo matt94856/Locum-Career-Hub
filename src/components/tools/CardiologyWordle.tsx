@@ -12,7 +12,6 @@ import {
 } from "@/lib/cardiology-wordle/daily";
 import {
   bestLetterColors,
-  isWin,
   scoreGuess,
   shareResult,
   type TileColor,
@@ -94,7 +93,7 @@ export function CardiologyWordle() {
   const finished = useRef(false);
   const currentRef = useRef("");
   const statusRef = useRef<Status>("playing");
-  const revealTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const revealTimer = useRef<number | undefined>(undefined);
 
   currentRef.current = current;
   statusRef.current = status;

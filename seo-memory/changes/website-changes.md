@@ -2,6 +2,16 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-10-15 — `https://www.locumcareerhub.com/cardiology-wordle`
+
+- Type: `page`
+- Status: shipped
+- Before: none
+- After: New indexable Cardiology Wordle at /cardiology-wordle, sitemap only
+- Reason: Net-new query play for cardiology wordle; hidden from nav/footer/homepage/tools
+- Expected: Organic impressions for cardiology wordle; shares back to the puzzle URL
+- Actual: pending
+
 ## 2026-10-15 — `https://www.locumcareerhub.com/non-invasive-cardiology-locums-pay`
 
 - Type: `new_page`
