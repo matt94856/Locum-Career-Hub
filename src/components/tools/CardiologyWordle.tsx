@@ -253,19 +253,22 @@ export function CardiologyWordle() {
   }, [addLetter, backspace, hintOpen, submit]);
 
   async function copyShare() {
-    if (!shareText) return;
+    if (!shareText) return false;
     try {
       await navigator.clipboard.writeText(shareText);
       setCopied(true);
       trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "copy" });
       trackViralShare("copy", CARDIOLOGY_WORDLE_TOOL_ID);
       window.setTimeout(() => setCopied(false), 1800);
+      return true;
     } catch {
       setCopied(false);
+      return false;
     }
   }
 
-  function shareLinkedIn() {
+  async function shareLinkedIn() {
+    await copyShare();
     trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "linkedin" });
     trackViralShare("linkedin", CARDIOLOGY_WORDLE_TOOL_ID);
     window.open(linkedInShareUrl(pageUrl), "_blank", "noopener,noreferrer");
@@ -278,11 +281,15 @@ export function CardiologyWordle() {
   }
 
   async function shareNative() {
-    trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "native_share" });
-    trackViralShare("native_share", CARDIOLOGY_WORDLE_TOOL_ID);
-    if (navigator.share) {
-      await navigator.share({ title: "Cardiology Wordle", text: shareText, url: pageUrl }).catch(() => undefined);
-      return;
+    if (typeof navigator.share === "function") {
+      trackDecisionToolEvent(CARDIOLOGY_WORDLE_TOOL_ID, "share", { method: "native_share" });
+      trackViralShare("native_share", CARDIOLOGY_WORDLE_TOOL_ID);
+      try {
+        await navigator.share({ title: "Heartle", text: shareText });
+        return;
+      } catch {
+        // User cancelled the sheet; fall through to copy.
+      }
     }
     await copyShare();
   }
@@ -393,17 +400,20 @@ export function CardiologyWordle() {
             </p>
             <p className="mt-2 font-display text-3xl text-slate-950">{puzzle.word}</p>
             <p className="mt-2 text-sm leading-6 text-slate-600">{puzzle.gloss}</p>
+            <pre className="mt-4 overflow-x-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-sm leading-7 text-slate-900">
+              {shareText}
+            </pre>
             <div className="mt-4 flex flex-wrap gap-2">
               <button
                 type="button"
-                onClick={() => void copyShare()}
+                onClick={() => void shareNative()}
                 className="min-h-11 rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
               >
-                {copied ? "Copied" : "Copy result"}
+                {copied ? "Copied" : "Share"}
               </button>
               <button
                 type="button"
-                onClick={shareLinkedIn}
+                onClick={() => void shareLinkedIn()}
                 className="min-h-11 rounded-xl bg-[#0A66C2] px-4 py-2.5 text-sm font-semibold text-white hover:brightness-110"
               >
                 LinkedIn
@@ -414,13 +424,6 @@ export function CardiologyWordle() {
                 className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
               >
                 Messages
-              </button>
-              <button
-                type="button"
-                onClick={() => void shareNative()}
-                className="min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:border-brand-300"
-              >
-                Share
               </button>
             </div>
             <p className="mt-5 text-sm font-semibold text-slate-900">See what locums actually pay</p>

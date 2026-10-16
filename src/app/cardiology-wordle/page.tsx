@@ -31,13 +31,32 @@ const FAQS = [
   },
 ];
 
-export const metadata: Metadata = buildSerpMetadata({
+const HEARTLE_SHARE_IMAGE = {
+  url: "/cardiology-wordle/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: "Heartle — daily cardiology Wordle",
+} as const;
+
+const baseMetadata = buildSerpMetadata({
   title: "Cardiology Wordle | Daily Heart Puzzle",
   description:
     "Play Cardiology Wordle, a daily Wordle-style heart puzzle. Six guesses, real cardiology terms, new word each midnight Eastern.",
   path: PATH,
   keywords: ["cardiology wordle", "heartle", "cardiology puzzle", "daily cardiology word game"],
 });
+
+export const metadata: Metadata = {
+  ...baseMetadata,
+  openGraph: {
+    ...baseMetadata.openGraph,
+    images: [HEARTLE_SHARE_IMAGE],
+  },
+  twitter: {
+    ...baseMetadata.twitter,
+    images: [HEARTLE_SHARE_IMAGE.url],
+  },
+};
 
 export default function CardiologyWordlePage() {
   return (

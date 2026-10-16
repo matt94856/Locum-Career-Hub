@@ -44,10 +44,12 @@ export function emojiGrid(rows: TileColor[][]) {
   const map: Record<TileColor, string> = {
     green: "🟩",
     yellow: "🟨",
-    gray: "⬛",
+    gray: "⬜",
   };
   return rows.map((row) => row.map((color) => map[color]).join("")).join("\n");
 }
+
+export const HEARTLE_SHARE_CHALLENGE = "I did the Heartle today. Can you beat this score?";
 
 export function shareResult(input: {
   puzzleNumber: number;
@@ -58,8 +60,9 @@ export function shareResult(input: {
   url: string;
 }) {
   const score = input.won ? String(input.guesses) : "X";
-  const header = `Cardiology Wordle #${input.puzzleNumber} ${score}/${input.maxGuesses}`;
-  return `${header}\n\n${emojiGrid(input.rows)}\n\n${input.url}`;
+  const number = new Intl.NumberFormat("en-US").format(input.puzzleNumber);
+  const header = `Heartle ${number} ${score}/${input.maxGuesses}`;
+  return `${header}\n\n${emojiGrid(input.rows)}\n\n${HEARTLE_SHARE_CHALLENGE}\n${input.url}`;
 }
 
 export function bestLetterColors(rows: { guess: string; colors: TileColor[] }[]) {

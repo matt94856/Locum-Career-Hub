@@ -15,14 +15,26 @@ describe("wordle scoring", () => {
   it("builds a Wordle-style share card", () => {
     const rows = [scoreGuess("HEART", "STEMI"), scoreGuess("STEMI", "STEMI")];
     expect(isWin(rows[1] ?? [])).toBe(true);
-    expect(emojiGrid(rows)).toContain("🟩");
-    expect(shareResult({
-      puzzleNumber: 2,
-      guesses: 2,
-      maxGuesses: 6,
-      won: true,
-      rows,
-      url: "https://www.locumcareerhub.com/cardiology-wordle",
-    })).toMatch(/Cardiology Wordle #2 2\/6/);
+    expect(emojiGrid(rows)).toBe("⬜🟨⬜⬜🟨\n🟩🟩🟩🟩🟩");
+    expect(
+      shareResult({
+        puzzleNumber: 2,
+        guesses: 2,
+        maxGuesses: 6,
+        won: true,
+        rows,
+        url: "https://www.locumcareerhub.com/cardiology-wordle",
+      }),
+    ).toBe(
+      [
+        "Heartle 2 2/6",
+        "",
+        "⬜🟨⬜⬜🟨",
+        "🟩🟩🟩🟩🟩",
+        "",
+        "I did the Heartle today. Can you beat this score?",
+        "https://www.locumcareerhub.com/cardiology-wordle",
+      ].join("\n"),
+    );
   });
 });
