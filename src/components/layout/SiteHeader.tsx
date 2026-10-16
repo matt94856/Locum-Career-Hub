@@ -77,9 +77,9 @@ export function SiteHeader() {
               variant="ghost"
               size="sm"
               className="max-w-[10.5rem] truncate xl:max-w-none"
-              title={CTA.recruiter}
+              title={CTA.contactMe}
             >
-              {CTA.recruiter}
+              {CTA.contactMe}
             </Button>
             <Button href="/physician-opportunities#lead-form" variant="primary" size="sm">
               {CTA.requestMatches}
@@ -140,7 +140,7 @@ export function SiteHeader() {
               {CTA.requestMatches}
             </Button>
             <Button href="/contact" variant="secondary" className="w-full justify-center" size="md">
-              {CTA.recruiter}
+              {CTA.contactMe}
             </Button>
           </div>
         </div>

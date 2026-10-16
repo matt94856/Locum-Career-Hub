@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
-import { SITE } from "@/lib/site";
+import { ContactFallbacks } from "@/components/cta/ContactFallbacks";
+import { CTA } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 
 export function RecruiterCta() {
@@ -21,14 +22,13 @@ export function RecruiterCta() {
                 Lucrative locum blocks, on a schedule you control. No spam. No bait-and-switch rates.
               </p>
               <div className="mt-6 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-                <CalendlyBookButton source="recruiter_cta" className="w-full justify-center" />
-                <Button
-                  href={`tel:${SITE.phoneTel}`}
-                  variant="secondary"
-                  className="w-full justify-center border-white/25 bg-white/10 !text-white hover:border-white/40 hover:bg-white/20"
-                >
-                  Call {SITE.phoneDisplay}
+                <Button href="#get-matched" className="w-full justify-center">
+                  {CTA.requestMatches}
                 </Button>
+                <CalendlyBookButton source="recruiter_cta" variant="secondary" className="w-full justify-center" />
+              </div>
+              <div className="mt-4 max-w-xl">
+                <ContactFallbacks source="recruiter_cta" onDark className="text-sm leading-6 text-slate-300" />
               </div>
             </div>
 
@@ -42,7 +42,7 @@ export function RecruiterCta() {
                   <li>Travel preferences and dealbreakers</li>
                 </ul>
                 <Link href="#get-matched" className="mt-6 inline-flex text-sm font-semibold text-brand-100 hover:text-white">
-                  Prefer a form? Submit an inquiry →
+                  Go to the form →
                 </Link>
               </div>
             </div>

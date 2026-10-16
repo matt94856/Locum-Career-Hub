@@ -10,7 +10,7 @@ import {
   opportunitySupportLine,
   type FeaturedCardiologyOpportunity,
 } from "@/lib/featured-cardiology-opportunities";
-import { SITE } from "@/lib/site";
+import { CTA } from "@/lib/site";
 
 function DetailList({
   title,
@@ -190,12 +190,8 @@ export function FeaturedCardiologyOpportunityView({
             >
               {AVAILABILITY_INQUIRY_CTA}
             </FeaturedOpportunityApplyButton>
-            <Button
-              href={`tel:${SITE.phoneTel}`}
-              variant="ghost"
-              className="text-white hover:bg-white/10"
-            >
-              Call {SITE.phoneDisplay}
+            <Button href="/contact" variant="ghost" className="text-white hover:bg-white/10">
+              {CTA.contactMe}
             </Button>
           </div>
         </div>

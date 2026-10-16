@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
-import { SITE } from "@/lib/site";
 
 const STANDALONE_POINTS = [
   "Matched to your subspecialty—not a generic job board",
@@ -47,12 +46,7 @@ export function LeadFormStandaloneSection({ children, withTrustPanel = true, cla
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-xs text-slate-500">
-              Questions first? Call{" "}
-              <a href={`tel:${SITE.phoneTel}`} className="font-semibold text-brand-700 hover:underline">
-                {SITE.phoneDisplay}
-              </a>
-            </p>
+            <p className="mt-5 text-xs text-slate-500">Start with the form. Call, text, or Calendly only if you can&apos;t submit it.</p>
           </div>
         </div>
         <div className="min-w-0 lg:col-span-8">{children}</div>

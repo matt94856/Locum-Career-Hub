@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { trackBookingClick, trackCtaClick } from "@/lib/analytics-events";
-import { CTA, SITE } from "@/lib/site";
+import { trackCtaClick } from "@/lib/analytics-events";
+import { CTA } from "@/lib/site";
 
 export function StickyMobileCta() {
   const pathname = usePathname();
@@ -28,10 +28,6 @@ export function StickyMobileCta() {
 
   if (pathname === "/thank-you" || pathname === "/cardiology-wordle" || formInView) return null;
 
-  const bookHref =
-    SITE.calendlyUrl ||
-    `mailto:${SITE.email}?subject=${encodeURIComponent("Schedule a call — Locum Career Hub")}`;
-  const bookExternal = bookHref.startsWith("http");
   const formHref = hasLocalForm
     ? "#lead-form"
     : "/physician-opportunities#lead-form";
@@ -49,7 +45,7 @@ export function StickyMobileCta() {
         <Button
           href={formHref}
           size="md"
-          className="min-h-11 min-w-0 flex-1 basis-0 justify-center px-2 text-sm leading-snug"
+          className="min-h-11 min-w-0 flex-[1.4] basis-0 justify-center px-2 text-sm leading-snug"
           onClick={() =>
             trackCtaClick(
               isFeaturedOpportunity
@@ -62,25 +58,13 @@ export function StickyMobileCta() {
           {isFeaturedOpportunity ? "Get details" : CTA.requestMatches}
         </Button>
         <Button
-          href={`tel:${SITE.phoneTel}`}
+          href="/contact"
           variant="secondary"
           size="md"
           className="min-h-11 min-w-0 flex-1 basis-0 justify-center px-2 text-sm leading-snug"
-          onClick={() => trackCtaClick("sticky_call", `tel:${SITE.phoneTel}`)}
+          onClick={() => trackCtaClick("sticky_contact", "/contact")}
         >
-          Call
-        </Button>
-        <Button
-          href={bookHref}
-          variant="secondary"
-          size="md"
-          className="min-h-11 min-w-0 flex-1 basis-0 justify-center px-2 text-sm leading-snug"
-          onClick={() => {
-            trackCtaClick("sticky_book_call", bookHref);
-            if (bookExternal) trackBookingClick("sticky_mobile");
-          }}
-        >
-          {SITE.calendlyUrl ? "Book" : "Email"}
+          {CTA.contactMe}
         </Button>
       </div>
     </div>

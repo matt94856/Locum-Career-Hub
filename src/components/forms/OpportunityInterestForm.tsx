@@ -104,7 +104,7 @@ export function OpportunityInterestForm({
         setStatus("error");
         setError(
           result?.code === "SUPABASE_NOT_CONFIGURED"
-            ? `The form is temporarily unavailable. Call ${SITE.phoneDisplay} or email ${SITE.email} and mention the ${opportunity.state} opportunity.`
+            ? `The form is temporarily unavailable. Call or text ${SITE.phoneDisplay} and mention the ${opportunity.state} opportunity.`
             : result?.error ||
                 "We could not send that. Please try again or contact us directly.",
         );
@@ -113,7 +113,7 @@ export function OpportunityInterestForm({
 
       if (result?.stored !== true) {
         setStatus("error");
-        setError(`We could not save that inquiry. Call ${SITE.phoneDisplay} or email ${SITE.email} and mention the ${opportunity.state} opportunity.`);
+        setError(`We could not save that inquiry. Call or text ${SITE.phoneDisplay} and mention the ${opportunity.state} opportunity.`);
         return;
       }
 

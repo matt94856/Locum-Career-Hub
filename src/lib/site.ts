@@ -8,9 +8,10 @@ export const SITE = {
   url: "https://www.locumcareerhub.com",
   tagline:
     "Cardiologist locums with clear expectations, pay that makes sense, and a schedule you control.",
-  email: "mfuller@mplthealthcare.com",
+  email: "matthewfuller389@gmail.com",
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",
+  smsHref: "sms:+13522936242",
   /** Override with `NEXT_PUBLIC_CALENDLY_URL` in Netlify / `.env.local` if the booking link changes. */
   calendlyUrl:
     (process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/matthewfuller389/30min").trim() ||
@@ -30,6 +31,7 @@ export const CTA = {
   explore: "See cardiology locums",
   flexible: "See flexible blocks",
   recruiter: "Talk with a recruiter",
+  contactMe: "Contact me",
   learn: "How locums works",
   schedule: "Find a schedule that fits",
   bookCall: "Book a 15-minute call",

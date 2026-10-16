@@ -6,7 +6,7 @@ import Link from "next/link";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
-import { LeadFormAltActions } from "@/components/forms/LeadFormAltActions";
+import { ContactFallbacks } from "@/components/cta/ContactFallbacks";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
 import { GENERATE_LEAD_SENT_KEY, persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
@@ -86,6 +86,7 @@ export type LeadCaptureFormProps = {
   defaultCareerStage?: CareerStageId;
   layout?: "full" | "sidebar";
   className?: string;
+  showEmailFallback?: boolean;
 };
 
 export function LeadCaptureForm({
@@ -97,6 +98,7 @@ export function LeadCaptureForm({
   defaultCareerStage,
   layout = "full",
   className = "",
+  showEmailFallback = false,
 }: LeadCaptureFormProps) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
@@ -248,7 +250,7 @@ export function LeadCaptureForm({
         setStatus("error");
         if (data?.code === "SUPABASE_NOT_CONFIGURED") {
           setError(
-            `We could not save your inquiry through the form yet. Please email ${SITE.email} or call ${SITE.phoneDisplay} and we will pick it up from there.`,
+            `We could not save your inquiry through the form yet. Call or text ${SITE.phoneDisplay} and we will pick it up from there.`,
           );
         } else {
           setError(typeof data?.error === "string" ? data.error : "Something went wrong. Please try again.");
@@ -258,7 +260,7 @@ export function LeadCaptureForm({
 
       if (data?.stored !== true) {
         setStatus("error");
-        setError(`We could not save your inquiry. Please email ${SITE.email} or call ${SITE.phoneDisplay}.`);
+        setError(`We could not save your inquiry. Call or text ${SITE.phoneDisplay}.`);
         return;
       }
 
@@ -319,13 +321,9 @@ export function LeadCaptureForm({
       </div>
 
       <div className="p-6 sm:p-8 lg:p-10">
-        <div className={isSidebar ? "max-w-2xl" : ""}>
-          <LeadFormAltActions source={isSidebar ? "sidebar" : "full"} compact={isSidebar} />
-        </div>
-
         <form
           ref={formRef}
-          className="relative mt-8 flex flex-col gap-8 lg:gap-10"
+          className="relative flex flex-col gap-8 lg:gap-10"
           onSubmit={onSubmit}
           onFocusCapture={markFormStart}
         >
@@ -631,12 +629,13 @@ export function LeadCaptureForm({
             <Link className="font-semibold text-brand-700 hover:underline" href="/privacy">
               Privacy Policy
             </Link>
-            . Need help?{" "}
-            <a className="font-semibold text-brand-700 hover:underline" href={`mailto:${SITE.email}`}>
-              Email us
-            </a>
             .
           </p>
+          <ContactFallbacks
+            source={isSidebar ? "sidebar_form" : "lead_form"}
+            className="text-xs leading-5 text-slate-500"
+            showEmail={showEmailFallback}
+          />
         </div>
       </form>
       </div>

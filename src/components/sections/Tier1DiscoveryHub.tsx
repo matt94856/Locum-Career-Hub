@@ -10,7 +10,7 @@ import {
   type Tier1Group,
   type Tier1Link,
 } from "@/lib/seo/tier1-discovery";
-import { CTA, SITE } from "@/lib/site";
+import { CTA } from "@/lib/site";
 
 type Props = {
   variant?: "full" | "compact";
@@ -104,13 +104,7 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
                 </li>
                 <li className="flex gap-3">
                   <ListCheck />
-                  <span>
-                    Call{" "}
-                    <a href={`tel:${SITE.phoneTel}`} className="font-semibold text-white hover:underline">
-                      {SITE.phoneDisplay}
-                    </a>{" "}
-                    if you prefer voice
-                  </span>
+                  <span>Call or text only if you can&apos;t use the form</span>
                 </li>
               </ul>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -118,11 +112,11 @@ export function Tier1DiscoveryHub({ variant = "full", leadHref = LEAD_FORM_HREF 
                   {CTA.requestMatches}
                 </Button>
                 <Button
-                  href={`tel:${SITE.phoneTel}`}
+                  href="/contact"
                   variant="secondary"
                   className="w-full justify-center border-white/25 bg-white/10 !text-white hover:border-white/40 hover:bg-white/20 sm:flex-1"
                 >
-                  Call now
+                  {CTA.contactMe}
                 </Button>
               </div>
             </div>

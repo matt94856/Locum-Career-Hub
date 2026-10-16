@@ -1,37 +1,25 @@
 "use client";
 
-import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
+import { ContactFallbacks } from "@/components/cta/ContactFallbacks";
 import { Button } from "@/components/ui/Button";
-import { trackCtaClick } from "@/lib/analytics-events";
-import { SITE } from "@/lib/site";
+import { CTA } from "@/lib/site";
 
 type Props = {
   source: string;
   compact?: boolean;
 };
 
-/** Peer CTAs beside the inquiry form—calendar and click-to-call. */
+/** Secondary path when someone is not on the inquiry form yet. */
 export function LeadFormAltActions({ source, compact = false }: Props) {
   return (
-    <div
-      className={`flex flex-col gap-2 ${compact ? "sm:flex-row sm:flex-wrap" : "sm:flex-row sm:items-center sm:gap-3"}`}
-    >
-      <CalendlyBookButton
-        source={`${source}_form`}
-        variant="secondary"
-        className={compact ? "w-full justify-center sm:w-auto sm:min-h-9 sm:px-3.5 sm:py-2 sm:text-xs" : "w-full justify-center sm:flex-1"}
-      >
-        Book a 15-min call
-      </CalendlyBookButton>
+    <div className={`flex flex-col gap-3 ${compact ? "" : "max-w-xl"}`}>
       <Button
-        href={`tel:${SITE.phoneTel}`}
-        variant="ghost"
-        size={compact ? "sm" : "md"}
-        className={compact ? "w-full justify-center sm:w-auto" : "w-full justify-center sm:flex-1"}
-        onClick={() => trackCtaClick(`call_${source}`, `tel:${SITE.phoneTel}`)}
+        href="/physician-opportunities#lead-form"
+        className={compact ? "w-full justify-center sm:w-auto" : "w-full justify-center sm:w-auto"}
       >
-        Call {SITE.phoneDisplay}
+        {CTA.requestMatches}
       </Button>
+      <ContactFallbacks source={source} />
     </div>
   );
 }

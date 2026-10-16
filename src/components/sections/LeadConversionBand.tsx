@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { ContactFallbacks } from "@/components/cta/ContactFallbacks";
 import { Button } from "@/components/ui/Button";
 import { LEAD_FORM_HREF } from "@/lib/seo/tier1-discovery";
-import { CTA, SITE } from "@/lib/site";
+import { CTA } from "@/lib/site";
 
 type Props = {
   headline?: string;
@@ -26,9 +27,12 @@ export function LeadConversionBand({
         <Button href={LEAD_FORM_HREF} className="w-full justify-center sm:w-auto">
           {CTA.requestMatches}
         </Button>
-        <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center sm:w-auto">
-          Call {SITE.phoneDisplay}
+        <Button href="/contact" variant="secondary" className="w-full justify-center sm:w-auto">
+          {CTA.contactMe}
         </Button>
+      </div>
+      <div className="mt-4">
+        <ContactFallbacks source="conversion_band" className="text-xs leading-5 text-slate-500" />
       </div>
       <p className="mt-4 text-xs text-slate-500">
         Prefer tools first?{" "}

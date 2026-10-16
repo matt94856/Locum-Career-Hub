@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { LeadFormStandaloneSection } from "@/components/forms/LeadFormStandaloneSection";
-import { CalendlyBookButton } from "@/components/cta/CalendlyBookButton";
 import { socialShareMetadata } from "@/lib/social-metadata";
-import { Button } from "@/components/ui/Button";
-import { SITE, CTA } from "@/lib/site";
 
 const CONTACT_DESC =
   "Talk with a Locum Career Hub physician recruiter about locum tenens jobs, credentialing timelines, and schedule planning—fast, physician-first responses.";
@@ -30,28 +27,15 @@ export default function ContactPage() {
             Talk with a recruiter who respects your time
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-600">
-            Tell us the schedule you want. We’ll look for work that pays well and still leaves you room.
-          </p>
-          <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
-            <CalendlyBookButton source="contact_hero" className="w-full justify-center">
-              {CTA.bookCall}
-            </CalendlyBookButton>
-            <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center">
-              Call {SITE.phoneDisplay}
-            </Button>
-          </div>
-          <p className="mt-6 text-sm text-slate-600">
-            Email:{" "}
-            <a className="font-semibold text-brand-700 hover:underline" href={`mailto:${SITE.email}`}>
-              {SITE.email}
-            </a>
+            Start with the form. Tell us the schedule you want—we’ll look for work that pays well and still leaves you
+            room.
           </p>
         </div>
       </section>
 
       <section className="py-14 sm:py-16">
         <LeadFormStandaloneSection>
-          <LeadCaptureForm id="lead-form" />
+          <LeadCaptureForm id="lead-form" showEmailFallback />
         </LeadFormStandaloneSection>
       </section>
     </main>

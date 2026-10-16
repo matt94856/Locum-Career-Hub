@@ -15,16 +15,14 @@ export function SiteFooter() {
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">{SITE.tagline}</p>
           <div className="mt-6 space-y-2 text-sm">
             <p>
-              <span className="text-slate-400">Phone: </span>
-              <a className="font-semibold text-white hover:underline" href={`tel:${SITE.phoneTel}`}>
-                {SITE.phoneDisplay}
-              </a>
+              <Link className="font-semibold text-white hover:underline" href="/physician-opportunities#lead-form">
+                Find my match
+              </Link>
             </p>
             <p>
-              <span className="text-slate-400">Email: </span>
-              <a className="font-semibold text-white hover:underline" href={`mailto:${SITE.email}`}>
-                {SITE.email}
-              </a>
+              <Link className="text-slate-300 hover:text-white hover:underline" href="/contact">
+                Contact me
+              </Link>
             </p>
             <p className="text-xs text-slate-400">{SITE.domain}</p>
           </div>

@@ -103,7 +103,10 @@ export default async function ThankYouPage({ searchParams }: Props) {
               {CTA.bookCall}
             </CalendlyBookButton>
             <Button href={`tel:${SITE.phoneTel}`} variant="secondary" className="w-full justify-center sm:w-auto">
-              Call {SITE.phoneDisplay}
+              Call or text {SITE.phoneDisplay}
+            </Button>
+            <Button href={SITE.smsHref} variant="ghost" className="w-full justify-center sm:w-auto">
+              Text us
             </Button>
             {opportunity ? (
               <Button
