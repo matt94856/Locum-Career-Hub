@@ -60,6 +60,9 @@ export function HomeCardiologistGuides() {
             <Button href="/locum-jobs/cardiology" variant="secondary" className="justify-center">
               Browse cardiology locum jobs →
             </Button>
+            <Button href="/should-i-do-cardiology-locums" variant="secondary" className="justify-center">
+              Take the 2-minute locums quiz
+            </Button>
           </div>
         </div>
       </section>

@@ -53,16 +53,25 @@ export default function ToolsIndexPage() {
             compensation, and career timing into structured next steps—built for MD/DO cardiologists. Calculations stay
             anonymous unless you request follow-up.
           </p>
-          <div className="mt-8 rounded-3xl bg-slate-950 p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-300">Flagship shareable report</p>
-              <h2 className="mt-2 font-display text-2xl font-semibold">Cardiologist locums earning potential calculator</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300">Screenshot-ready weekly $ card, LinkedIn share link with OG preview, full numbers ungated — PDF is the only light gate.</p>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-3xl bg-slate-950 p-6 text-white">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-300">Burned out or boxed in?</p>
+              <h2 className="mt-2 font-display text-2xl font-semibold">Should you try cardiology locums?</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-300">
+                Free 2-minute quiz for employed cardiologists. Honest fit score, then matching locums dates — not a job blast.
+              </p>
+              <Link href="/should-i-do-cardiology-locums" className="mt-5 inline-flex rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600">
+                Take the quiz
+              </Link>
             </div>
-            <div className="mt-5 flex shrink-0 flex-col gap-2 sm:mt-0">
-              <Link href="/cardiologist-locums-calculator" className="inline-flex rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600">Calculate & share</Link>
-              <Link href="/cardiologist-locums-pay-report" className="inline-flex rounded-xl border border-slate-600 px-5 py-3 text-center text-sm font-semibold text-white hover:border-brand-400">Cite pay chart</Link>
-              <Link href="/tools/cardiology-call-pay" className="inline-flex rounded-xl border border-slate-600 px-5 py-3 text-center text-sm font-semibold text-white hover:border-brand-400">Call pay tool</Link>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">Flagship shareable report</p>
+              <h2 className="mt-2 font-display text-2xl font-semibold text-slate-950">Cardiologist locums earning potential calculator</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">Screenshot-ready weekly $ card. Full numbers ungated — PDF is the only light gate.</p>
+              <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+                <Link href="/cardiologist-locums-calculator" className="inline-flex rounded-xl bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-600">Calculate & share</Link>
+                <Link href="/cardiologist-locums-pay-report" className="inline-flex rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-semibold text-slate-800 hover:border-brand-400">Cite pay chart</Link>
+              </div>
             </div>
           </div>
         </div>

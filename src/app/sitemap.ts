@@ -53,6 +53,7 @@ const staticRoutes = [
       "/best-states-for-cardiology-locums",
       "/part-time-cardiologist-jobs",
       "/cardiologist-burnout-solutions",
+      "/should-i-do-cardiology-locums",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

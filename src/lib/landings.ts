@@ -147,6 +147,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Advocacy for sustainable consult census, clinic panels, and cath lab call",
     ],
     relatedSlugs: ["part-time-physician-jobs", "moonlighting-physician-jobs", "national-locum-tenens-jobs-guide"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
     answer:
       "Flexible cardiology careers reorganize how, when, and where you practice—often through locum blocks, moonlighting, or hybrid clinic and consult models—so your schedule matches your life instead of the other way around.",
     whoFor: [
@@ -441,6 +442,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Advocacy for sustainable schedules and backup staffing",
     ],
     relatedSlugs: ["physician-burnout-solutions", "flexible-physician-careers", "part-time-physician-jobs"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
   },
   {
     slug: "part-time-physician-jobs",
@@ -475,6 +477,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Recruiters who respect “no,” “not yet,” and “I am still thinking.”",
     ],
     relatedSlugs: ["physician-burnout-alternatives", "doctor-work-life-balance", "flexible-physician-careers"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
     answer:
       "Physician burnout solutions combine honest workload assessment, boundaries, and sometimes a structural change—like flexible contract coverage—so recovery is not constantly undone by the same schedule.",
     whoFor: [
@@ -530,6 +533,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Advocacy for handoffs, cap discussions, and malpractice clarity",
     ],
     relatedSlugs: ["physician-schedule-flexibility", "part-time-physician-jobs", "flexible-physician-careers"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
   },
   {
     slug: "physician-side-income",
@@ -564,6 +568,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Iteration after your first assignment—adjust, repeat, or politely exit",
     ],
     relatedSlugs: ["flexible-physician-careers", "part-time-physician-jobs", "national-locum-tenens-jobs-guide"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
   },
   {
     slug: "careers-after-residency",
@@ -603,6 +608,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Licensing and privileging timelines for cardiologists so you are not guessing in silence",
     ],
     relatedSlugs: ["career-change-for-doctors", "physician-burnout-solutions", "flexible-physician-careers", "national-locum-tenens-jobs-guide"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
     answer:
       "Leaving employed cardiology usually means changing your work structure—not your identity. Locum Career Hub recruits cardiologists only and helps you map transitions (including locum tenens) with transparent expectations and low-pressure guidance.",
     whoFor: [
@@ -676,6 +682,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Recruiter conversations that respect uncertainty",
     ],
     relatedSlugs: ["leaving-employed-cardiology", "careers-after-residency", "physician-side-income", "national-locum-tenens-jobs-guide"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
     answer:
       "Career change for doctors is a design problem: match clinical intensity, autonomy, and admin load to your season of life. Locum Career Hub maps options—including locum opportunities—without treating uncertainty as a sales hook.",
     whoFor: [
@@ -722,6 +729,7 @@ export const LANDING_PAGES: LandingPage[] = [
       "Options that respect your safety and your family’s stability",
     ],
     relatedSlugs: ["physician-burnout-solutions", "doctor-work-life-balance", "leaving-employed-cardiology", "flexible-physician-careers"],
+    relatedLinks: [{ href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" }],
     answer:
       "If you feel tired of being a doctor, the next step is often to change the work structure—not your character. Locum Career Hub helps physicians explore flexible models (including locums) with explicit expectations and recruiter respect for boundaries.",
     whoFor: [

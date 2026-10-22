@@ -50,8 +50,8 @@ export const THANK_YOU_READING_BY_TOPIC: Record<string, { href: string; title: s
     { href: "/resources/credentialing-for-locum-cardiologists", title: "Credentialing checklist" },
   ],
   burnout: [
+    { href: "/should-i-do-cardiology-locums", title: "Should I try cardiology locums? 2-minute quiz" },
     { href: "/leaving-employed-cardiology", title: "Leaving employed cardiology" },
-    { href: "/flexible-physician-careers", title: "Flexible cardiology careers" },
   ],
   fellowship: [
     { href: "/tools/credentialing-timeline", title: "Credentialing timeline estimator" },

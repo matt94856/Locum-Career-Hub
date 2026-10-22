@@ -17,6 +17,7 @@ export function CardiologyCompensationGuide({
   sections,
   faqs,
   path = "/cardiologist-locums-calculator",
+  cta,
 }: {
   eyebrow: string;
   title: string;
@@ -24,6 +25,7 @@ export function CardiologyCompensationGuide({
   sections: Section[];
   faqs: { q: string; a: string }[];
   path?: string;
+  cta?: { href: string; label: string };
 }) {
   return (
     <main className="pb-24 sm:pb-0">
@@ -38,6 +40,7 @@ export function CardiologyCompensationGuide({
             <Button href="/cardiologist-locums-calculator">Calculate my earning potential</Button>
             <Button href="/cardiologist-locums-pay-report" variant="secondary">Cite the pay chart</Button>
             <Button href="/physician-opportunities#lead-form" variant="secondary">Request cardiology matches</Button>
+            {cta ? <Button href={cta.href} variant="secondary">{cta.label}</Button> : null}
             {path === "/part-time-cardiologist-jobs" ? (
               <Button href="/featured-cardiology-jobs/baton-rouge-non-invasive-cardiology-locum" variant="secondary">
                 Baton Rouge part-time locum

@@ -84,6 +84,9 @@ export type LeadCaptureFormProps = {
   /** Pre-select states (e.g. from state job pages) */
   defaultPreferredStates?: string[];
   defaultCareerStage?: CareerStageId;
+  defaultAvailability?: string;
+  defaultTravel?: "yes" | "no" | "maybe";
+  defaultClinicalNotes?: string;
   layout?: "full" | "sidebar";
   className?: string;
   showEmailFallback?: boolean;
@@ -96,6 +99,9 @@ export function LeadCaptureForm({
   defaultSpecialty = "General Cardiology",
   defaultPreferredStates = [],
   defaultCareerStage,
+  defaultAvailability,
+  defaultTravel,
+  defaultClinicalNotes,
   layout = "full",
   className = "",
   showEmailFallback = false,
@@ -429,6 +435,7 @@ export function LeadCaptureForm({
                 name="clinicalNotes"
                 rows={3}
                 maxLength={2000}
+                defaultValue={defaultClinicalNotes}
                 placeholder="Share non-negotiables so we do not waste your time…"
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
               />
@@ -534,7 +541,11 @@ export function LeadCaptureForm({
                 <select
                   name="availability"
                   className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm outline-none ring-brand-200 focus:border-brand-300 focus:ring-4"
-                  defaultValue="Exploring / no firm date"
+                  defaultValue={
+                    defaultAvailability && availabilityOptions.includes(defaultAvailability)
+                      ? defaultAvailability
+                      : "Exploring / no firm date"
+                  }
                 >
                   {availabilityOptions.map((x) => (
                     <option key={x} value={x}>
@@ -572,7 +583,13 @@ export function LeadCaptureForm({
                       key={o.v}
                       className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50"
                     >
-                      <input type="radio" name="travel" value={o.v} className="accent-brand-600" />
+                      <input
+                        type="radio"
+                        name="travel"
+                        value={o.v}
+                        defaultChecked={defaultTravel === o.v}
+                        className="accent-brand-600"
+                      />
                       {o.label}
                     </label>
                   ))}
