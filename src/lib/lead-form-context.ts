@@ -136,6 +136,22 @@ export function thankYouReadingLinks(pagePath?: string | null, careerStage?: Car
       },
     ];
   }
+  if (pagePath.includes("featured-cardiology-jobs/kentucky-cath-lab-only")) {
+    return [
+      {
+        href: "/interventional-cardiology-locums-pay",
+        title: "Interventional cardiology locums pay",
+      },
+      {
+        href: "/locum-tenens-jobs/kentucky/interventional-cardiology",
+        title: "Kentucky interventional locum jobs",
+      },
+      {
+        href: "/tools/imlc-eligibility-calculator",
+        title: "Check IMLC eligibility",
+      },
+    ];
+  }
   if (pagePath.includes("salary") || pagePath.includes("pay")) return THANK_YOU_READING_BY_TOPIC.salary;
   if (pagePath.includes("credential")) return THANK_YOU_READING_BY_TOPIC.credentialing;
   if (pagePath.includes("burnout") || pagePath.includes("leaving-employed")) {

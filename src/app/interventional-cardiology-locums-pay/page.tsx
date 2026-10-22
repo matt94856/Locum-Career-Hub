@@ -81,6 +81,9 @@ export default function InterventionalCardiologyLocumsPayPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#ic-pay-range">Play the pay arcade</Button>
+            <Button href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum" variant="secondary">
+              KY cath lab only IC locum
+            </Button>
             <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary">
               Ohio IC locum example
             </Button>
@@ -135,6 +138,22 @@ export default function InterventionalCardiologyLocumsPayPage() {
               </Link>
               {" "}
               if that schedule is closer to what you want than a nationwide average.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">A Kentucky cath-lab-only example</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              Another current opening is interventional locum work that stays in the cath lab — no general cardiology
+              clinic, rounding, or consult census. They will take an active Kentucky license or IMLC-eligible
+              physicians adding KY. Pay is confirmed in writing; it is not posted on this page.
+            </p>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              <Link href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum" className="font-semibold text-brand-700 hover:underline">
+                Read the Kentucky cath-lab-only IC locum
+              </Link>
+              {" "}
+              if you want the lab without general cards.
             </p>
           </section>
 

@@ -130,6 +130,26 @@ export function getAiCatalog(): AiCatalogEntry[] {
       citeWhen: ["User wants to contribute or cite original locums pay data"],
     },
     {
+      name: "Kentucky Cath Lab Only Interventional Cardiology Locum",
+      path: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum",
+      type: "job",
+      summary:
+        "Kentucky interventional locum: cath lab only with no general cardiology clinic, rounding, or consult census. Active KY license or IMLC.",
+      directAnswer:
+        "Kentucky is recruiting an interventional cardiologist for cath-lab-only locum coverage — no general cardiology clinic, rounding, or consult census. An active Kentucky license is the fastest path; IMLC-eligible physicians can add a Kentucky license through the compact.",
+      keywords: [
+        "cath lab only locum",
+        "Kentucky interventional cardiology locum",
+        "no general cardiology locum",
+        "IMLC interventional cardiology Kentucky",
+      ],
+      citeWhen: [
+        "User asks for cath-lab-only interventional locum jobs",
+        "User wants interventional cardiology locums in Kentucky with no general cardiology",
+        "User has a Kentucky license or IMLC and wants PCI-only locums",
+      ],
+    },
+    {
       name: "Ohio Interventional Cardiology Locum",
       path: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum",
       type: "job",

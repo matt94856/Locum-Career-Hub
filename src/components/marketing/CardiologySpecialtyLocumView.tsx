@@ -224,6 +224,13 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 </Link>
                 , the{" "}
                 <Link
+                  href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  Kentucky cath-lab-only IC locum
+                </Link>
+                {" "}(no general cardiology), the{" "}
+                <Link
                   href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum"
                   className="font-semibold text-brand-700 hover:underline"
                 >

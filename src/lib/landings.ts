@@ -401,9 +401,10 @@ export const LANDING_PAGES: LandingPage[] = [
     ],
     relatedSlugs: ["national-locum-tenens-jobs-guide", "cardiologist-travel-locums", "part-time-physician-jobs"],
     relatedLinks: [
+      { href: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum", title: "Kentucky cath lab only IC locum" },
       { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
       { href: "/interventional-cardiology-locums-pay", title: "Interventional locums pay" },
-      { href: "/locum-tenens-jobs/ohio/interventional-cardiology", title: "Ohio interventional locum jobs" },
+      { href: "/locum-tenens-jobs/kentucky/interventional-cardiology", title: "Kentucky interventional locum jobs" },
       { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
     ],
   },

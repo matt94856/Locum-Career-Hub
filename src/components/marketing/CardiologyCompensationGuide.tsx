@@ -44,9 +44,14 @@ export function CardiologyCompensationGuide({
               </Button>
             ) : null}
             {path === "/interventional-cardiology-locums-pay" ? (
-              <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary">
-                Ohio IC locum (1–2 wks/mo)
-              </Button>
+              <>
+                <Button href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum" variant="secondary">
+                  KY cath lab only IC locum
+                </Button>
+                <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary">
+                  Ohio IC locum (1–2 wks/mo)
+                </Button>
+              </>
             ) : null}
             {path === "/ep-cardiology-locums-pay" ? (
               <>

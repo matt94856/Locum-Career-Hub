@@ -176,6 +176,11 @@ export const FEATURED_PROOF = {
     title: "Ohio interventional locum",
     detail: "ASAP 1–2 weeks/month IC coverage with 24-hour call and a written daily guarantee.",
   },
+  kentucky: {
+    href: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum",
+    title: "Kentucky cath lab only IC locum",
+    detail: "Cath-lab-only interventional locum — no general cardiology clinic, rounding, or consults. KY license or IMLC.",
+  },
 } as const;
 
 export function featuredProofForSpecialty(pathSlug: string) {
@@ -186,7 +191,7 @@ export function featuredProofForSpecialty(pathSlug: string) {
     return [FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
   }
   if (pathSlug === "interventional") {
-    return [FEATURED_PROOF.ohio];
+    return [FEATURED_PROOF.kentucky, FEATURED_PROOF.ohio];
   }
   return [];
 }
@@ -214,14 +219,14 @@ export function geoProofForSpecialty(pathSlug: string) {
   if (pathSlug === "interventional") {
     return [
       {
+        href: "/locum-tenens-jobs/kentucky/interventional-cardiology",
+        title: "Kentucky interventional locum jobs",
+        detail: "Cath-lab-only IC coverage — no general cardiology clinic or rounding. KY license or IMLC.",
+      },
+      {
         href: "/locum-tenens-jobs/new-jersey/interventional-cardiology",
         title: "New Jersey interventional locum jobs",
         detail: "STEMI and cath-lab coverage with documented activation rules.",
-      },
-      {
-        href: "/locum-tenens-jobs/nevada/interventional-cardiology",
-        title: "Nevada interventional locum jobs",
-        detail: "Western shortage STEMI coverage and IMLC licensing paths.",
       },
       {
         href: "/locum-tenens-jobs/ohio/interventional-cardiology",

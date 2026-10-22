@@ -69,6 +69,7 @@ function defaultRelatedLinks(def: PageDef): { href: string; title: string }[] {
     links.unshift(
       { href: "/locum-jobs/cardiology/interventional", title: "Interventional locum jobs hub" },
       { href: "/interventional-cardiology-locums-pay", title: "Interventional locums pay" },
+      { href: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum", title: "Kentucky cath lab only IC locum" },
       { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
     );
   }

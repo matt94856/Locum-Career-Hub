@@ -3,6 +3,20 @@ import { FEATURED_CARDIOLOGY_OPPORTUNITIES } from "@/lib/featured-cardiology-opp
 import { OPEN_JOB_DRAFTS } from "@/lib/open-jobs";
 
 describe("open cardiology job pages", () => {
+  it("posts a Kentucky cath-lab-only IC locum with no general cardiology", () => {
+    const job = FEATURED_CARDIOLOGY_OPPORTUNITIES.find(
+      (item) => item.slug === "kentucky-cath-lab-only-interventional-cardiology-locum",
+    );
+    expect(job?.state).toBe("Kentucky");
+    expect(job?.metaTitle.length).toBeLessThanOrEqual(52);
+    expect(job?.h1.toLowerCase()).toContain("cath lab only");
+    expect(job?.directAnswer.toLowerCase()).toContain("no general cardiology");
+    expect(job?.directAnswer.toLowerCase()).toMatch(/imlc/);
+    expect(job?.compensation).toBeUndefined();
+    expect(job?.city).toBeUndefined();
+    expect(job?.faqs.some((faq) => /general cardiology/i.test(faq.q))).toBe(true);
+  });
+
   it("keeps unique slugs, H1s, and SERP titles", () => {
     const slugs = FEATURED_CARDIOLOGY_OPPORTUNITIES.map((job) => job.slug);
     const h1s = FEATURED_CARDIOLOGY_OPPORTUNITIES.map((job) => job.h1);

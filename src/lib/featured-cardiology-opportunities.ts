@@ -1,5 +1,6 @@
 import { OPEN_JOB_OPPORTUNITIES } from "@/lib/open-jobs";
 import { BATON_ROUGE_NONINVASIVE_LOCUM } from "@/lib/open-jobs/baton-rouge";
+import { KENTUCKY_CATH_LAB_ONLY_IC_LOCUM } from "@/lib/open-jobs/kentucky-ic";
 
 export type FeaturedCardiologyOpportunity = {
   slug: string;
@@ -84,6 +85,7 @@ export const AVAILABILITY_INQUIRY_CTA =
 
 const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
   BATON_ROUGE_NONINVASIVE_LOCUM,
+  KENTUCKY_CATH_LAB_ONLY_IC_LOCUM,
   {
     slug: "kansas-inpatient-non-invasive-cardiology-locum",
     state: "Kansas",

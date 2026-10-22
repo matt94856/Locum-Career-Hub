@@ -119,6 +119,10 @@ export function HomeCardiologistGuides() {
               Tennessee EP locums →
             </Link>
             {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum">
+              KY cath lab only IC locum →
+            </Link>
+            {" · "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum">
               Ohio IC locum →
             </Link>
