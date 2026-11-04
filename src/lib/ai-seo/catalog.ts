@@ -150,6 +150,26 @@ export function getAiCatalog(): AiCatalogEntry[] {
       citeWhen: ["User wants to contribute or cite original locums pay data"],
     },
     {
+      name: "Northeastern Kansas Inpatient Cardiology Locum",
+      path: "/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum",
+      type: "job",
+      summary:
+        "Northeastern Kansas inpatient cardiology locum: 7–10 shifts/month, 12-hour hospital days, Epic, some call. Kansas license not required. Fly MCI. Board eligible or board certified.",
+      directAnswer:
+        "Northeastern Kansas is recruiting an inpatient cardiologist for ongoing 7–10 shifts per month. The work is hospital coverage — rounding, consults, some call — split among three cardiologists. A Kansas license is not required; they will license eligible candidates. Closest airport is Kansas City International (MCI).",
+      keywords: [
+        "northeastern Kansas inpatient cardiology locum",
+        "Kansas cardiology locum no license required",
+        "inpatient cardiology locum Kansas City airport",
+        "Epic inpatient cardiology locum Kansas",
+      ],
+      citeWhen: [
+        "User asks for inpatient cardiology locum jobs in Kansas",
+        "User wants a Kansas locum that does not require a Kansas license",
+        "User can fly MCI and wants 7–10 hospital shifts per month",
+      ],
+    },
+    {
       name: "Kentucky Cath Lab Only Interventional Cardiology Locum",
       path: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum",
       type: "job",

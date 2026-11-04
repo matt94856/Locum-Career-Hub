@@ -16,7 +16,7 @@ export const OPEN_JOB_DRAFTS: OpenJobDraft[] = [
     call: "Call during scheduled coverage",
     metaTitle: "Western KS Non-Invasive Cardiology Locum | 7 Days/Mo",
     angle:
-      "This is a western Kansas inpatient block, not the existing 7-on/7-off Kansas nuclear assignment. The board asks for a smaller monthly footprint—seven days minimum—so it can fit physicians who already hold other blocks or an employed clinic week.",
+      "This is a western Kansas inpatient block, not the existing 7-on/7-off Kansas nuclear assignment and not the northeastern Kansas 7–10 shift inpatient hospital job that flies MCI. The board asks for a smaller monthly footprint—seven days minimum—so it can fit physicians who already hold other blocks or an employed clinic week.",
   },
   {
     slug: "pennsylvania-northwestern-interventional-cardiology-locum",
@@ -321,7 +321,7 @@ export const OPEN_JOB_DRAFTS: OpenJobDraft[] = [
     ],
     metaTitle: "NE Kansas Interventional Cardiology Locum | Full-Time",
     angle:
-      "Northeastern Kansas is a full-time Monday–Friday interventional job with eight-hour days and 24-hour call. It is not the western Kansas seven-day non-invasive block and not the existing Kansas 7-on/7-off nuclear inpatient page.",
+      "Northeastern Kansas is a full-time Monday–Friday interventional job with eight-hour days and 24-hour call. It is not the western Kansas seven-day non-invasive block, not the existing Kansas 7-on/7-off nuclear inpatient page, and not the northeastern Kansas inpatient non-invasive 7–10 shift hospital job.",
   },
   {
     slug: "minnesota-north-central-interventional-cardiology-locum",

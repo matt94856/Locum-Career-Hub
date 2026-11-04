@@ -92,6 +92,22 @@ export function thankYouReadingLinks(pagePath?: string | null, careerStage?: Car
     if (careerStage === "locums-primary") return THANK_YOU_READING_BY_TOPIC.locumsPrimary;
     return THANK_YOU_READING_BY_TOPIC.default;
   }
+  if (pagePath.includes("featured-cardiology-jobs/kansas-northeastern-inpatient")) {
+    return [
+      {
+        href: "/locum-tenens-jobs/kansas/general-cardiology",
+        title: "Kansas cardiology locum jobs",
+      },
+      {
+        href: "/tools/imlc-eligibility-calculator",
+        title: "Check IMLC eligibility",
+      },
+      {
+        href: "/guides/cardiology-locum-schedule-examples",
+        title: "Compare cardiology block schedules",
+      },
+    ];
+  }
   if (
     pagePath.includes(
       "featured-cardiology-jobs/kansas-inpatient-non-invasive",

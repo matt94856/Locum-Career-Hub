@@ -126,6 +126,10 @@ export function HomeCardiologistGuides() {
               KY cath lab only IC locum →
             </Link>
             {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum">
+              NE Kansas inpatient locum →
+            </Link>
+            {" · "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum">
               Ohio IC locum →
             </Link>

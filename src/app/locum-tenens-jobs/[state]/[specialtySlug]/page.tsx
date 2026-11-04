@@ -162,9 +162,20 @@ export default async function SpecialtyStateLocumPage({
               </>
             ) : null}
             {specialtySlug === "general-cardiology" ? (
-              <Button href="/locum-jobs/cardiology/general" variant="secondary" className="justify-center">
-                General cardiology hub →
-              </Button>
+              <>
+                <Button href="/locum-jobs/cardiology/general" variant="secondary" className="justify-center">
+                  General cardiology hub →
+                </Button>
+                {state !== "kansas" ? (
+                  <Button
+                    href="/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum"
+                    variant="secondary"
+                    className="justify-center"
+                  >
+                    NE Kansas inpatient locum →
+                  </Button>
+                ) : null}
+              </>
             ) : null}
             {specialtySlug === "advanced-imaging" || specialtyName.toLowerCase().includes("imaging") ? (
               <>

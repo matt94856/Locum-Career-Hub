@@ -17,6 +17,26 @@ describe("open cardiology job pages", () => {
     expect(job?.faqs.some((faq) => /general cardiology/i.test(faq.q))).toBe(true);
   });
 
+  it("posts a northeastern Kansas inpatient locum that does not require a KS license", () => {
+    const job = FEATURED_CARDIOLOGY_OPPORTUNITIES.find(
+      (item) => item.slug === "kansas-northeastern-inpatient-cardiology-locum",
+    );
+    expect(job?.state).toBe("Kansas");
+    expect(job?.region).toBe("Northeastern Kansas");
+    expect(job?.metaTitle.length).toBeLessThanOrEqual(52);
+    expect(job?.h1.toLowerCase()).toContain("northeastern kansas");
+    expect(job?.directAnswer.toLowerCase()).toMatch(/7.?10 shifts/);
+    expect(job?.directAnswer.toLowerCase()).toContain("12-hour");
+    expect(job?.directAnswer.toLowerCase()).toContain("epic");
+    expect(job?.directAnswer.toLowerCase()).toMatch(/kansas city international|\bmci\b/);
+    expect(job?.directAnswer.toLowerCase()).toMatch(/board eligible/);
+    expect(job?.directAnswer.toLowerCase()).toMatch(/license is not required/);
+    expect(job?.requirements.some((item) => /nuclear/i.test(item))).toBe(false);
+    expect(job?.compensation).toBeUndefined();
+    expect(job?.city).toBeUndefined();
+    expect(job?.faqs.some((faq) => /kansas license/i.test(faq.q))).toBe(true);
+  });
+
   it("keeps unique slugs, H1s, and SERP titles", () => {
     const slugs = FEATURED_CARDIOLOGY_OPPORTUNITIES.map((job) => job.slug);
     const h1s = FEATURED_CARDIOLOGY_OPPORTUNITIES.map((job) => job.h1);

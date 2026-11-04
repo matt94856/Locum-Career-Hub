@@ -166,6 +166,11 @@ export const FEATURED_PROOF = {
     title: "Kansas inpatient non-invasive locum",
     detail: "7-on/7-off inpatient general cardiology with nuclear required.",
   },
+  kansasNe: {
+    href: "/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum",
+    title: "NE Kansas inpatient locum",
+    detail: "7–10 shifts/month, 12-hour hospital days, Epic. Kansas license not required. Fly MCI.",
+  },
   northCarolina: {
     href: "/featured-cardiology-jobs/north-carolina-outpatient-cardiology-locum",
     title: "North Carolina outpatient locum",
@@ -185,7 +190,7 @@ export const FEATURED_PROOF = {
 
 export function featuredProofForSpecialty(pathSlug: string) {
   if (pathSlug === "general") {
-    return [FEATURED_PROOF.batonRouge, FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
+    return [FEATURED_PROOF.kansasNe, FEATURED_PROOF.batonRouge, FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];
   }
   if (pathSlug === "cardiac-imaging") {
     return [FEATURED_PROOF.kansas, FEATURED_PROOF.northCarolina];

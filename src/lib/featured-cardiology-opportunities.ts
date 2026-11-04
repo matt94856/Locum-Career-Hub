@@ -1,5 +1,6 @@
 import { OPEN_JOB_OPPORTUNITIES } from "@/lib/open-jobs";
 import { BATON_ROUGE_NONINVASIVE_LOCUM } from "@/lib/open-jobs/baton-rouge";
+import { KANSAS_NORTHEASTERN_INPATIENT_LOCUM } from "@/lib/open-jobs/kansas-ne-inpatient";
 import { KENTUCKY_CATH_LAB_ONLY_IC_LOCUM } from "@/lib/open-jobs/kentucky-ic";
 
 export type FeaturedCardiologyOpportunity = {
@@ -86,6 +87,7 @@ export const AVAILABILITY_INQUIRY_CTA =
 const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
   BATON_ROUGE_NONINVASIVE_LOCUM,
   KENTUCKY_CATH_LAB_ONLY_IC_LOCUM,
+  KANSAS_NORTHEASTERN_INPATIENT_LOCUM,
   {
     slug: "kansas-inpatient-non-invasive-cardiology-locum",
     state: "Kansas",
@@ -215,6 +217,15 @@ const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
       "nuclear cardiology locum jobs",
     ],
     datePosted: "2026-09-09",
+    relatedLinks: [
+      {
+        href: "/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum",
+        label: "NE Kansas inpatient locum (7–10 shifts/month)",
+      },
+      { href: "/locum-tenens-jobs/kansas/general-cardiology", label: "Kansas cardiology locum jobs" },
+      { href: "/guides/inpatient-vs-outpatient-cardiology-locums", label: "Inpatient vs outpatient locums" },
+      { href: "/physician-opportunities", label: "All current cardiology opportunities" },
+    ],
     relatedSpecialtySlugs: ["general-cardiology", "advanced-imaging"],
     screeningQuestions: [
       {

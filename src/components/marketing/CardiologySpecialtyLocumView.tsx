@@ -261,6 +261,13 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
                 </Link>
                 , the{" "}
                 <Link
+                  href="/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum"
+                  className="font-semibold text-brand-700 hover:underline"
+                >
+                  NE Kansas 7–10 shift inpatient locum
+                </Link>
+                , the{" "}
+                <Link
                   href="/featured-cardiology-jobs/kansas-inpatient-non-invasive-cardiology-locum"
                   className="font-semibold text-brand-700 hover:underline"
                 >

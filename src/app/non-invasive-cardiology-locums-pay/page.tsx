@@ -71,6 +71,9 @@ export default function NonInvasiveCardiologyLocumsPayPage() {
             <Button href="/locum-jobs/cardiology/general" variant="secondary">
               Non-invasive jobs
             </Button>
+            <Button href="/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum" variant="secondary">
+              NE Kansas inpatient locum
+            </Button>
             <Button href="/physician-opportunities#lead-form" variant="secondary">
               Request matches
             </Button>
