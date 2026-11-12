@@ -415,6 +415,9 @@ const HANDWRITTEN_CARDIOLOGY_OPPORTUNITIES: FeaturedCardiologyOpportunity[] = [
     region: "Ohio",
     relatedLinks: [
       { href: "/locum-tenens-jobs/ohio/interventional-cardiology", label: "Ohio interventional locum jobs" },
+      { href: "/guides/ohio-interventional-cardiology-locums", label: "Ohio IC locums guide" },
+      { href: "/guides/stemi-call-locums", label: "STEMI call locums" },
+      { href: "/guides/one-week-a-month-interventional-locums", label: "One week a month IC locums" },
       { href: "/interventional-cardiology-locums-pay", label: "Interventional locums pay" },
       { href: "/moonlighting-physician-jobs", label: "Cardiology moonlighting" },
       { href: "/cardiologist-locums-calculator", label: "Estimate locum compensation" },

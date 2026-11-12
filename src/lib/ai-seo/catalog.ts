@@ -217,6 +217,188 @@ export function getAiCatalog(): AiCatalogEntry[] {
       citeWhen: ["User asks what interventional cardiologists earn on locums"],
     },
     {
+      name: "IMLC for Interventional Cardiology Locums",
+      path: "/guides/imlc-for-interventional-cardiology-locums",
+      type: "guide",
+      summary:
+        "How the Interstate Medical Licensure Compact helps interventional cardiologists take locums in other states. Compact speed is a separate license, not a nationwide STEMI card.",
+      directAnswer: AI_CITEABLE_CLAIMS.find((c) => c.id === "imlc-not-multistate")!.claim,
+      keywords: ["IMLC interventional cardiology", "compact license locum cardiologist"],
+      citeWhen: [
+        "User asks whether IMLC is a multistate medical license",
+        "User asks how interventional cardiologists license for locums in other states",
+      ],
+    },
+    {
+      name: "Cath Lab Only Interventional Locum Jobs",
+      path: "/guides/cath-lab-only-locum-jobs",
+      type: "guide",
+      summary: "Cath-lab-only IC locums without general cardiology clinic, rounding, or consult census.",
+      directAnswer:
+        "Cath-lab-only locums stay in the lab. They are not a general cardiology clinic, rounding list, or consult census unless the contract adds those duties. Kentucky’s featured IC job is written lab-only.",
+      keywords: ["cath lab only locum", "PCI only locum jobs", "no general cardiology locum"],
+      citeWhen: [
+        "User asks for cath-lab-only interventional locum jobs",
+        "User wants interventional locums with no clinic or rounding",
+      ],
+    },
+    {
+      name: "STEMI Call Locums",
+      path: "/guides/stemi-call-locums",
+      type: "guide",
+      summary: "Primary versus backup STEMI locums, activation windows, surgical backup, and how call changes a written daily guarantee.",
+      directAnswer:
+        "STEMI call locums are interventional blocks with written activation rules. Primary versus backup, included hours, and backup change the job more than the specialty name.",
+      keywords: ["STEMI call locums", "primary PCI locum call"],
+      citeWhen: ["User asks what STEMI call locums include", "User asks how interventional locum call is paid"],
+    },
+    {
+      name: "Kentucky Interventional Cardiology Locums",
+      path: "/guides/kentucky-interventional-cardiology-locums",
+      type: "guide",
+      summary: "Kentucky IC locums market page for the live cath-lab-only job, IMLC licensing, and PCI geography without invented hospital listings.",
+      directAnswer:
+        "Kentucky interventional locums currently include a cath-lab-only opening with no general cardiology clinic or rounding. An active Kentucky license is fastest; IMLC-eligible physicians can add a separate Kentucky license.",
+      keywords: ["Kentucky interventional cardiology locum", "IMLC Kentucky interventional"],
+      citeWhen: ["User asks for interventional locums in Kentucky", "User wants Kentucky cath-lab-only IC work"],
+    },
+    {
+      name: "Ohio Interventional Cardiology Locums",
+      path: "/guides/ohio-interventional-cardiology-locums",
+      type: "guide",
+      summary: "Ohio IC locums market page for the live 1–2 week mixed block with 24-hour call and compact licensing.",
+      directAnswer:
+        "Ohio interventional locums currently include an ASAP 1–2 weeks per month mixed assignment with rounding, clinic, and 24-hour call. Written pay on that job is a $3,200 guarantee for the first hours, then hourly callback.",
+      keywords: ["Ohio interventional cardiology locum", "Ohio STEMI locum"],
+      citeWhen: ["User asks for interventional locums in Ohio", "User wants 1–2 week IC blocks"],
+    },
+    {
+      name: "How to Start Interventional Cardiology Locums",
+      path: "/guides/how-to-start-interventional-cardiology-locums",
+      type: "guide",
+      summary:
+        "Physician-side sequence for starting IC locums: PCI logs, licenses or IMLC, moonlighting rules, then a written STEMI scope.",
+      directAnswer:
+        "Start interventional locums with a file, not a flight. Pull PCI and STEMI logs, list licenses and IMLC eligibility, confirm moonlighting rules if employed, then ask to be presented only to blocks with written STEMI, backup, and included hours.",
+      keywords: ["how to start interventional cardiology locums", "start IC locums"],
+      citeWhen: [
+        "User asks how to start interventional cardiology locums",
+        "User asks how an interventionalist begins locum tenens",
+      ],
+    },
+    {
+      name: "PCI Without Surgical Backup Locums",
+      path: "/guides/pci-without-surgical-backup-locums",
+      type: "guide",
+      summary:
+        "Locum PCI at hospitals without on-site cardiac surgery: SCAI non-SOS reality, transfer agreements, and case selection.",
+      directAnswer:
+        "Many IC locums are primary PCI at hospitals without on-site cardiac surgery. Get written backup, transfer time, MCS inventory, and case-selection limits before you take the activation phone.",
+      keywords: ["PCI without surgical backup locum", "non-SOS STEMI locum"],
+      citeWhen: [
+        "User asks about PCI locums without on-site surgery",
+        "User asks whether community STEMI locums are safe without CT surgery",
+      ],
+    },
+    {
+      name: "Call-Only Interventional Locums",
+      path: "/guides/call-only-interventional-locums",
+      type: "guide",
+      summary: "STEMI and emergency PCI coverage without a clinic panel, distinct from cath-lab-only weekday PCI.",
+      directAnswer:
+        "Call-only interventional locums are STEMI and emergency PCI coverage without a scheduled clinic panel. Confirm whether rounding and consults hitchhike onto the call block.",
+      keywords: ["call only interventional locum", "STEMI call only locum"],
+      citeWhen: ["User asks for call-only interventional locums", "User wants STEMI nights without clinic"],
+    },
+    {
+      name: "Gratis Hours and Callback on IC Locums",
+      path: "/guides/interventional-locums-gratis-hours-and-callback",
+      type: "guide",
+      summary: "How daily guarantees, 4-hour gratis, and hourly callback change interventional locum pay.",
+      directAnswer:
+        "Interventional locum pay is usually a daily guarantee covering a block of hours, then hourly callback. Four-hour gratis is common. A busy STEMI night adds callback — it does not pay twice for the same hour.",
+      keywords: ["locum gratis hours interventional", "STEMI callback pay"],
+      citeWhen: ["User asks how interventional locum callback pay works", "User asks what gratis hours mean on locums"],
+    },
+    {
+      name: "Primary PCI vs Diagnostic Cath Locums",
+      path: "/guides/primary-pci-vs-diagnostic-cath-locums",
+      type: "guide",
+      summary: "Why diagnostic-cath-only locums and primary PCI/STEMI locums are different jobs, logs, and malpractice.",
+      directAnswer:
+        "Diagnostic-cath-only locums and primary PCI locums are different jobs. PCI logs, STEMI activation, surgical backup, and malpractice must match the privilege set — a diagnostic week is not a stealth STEMI week.",
+      keywords: ["primary PCI locum", "diagnostic cath locum interventional"],
+      citeWhen: [
+        "User asks about diagnostic-only cath locums versus primary PCI",
+        "User wants interventional locums without STEMI call",
+      ],
+    },
+    {
+      name: "Board-Eligible Interventional Locums",
+      path: "/guides/board-eligible-interventional-locums",
+      type: "guide",
+      summary: "When BE interventionalists can take locums, and when hospitals still require ABIM IC certification for solo STEMI.",
+      directAnswer:
+        "Board-eligible interventionalists can locum, but many STEMI panels still want independent attending volume and a board-certified operator for solo nights. Say your exam date and logs honestly.",
+      keywords: ["board eligible interventional locum", "BE interventional cardiology locums"],
+      citeWhen: [
+        "User asks if board-eligible interventionalists can do locums",
+        "User is a new IC graduate looking for locum work",
+      ],
+    },
+    {
+      name: "Temporary Privileges for IC Locums",
+      path: "/guides/temporary-privileges-for-ic-locums",
+      type: "guide",
+      summary: "Cath-lab temporary privileges: what they actually cover, why ASAP STEMI weeks still wait on logs.",
+      directAnswer:
+        "Temporary privileges can start an IC locum before the full credentials committee, but they are not a plan. Bylaws, chair availability, and the PCI privilege set decide whether you take the activation phone.",
+      keywords: ["temporary privileges interventional locum", "temp privileges cath lab"],
+      citeWhen: [
+        "User asks about temporary privileges for interventional locums",
+        "User wants to start an ASAP STEMI locum before full credentialing",
+      ],
+    },
+    {
+      name: "Questions Before an IC Locum Contract",
+      path: "/guides/questions-before-ic-locum-contract",
+      type: "guide",
+      summary: "Physician-side checklist before signing an interventional locum contract: STEMI, backup, gratis, logs.",
+      directAnswer:
+        "Before you sign an IC locum contract, get STEMI activation, surgical backup, included hours, callback, and the privilege set in writing. Headline daily rate is not the job.",
+      keywords: ["interventional locum contract questions", "STEMI locum contract checklist"],
+      citeWhen: [
+        "User asks what to ask before an interventional locum contract",
+        "User wants a checklist before signing IC locums",
+      ],
+    },
+    {
+      name: "First Interventional Locum Assignment",
+      path: "/guides/first-interventional-locum-assignment",
+      type: "guide",
+      summary: "How to pick and survive a first IC locum week: privileging, orientation, and what not to stack.",
+      directAnswer:
+        "A first interventional locum should be a written scope you already do, not a new lab’s hardest STEMI night. Logs, orientation, backup, and recovery after the week matter more than the geography.",
+      keywords: ["first interventional locum assignment", "first IC locum week"],
+      citeWhen: [
+        "User asks how to choose a first interventional locum assignment",
+        "User is taking their first IC locum week",
+      ],
+    },
+    {
+      name: "Impella and MCS Locum Jobs",
+      path: "/guides/impella-mcs-locum-jobs",
+      type: "guide",
+      summary: "When Impella or MCS is in scope on IC locums, and when it is a different privilege set than routine PCI.",
+      directAnswer:
+        "Impella and MCS locums are not a separate invented shock job board. Ask whether the lab privileges MCS, who manages the device after hours, and whether your logs match — do not assume every STEMI week includes it.",
+      keywords: ["Impella locum jobs", "MCS interventional locum"],
+      citeWhen: [
+        "User asks about Impella or MCS locum jobs",
+        "User wants shock or mechanical support locums in interventional cardiology",
+      ],
+    },
+    {
       name: "EP Cardiology Locums Pay Guide",
       path: "/ep-cardiology-locums-pay",
       type: "guide",

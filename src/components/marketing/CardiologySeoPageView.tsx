@@ -4,6 +4,7 @@ import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
+import { IC_ALL_SLUGS } from "@/lib/cardiology-content/wave-ic-cluster";
 import type { CardiologySeoPage } from "@/lib/cardiology-seo/types";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
@@ -60,10 +61,15 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
     aboutTopics: ["Cardiology", "Locum tenens", "Cardiologist careers", SITE.name],
   });
 
-  const showSidebarForm = page.category === "state" || page.category === "city" || page.category === "money" || page.category === "salary";
+  const showSidebarForm =
+    page.category === "state" ||
+    page.category === "city" ||
+    page.category === "money" ||
+    page.category === "salary" ||
+    IC_ALL_SLUGS.has(page.slug);
   const defaultSpecialty = page.slug.includes("electrophysiolog")
     ? "Electrophysiology"
-    : page.slug.includes("interventional")
+    : page.slug.includes("interventional") || IC_ALL_SLUGS.has(page.slug)
       ? "Interventional Cardiology"
       : "General Cardiology";
 

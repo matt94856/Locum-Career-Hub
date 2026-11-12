@@ -23,6 +23,8 @@ import {
   featuredOpportunityPath,
   getFeaturedOpportunitiesForSpecialtySlug,
 } from "@/lib/featured-cardiology-opportunities";
+import { IC_CLUSTER_NAV } from "@/lib/cardiology-content/wave-ic-cluster";
+import { IC_DECISION_NAV } from "@/lib/cardiology-content/wave-ic-unpaid";
 
 export function CardiologySpecialtyLocumView({ specialty }: { specialty: CardiologyLocumSpecialty }) {
   const path = cardiologySpecialtyPath(specialty.pathSlug);
@@ -31,7 +33,10 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
 
   const pillarSections = careerFitSections(pillar?.sections ?? []);
   const directAnswer = pillar?.directAnswer ?? specialty.intro;
-  const allFaqs = uniqueFaqs([...specialty.faqs, ...(pillar?.faqs ?? []), ...(profile?.faqs ?? [])]);
+  const allFaqs = uniqueFaqs(
+    [...specialty.faqs, ...(pillar?.faqs ?? []), ...(profile?.faqs ?? [])],
+    specialty.pathSlug === "interventional" ? 8 : 5,
+  );
   const eeat = pillar?.eeat;
   const contextualLinks = SPECIALTY_CONTEXTUAL_LINKS[specialty.pathSlug] ?? [];
   const featuredSpecialtySlug =
@@ -217,34 +222,79 @@ export function CardiologySpecialtyLocumView({ specialty }: { specialty: Cardiol
               </p>
             ) : null}
             {specialty.pathSlug === "interventional" ? (
-              <p className="text-sm text-slate-600">
-                Compare rates on the{" "}
-                <Link href="/interventional-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
-                  interventional locums pay arcade
-                </Link>
-                , the{" "}
-                <Link
-                  href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum"
-                  className="font-semibold text-brand-700 hover:underline"
-                >
-                  Kentucky cath-lab-only IC locum
-                </Link>
-                {" "}(no general cardiology), the{" "}
-                <Link
-                  href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum"
-                  className="font-semibold text-brand-700 hover:underline"
-                >
-                  Ohio 1–2 weeks/month interventional locum
-                </Link>
-                , and review{" "}
-                <Link
-                  href="/locum-tenens-jobs/new-jersey/interventional-cardiology"
-                  className="font-semibold text-brand-700 hover:underline"
-                >
-                  New Jersey interventional locum jobs
-                </Link>
-                .
-              </p>
+              <>
+                <div>
+                  <h2 className="font-display text-lg font-semibold text-slate-950">
+                    Unique interventional locum guides
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    These are handwritten IC pages—not another state shell. Start with the shape of work you want, then
+                    the live jobs.
+                  </p>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {IC_CLUSTER_NAV.map((item) => (
+                      <li key={item.href}>
+                        <Link href={item.href} className="text-sm font-semibold text-brand-700 hover:underline">
+                          {item.title} →
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="font-display text-lg font-semibold text-slate-950">
+                    Decision pages agencies do not buy ads on
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    CompHealth and Weatherby flood “interventional cardiology locum jobs.” These searches currently
+                    rank SCAI, Reddit, and generic blogs — not paid job packs.
+                  </p>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {IC_DECISION_NAV.map((item) => (
+                      <li key={item.href}>
+                        <Link href={item.href} className="text-sm font-semibold text-brand-700 hover:underline">
+                          {item.title} →
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className="text-sm text-slate-600">
+                  Compare rates on the{" "}
+                  <Link href="/interventional-cardiology-locums-pay" className="font-semibold text-brand-700 hover:underline">
+                    interventional locums pay arcade
+                  </Link>
+                  , the{" "}
+                  <Link
+                    href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum"
+                    className="font-semibold text-brand-700 hover:underline"
+                  >
+                    Kentucky cath-lab-only IC locum
+                  </Link>
+                  {" "}(no general cardiology), the{" "}
+                  <Link
+                    href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum"
+                    className="font-semibold text-brand-700 hover:underline"
+                  >
+                    Ohio 1–2 weeks/month interventional locum
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="/guides/imlc-for-interventional-cardiology-locums"
+                    className="font-semibold text-brand-700 hover:underline"
+                  >
+                    IMLC for IC locums
+                  </Link>
+                  , and review{" "}
+                  <Link
+                    href="/locum-tenens-jobs/new-jersey/interventional-cardiology"
+                    className="font-semibold text-brand-700 hover:underline"
+                  >
+                    New Jersey interventional locum jobs
+                  </Link>
+                  .
+                </p>
+              </>
             ) : null}
             {specialty.pathSlug === "general" ? (
               <p className="text-sm text-slate-600">

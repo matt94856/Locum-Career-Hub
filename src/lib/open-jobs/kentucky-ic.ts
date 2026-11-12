@@ -26,6 +26,9 @@ export const KENTUCKY_CATH_LAB_ONLY_IC_LOCUM: FeaturedCardiologyOpportunity = {
     "Confirm travel, lodging, malpractice, STEMI rules, and the written cath-lab-only scope before you accept.",
   relatedLinks: [
     { href: "/locum-tenens-jobs/kentucky/interventional-cardiology", label: "Kentucky interventional locum jobs" },
+    { href: "/guides/kentucky-interventional-cardiology-locums", label: "Kentucky IC locums guide" },
+    { href: "/guides/cath-lab-only-locum-jobs", label: "Cath-lab-only IC locums" },
+    { href: "/guides/imlc-for-interventional-cardiology-locums", label: "IMLC for IC locums" },
     { href: "/interventional-cardiology-locums-pay", label: "Interventional locums pay" },
     { href: "/tools/imlc-eligibility-calculator", label: "IMLC eligibility calculator" },
     { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", label: "Ohio IC locum (includes clinic)" },

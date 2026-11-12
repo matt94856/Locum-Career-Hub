@@ -2,6 +2,266 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/impella-mcs-locum-jobs`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No Impella/MCS locum URL; do not invent shock jobs
+- After: MCS as a privilege-set question on IC locums, not a fake job board
+- Reason: High-acuity IC operators search MCS; agencies do not buy this ad
+- Expected: IC inquiries that state MCS yes/no without implying a live Impella listing
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/first-interventional-locum-assignment`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No first-assignment IC URL
+- After: How to pick a first IC locum week without stacking hardest STEMI
+- Reason: People-also-search from how-to-start; unpaid
+- Expected: First-week IC match requests with recovery stated
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/questions-before-ic-locum-contract`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No IC contract-questions URL
+- After: Physician-side checklist before signing an IC locum contract
+- Reason: Decision SERP, not a job board; Reddit/ACC currently occupy it
+- Expected: High-intent IC inquiries after reading the checklist
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/interventional-locums-gratis-hours-and-callback`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Pay arcade only; people-also-search includes IC locum rates
+- After: Gratis hours vs daily guarantee vs STEMI callback
+- Reason: Related search from the paid SERP; do not retitle the pay arcade
+- Expected: Clicks from rate queries into a unique IC pay-mechanics URL
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/temporary-privileges-for-ic-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Generic temp-privileges glossary already converted 1 generate_lead
+- After: Cath-lab-specific temp privileges page
+- Reason: Glossary converted; IC operators need PCI/STEMI specifics
+- Expected: ASAP IC form_starts that do not assume temps are a plan
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/board-eligible-interventional-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No BE IC locums URL
+- After: Board-eligible IC locums: logs and solo STEMI reality
+- Reason: Fellowship graduates search BE/BC locums; not a paid job pack
+- Expected: Honest BE IC inquiries with exam dates
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/primary-pci-vs-diagnostic-cath-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No diagnostic-vs-primary PCI locum distinction URL
+- After: Diagnostic-only vs primary PCI locums as different privilege sets
+- Reason: Operators search this split; job ads collapse it into interventional
+- Expected: Fewer mismatched STEMI presentations
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/call-only-interventional-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Only cath-lab-only and STEMI-call pages
+- After: Call-only vs lab-only vs mixed week distinction
+- Reason: Call-only is a different product than weekday PCI; agencies do not buy this query
+- Expected: STEMI-night match requests without clinic panels
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/pci-without-surgical-backup-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No non-SOS PCI locum URL
+- After: SCAI-context PCI without on-site surgery locums guide; not invented hospital listings
+- Reason: Paid job SERP ignores this query; organic is SCAI/ACC/NIH
+- Expected: Community STEMI IC inquiries that state backup preference
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/how-to-start-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No IC how-to-start URL; SERP is Locumstory/Weatherby blog/Reddit with 0 ads
+- After: Unique IC start sequence: logs, IMLC, moonlighting, written STEMI scope
+- Reason: Live Google 2026-11-11: how to start IC locums has no CompHealth/Weatherby ads
+- Expected: Index and rank for how-to-start IC locums; form_starts from operators skipping the paid job SERP
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: Pay arcade + Ohio/KY examples; 28 impr / 0 clicks / pos 9.6; title already ,200/Day
+- After: Added STEMI nights, IMLC, lab-only sections and cluster links; SERP title unchanged
+- Reason: Memory forbids retitling IC pay; content/internal links are the remaining lever
+- Expected: First click from existing ~#10 impressions and clicks through to Ohio/KY jobs
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/interventional-cardiologist-locum-jobs`
+
+- Type: `content`
+- Status: shipped
+- Before: One exclusive-blocks section; 29 impr / 1 click / 1 generate_lead
+- After: Added lab-only vs mixed, IMLC/logs sections, FAQs, cluster internal links
+- Reason: Only IC landing with a GA4 generate_lead in 90d
+- Expected: More IC form_starts from this URL without a title change
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/locum-jobs/cardiology/interventional`
+
+- Type: `content`
+- Status: shipped
+- Before: Thin hub sections; 90d GSC 88 impr / 3 clicks / pos 44
+- After: Unique lab-only vs mixed copy, 12-guide cluster nav, IMLC/cath-lab contextual links
+- Reason: Highest-ROI IC URL by clicks; deepen instead of more state shells
+- Expected: More clicks from generic cardiology locums queries into KY/OH jobs and IC guides
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/rural-stemi-coverage-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No rural STEMI intent page
+- After: Community PCI/STEMI locums guide; not a 50-state shell list
+- Reason: Real IC demand is community STEMI; city shells already failed
+- Expected: Community STEMI IC match requests with solo-call preference stated
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/sacramento-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Only VMS featured job
+- After: Sacramento-area IC guide: CA is not IMLC; VMS facility withheld; hospitals as context
+- Reason: Live Sacramento VMS IC job had 2 GA4 sessions; unique geography without fake hospital listings
+- Expected: CA-licensed IC inquiries; out-of-state operators routed to compact states
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/ohio-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Only state shell + featured job
+- After: Unique Ohio IC corridor page for live 1-2 week mixed block + IMLC
+- Reason: Ohio featured job needed a unique market page, not another thin state URL
+- Expected: Ohio IC queries into the featured job inquiry
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/kentucky-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Only state shell + featured job
+- After: Unique KY IC corridor page for live cath-lab-only job + IMLC; hospitals as context not listings
+- Reason: State IC shells had ~0 clicks; unique corridor + live job is the alternative to city shells
+- Expected: KY IC queries into the featured lab-only job form
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/moonlighting-as-an-employed-interventional-cardiologist`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Generic moonlighting landing only
+- After: Employed IC moonlighting: clause, recovery, compact second license
+- Reason: Ohio/KY IC jobs fit employed add-on weeks; generic moonlighting page is not IC-specific
+- Expected: Employed IC form_starts with moonlighting status stated
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/structural-vs-pci-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Structural hub existed; no PCI-vs-structural locums comparison
+- After: Honest comparison: most IC locums are PCI/STEMI, not TAVR
+- Reason: Do not invent structural jobs; separate privilege sets
+- Expected: PCI operators self-select; structural-only asks stay honest
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/pci-logs-and-privileging-for-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Privileging mentioned in hub/pay only
+- After: PCI/STEMI logs, FPPE, and why ASAP is a file date
+- Reason: ASAP Ohio/KY starts fail on thin logs more than on titles
+- Expected: Complete-file IC inquiries and fewer dead ASAP presentations
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/one-week-a-month-interventional-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: 1-2 week cadence lived only on the Ohio job
+- After: Recurring IC week guide; explicitly not the NE Kansas inpatient shift job
+- Reason: Ohio job is 1-2 weeks/month mixed IC; prevent confusion with general inpatient shift counts
+- Expected: Recurring-block IC inquiries without Kansas-inpatient mixups
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/weekend-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: Weekend locums was general cardiology, not IC
+- After: Weekend IC locums guide for employed moonlighting STEMI blocks
+- Reason: Employed IC moonlighting is a real door; do not invent weekly salary theater
+- Expected: Moonlighting IC inquiries with licenses and weekend dates
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/stemi-call-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: STEMI explained only inside pay/hub copy
+- After: Flagship STEMI call locums guide with activation, backup, and Ohio example
+- Reason: IC pay has 28 impr at #9.6 with 0 clicks; STEMI nights are the conversion topic
+- Expected: Engaged sessions from STEMI/call queries into Ohio job and IC pay
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/cath-lab-only-locum-jobs`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No dedicated cath-lab-only intent page
+- After: Flagship guide distinguishing lab-only vs mixed IC weeks; CTA to KY featured job
+- Reason: Live KY job is lab-only; hub clicks come from generic locums queries that need a unique next step
+- Expected: Clicks and form_starts from cath-lab-only / no-clinic IC searches
+- Actual: pending
+
+## 2026-11-11 — `https://www.locumcareerhub.com/guides/imlc-for-interventional-cardiology-locums`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No unique IC+IMLC guide
+- After: Flagship guide: IMLC is a separate license pathway for IC locums, not a multistate STEMI card
+- Reason: GSC 90d had 0 IMLC query impressions; compact licensing is the gating item for KY/OH IC locums
+- Expected: Index this URL and send compact-eligible IC inquiries to KY/OH jobs and the IMLC calculator
+- Actual: pending
+
+## 2026-11-04 — `https://www.locumcareerhub.com/featured-cardiology-jobs/kansas-northeastern-inpatient-cardiology-locum`
+
+- Type: `new-landing-page`
+- Status: shipped
+- Before: No dedicated NE Kansas inpatient 7-10 shift page
+- After: Featured inpatient locum: 7-10 shifts/month, 12-hour hospital days, Epic, KS license not required, fly MCI, BE/BC
+- Reason: New recruiting assignment needed an indexable unique URL distinct from the 7-on/7-off nuclear Kansas page and the NE Kansas full-time IC row
+- Expected: Index the job URL; inquiries via the on-page lead form from Kansas/inpatient NIC searches
+- Actual: pending
+
 ## 2026-10-15 — `https://www.locumcareerhub.com/cardiology-wordle`
 
 - Type: `page`

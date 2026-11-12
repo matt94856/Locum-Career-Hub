@@ -391,6 +391,8 @@ export const LANDING_PAGES: LandingPage[] = [
       "Travel stipends and malpractice structure reviewed before you fly",
       "Exclusive interventional openings that are not posted on this page",
     ],
+    answer:
+      "Interventional cardiologist locum jobs are cath-lab blocks with written STEMI, PCI, and backup rules. Compact licenses can add a second state; they do not replace privileging. Request a match for exclusive coverage plus the public Kentucky lab-only and Ohio mixed-week jobs.",
     sections: [
       {
         h2: "Public listings and exclusive IC blocks",
@@ -399,12 +401,44 @@ export const LANDING_PAGES: LandingPage[] = [
           "Request a match with your licenses, STEMI comfort, and dates. We come back with the exclusive openings that fit, not a public job-board blast.",
         ],
       },
+      {
+        h2: "Cath-lab-only, mixed weeks, or weekends",
+        paragraphs: [
+          "Lab-only means no general cardiology clinic, rounding, or consult census. Mixed IC weeks add rounding and clinic plus 24-hour call. Weekends are short STEMI add-ons for employed operators whose contracts allow moonlighting.",
+          "Kentucky is the public lab-only example. Ohio is the public 1–2 week mixed example. If you want one week a month, say that—do not confuse it with a general inpatient shift roster.",
+        ],
+      },
+      {
+        h2: "Licenses, IMLC, and PCI logs",
+        paragraphs: [
+          "IMLC is an expedited path to a separate state license, not one nationwide STEMI card. Kentucky and Ohio are compact examples. Sacramento-area coverage is a California full-license process for most out-of-state physicians.",
+          "Start dates still wait on PCI and STEMI logs. Bring 12–24 months of operator volume if you want independent primary PCI. Temporary privileges are not a plan.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Where are the current public IC jobs?",
+        a: "Kentucky cath-lab-only, Ohio 1–2 weeks/month mixed IC, and a Sacramento-area VMS row. Exclusive coverage is matched after you submit licenses and dates.",
+      },
+      {
+        q: "Do I need IMLC to take interventional locums?",
+        a: "No, but compact eligibility speeds second licenses in states like Kentucky and Ohio. It does not replace cath-lab privileging.",
+      },
+      {
+        q: "Is structural heart included?",
+        a: "Only when the lab privileges it and your logs match. Most IC locums are PCI and STEMI. Read structural vs PCI locums before you assume TAVR.",
+      },
     ],
     relatedSlugs: ["national-locum-tenens-jobs-guide", "cardiologist-travel-locums", "part-time-physician-jobs"],
     relatedLinks: [
       { href: "/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum", title: "Kentucky cath lab only IC locum" },
       { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
       { href: "/interventional-cardiology-locums-pay", title: "Interventional locums pay" },
+      { href: "/guides/imlc-for-interventional-cardiology-locums", title: "IMLC for interventional locums" },
+      { href: "/guides/cath-lab-only-locum-jobs", title: "Cath-lab-only IC locums" },
+      { href: "/guides/how-to-start-interventional-cardiology-locums", title: "How to start IC locums" },
+      { href: "/guides/pci-without-surgical-backup-locums", title: "PCI without surgical backup" },
       { href: "/locum-tenens-jobs/kentucky/interventional-cardiology", title: "Kentucky interventional locum jobs" },
       { href: "/locum-jobs/cardiology/interventional", title: "Interventional cardiology locum jobs" },
     ],

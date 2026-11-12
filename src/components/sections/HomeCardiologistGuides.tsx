@@ -122,6 +122,22 @@ export function HomeCardiologistGuides() {
               Tennessee EP locums →
             </Link>
             {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/locum-jobs/cardiology/interventional">
+              Interventional locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/guides/how-to-start-interventional-cardiology-locums">
+              How to start IC locums →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/guides/pci-without-surgical-backup-locums">
+              PCI without surgical backup →
+            </Link>
+            {" · "}
+            <Link className="font-semibold text-brand-700 hover:underline" href="/guides/cath-lab-only-locum-jobs">
+              Cath-lab-only IC locums →
+            </Link>
+            {" · "}
             <Link className="font-semibold text-brand-700 hover:underline" href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum">
               KY cath lab only IC locum →
             </Link>

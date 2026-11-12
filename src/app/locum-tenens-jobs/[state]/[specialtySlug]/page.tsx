@@ -149,14 +149,30 @@ export default async function SpecialtyStateLocumPage({
                 <Button href="/locum-jobs/cardiology/interventional" variant="secondary" className="justify-center">
                   Interventional specialty hub →
                 </Button>
-                {state !== "kentucky" ? (
+                <Button href="/guides/how-to-start-interventional-cardiology-locums" variant="secondary" className="justify-center">
+                  How to start IC locums →
+                </Button>
+                {state === "kentucky" ? (
+                  <Button href="/guides/kentucky-interventional-cardiology-locums" variant="secondary" className="justify-center">
+                    Kentucky IC locums guide →
+                  </Button>
+                ) : (
                   <Button href="/featured-cardiology-jobs/kentucky-cath-lab-only-interventional-cardiology-locum" variant="secondary" className="justify-center">
                     KY cath lab only IC locum →
                   </Button>
-                ) : null}
-                {state !== "ohio" ? (
+                )}
+                {state === "ohio" ? (
+                  <Button href="/guides/ohio-interventional-cardiology-locums" variant="secondary" className="justify-center">
+                    Ohio IC locums guide →
+                  </Button>
+                ) : (
                   <Button href="/featured-cardiology-jobs/ohio-interventional-cardiology-locum" variant="secondary" className="justify-center">
                     Featured Ohio IC locum →
+                  </Button>
+                )}
+                {state === "california" ? (
+                  <Button href="/guides/sacramento-interventional-cardiology-locums" variant="secondary" className="justify-center">
+                    Sacramento-area IC locums →
                   </Button>
                 ) : null}
               </>

@@ -147,6 +147,10 @@ export function thankYouReadingLinks(pagePath?: string | null, careerStage?: Car
         title: "Interventional cardiology locums pay",
       },
       {
+        href: "/guides/ohio-interventional-cardiology-locums",
+        title: "Ohio interventional locums guide",
+      },
+      {
         href: "/locum-tenens-jobs/ohio/interventional-cardiology",
         title: "Ohio interventional locum jobs",
       },
@@ -159,8 +163,8 @@ export function thankYouReadingLinks(pagePath?: string | null, careerStage?: Car
         title: "Interventional cardiology locums pay",
       },
       {
-        href: "/locum-tenens-jobs/kentucky/interventional-cardiology",
-        title: "Kentucky interventional locum jobs",
+        href: "/guides/kentucky-interventional-cardiology-locums",
+        title: "Kentucky interventional locums guide",
       },
       {
         href: "/tools/imlc-eligibility-calculator",

@@ -73,7 +73,21 @@ function defaultRelatedLinks(def: PageDef): { href: string; title: string }[] {
       { href: "/featured-cardiology-jobs/ohio-interventional-cardiology-locum", title: "Ohio interventional locum" },
     );
   }
-  return links.slice(0, 7);
+  return links.slice(0, 8);
+}
+
+function mergeRelatedLinks(
+  preferred: { href: string; title: string }[] | undefined,
+  fallback: { href: string; title: string }[],
+): { href: string; title: string }[] {
+  const seen = new Set<string>();
+  const merged: { href: string; title: string }[] = [];
+  for (const link of [...(preferred ?? []), ...fallback]) {
+    if (!link.href || seen.has(link.href)) continue;
+    seen.add(link.href);
+    merged.push(link);
+  }
+  return merged.slice(0, 8);
 }
 
 function buildEnrichedSections(def: PageDef, path: string): CardiologySeoPage["sections"] {
@@ -121,6 +135,7 @@ function buildEnrichedFaqs(def: PageDef, path: string): CardiologySeoPage["faqs"
     if (pillar?.extraFaqs.length) return [...base, ...pillar.extraFaqs];
   }
   const editorial = getEditorialGuideBody(def.slug);
+  if (editorial && editorial.faqs.length >= 4) return editorial.faqs;
   if (editorial?.faqs.length) return [...base, ...editorial.faqs];
   return base;
 }
@@ -131,23 +146,27 @@ export function buildPageFromDef(def: PageDef): CardiologySeoPage {
   const geo = def.geoLabel;
   const tier = resolveContentTier(def);
 
+  const editorial = getEditorialGuideBody(def.slug);
+
   const directAnswer =
-    def.category === "state" || def.category === "city"
+    editorial?.directAnswer ??
+    (def.category === "state" || def.category === "city"
       ? `${def.h1} are contract-based cardiology assignments in ${geo ?? "selected regions"} where licensing, privileging, and call should be documented before you start. Locum Career Hub is a cardiologist-only recruiting service—we are not the hospital employer.`
       : def.category === "salary" && def.slug.startsWith("cardiologist-salary-")
         ? `${def.h1} depends on subspecialty, call burden, acuity, and whether the role is locum or employed. This page explains market drivers in ${geo ?? "the state"}—not a guaranteed compensation offer.`
         : def.slug === "electrophysiologist-salary"
           ? "Electrophysiologist locum pay on this page is a directional $2,800–$3,200 per day. Public October 2026 posts are single openings, including Aya at $3,200–$3,500/day in Canton, Ohio and about $550/hour weekdays in Kingsport, Tennessee. Those listings are not this benchmark. 24-hour call usually includes 0–4 hours; extra callback is daily ÷ 8."
-          : `${def.h1}—educational context for cardiologists exploring locum tenens. Locum Career Hub recruits MD/DO cardiologists and connects you with hospitals and groups when mutual fit exists.`;
+          : `${def.h1}—educational context for cardiologists exploring locum tenens. Locum Career Hub recruits MD/DO cardiologists and connects you with hospitals and groups when mutual fit exists.`);
 
   const intro =
-    def.category === "state" || def.category === "city"
+    editorial?.intro ??
+    (def.category === "state" || def.category === "city"
       ? `Cardiology programs in ${geo ?? "this market"} periodically need locum coverage for leave, volume growth, and service-line expansion. This page explains what to document before you accept a block—and how our inquiry process works. When you submit the form with ${geo ? `${geo} among your ` : ""}preferred states, a cardiology recruiter will review your subspecialty and timeline. If there are realistic opportunities in the areas you selected, we will reach out shortly (typically within one business day). If nothing fits, we will tell you directly.`
       : def.category === "salary" && def.slug.startsWith("cardiologist-salary-")
         ? `Cardiologists comparing offers in ${geo ?? "this state"} need more than a single number from a forum post. This guide explains how subspecialty, STEMI call, consult census, clinic panels, and licensing timelines interact with compensation—employed and locum. Figures are directional market context, not promises.`
         : PILLAR_SLUGS.has(def.slug) || hasEditorialGuideBody(def.slug)
           ? `This pillar guide is a long-form reference for cardiologists. It is educational—not medical, legal, or tax advice. For recruiter-led matching after you read it, submit an inquiry with your subspecialty and preferred states.`
-          : `This guide covers ${def.topic} for cardiologists considering locum tenens. We recruit cardiologists only—not other physician specialties. Content is educational, not medical, legal, or tax advice.`;
+          : `This guide covers ${def.topic} for cardiologists considering locum tenens. We recruit cardiologists only—not other physician specialties. Content is educational, not medical, legal, or tax advice.`);
 
   const h2Variants = [
     "Cardiologist-only recruiting with documented expectations",
@@ -171,7 +190,7 @@ export function buildPageFromDef(def: PageDef): CardiologySeoPage {
     intro,
     sections,
     faqs,
-    relatedLinks: defaultRelatedLinks(def),
+    relatedLinks: mergeRelatedLinks(editorial?.relatedLinks, defaultRelatedLinks(def)),
     geoLabel: geo,
     showRecruiterTrust:
       def.showRecruiterTrust ?? (def.category === "state" || def.category === "city" || def.slug.startsWith("cardiologist-salary-")),

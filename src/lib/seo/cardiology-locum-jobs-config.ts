@@ -136,10 +136,34 @@ export const SPECIALTY_CONTEXTUAL_LINKS: Record<
       suffix: "page.",
     },
     {
+      prefix: "If you want the lab without clinic, start with",
+      href: "/guides/cath-lab-only-locum-jobs",
+      anchor: "cath-lab-only IC locums",
+      suffix: "and the Kentucky featured job.",
+    },
+    {
+      prefix: "Compact licenses are a separate state license, not a nationwide STEMI card—read",
+      href: "/guides/imlc-for-interventional-cardiology-locums",
+      anchor: "IMLC for interventional locums",
+      suffix: "before you pick a geography.",
+    },
+    {
       prefix: "Employed interventionalists adding weekend cath lab days should read",
-      href: "/moonlighting-physician-jobs",
-      anchor: "cardiologist moonlighting jobs",
+      href: "/guides/moonlighting-as-an-employed-interventional-cardiologist",
+      anchor: "employed IC moonlighting",
       suffix: "before stacking STEMI call.",
+    },
+    {
+      prefix: "Community STEMI weeks without a CT surgeon next door are covered in",
+      href: "/guides/pci-without-surgical-backup-locums",
+      anchor: "PCI without surgical backup locums",
+      suffix: "— agencies rarely buy ads on that query.",
+    },
+    {
+      prefix: "If you are starting IC locums, skip the paid job SERP and use",
+      href: "/guides/how-to-start-interventional-cardiology-locums",
+      anchor: "how to start interventional cardiology locums",
+      suffix: "first.",
     },
     {
       prefix: "Compare weekly rate drivers on the",
@@ -325,18 +349,28 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
         h2: "About Interventional Cardiology Locum Jobs",
         paragraphs: [
           "Locum interventional cardiologists support PCI-capable hospitals, STEMI networks, and hybrid OR programs. Define activation windows, add-on case compensation, and complication backup in writing.",
+          "This hub already earns the site’s interventional clicks—mostly from cardiologists searching locums, not from a flood of “interventional” queries. The pages worth reading next are unique: cath-lab-only versus mixed weeks, STEMI call design, IMLC as a separate license pathway, and the live Kentucky, Ohio, and Sacramento-area jobs.",
         ],
       },
       {
         h2: "Job Requirements",
         paragraphs: [
           "Cath lab privileges, current procedural logs if required, board certification in interventional cardiology, state license, and malpractice appropriate to PCI scope.",
+          "A compact license can shorten a second state board. It does not replace PCI logs or hospital privileging. Bring 12–24 months of operator volume if you want independent primary PCI.",
         ],
       },
       {
         h2: "Typical Locations & Pay",
         paragraphs: [
           "High demand in community PCI programs, regional STEMI centers, and vacation markets needing temporary interventional coverage. STEMI call and night coverage are primary pay drivers.",
+          "Many attending interventionalists we recruit start around $3,200–$3,500 a day. That is a band, not a posted salary. Compact-state weeks in Kentucky or Ohio can start sooner than California. Do not treat city shells as extra jobs.",
+        ],
+      },
+      {
+        h2: "Cath-lab-only versus mixed IC weeks",
+        paragraphs: [
+          "Cath-lab-only means no general cardiology clinic, rounding, or consult census. Kentucky’s featured opening is written that way. Mixed weeks add morning rounding and afternoon clinic plus 24-hour call—the Ohio 1–2 week block is that shape.",
+          "If a listing only says “interventional,” ask which one you are being presented. Exclusive lab-only and STEMI coverage often never appears on this hub. Request a match with licenses and STEMI comfort.",
         ],
       },
     ],
@@ -348,6 +382,14 @@ export const CARDIOLOGY_LOCUM_SPECIALTIES: CardiologyLocumSpecialty[] = [
       {
         q: "How does STEMI call affect interventional locum pay?",
         a: "Activation responsibility, transport patterns, and backup surgery availability change lifestyle and compensation—document them before accepting.",
+      },
+      {
+        q: "Is IMLC enough to take an interventional locum in another state?",
+        a: "No. IMLC is an expedited path to a separate state license, not a multistate license and not cath-lab privileges. Kentucky and Ohio are compact examples; California usually is not.",
+      },
+      {
+        q: "Do you post every PCI hospital as its own job?",
+        a: "No. Thin city and state shells already exist and do not convert. We deepen this hub, unique IC guides, and live jobs—Kentucky lab-only, Ohio mixed weeks, and Sacramento-area VMS coverage.",
       },
     ],
   },

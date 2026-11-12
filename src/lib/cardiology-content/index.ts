@@ -18,6 +18,8 @@ import { P2B_GUIDES, P2B_RESOURCES } from "./wave-p2b";
 import { P3_GUIDES, P3_RESOURCES } from "./wave-p3";
 import { GAP_GUIDES } from "./wave-gap";
 import { DEEPEN_GUIDES } from "./wave-deepen";
+import { IC_CLUSTER_GUIDES } from "./wave-ic-cluster";
+import { IC_DECISION_GUIDES } from "./wave-ic-unpaid";
 
 export const ALL_EDITORIAL_GUIDES: EditorialGuideBody[] = [
   ...P0_GUIDES,
@@ -27,6 +29,8 @@ export const ALL_EDITORIAL_GUIDES: EditorialGuideBody[] = [
   ...P3_GUIDES,
   ...GAP_GUIDES,
   ...DEEPEN_GUIDES,
+  ...IC_CLUSTER_GUIDES,
+  ...IC_DECISION_GUIDES,
 ];
 
 export const ALL_EDITORIAL_RESOURCES: EditorialResourceDraft[] = [

@@ -153,7 +153,58 @@ export default function InterventionalCardiologyLocumsPayPage() {
                 Read the Kentucky cath-lab-only IC locum
               </Link>
               {" "}
-              if you want the lab without general cards.
+              if you want the lab without general cards. The{" "}
+              <Link href="/guides/cath-lab-only-locum-jobs" className="font-semibold text-brand-700 hover:underline">
+                cath-lab-only locums guide
+              </Link>{" "}
+              explains how that scope differs from mixed rounding and clinic.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">STEMI nights versus the daily number</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              Primary STEMI, backup, and scheduled-lab coverage are different jobs that can share a specialty label.
+              Included hours and callback change a quiet night versus a busy activation night. We do not turn that into
+              a fake weekly salary on this page.
+            </p>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              Read{" "}
+              <Link href="/guides/stemi-call-locums" className="font-semibold text-brand-700 hover:underline">
+                STEMI call locums
+              </Link>{" "}
+              for activation, backup, and post-call rules, and{" "}
+              <Link href="/guides/pci-logs-and-privileging-for-locums" className="font-semibold text-brand-700 hover:underline">
+                PCI logs and privileging
+              </Link>{" "}
+              if the start date is the real constraint. Gratis hours and callback are unpacked in{" "}
+              <Link
+                href="/guides/interventional-locums-gratis-hours-and-callback"
+                className="font-semibold text-brand-700 hover:underline"
+              >
+                IC locums gratis hours and callback
+              </Link>
+              .
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-3xl font-semibold text-slate-950">IMLC speeds a license, not a STEMI list</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              Compact eligibility can shorten a second state license in places like Kentucky and Ohio. It is still a
+              separate license. It is not a nationwide pager, and it does not replace cath-lab privileges. California
+              Sacramento-area coverage is usually a full-license timeline.
+            </p>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              <Link href="/guides/imlc-for-interventional-cardiology-locums" className="font-semibold text-brand-700 hover:underline">
+                IMLC for interventional locums
+              </Link>
+              {" "}
+              and the{" "}
+              <Link href="/tools/imlc-eligibility-calculator" className="font-semibold text-brand-700 hover:underline">
+                IMLC eligibility calculator
+              </Link>{" "}
+              belong next to this pay page, not instead of it.
             </p>
           </section>
 
@@ -190,6 +241,21 @@ export default function InterventionalCardiologyLocumsPayPage() {
               </Link>
               <Link href="/locum-jobs/cardiology/interventional" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
                 Interventional locum jobs
+              </Link>
+              <Link href="/guides/stemi-call-locums" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                STEMI call locums
+              </Link>
+              <Link href="/guides/imlc-for-interventional-cardiology-locums" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                IMLC for IC locums
+              </Link>
+              <Link href="/guides/interventional-locums-gratis-hours-and-callback" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                Gratis hours and callback
+              </Link>
+              <Link href="/guides/how-to-start-interventional-cardiology-locums" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                How to start IC locums
+              </Link>
+              <Link href="/interventional-cardiologist-locum-jobs" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
+                Interventional cardiologist locum jobs
               </Link>
               <Link href="/ep-cardiology-locums-pay" className="mt-3 block text-sm font-semibold text-brand-700 hover:underline">
                 EP locums pay arcade

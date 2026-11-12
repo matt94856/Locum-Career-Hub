@@ -8,6 +8,11 @@ export type EditorialGuideBody = {
   pageDef?: Omit<PageDef, "slug"> & { slug?: string };
   sections: ContentSection[];
   faqs: { q: string; a: string }[];
+  /** Overrides the templated direct-answer band when present. */
+  directAnswer?: string;
+  /** Overrides the templated intro when present. */
+  intro?: string;
+  relatedLinks?: { href: string; title: string }[];
 };
 
 /** Long-form /resources article draft (merged into CARDIOLOGY_ARTICLES). */

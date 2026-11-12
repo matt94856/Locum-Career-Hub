@@ -224,19 +224,29 @@ export function geoProofForSpecialty(pathSlug: string) {
   if (pathSlug === "interventional") {
     return [
       {
-        href: "/locum-tenens-jobs/kentucky/interventional-cardiology",
-        title: "Kentucky interventional locum jobs",
+        href: "/guides/kentucky-interventional-cardiology-locums",
+        title: "Kentucky interventional locums",
         detail: "Cath-lab-only IC coverage — no general cardiology clinic or rounding. KY license or IMLC.",
       },
       {
-        href: "/locum-tenens-jobs/new-jersey/interventional-cardiology",
-        title: "New Jersey interventional locum jobs",
-        detail: "STEMI and cath-lab coverage with documented activation rules.",
+        href: "/guides/ohio-interventional-cardiology-locums",
+        title: "Ohio interventional locums",
+        detail: "ASAP 1–2 week IC blocks with 24-hour call and a written daily guarantee.",
       },
       {
-        href: "/locum-tenens-jobs/ohio/interventional-cardiology",
-        title: "Ohio interventional locum jobs",
-        detail: "ASAP 1–2 week IC blocks with 24-hour call and a written daily guarantee.",
+        href: "/guides/imlc-for-interventional-cardiology-locums",
+        title: "IMLC for interventional locums",
+        detail: "Compact speed is a separate state license, not a nationwide STEMI card.",
+      },
+      {
+        href: "/guides/how-to-start-interventional-cardiology-locums",
+        title: "How to start IC locums",
+        detail: "Logs, licenses, and STEMI scope before you touch the paid job SERP.",
+      },
+      {
+        href: "/guides/pci-without-surgical-backup-locums",
+        title: "PCI without surgical backup",
+        detail: "Non-SOS community STEMI — the query CompHealth does not bid on.",
       },
     ];
   }

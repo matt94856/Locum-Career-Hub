@@ -283,6 +283,9 @@ export function buildOpenJobOpportunity(draft: OpenJobDraft): FeaturedCardiology
     ...(draft.track === "interventional"
       ? [{ href: "/interventional-cardiology-locums-pay", label: "Interventional locums pay" }]
       : []),
+    ...(draft.slug === "california-sacramento-area-interventional-vms-locum"
+      ? [{ href: "/guides/sacramento-interventional-cardiology-locums", label: "Sacramento-area IC locums guide" }]
+      : []),
     ...(draft.track === "electrophysiology"
       ? [{ href: "/salary/electrophysiologist-salary", label: "Electrophysiologist salary guide" }]
       : []),

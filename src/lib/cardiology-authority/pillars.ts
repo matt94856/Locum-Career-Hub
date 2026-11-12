@@ -82,7 +82,7 @@ export const CARDIOLOGY_PILLAR_EXTENSIONS: CardiologyPillarExtension[] = [
         h2: "When interventional locums fits—and when it does not",
         paragraphs: [
           "IC locums can bridge between employed jobs, sample markets, or create defined recovery weeks between intense blocks. It does not fix every burnout story: if your pain is STEMI intensity itself, swapping employers without changing call design may recreate the same week.",
-          "Confirm moonlighting clauses, tail coverage, and recovery gaps before stacking employed call with locum STEMI. Write non-negotiables before you travel.",
+          "Confirm moonlighting clauses, tail coverage, and recovery gaps before stacking employed call with locum STEMI. Write non-negotiables before you travel. Cath-lab-only weeks, mixed Ohio-shaped weeks, and compact-state licensing are different products—read those unique guides instead of another state shell.",
         ],
       },
     ],
