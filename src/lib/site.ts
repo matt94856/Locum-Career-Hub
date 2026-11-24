@@ -4,6 +4,7 @@ export const BRAND_LOGO_URL =
 
 export const SITE = {
   name: "Locum Career Hub",
+  legalName: "MPLT Healthcare LLC",
   domain: "LocumCareerHub.com",
   url: "https://www.locumcareerhub.com",
   tagline:
@@ -12,6 +13,13 @@ export const SITE = {
   phoneDisplay: "(352) 293-6242",
   phoneTel: "+13522936242",
   smsHref: "sms:+13522936242",
+  address: {
+    streetAddress: "3701 FAU Blvd Suite 300",
+    addressLocality: "Boca Raton",
+    addressRegion: "FL",
+    postalCode: "33431",
+    addressCountry: "US",
+  },
   /** Override with `NEXT_PUBLIC_CALENDLY_URL` in Netlify / `.env.local` if the booking link changes. */
   calendlyUrl:
     (process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/matthewfuller389/30min").trim() ||

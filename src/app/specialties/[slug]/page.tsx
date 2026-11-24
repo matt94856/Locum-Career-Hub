@@ -18,6 +18,8 @@ import { getSpecialtyProfile } from "@/lib/seo/specialty-profiles";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { CTA } from "@/lib/site";
 
+export const dynamicParams = false;
+
 const SPECIALTY_FAQ = (name: string) =>
   [
     {

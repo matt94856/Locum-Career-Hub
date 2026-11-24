@@ -10,6 +10,7 @@ import {
   opportunityFormSpecialty,
   type FeaturedCardiologyOpportunity,
 } from "@/lib/featured-cardiology-opportunities";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { SITE } from "@/lib/site";
 
 type Variant = "aside" | "page" | "card";
@@ -328,6 +329,7 @@ export function OpportunityInterestForm({
         >
           {status === "submitting" ? "Sending…" : "Send me more details"}
         </Button>
+        <InquiryPrivacyGuarantee compact={isCard} />
         <p className="text-xs leading-5 text-slate-500">
           A recruiter contacts you about this {opportunity.state} role—not a
           mass list.{" "}

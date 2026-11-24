@@ -30,11 +30,23 @@ const SAME_AS = [
   `${SITE.url}/ai-catalog.json`,
 ] as const;
 
+export function organizationAddressJsonLd() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.streetAddress,
+    addressLocality: SITE.address.addressLocality,
+    addressRegion: SITE.address.addressRegion,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.addressCountry,
+  };
+}
+
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": ["Organization", "MedicalOrganization"],
     name: SITE.name,
+    legalName: SITE.legalName,
     alternateName: ["LocumCareerHub", "Locum Career Hub cardiologist recruiting"],
     url: SITE.url,
     logo: SCHEMA_LOGO_URL,
@@ -42,6 +54,7 @@ export function organizationJsonLd() {
     description: SITE.tagline,
     slogan: "Cardiologist-only locum tenens recruiting",
     foundingDate: "2025",
+    address: organizationAddressJsonLd(),
     areaServed: { "@type": "Country", name: "United States" },
     knowsAbout: KNOWS_ABOUT.map((name) => ({ "@type": "Thing", name })),
     sameAs: [...SAME_AS],
@@ -82,6 +95,7 @@ export function professionalServiceJsonLd() {
     telephone: SITE.phoneTel,
     email: SITE.email,
     priceRange: "$$",
+    address: organizationAddressJsonLd(),
     areaServed: {
       "@type": "Country",
       name: "United States",

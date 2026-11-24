@@ -2,6 +2,46 @@
 
 Auto-exported from `seo_memory.db`. Do not put secrets here.
 
+## 2026-11-24 — `https://www.locumcareerhub.com/llms.txt`
+
+- Type: `technical`
+- Status: shipped
+- Before: Hand-curated IC-heavy catalog; NIC pay missing; llms files not in sitemap; footer omitted llms-full
+- After: When to use index, NIC pay claim, featured jobs synced into ai-catalog.json, sitemap+footer include AI files
+- Reason: Agents follow llms.txt links; Google ignores the file so sitemap+HTML still matter
+- Expected: Primary retrieval set is calculator, pay, IMLC, KY/OH/KS jobs, not city shells
+- Actual: pending
+
+## 2026-11-24 — `https://www.locumcareerhub.com/interventional-cardiology-locums-pay`
+
+- Type: `content`
+- Status: shipped
+- Before: IC/EP/NIC pay pages had no AiCitePanel; SERP titles unchanged
+- After: Answer-first claim, pay vs callback table, cite panel; IC title still Interventional Cardiology Locums Pay | ,200/Day
+- Reason: Pay pages are the unique daily-band facts AI should cite; titles stay as-is
+- Expected: ChatGPT/Perplexity can quote dated IC/EP/NIC daily bands from HTML or markdown
+- Actual: pending
+
+## 2026-11-24 — `https://www.locumcareerhub.com/guides/how-to-start-interventional-cardiology-locums`
+
+- Type: `content`
+- Status: shipped
+- Before: Direct answer paragraph without speakable id; no cite panel on programmatic guides
+- After: AnswerFirstBlock id=direct-answer, provenance, IC scope table, AiCitePanel on IC/money/licensing templates
+- Reason: Schema speakable targeted #direct-answer that did not exist on the guide template RAG needs
+- Expected: IC cluster pages extract as citeable chunks once indexed
+- Actual: pending
+
+## 2026-11-24 — `https://www.locumcareerhub.com/`
+
+- Type: `technical`
+- Status: shipped
+- Before: Unknown URLs HTTP 200; Accept text/markdown returned HTML; llms.txt When to cite only; Organization schema missing postal address
+- After: dynamicParams false + 404 recovery to llms.txt/sitemap; Markdown Accept with Vary; When to use section; MPLT Boca Raton address in SITE and JSON-LD
+- Reason: Is Agentic essential failures blocked agent retrieval even though bots were allowed
+- Expected: Is Agentic essential 404 and markdown pass; agents can recover from misses
+- Actual: pending
+
 ## 2026-11-11 — `https://www.locumcareerhub.com/guides/impella-mcs-locum-jobs`
 
 - Type: `new-landing-page`

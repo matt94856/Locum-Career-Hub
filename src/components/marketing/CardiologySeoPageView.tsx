@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LeadCaptureForm } from "@/components/forms/LeadCaptureForm";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { ContentProvenance } from "@/components/seo/ContentProvenance";
 import { ContentSections } from "@/components/seo/ContentSections";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { RecruiterInquiryTrust } from "@/components/seo/RecruiterInquiryTrust";
+import { ScopeComparisonTable } from "@/components/seo/ScopeComparisonTable";
 import { IC_ALL_SLUGS } from "@/lib/cardiology-content/wave-ic-cluster";
 import type { CardiologySeoPage } from "@/lib/cardiology-seo/types";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
@@ -72,6 +76,15 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
     : page.slug.includes("interventional") || IC_ALL_SLUGS.has(page.slug)
       ? "Interventional Cardiology"
       : "General Cardiology";
+  const comparisonVariant = IC_ALL_SLUGS.has(page.slug)
+    ? ("ic-scope" as const)
+    : page.category === "licensing"
+      ? ("imlc" as const)
+      : page.category === "money"
+        ? ("pay-callback" as const)
+        : null;
+  const showCitePanel =
+    IC_ALL_SLUGS.has(page.slug) || page.category === "money" || page.category === "licensing";
 
   return (
     <main className="pb-24 sm:pb-0">
@@ -88,10 +101,8 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
               {page.h1}
             </h1>
             <h2 className="mt-4 text-lg font-medium text-slate-700 sm:text-xl">{page.h2}</h2>
-            <p className="mt-6 rounded-2xl border border-brand-100 bg-white/90 p-4 text-base font-medium leading-relaxed text-slate-800 shadow-sm sm:p-5 sm:text-lg">
-              <span className="text-brand-800">Direct answer: </span>
-              {page.directAnswer}
-            </p>
+            <AnswerFirstBlock answer={page.directAnswer} className="mt-6" />
+            <ContentProvenance className="mt-3" />
             <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">{page.intro}</p>
             <div className="mt-8 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2">
               <Button href="/physician-opportunities#lead-form" className="w-full justify-center">
@@ -109,7 +120,19 @@ export function CardiologySeoPageView({ page }: { page: CardiologySeoPage }) {
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="min-w-0 space-y-10 lg:col-span-7">
             {page.showRecruiterTrust ? <RecruiterInquiryTrust geoLabel={page.geoLabel} /> : null}
+            {comparisonVariant ? <ScopeComparisonTable variant={comparisonVariant} /> : null}
             <ContentSections sections={page.sections} />
+            {showCitePanel ? (
+              <AiCitePanel
+                claimIds={
+                  IC_ALL_SLUGS.has(page.slug)
+                    ? ["cardiologist-only", "imlc-not-multistate", "interventional-band"]
+                    : page.category === "licensing"
+                      ? ["imlc-not-multistate", "cardiologist-only", "not-employer"]
+                      : ["cardiologist-only", "not-employer", "pay-educational"]
+                }
+              />
+            ) : null}
 
             <div>
               <h2 className="font-display text-2xl font-semibold tracking-tight text-slate-950">FAQ</h2>

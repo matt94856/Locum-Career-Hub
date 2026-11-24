@@ -7,6 +7,8 @@ import {
 } from "@/lib/seo/cardiology-locum-jobs-config";
 import { buildCardiologySpecialtySerpMetadata } from "@/lib/serp-ctr";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return CARDIOLOGY_PATH_SLUGS.map((specialty) => ({ specialty }));
 }

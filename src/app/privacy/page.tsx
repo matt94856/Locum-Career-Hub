@@ -67,9 +67,10 @@ export default function PrivacyPage() {
         <div>
           <h2 className="font-display text-2xl font-normal text-slate-950">Sharing</h2>
           <p className="mt-4">
-            Inquiry details may be shared with recruiting team members supporting Locum Career Hub placements. Service
-            providers (email delivery, hosting, analytics, captcha) process data only to operate the site. Facility
-            partners receive information only as needed to evaluate a potential assignment you are considering.
+            We never sell your information or share it with other staffing firms. Inquiry details may be used by
+            recruiting team members supporting Locum Career Hub placements. Service providers (email delivery, hosting,
+            analytics, captcha) process data only to operate the site. Facility partners receive information only as
+            needed to evaluate a potential assignment you are considering.
           </p>
         </div>
 

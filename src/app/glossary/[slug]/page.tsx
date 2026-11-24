@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { ContentProvenance } from "@/components/seo/ContentProvenance";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 import { GLOSSARY_SLUGS, getGlossaryItem, glossaryBodyParagraphs } from "@/lib/glossary-data";
@@ -8,6 +10,8 @@ import { LeadConversionBand } from "@/components/sections/LeadConversionBand";
 import { Tier1QuickLinks } from "@/components/sections/Tier1QuickLinks";
 import { buildGlossarySerpMetadata } from "@/lib/serp-ctr";
 import { CTA, SITE } from "@/lib/site";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return GLOSSARY_SLUGS.map((slug) => ({ slug }));
@@ -53,8 +57,10 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             {item.title}
           </h1>
+          {paragraphs[0] ? <AnswerFirstBlock answer={paragraphs[0]} className="mt-6" /> : null}
+          <ContentProvenance className="mt-3" />
           <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-700">
-            {paragraphs.map((p, i) => (
+            {paragraphs.slice(1).map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>

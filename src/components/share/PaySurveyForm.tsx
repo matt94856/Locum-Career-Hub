@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics-events";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { US_STATES } from "@/lib/states";
 
@@ -129,6 +130,7 @@ export function PaySurveyForm() {
       >
         {status === "sending" ? "Saving…" : "Submit anonymous range"}
       </button>
+      <InquiryPrivacyGuarantee className="mt-4" />
     </form>
   );
 }

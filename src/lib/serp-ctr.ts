@@ -57,7 +57,12 @@ export function buildSerpMetadata(input: {
   return {
     title: metadataPageTitle(titlePart),
     description,
-    alternates: { canonical: input.path },
+    alternates: {
+      canonical: input.path,
+      types: {
+        "text/markdown": input.path,
+      },
+    },
     ...(input.keywords?.length ? { keywords: input.keywords } : {}),
     ...socialShareMetadata({
       title: shareDocumentTitle(titlePart),

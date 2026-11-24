@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
 
@@ -119,6 +120,7 @@ export function PdfEmailGate({
       >
         {status === "sending" ? "Sending…" : "Email my PDF + open print dialog"}
       </button>
+      <InquiryPrivacyGuarantee className="mt-4" />
     </form>
   );
 }

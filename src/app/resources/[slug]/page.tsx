@@ -4,6 +4,8 @@ import { CardiologyAuthorityPageView } from "@/components/marketing/CardiologyAu
 import { getAllArticleSlugs, getCardiologyArticle } from "@/lib/cardiology-authority/articles";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllArticleSlugs().map((slug) => ({ slug }));
 }

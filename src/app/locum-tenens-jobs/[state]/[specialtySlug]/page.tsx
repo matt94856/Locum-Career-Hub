@@ -22,6 +22,8 @@ import { CTA, SITE } from "@/lib/site";
 import { formSubtitleForPlace } from "@/lib/marketing-copy";
 import { LatticeUpLinks } from "@/components/marketing/LatticeUpLinks";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const out: { state: string; specialtySlug: string }[] = [];
   for (const state of US_STATE_SLUGS) {

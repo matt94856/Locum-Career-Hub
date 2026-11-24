@@ -5,6 +5,8 @@ import {
 } from "@/components/marketing/CardiologyProgrammaticView";
 import { CARDIOLOGY_PROGRAMMATIC_SLUGS, getCardiologyProgrammaticPage } from "@/lib/cardiology-programmatic";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return CARDIOLOGY_PROGRAMMATIC_SLUGS.map((slug) => ({ slug }));
 }

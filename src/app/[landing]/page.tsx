@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { buildLandingMetadata, LandingPageView } from "@/components/marketing/LandingPageView";
 import { getLanding, LANDING_SLUGS } from "@/lib/landings";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return LANDING_SLUGS.map((slug) => ({ landing: slug }));
 }

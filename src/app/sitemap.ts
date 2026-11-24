@@ -22,6 +22,9 @@ import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 
 const staticRoutes = [
   "/",
+  "/llms.txt",
+  "/llms-full.txt",
+  "/ai-catalog.json",
   "/about",
   "/contact",
   "/physician-opportunities",

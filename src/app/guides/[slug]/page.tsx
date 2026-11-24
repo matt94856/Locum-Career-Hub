@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { buildCardiologySeoMetadata, CardiologySeoPageView } from "@/components/marketing/CardiologySeoPageView";
 import { getGuideSlugs, getPageByGuideSlug } from "@/lib/cardiology-seo/registry";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getGuideSlugs().map((slug) => ({ slug }));
 }

@@ -2,6 +2,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { OpportunityInterestForm } from "@/components/forms/OpportunityInterestForm";
 import { FeaturedOpportunityApplyButton } from "@/components/cta/FeaturedOpportunityApplyButton";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { ContentProvenance } from "@/components/seo/ContentProvenance";
 import {
   AVAILABILITY_INQUIRY_CTA,
   formatOpportunityPostedDate,
@@ -97,9 +100,8 @@ export function FeaturedCardiologyOpportunityView({
               <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
                 {opportunity.h1}
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
-                {opportunity.directAnswer}
-              </p>
+              <AnswerFirstBlock answer={opportunity.directAnswer} className="mt-6 max-w-3xl" />
+              <ContentProvenance className="mt-3 max-w-3xl" lastVerified={opportunity.dateModified ?? opportunity.datePosted} />
               <div className="mt-8 flex flex-wrap gap-3">
                 <FeaturedOpportunityApplyButton
                   opportunitySlug={opportunity.slug}
@@ -274,6 +276,10 @@ export function FeaturedCardiologyOpportunityView({
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 pb-4 sm:px-6 lg:px-8">
+        <AiCitePanel claimIds={["cardiologist-only", "not-employer", "imlc-not-multistate"]} />
       </section>
 
       <section id="apply" className="scroll-mt-24 bg-brand-50 py-14">

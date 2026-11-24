@@ -15,6 +15,14 @@ export function RecruiterInquiryTrust({ geoLabel }: { geoLabel?: string }) {
             ✓
           </span>
           <span>
+            <strong className="font-semibold text-slate-900">Your information is secure and never shared.</strong>
+          </span>
+        </li>
+        <li className="flex gap-2">
+          <span className="text-emerald-700" aria-hidden>
+            ✓
+          </span>
+          <span>
             <strong className="font-semibold text-slate-900">No spam lists.</strong>
           </span>
         </li>

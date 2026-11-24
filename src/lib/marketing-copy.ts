@@ -7,7 +7,11 @@ export const FORM_TITLE = "Let’s find the right locum block";
 export const FORM_SUBTITLE =
   "Work that pays well, with the freedom to schedule around your life.";
 
-export const FORM_CHIPS = ["One short form", "No spam", "Plain answers if nothing fits"] as const;
+export const FORM_CHIPS = [
+  "One short form",
+  "Secure & never shared",
+  "Plain answers if nothing fits",
+] as const;
 
 export function formSubtitleForPlace(place?: string) {
   if (!place) return FORM_SUBTITLE;

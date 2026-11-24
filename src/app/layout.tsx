@@ -44,6 +44,11 @@ export const metadata: Metadata = {
   description: SITE.tagline,
   applicationName: SITE.name,
   robots: { index: true, follow: true },
+  alternates: {
+    types: {
+      "text/markdown": "/",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

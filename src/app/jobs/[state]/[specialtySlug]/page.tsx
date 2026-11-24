@@ -9,6 +9,8 @@ import {
 import { buildSerpMetadata } from "@/lib/serp-ctr";
 import { US_STATE_SLUGS } from "@/lib/us-state-slugs";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return US_STATE_SLUGS.flatMap((state) =>
     JOB_SPECIALTY_SLUGS.map((specialtySlug) => ({ state, specialtySlug })),

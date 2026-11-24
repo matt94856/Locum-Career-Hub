@@ -8,6 +8,8 @@ import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
 import { DEFAULT_BLOG_AUTHOR } from "@/lib/blog-author";
 import { socialShareMetadata } from "@/lib/social-metadata";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
 }

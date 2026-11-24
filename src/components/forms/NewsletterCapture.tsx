@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics-events";
@@ -97,6 +98,7 @@ export function NewsletterCapture({
           {status === "error" && message ? (
             <p className="text-xs text-red-700">{message}</p>
           ) : null}
+          <InquiryPrivacyGuarantee />
           <p className="text-[11px] leading-relaxed text-slate-500">
             Unsubscribe anytime by replying to any email. Not medical, legal, or tax advice.
           </p>

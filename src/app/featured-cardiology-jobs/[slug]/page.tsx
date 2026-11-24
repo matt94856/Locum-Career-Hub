@@ -15,6 +15,8 @@ import {
 } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
 
+export const dynamicParams = false;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

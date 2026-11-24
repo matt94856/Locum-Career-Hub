@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { DistributionStrip } from "@/components/share/DistributionStrip";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { PdfEmailGate } from "@/components/share/PdfEmailGate";
 import { ShareResultCard } from "@/components/share/ShareResultCard";
 import { ViralShareKit } from "@/components/share/ViralShareKit";
@@ -267,6 +268,7 @@ function ReportGate({
                 {status === "sending" ? "Saving…" : "Request a personalized review"}
               </button>
               {status === "error" ? <p role="alert" className="mt-3 text-sm text-rose-300">{message}</p> : null}
+              <InquiryPrivacyGuarantee tone="dark" className="mt-3" />
               <p className="mt-3 text-xs leading-5 text-slate-400">No PHI. By submitting, you consent to follow-up about cardiology opportunities. Standard messaging rates may apply only if you later opt into SMS.</p>
             </div>
           </form>

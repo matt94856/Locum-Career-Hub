@@ -7,6 +7,7 @@ import { CARDIOLOGY_SUBSPECIALTIES } from "@/lib/specialties";
 import { FEATURED_STATES, US_STATES } from "@/lib/states";
 import { Button } from "@/components/ui/Button";
 import { ContactFallbacks } from "@/components/cta/ContactFallbacks";
+import { InquiryPrivacyGuarantee } from "@/components/forms/InquiryPrivacyGuarantee";
 import { RecaptchaField, type RecaptchaFieldHandle } from "@/components/forms/RecaptchaField";
 import { GENERATE_LEAD_SENT_KEY, persistGenerateLead, trackEvent } from "@/lib/analytics-events";
 import { readLeadAttribution } from "@/lib/attribution";
@@ -638,6 +639,7 @@ export function LeadCaptureForm({
           <Button type="submit" disabled={status === "submitting"} size="md" className="w-full sm:w-auto">
             {status === "submitting" ? "Submitting…" : CTA.requestMatches}
           </Button>
+          <InquiryPrivacyGuarantee />
           <p className="text-xs text-slate-500">
             One form. We reply with realistic matches—or a plain no if nothing fits.
           </p>

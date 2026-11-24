@@ -98,6 +98,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link className="hover:text-white" href="/llms-full.txt">
+                  llms-full.txt
+                </Link>
+              </li>
+              <li>
                 <Link className="hover:text-white" href="/ai-catalog.json">
                   AI catalog (JSON)
                 </Link>

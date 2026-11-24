@@ -27,6 +27,8 @@ import { ContentSections } from "@/components/seo/ContentSections";
 import { getStateProfile, getStateProfileSections } from "@/lib/seo/state-profiles";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd } from "@/lib/schema";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return STATE_LOCUM_SLUGS.map((state) => ({ state }));
 }

@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { EpLocumsPayRangeTool } from "@/components/tools/EpLocumsPayRangeTool";
 import { Button } from "@/components/ui/Button";
+import { AnswerFirstBlock } from "@/components/seo/AnswerFirstBlock";
+import { AiCitePanel } from "@/components/seo/AiCitePanel";
+import { ContentProvenance } from "@/components/seo/ContentProvenance";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ScopeComparisonTable } from "@/components/seo/ScopeComparisonTable";
+import { AI_CITEABLE_CLAIMS } from "@/lib/ai-seo/catalog";
 import { EP_PAY_EFFECTIVE_DATE } from "@/lib/ep-pay/model";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, webApplicationJsonLd } from "@/lib/schema";
 import { buildSerpMetadata } from "@/lib/serp-ctr";
@@ -61,6 +66,11 @@ export default function EpCardiologyLocumsPayPage() {
           <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
             EP locums pay is a range
           </h1>
+          <AnswerFirstBlock
+            className="mt-6"
+            answer={AI_CITEABLE_CLAIMS.find((c) => c.id === "ep-band")!.claim}
+          />
+          <ContentProvenance className="mt-3" lastVerified={EP_PAY_EFFECTIVE_DATE} />
           <p className="mt-6 text-lg leading-8 text-slate-600">
             Most attending electrophysiologists we recruit start around $2,800–$3,200 a day. That is a market band, not
             your number. Ablation vs devices, complex work, and the call you will actually take move a written guarantee
@@ -84,6 +94,8 @@ export default function EpCardiologyLocumsPayPage() {
 
       <div className="container-site grid max-w-6xl gap-12 pb-16 lg:grid-cols-12">
         <article className="space-y-12 lg:col-span-8">
+          <ScopeComparisonTable variant="pay-callback" />
+          <AiCitePanel claimIds={["ep-band", "pay-educational", "cardiologist-only"]} />
           <section>
             <h2 className="font-display text-3xl font-semibold text-slate-950">What the $2,800–$3,200 band actually is</h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
